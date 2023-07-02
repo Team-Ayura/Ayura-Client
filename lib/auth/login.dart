@@ -58,7 +58,7 @@ class _LoginState extends State<Login> {
             height: 20,
           ),
           const Text(
-            'Create an account',
+            'Create an account here',
             style: AppStyles.subHeadingTextStyle,
           ),
           const SizedBox(height: 25),

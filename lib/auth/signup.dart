@@ -84,7 +84,7 @@ class _SignupState extends State<Signup> {
               height: 20,
             ),
             const Text(
-              'Create an account',
+              'Create an account here',
               style: AppStyles.subHeadingTextStyle,
             ),
             const SizedBox(height: 25),
@@ -121,7 +121,6 @@ class _SignupState extends State<Signup> {
               ),
             ),
             const SizedBox(height: 25),
-
             Container(
               width: MediaQuery.of(context).size.width,
               height: 50,
