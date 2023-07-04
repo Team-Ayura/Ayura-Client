@@ -1,11 +1,13 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
+import 'package:ayura/utils/convertDate.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/global/primaryBtn.dart';
 import 'package:ayura/widgets/global/textinput.dart';
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
 import 'package:dob_input_field/dob_input_field.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/autProvider/auth_provider.dart';
@@ -31,9 +33,27 @@ class _SignupState extends State<Signup> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   String? gender;
-  String selectedGender = '';
+  String selectedGender = "M";
   String? activityLevel;
   String selectedActivityLevel = '';
+  String? selectedBloodGroup;
+  String? nationality;
+  List<String> bloodGroups = [
+    'A+',
+    'A-',
+    'B+',
+    'B-',
+    'AB+',
+    'AB-',
+    'O+',
+    'O-',
+  ];
+  List<String> activityLevels = [
+    'somewhat_active',
+    'sedentary',
+    'active',
+    'very_active'
+  ];
 
   @override
   void dispose() {
@@ -51,6 +71,8 @@ class _SignupState extends State<Signup> {
     selectedGender = '';
     activityLevel = '';
     selectedActivityLevel = '';
+    selectedBloodGroup = '';
+    nationality = '';
     super.dispose();
   }
 
@@ -97,15 +119,73 @@ class _SignupState extends State<Signup> {
             const SizedBox(height: 20),
             Container(
               width: width,
+              height: height * 0.07,
+              decoration: AppStyles.containerDecoration,
+              child: DropdownButtonFormField<String>(
+                  value: selectedBloodGroup,
+                  decoration: const InputDecoration(
+                    labelText: 'Blood Group',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: bloodGroups.map((bloodGroup) {
+                    return DropdownMenuItem<String>(
+                      value: bloodGroup,
+                      child: Text(bloodGroup),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedBloodGroup = newValue;
+                    });
+                  }),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              width: width,
               height: 50,
               decoration: AppStyles.containerDecoration,
-              child: DOBInputField(
-                firstDate: DateTime(1900),
-                lastDate: DateTime.now(),
-                showLabel: true,
-                dateFormatType: DateFormatType.YYYYMMDD,
-                autovalidateMode: AutovalidateMode.always,
-                fieldLabelText: "Birthday",
+              child: TextField(
+                controller: birthdayController,
+                decoration: InputDecoration(
+                  fillColor: Colors.transparent,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide:
+                        const BorderSide(color: Color(0xff23A6F0), width: 1.5),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.grey.shade300, width: 1.5),
+                  ),
+                  hintText: 'Birthday',
+                  hintStyle: const TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 16,
+                  ),
+                ),
+                readOnly: true,
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1980),
+                      lastDate: DateTime.now());
+                  if (pickedDate != null) {
+                    print(
+                        pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                    String formattedDate =
+                        DateFormat('yyyy-MM-dd').format(pickedDate);
+                    print(
+                        formattedDate); //formatted date output using intl package =>  2021-03-16
+
+                    setState(() {
+                      birthdayController.text =
+                          formattedDate; //set output date to TextField value.
+                    });
+                  } else {
+                    print("Date is not selected");
+                  }
+                },
               ),
             ),
             const SizedBox(height: 25),
@@ -151,7 +231,8 @@ class _SignupState extends State<Signup> {
                       '+94', //inital selection, +672 for Antarctica
                   onChanged: (CountryCode? code) {
                     nationalityController.text = code?.name ?? '';
-                    // print(code!.name);
+                    nationality = nationalityController.text;
+                    print(code!.name);
                     // print(code.code);
                     // print(code.dialCode);
                     // print(code.flagUri);
@@ -168,7 +249,7 @@ class _SignupState extends State<Signup> {
               children: [
                 const Text('Male'),
                 Radio(
-                  value: 'Male',
+                  value: "M",
                   groupValue: gender,
                   onChanged: (value) {
                     setState(() {
@@ -179,7 +260,7 @@ class _SignupState extends State<Signup> {
                 ),
                 const Text('Female'),
                 Radio(
-                  value: 'Female',
+                  value: "F",
                   groupValue: gender,
                   onChanged: (value) {
                     setState(() {
@@ -191,29 +272,30 @@ class _SignupState extends State<Signup> {
               ],
             ),
             const SizedBox(height: 20),
-
-            DropdownButton<String>(
-              value: activityLevel,
-              hint: const Text('Activity Level'),
-              items: <String>[
-                'somewhat_active',
-                'sedentary',
-                'active',
-                'very_active'
-              ].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  activityLevel = value;
-                  selectedActivityLevel = activityLevel!;
-                });
-              },
+            Container(
+              width: width,
+              height: height * 0.07,
+              decoration: AppStyles.containerDecoration,
+              child: DropdownButtonFormField<String>(
+                value: activityLevel,
+                decoration: const InputDecoration(
+                  labelText: 'Activity Level',
+                  border: OutlineInputBorder(),
+                ),
+                items: activityLevels.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    activityLevel = value;
+                    selectedActivityLevel = activityLevel!;
+                  });
+                },
+              ),
             ),
-
             const SizedBox(height: 20),
             CustomInput(controller: passwordController, hintText: 'Password'),
             const SizedBox(height: 20),
@@ -245,11 +327,11 @@ class _SignupState extends State<Signup> {
                       lastName: lastNameController.text.trim(),
                       email: emailController.text.trim(),
                       password: passwordController.text.trim(),
-                      birthday: birthdayController.text.trim(),
+                      birthday: convertDate(birthdayController.text.trim()),
                       weight: int.parse(weightController.text.trim()),
                       height: int.parse(heightController.text.trim()),
-                      nationality: nationalityController.text.trim(),
-                      bloodGroup: bloodGroupController.text.trim(),
+                      nationality: nationality!.trim(),
+                      bloodGroup: selectedBloodGroup!,
                       activityLevel: selectedActivityLevel,
                       gender: selectedGender,
                       context: context,
@@ -260,38 +342,6 @@ class _SignupState extends State<Signup> {
                 status: auth.isLoading,
               );
             }),
-            // Consumer<AuthenticationProvider>(builder: (context, auth, child) {
-            //   WidgetsBinding.instance!.addPostFrameCallback((_) {
-            //     if (auth.resMessage != '') {
-            //       showMessage(context, auth.resMessage);
-
-            //       //clear the response message
-            //       auth.clear();
-            //     }
-            //   });
-            //   return PrimaryBtn(
-            //       text: 'Sign Up',
-            //       onPressed: (() {
-            //         if (emailController.text.isEmpty ||
-            //             passwordController.text.isEmpty) {
-            //           showMessage(context, 'All fields are required');
-            //         } else {
-            //           auth.registerUser(
-            //               email: emailController.text.trim(),
-            //               password: passwordController.text.trim(),
-            //               firstName: firstNameController.text.trim(),
-            //               lastName: lastNameController.text.trim(),
-            //               birthday: birthdayController.text.trim(),
-            //               weight: int.parse(weightController.text.trim()),
-            //               height: int.parse(heightController.text.trim()),
-            //               nationality: nationalityController.text.trim(),
-            //               bloodGroup: bloodGroupController.text.trim(),
-            //               gender: selectedGender,
-            //               activityLevel: selectedActivityLevel.trim(),
-            //               context: context);
-            //         }
-            //       }));
-            // }),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

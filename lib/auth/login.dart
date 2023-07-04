@@ -1,5 +1,6 @@
 import 'package:ayura/auth/signup.dart';
 import 'package:ayura/constants/styles.dart';
+import 'package:ayura/pages/home.dart';
 import 'package:ayura/provider/autProvider/auth_provider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/utils/snack_message.dart';
@@ -58,13 +59,13 @@ class _LoginState extends State<Login> {
             height: 20,
           ),
           const Text(
-            'Create an account here',
+            'Login to your account here',
             style: AppStyles.subHeadingTextStyle,
           ),
           const SizedBox(height: 25),
           CustomInput(controller: emailController, hintText: 'Email'),
           const SizedBox(height: 20),
-          CustomInput(controller: passwordController, hintText: 'First Name'),
+          CustomInput(controller: passwordController, hintText: 'Password'),
           const SizedBox(height: 20),
           Consumer<AuthenticationProvider>(builder: (context, auth, child) {
             WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -87,6 +88,7 @@ class _LoginState extends State<Login> {
                     password: passwordController.text.trim(),
                     context: context,
                   );
+                  PageNavigator(context: context).nextPage(const Home());
                 }
               },
               context: context,
