@@ -1,3 +1,5 @@
 class appURLs {
-  static String baseUrl = "https://192.168.1.141:7034";
+  static String baseUrl = "https://ayura.azurewebsites.net";
 }
+
+

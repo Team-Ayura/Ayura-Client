@@ -34,7 +34,7 @@ class AuthenticationProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    String url = 'https://192.168.1.141:7034/api/auth/signup';
+    String url = '$requestBaseUrl/api/auth/signup';
 
     final body = {
       "email": email,
@@ -49,25 +49,21 @@ class AuthenticationProvider extends ChangeNotifier {
       "bloodGroup": bloodGroup,
       "activityLevel": activityLevel,
     };
+    print(json.encode(body));
+    String encodedBody = json.encode(body);
+    print(encodedBody);
     try {
-      // http.Response req =
-      //     await http.post(Uri.parse(url), body: json.encode(body));
-
       http.Response req = await http.post(
         Uri.parse(url),
-        body: json.encode(body),
         headers: {
-          'accept': '*/*',
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
+        body: encodedBody,
       );
-      print('request sent');
-
-      print(req.statusCode);
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         final res = json.decode(req.body);
-        print(res);
+
         _isLoading = false;
         _resMessage = "Registered Successfully!";
         notifyListeners();
@@ -78,14 +74,14 @@ class AuthenticationProvider extends ChangeNotifier {
         notifyListeners();
       }
     } on SocketException catch (e) {
-      print(e);
       _isLoading = false;
       _resMessage = e.toString();
       notifyListeners();
     } catch (e) {
       print(e);
+
       _isLoading = false;
-      _resMessage = 'Something went wrong';
+      _resMessage = e.toString();
       notifyListeners();
     }
   }
@@ -98,17 +94,20 @@ class AuthenticationProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    String url = 'https://192.168.1.141:7034/api/auth/signin';
+    String url = 'https://ayura.azurewebsites.net/api/auth/signin';
 
     final body = {
       "email": email,
       "password": password,
     };
-    print(body);
+    print(json.encode(body));
 
     try {
-      http.Response req =
-          await http.post(Uri.parse(url), body: json.encode(body));
+      http.Response req = await http.post(Uri.parse(url),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: json.encode(body));
       // print(req.statusCode);
       // print(req.body);
 
