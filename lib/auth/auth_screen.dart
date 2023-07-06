@@ -1,17 +1,12 @@
 import 'package:ayura/auth/login.dart';
-import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/features/register/page2.dart';
 import 'package:ayura/pages/features/register/page3.dart';
 import 'package:ayura/pages/features/register/page4.dart';
 import 'package:ayura/pages/home.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/pages/features/register/page1.dart';
-import 'package:ayura/widgets/features/register/rulerpicker.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
-
-import '../constants/colors.dart';
-import '../widgets/features/register/custom_radio_input.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);

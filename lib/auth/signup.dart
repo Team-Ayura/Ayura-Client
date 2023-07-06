@@ -2,11 +2,10 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:ayura/utils/convertDate.dart';
 import 'package:ayura/utils/router.dart';
-import 'package:ayura/widgets/global/primaryBtn.dart';
+import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:ayura/widgets/global/textinput.dart';
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
-import 'package:dob_input_field/dob_input_field.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -110,12 +109,23 @@ class _SignupState extends State<Signup> {
               style: AppStyles.subHeadingTextStyle,
             ),
             const SizedBox(height: 25),
-            CustomInput(controller: emailController, hintText: 'Email', label: '',),
+            CustomInput(
+              controller: emailController,
+              hintText: 'Email',
+              label: '',
+            ),
             const SizedBox(height: 20),
             CustomInput(
-                controller: firstNameController, hintText: 'First Name', label: '',),
+              controller: firstNameController,
+              hintText: 'First Name',
+              label: '',
+            ),
             const SizedBox(height: 20),
-            CustomInput(controller: lastNameController, hintText: 'Last Name', label: '',),
+            CustomInput(
+              controller: lastNameController,
+              hintText: 'Last Name',
+              label: '',
+            ),
             const SizedBox(height: 20),
             Container(
               width: width,
@@ -297,11 +307,17 @@ class _SignupState extends State<Signup> {
               ),
             ),
             const SizedBox(height: 20),
-            CustomInput(controller: passwordController, hintText: 'Password', label: '',),
+            CustomInput(
+              controller: passwordController,
+              hintText: 'Password',
+              label: '',
+            ),
             const SizedBox(height: 20),
             CustomInput(
-                controller: confirmPasswordController,
-                hintText: 'Confirm Password', label: '',),
+              controller: confirmPasswordController,
+              hintText: 'Confirm Password',
+              label: '',
+            ),
             const SizedBox(height: 20),
             Consumer<AuthenticationProvider>(builder: (context, auth, child) {
               WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -340,7 +356,6 @@ class _SignupState extends State<Signup> {
                   }
                 },
                 context: context,
-                status: auth.isLoading,
               );
             }),
             Row(

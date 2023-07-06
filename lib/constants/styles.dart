@@ -31,6 +31,12 @@ class AppStyles {
     color: Colors.black,
   );
 
+  static const TextStyle bodyTextStyle2 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 15,
+    color: Color(0xFF878787),
+  );
+
   InputDecoration inputDecoration(String placeholder) {
     return InputDecoration(
       fillColor: Colors.transparent,

@@ -13,7 +13,7 @@ Widget customButton(
     onTap: tap,
     child: Container(
       height: height ?? 48,
-      width: width ?? MediaQuery.of(context!).size.width*0.3,
+      width: width ?? MediaQuery.of(context!).size.width * 0.3,
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: AppColors.primaryColor,
