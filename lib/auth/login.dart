@@ -1,3 +1,4 @@
+import 'package:ayura/auth/auth_screen.dart';
 import 'package:ayura/auth/signup.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/home.dart';
@@ -63,9 +64,17 @@ class _LoginState extends State<Login> {
             style: AppStyles.subHeadingTextStyle,
           ),
           const SizedBox(height: 25),
-          CustomInput(controller: emailController, hintText: 'Email'),
+          CustomInput(
+            controller: emailController,
+            hintText: 'Email',
+            label: '',
+          ),
           const SizedBox(height: 20),
-          CustomInput(controller: passwordController, hintText: 'Password'),
+          CustomInput(
+            controller: passwordController,
+            hintText: 'Password',
+            label: '',
+          ),
           const SizedBox(height: 20),
           Consumer<AuthenticationProvider>(builder: (context, auth, child) {
             WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -107,7 +116,7 @@ class _LoginState extends State<Login> {
               ),
               InkWell(
                 onTap: () {
-                  PageNavigator(context: context).nextPage(const Signup());
+                  PageNavigator(context: context).nextPage(const AuthScreen());
                 },
                 child: const Text(
                   'Sign up',

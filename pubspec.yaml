@@ -16,6 +16,9 @@ dependencies:
   dob_input_field: ^2.0.0
   flutter:
     sdk: flutter
+  flutter_animate: ^4.2.0
+  flutter_ruler_picker: ^1.0.3
+  flutter_svg: ^2.0.5
   http: ^0.13.6
   intl: ^0.18.1
   provider: ^6.0.5
@@ -34,6 +37,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo.png
+    - assets/images/
+    - assets/icons/
 
 
   fonts:
