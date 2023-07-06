@@ -110,12 +110,12 @@ class _SignupState extends State<Signup> {
               style: AppStyles.subHeadingTextStyle,
             ),
             const SizedBox(height: 25),
-            CustomInput(controller: emailController, hintText: 'Email'),
+            CustomInput(controller: emailController, hintText: 'Email', label: '',),
             const SizedBox(height: 20),
             CustomInput(
-                controller: firstNameController, hintText: 'First Name'),
+                controller: firstNameController, hintText: 'First Name', label: '',),
             const SizedBox(height: 20),
-            CustomInput(controller: lastNameController, hintText: 'Last Name'),
+            CustomInput(controller: lastNameController, hintText: 'Last Name', label: '',),
             const SizedBox(height: 20),
             Container(
               width: width,
@@ -297,11 +297,11 @@ class _SignupState extends State<Signup> {
               ),
             ),
             const SizedBox(height: 20),
-            CustomInput(controller: passwordController, hintText: 'Password'),
+            CustomInput(controller: passwordController, hintText: 'Password', label: '',),
             const SizedBox(height: 20),
             CustomInput(
                 controller: confirmPasswordController,
-                hintText: 'Confirm Password'),
+                hintText: 'Confirm Password', label: '',),
             const SizedBox(height: 20),
             Consumer<AuthenticationProvider>(builder: (context, auth, child) {
               WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -313,7 +313,8 @@ class _SignupState extends State<Signup> {
                 }
               });
               return customButton(
-                text: 'Register',
+                text: 'Next',
+                icon: Icons.arrow_forward,
                 tap: () {
                   if (emailController.text.isEmpty ||
                       passwordController.text.isEmpty ||

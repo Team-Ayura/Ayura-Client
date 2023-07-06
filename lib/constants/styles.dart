@@ -18,6 +18,13 @@ class AppStyles {
     color: Color.fromARGB(255, 123, 123, 123),
   );
 
+  static const TextStyle subheadingTextStyle2 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+
   static const TextStyle bodyTextStyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 16,
@@ -28,11 +35,12 @@ class AppStyles {
     return InputDecoration(
       fillColor: Colors.transparent,
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
         borderSide: const BorderSide(color: Color(0xff23A6F0), width: 1.5),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey.shade300, width: 1.5),
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: AppColors.primaryColor, width: 1.5),
       ),
       hintText: placeholder,
       hintStyle: const TextStyle(
