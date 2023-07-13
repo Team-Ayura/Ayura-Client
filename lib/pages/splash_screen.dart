@@ -1,7 +1,4 @@
-import 'package:ayura/auth/signup.dart';
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
-import 'package:ayura/utils/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 

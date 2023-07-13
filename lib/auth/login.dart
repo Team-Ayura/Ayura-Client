@@ -1,5 +1,4 @@
 import 'package:ayura/auth/auth_screen.dart';
-import 'package:ayura/auth/signup.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/home.dart';
 import 'package:ayura/provider/autProvider/authentication_provider.dart';
