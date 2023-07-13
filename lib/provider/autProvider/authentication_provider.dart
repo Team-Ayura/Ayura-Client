@@ -8,7 +8,7 @@ import 'package:ayura/constants/constants.dart';
 
 class AuthenticationProvider2 extends ChangeNotifier {
   // BaseURL
-  final requestBaseUrl = appURLs.baseUrl;
+  final requestBaseUrl = AppUrls.baseUrl;
 
   final UserModel _userModel = UserModel(
     gender: '',
@@ -126,10 +126,10 @@ class AuthenticationProvider2 extends ChangeNotifier {
     String url = '$requestBaseUrl/api/auth/signup';
 
     final body = _userModel.toJson();
-    print(json.encode(body));
+   
 
     try {
-      print('try');
+      
       http.Response req = await http.post(
         Uri.parse(url),
         headers: {
@@ -137,11 +137,9 @@ class AuthenticationProvider2 extends ChangeNotifier {
         },
         body: json.encode(body),
       );
-      print(req.body);
 
       if (req.statusCode == 200 || req.statusCode == 201) {
-        final res = json.decode(req.body);
-        print(res);
+        //final res = json.decode(req.body);
 
         _resMessage = "Registered Successfully!";
         notifyListeners();
@@ -155,7 +153,6 @@ class AuthenticationProvider2 extends ChangeNotifier {
       _resMessage = e.toString();
       notifyListeners();
     } catch (e) {
-      print(e);
 
       _resMessage = e.toString();
       notifyListeners();
@@ -174,7 +171,7 @@ class AuthenticationProvider2 extends ChangeNotifier {
       "email": email,
       "password": password,
     };
-    print(json.encode(body));
+    //print(json.encode(body));
 
     try {
       http.Response req = await http.post(Uri.parse(url),
@@ -186,8 +183,8 @@ class AuthenticationProvider2 extends ChangeNotifier {
       // print(req.body);
 
       if (req.statusCode == 200 || req.statusCode == 201) {
-        final res = json.decode(req.body);
-        print(req.body);
+        // final res = json.decode(req.body);
+        // print(req.body);
 
         _resMessage = "Login Successful!";
 
@@ -195,7 +192,7 @@ class AuthenticationProvider2 extends ChangeNotifier {
         callback(true);
       } else {
         final res = json.decode(req.body);
-        print(res);
+        //print(res);
 
         _resMessage = res['reason'];
 
@@ -203,7 +200,7 @@ class AuthenticationProvider2 extends ChangeNotifier {
         callback(false);
       }
     } on SocketException catch (_) {
-      print(_);
+      
       _resMessage = 'No Internet Connection';
       notifyListeners();
     } catch (e) {

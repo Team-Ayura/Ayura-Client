@@ -46,7 +46,7 @@ class AppStyles {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: AppColors.primaryColor, width: 1.5),
+        borderSide: const BorderSide(color: AppColors.primaryColor, width: 1.5),
       ),
       hintText: placeholder,
       hintStyle: const TextStyle(

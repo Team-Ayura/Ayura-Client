@@ -10,10 +10,10 @@ class PageOne extends StatefulWidget {
   const PageOne({Key? key}) : super(key: key);
 
   @override
-  _PageOneState createState() => _PageOneState();
+  PageOneState createState() => PageOneState();
 }
 
-class _PageOneState extends State<PageOne> {
+class PageOneState extends State<PageOne> {
   int weightval = 1;
   int heightval = 1;
   final TextEditingController weightEditingController = TextEditingController(text: '50');
@@ -132,7 +132,7 @@ class _PageOneState extends State<PageOne> {
               controller: weightEditingController,
               update: auth.updateWeight,
               onChanged: (newValue) {
-                print(newValue);
+               
                 selectedValues.updateWeight(int.tryParse(newValue) ?? 0);
                 setState(() {
                   weightEditingController.text = newValue;
@@ -185,13 +185,13 @@ class _PageOneState extends State<PageOne> {
                 auth.updateHeight(value);
               },
               onChanged: (newValue) {
-                print(newValue);
+                
                 selectedValues.updateWeight(int.tryParse(newValue) ?? 0);
                  setState(() {
                   heightEditingController.text = newValue;
                 });
               },
-              value: selectedValues.height ?? 0,
+              value: selectedValues.height,
             );
           }),
           const SizedBox(height: 20),

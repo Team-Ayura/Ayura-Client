@@ -15,10 +15,10 @@ class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  LoginState createState() => LoginState();
 }
 
-class _LoginState extends State<Login> {
+class LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -74,7 +74,7 @@ class _LoginState extends State<Login> {
           ),
           const SizedBox(height: 20),
           Consumer<AuthenticationProvider2>(builder: (context, auth, child) {
-            WidgetsBinding.instance!.addPostFrameCallback((_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
               if (auth.resMessage != '') {
                 showMessage(context, auth.resMessage);
 

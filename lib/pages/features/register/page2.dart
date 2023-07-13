@@ -9,10 +9,10 @@ class PageTwo extends StatefulWidget {
   const PageTwo({Key? key}) : super(key: key);
 
   @override
-  _PageTwoState createState() => _PageTwoState();
+  PageTwoState createState() => PageTwoState();
 }
 
-class _PageTwoState extends State<PageTwo> {
+class PageTwoState extends State<PageTwo> {
   final List _activity = [
     'Sedentary',
     'Lightly Active',
@@ -37,9 +37,9 @@ class _PageTwoState extends State<PageTwo> {
         activity ==
         Provider.of<AuthenticationProvider2>(context).activityLevel);
 
-    int _selected = index;
+    int selected = index;
 
-    void _onChanged(int value) {
+    void onChanged(int value) {
       // Update the selected value in the state
       Provider.of<AuthenticationProvider2>(context, listen: false)
           .updateActivityLevel(_activity[value]);
@@ -87,14 +87,14 @@ class _PageTwoState extends State<PageTwo> {
                           'assets/icons/activity${index + 1}.svg',
                           height: 70,
                           color:
-                              _selected == index ? Colors.white : Colors.black,
+                              selected == index ? Colors.white : Colors.black,
                         ),
-                        selected: _selected == index ? true : false,
+                        selected: selected == index ? true : false,
                         onTap: () {
                           auth.updateActivityLevel(_activity[index]);
-                          _onChanged(index);
+                          onChanged(index);
                         },
-                        selectedTileColor: _selected == index
+                        selectedTileColor: selected == index
                             ? AppColors.primaryColor
                             : Colors.white,
                         selectedColor: Colors.white,
@@ -102,7 +102,7 @@ class _PageTwoState extends State<PageTwo> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                             side: BorderSide(
-                                color: _selected != index
+                                color: selected != index
                                     ? Colors.black
                                     : AppColors.primaryColor,
                                 width: 1)),

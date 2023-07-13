@@ -14,23 +14,22 @@ class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
   @override
-  _AuthScreenState createState() => _AuthScreenState();
+  AuthScreenState createState() => AuthScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> {
+class AuthScreenState extends State<AuthScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _curr = 0;
 
   @override
   Widget build(BuildContext context) {
-    final userModel = Provider.of<AuthenticationProvider2>(context);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final List<Widget> list = <Widget>[
-      PageOne(),
-      PageTwo(),
-      PageThree(),
-      PageFour(),
+      const PageOne(),
+      const PageTwo(),
+      const PageThree(),
+      const PageFour(),
     ];
 
     return SafeArea(
@@ -63,12 +62,12 @@ class _AuthScreenState extends State<AuthScreen> {
                               .nextPage(const Login());
                         }
                         _pageController.animateToPage(--_curr,
-                            duration: Duration(milliseconds: 250),
+                            duration: const Duration(milliseconds: 250),
                             curve: Curves.bounceInOut);
                       },
                       child: Container(
                           height: 48,
-                          width: MediaQuery.of(context!).size.width * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -106,7 +105,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             }
 
                             _pageController.animateToPage(++_curr,
-                                duration: Duration(milliseconds: 250),
+                                duration: const Duration(milliseconds: 250),
                                 curve: Curves.bounceInOut);
                           },
                           icon: Icons.arrow_forward,
