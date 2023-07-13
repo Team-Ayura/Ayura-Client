@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:ayura/constants/constants.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -50,15 +49,15 @@ class AuthenticationProvider extends ChangeNotifier {
       "activityLevel": activityLevel,
     };
     print(json.encode(body));
-    String encodedBody = json.encode(body);
-    print(encodedBody);
+    // String encodedBody = json.encode(body);
+    // print(encodedBody);
     try {
       http.Response req = await http.post(
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
         },
-        body: encodedBody,
+        body: json.encode(body),
       );
 
       if (req.statusCode == 200 || req.statusCode == 201) {

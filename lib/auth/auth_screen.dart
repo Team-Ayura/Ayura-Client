@@ -3,10 +3,12 @@ import 'package:ayura/pages/features/register/page2.dart';
 import 'package:ayura/pages/features/register/page3.dart';
 import 'package:ayura/pages/features/register/page4.dart';
 import 'package:ayura/pages/home.dart';
+import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/pages/features/register/page1.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -21,14 +23,22 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userModel = Provider.of<AuthenticationProvider2>(context);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    final List<Widget> list = <Widget>[
+      PageOne(),
+      PageTwo(),
+      PageThree(),
+      PageFour(),
+    ];
+
     return SafeArea(
       child: Scaffold(
           resizeToAvoidBottomInset: true,
           body: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: width * 0.07, vertical: height * 0.05),
+                horizontal: width * 0.09, vertical: height * 0.05),
             child: Column(
               children: [
                 Expanded(
@@ -40,7 +50,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       });
                     },
                     scrollDirection: Axis.horizontal,
-                    children: _list,
+                    children: list,
                   ),
                 ),
                 Row(
@@ -82,20 +92,27 @@ class _AuthScreenState extends State<AuthScreen> {
                             ],
                           )),
                     ),
-                    customButton(
-                        tap: () {
-                          if (_curr == 3) {
-                            PageNavigator(context: context)
-                                .nextPage(const Home());
-                          }
+                    Consumer<AuthenticationProvider2>(
+                        builder: (context, auth, child) {
+                      return customButton(
+                          tap: () {
+                            if (_curr == 3) {
+                              //validate password
+                              auth.getUserData();
+                              auth.register();
 
-                          _pageController.animateToPage(++_curr,
-                              duration: Duration(milliseconds: 250),
-                              curve: Curves.bounceInOut);
-                        },
-                        icon: Icons.arrow_forward,
-                        text: 'Next',
-                        context: context),
+                              PageNavigator(context: context)
+                                  .nextPage(const Home());
+                            }
+
+                            _pageController.animateToPage(++_curr,
+                                duration: Duration(milliseconds: 250),
+                                curve: Curves.bounceInOut);
+                          },
+                          icon: Icons.arrow_forward,
+                          text: 'Next',
+                          context: context);
+                    }),
                   ],
                 ),
               ],
@@ -103,11 +120,4 @@ class _AuthScreenState extends State<AuthScreen> {
           )),
     );
   }
-
-  final List<Widget> _list = <Widget>[
-    PageOne(),
-    PageTwo(),
-    PageThree(),
-    PageFour(),
-  ];
 }
