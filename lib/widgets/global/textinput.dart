@@ -12,6 +12,7 @@ class CustomInput extends StatelessWidget {
     this.height,
     this.obscure,
     this.onInput,
+    required this.errorMsg,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -21,6 +22,7 @@ class CustomInput extends StatelessWidget {
   final double? height;
   final bool? obscure;
   final Function(String)? onInput;
+  final String errorMsg;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +44,7 @@ class CustomInput extends StatelessWidget {
             style: const TextStyle(backgroundColor: Colors.white),
             controller: controller,
             onChanged: onInput,
-            decoration: AppStyles().inputDecoration(hintText),
-            
+            decoration: AppStyles().inputDecoration(hintText, errorMsg),
           ),
         ),
       ],

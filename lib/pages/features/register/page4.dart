@@ -18,9 +18,17 @@ class _PageFourState extends State<PageFour> {
       TextEditingController();
 
   @override
+  void dispose() {
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Column(
@@ -46,42 +54,42 @@ class _PageFourState extends State<PageFour> {
             ),
             Expanded(
               child: ListView(
-                  padding: EdgeInsets.all(0),
-                  children: [
-                    Image.asset('assets/images/Password.png',
-                        height: height * 0.4),
-                    SizedBox(height: height * 0.05),
-                    Consumer<AuthenticationProvider2>(
+                padding: EdgeInsets.all(0),
+                children: [
+                  Image.asset('assets/images/Password.png',
+                      height: height * 0.4),
+                  SizedBox(height: height * 0.05),
+                  Consumer<AuthenticationProvider2>(
                       builder: (context, auth, child) {
-                        return CustomInput(
-                          controller: passwordController,
-                          hintText: '********',
-                          label: 'Password',
-                          obscure: true,
-                          width: width * 0.9,
-                          height: height * 0.04,
-                          onInput: (value) =>
-                              auth.updatePassword(passwordController.text),
-                        );
-                      }
-                    ),
-                    SizedBox(height: height * 0.01),
-                    Consumer<AuthenticationProvider2>(
-                      builder: (context,auth,child) {
-                        return CustomInput(
-                          controller: confirmPasswordController,
-                          hintText: '********',
-                          label: 'Confirm Password',
-                          obscure: true,
-                          width: width * 0.9,
-                          height: height * 0.04,
-                          onInput: (value) =>
-                              auth.updatePassword(confirmPasswordController.text),
-                        );
-                      }
-                    ),
-                  ],
-                ),
+                    return CustomInput(
+                      controller: passwordController,
+                      hintText: '********',
+                      label: 'Password',
+                      obscure: true,
+                      width: width * 0.9,
+                      height: height * 0.04,
+                      onInput: (value) =>
+                          auth.updatePassword(passwordController.text),
+                      errorMsg: auth.passwordvalidate.error,
+                    );
+                  }),
+                  SizedBox(height: height * 0.01),
+                  Consumer<AuthenticationProvider2>(
+                      builder: (context, auth, child) {
+                    return CustomInput(
+                      controller: confirmPasswordController,
+                      hintText: '********',
+                      label: 'Confirm Password',
+                      obscure: true,
+                      width: width * 0.9,
+                      height: height * 0.04,
+                      onInput: (value) =>
+                          auth.updatePassword(confirmPasswordController.text),
+                      errorMsg: auth.confirmPasswordvalidate.error,
+                    );
+                  }),
+                ],
+              ),
             ),
           ]),
     );

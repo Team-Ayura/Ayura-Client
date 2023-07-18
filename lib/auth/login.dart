@@ -4,11 +4,10 @@ import 'package:ayura/pages/home.dart';
 import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/utils/snack_message.dart';
+import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../constants/colors.dart';
-import '../widgets/global/PrimaryBtn.dart';
 import '../widgets/global/textinput.dart';
 
 class Login extends StatefulWidget {
@@ -64,13 +63,13 @@ class LoginState extends State<Login> {
           CustomInput(
             controller: emailController,
             hintText: 'Email',
-            label: '',
+            label: '', errorMsg: '',
           ),
           const SizedBox(height: 5),
           CustomInput(
             controller: passwordController,
             hintText: 'Password',
-            label: '',
+            label: '', errorMsg: '',
           ),
           const SizedBox(height: 20),
           Consumer<AuthenticationProvider2>(builder: (context, auth, child) {

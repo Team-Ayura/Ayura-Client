@@ -47,6 +47,16 @@ class _PageThreeState extends State<PageThree> {
   }
 
   @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    birthdayController.dispose();
+    nationalityController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
@@ -94,21 +104,24 @@ class _PageThreeState extends State<PageThree> {
                           onInput: (value) => {
                                 auth.updateFirstName(firstNameController.text),
                                 inputs.updateFirstName(firstNameController.text)
-                              });
+                              },
+                          errorMsg: auth.firstnamevalidate.error);
                     }),
                     SizedBox(width: width * 0.05),
                     Consumer<AuthenticationProvider2>(
                         builder: (context, auth, child) {
                       return CustomInput(
-                          controller: lastNameController,
-                          hintText: 'Kahatapitiya',
-                          label: 'Last Name',
-                          width: width * 0.38,
-                          height: height * 0.05,
-                          onInput: (value) => {
-                                auth.updateLastName(lastNameController.text),
-                                inputs.updateLastName(lastNameController.text)
-                              });
+                        controller: lastNameController,
+                        hintText: 'Kahatapitiya',
+                        label: 'Last Name',
+                        width: width * 0.38,
+                        height: height * 0.05,
+                        onInput: (value) => {
+                          auth.updateLastName(lastNameController.text),
+                          inputs.updateLastName(lastNameController.text)
+                        },
+                        errorMsg: auth.lastnamevalidate.error,
+                      );
                     }),
                   ],
                 ),
@@ -125,6 +138,7 @@ class _PageThreeState extends State<PageThree> {
                       auth.updateEmail(emailController.text),
                       inputs.updateEmail(emailController.text)
                     },
+                    errorMsg: auth.emailvalidate.error,
                   );
                 }),
                 SizedBox(height: height * 0.02),
@@ -146,7 +160,8 @@ class _PageThreeState extends State<PageThree> {
                         height: height * 0.1,
                         child: TextField(
                           controller: birthdayController,
-                          decoration: AppStyles().inputDecoration('2000-08-08'),
+                          decoration:
+                              AppStyles().inputDecoration('2000-08-08', ''),
                           readOnly: true,
                           onTap: () async {
                             DateTime? pickedDate = await showDatePicker(
@@ -201,7 +216,8 @@ class _PageThreeState extends State<PageThree> {
                         child: DropdownButtonFormField<String>(
                             value: selectedBloodGroup,
                             decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(left: 10, right: 10),
+                              contentPadding:
+                                  EdgeInsets.only(left: 10, right: 10),
                               border: InputBorder.none,
                             ),
                             items: bloodGroups.map((bloodGroup) {

@@ -20,6 +20,8 @@ class AuthScreen extends StatefulWidget {
 class AuthScreenState extends State<AuthScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _curr = 0;
+  AuthenticationProvider2 auth = AuthenticationProvider2();
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -96,17 +98,23 @@ class AuthScreenState extends State<AuthScreen> {
                       return customButton(
                           tap: () {
                             if (_curr == 3) {
-                              //validate password
-                              auth.getUserData();
-                              auth.register();
-
-                              PageNavigator(context: context)
-                                  .nextPage(const Home());
+                             if(auth.isValid == true){
+                                auth.register();
+                                PageNavigator(context: context)
+                                    .nextPage(const Home());
+                             }else{
+                               ScaffoldMessenger.of(context).showSnackBar(
+                                 const SnackBar(
+                                   content: Text('Please fill all fields'),
+                                 ),
+                               );
+                             }
+                              
                             }
 
-                            _pageController.animateToPage(++_curr,
-                                duration: const Duration(milliseconds: 250),
-                                curve: Curves.bounceInOut);
+                                 _pageController.animateToPage(++_curr,
+                                    duration: const Duration(milliseconds: 250),
+                                    curve: Curves.bounceInOut);
                           },
                           icon: Icons.arrow_forward,
                           text: 'Next',

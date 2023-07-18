@@ -37,7 +37,7 @@ class AppStyles {
     color: Color(0xFF878787),
   );
 
-  InputDecoration inputDecoration(String placeholder) {
+  InputDecoration inputDecoration(String placeholder, String error) {
     return InputDecoration(
       fillColor: Colors.transparent,
       focusedBorder: OutlineInputBorder(
@@ -52,6 +52,15 @@ class AppStyles {
       hintStyle: const TextStyle(
         fontFamily: 'Inter',
         fontSize: 16,
+      ),
+      errorText: error.isNotEmpty ? error : null,
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Colors.red, width: 1.5),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Colors.red, width: 1.5),
       ),
     );
   }
