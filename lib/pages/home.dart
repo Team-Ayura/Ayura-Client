@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:ayura/pages/features/mood_tracking/page1.dart';
 import 'package:ayura/utils/convertDate.dart';
 import 'package:dob_input_field/dob_input_field.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +87,20 @@ class _HomeState extends State<Home> {
                   print(birthdayController.text);
                   print(convertDate(birthdayController.text));
                 },
-                child: Text('Save'))
+                child: Text('Save')
+            ),
+            //move to mood tracker
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>const SelectMood(),
+                  ),
+                );
+              },
+              child: const Text('Mood')
+            ),
           ],
         ),
       ),
