@@ -2,7 +2,8 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
    final IconData leftIcon;
    final IconData rightIcon;
    final String title;
