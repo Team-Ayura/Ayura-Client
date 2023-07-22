@@ -1,7 +1,9 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
+import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/widgets/global/textinput.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PageFour extends StatefulWidget {
   const PageFour({Key? key}) : super(key: key);
@@ -16,9 +18,17 @@ class _PageFourState extends State<PageFour> {
       TextEditingController();
 
   @override
+  void dispose() {
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Column(
@@ -49,23 +59,35 @@ class _PageFourState extends State<PageFour> {
                   Image.asset('assets/images/Password.png',
                       height: height * 0.4),
                   SizedBox(height: height * 0.05),
-                  CustomInput(
-                    controller: passwordController,
-                    hintText: '********',
-                    label: 'Password',
-                    obscure: true,
-                    width: width * 0.9,
-                    height: height * 0.04,
-                  ),
+                  Consumer<AuthenticationProvider2>(
+                      builder: (context, auth, child) {
+                    return CustomInput(
+                      controller: passwordController,
+                      hintText: '********',
+                      label: 'Password',
+                      obscure: true,
+                      width: width * 0.9,
+                      height: height * 0.04,
+                      onInput: (value) =>
+                          auth.updatePassword(passwordController.text),
+                      errorMsg: auth.passwordvalidate.error,
+                    );
+                  }),
                   SizedBox(height: height * 0.01),
-                  CustomInput(
-                    controller: confirmPasswordController,
-                    hintText: '********',
-                    label: 'Confirm Password',
-                    obscure: true,
-                    width: width * 0.9,
-                    height: height * 0.04,
-                  ),
+                  Consumer<AuthenticationProvider2>(
+                      builder: (context, auth, child) {
+                    return CustomInput(
+                      controller: confirmPasswordController,
+                      hintText: '********',
+                      label: 'Confirm Password',
+                      obscure: true,
+                      width: width * 0.9,
+                      height: height * 0.04,
+                      onInput: (value) =>
+                          auth.updatePassword(confirmPasswordController.text),
+                      errorMsg: auth.confirmPasswordvalidate.error,
+                    );
+                  }),
                 ],
               ),
             ),

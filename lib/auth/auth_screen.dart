@@ -3,32 +3,43 @@ import 'package:ayura/pages/features/register/page2.dart';
 import 'package:ayura/pages/features/register/page3.dart';
 import 'package:ayura/pages/features/register/page4.dart';
 import 'package:ayura/pages/home.dart';
+import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/pages/features/register/page1.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
   @override
-  _AuthScreenState createState() => _AuthScreenState();
+  AuthScreenState createState() => AuthScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> {
+class AuthScreenState extends State<AuthScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _curr = 0;
+  AuthenticationProvider2 auth = AuthenticationProvider2();
+ 
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    final List<Widget> list = <Widget>[
+      const PageOne(),
+      const PageTwo(),
+      const PageThree(),
+      const PageFour(),
+    ];
+
     return SafeArea(
       child: Scaffold(
           resizeToAvoidBottomInset: true,
           body: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: width * 0.07, vertical: height * 0.05),
+                horizontal: width * 0.09, vertical: height * 0.05),
             child: Column(
               children: [
                 Expanded(
@@ -40,7 +51,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       });
                     },
                     scrollDirection: Axis.horizontal,
-                    children: _list,
+                    children: list,
                   ),
                 ),
                 Row(
@@ -53,12 +64,12 @@ class _AuthScreenState extends State<AuthScreen> {
                               .nextPage(const Login());
                         }
                         _pageController.animateToPage(--_curr,
-                            duration: Duration(milliseconds: 250),
+                            duration: const Duration(milliseconds: 250),
                             curve: Curves.bounceInOut);
                       },
                       child: Container(
                           height: 48,
-                          width: MediaQuery.of(context!).size.width * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -82,20 +93,33 @@ class _AuthScreenState extends State<AuthScreen> {
                             ],
                           )),
                     ),
-                    customButton(
-                        tap: () {
-                          if (_curr == 3) {
-                            PageNavigator(context: context)
-                                .nextPage(const Home());
-                          }
+                    Consumer<AuthenticationProvider2>(
+                        builder: (context, auth, child) {
+                      return customButton(
+                          tap: () {
+                            if (_curr == 3) {
+                             if(auth.isValid == true){
+                                auth.register();
+                                PageNavigator(context: context)
+                                    .nextPage(const Home());
+                             }else{
+                               ScaffoldMessenger.of(context).showSnackBar(
+                                 const SnackBar(
+                                   content: Text('Please fill all fields'),
+                                 ),
+                               );
+                             }
+                              
+                            }
 
-                          _pageController.animateToPage(++_curr,
-                              duration: Duration(milliseconds: 250),
-                              curve: Curves.bounceInOut);
-                        },
-                        icon: Icons.arrow_forward,
-                        text: 'Next',
-                        context: context),
+                                 _pageController.animateToPage(++_curr,
+                                    duration: const Duration(milliseconds: 250),
+                                    curve: Curves.bounceInOut);
+                          },
+                          icon: Icons.arrow_forward,
+                          text: 'Next',
+                          context: context);
+                    }),
                   ],
                 ),
               ],
@@ -103,11 +127,4 @@ class _AuthScreenState extends State<AuthScreen> {
           )),
     );
   }
-
-  final List<Widget> _list = <Widget>[
-    PageOne(),
-    PageTwo(),
-    PageThree(),
-    PageFour(),
-  ];
 }

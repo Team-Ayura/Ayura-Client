@@ -1,9 +1,7 @@
 import 'package:ayura/auth/auth_screen.dart';
 import 'package:ayura/auth/login.dart';
-import 'package:ayura/auth/signup.dart';
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
-import 'package:ayura/pages/home.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +10,10 @@ class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 
   @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
+  OnboardingScreenState createState() => OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,7 +26,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 Image.asset(
                   'assets/images/onboardingImg.png',
-                  height: 350,
+                  height: 300,
                 ),
                 const SizedBox(height: 25),
                 const Text("Let's Simplify, \n Health",
@@ -51,7 +49,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 const SizedBox(height: 20),
                 customButton(
                     tap: () {
-                      print('clicked');
                       PageNavigator(context: context)
                           .nextPage(const AuthScreen());
                     },
@@ -61,31 +58,30 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     context: context),
                 const SizedBox(height: 20),
                 Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Already have an account? ',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    PageNavigator(context: context).nextPage(const Login());
-                  },
-                  child: const Text(
-                    'Sign in',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.bold,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Already have an account? ',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
+                    InkWell(
+                      onTap: () {
+                        PageNavigator(context: context).nextPage(const Login());
+                      },
+                      child: const Text(
+                        'Sign in',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
               ]),
-
         ),
       ),
     );
