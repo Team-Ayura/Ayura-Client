@@ -63,13 +63,16 @@ class LoginState extends State<Login> {
           CustomInput(
             controller: emailController,
             hintText: 'Email',
-            label: '', errorMsg: '',
+            label: '',
+            errorMsg: '',
           ),
           const SizedBox(height: 5),
           CustomInput(
             controller: passwordController,
             hintText: 'Password',
-            label: '', errorMsg: '',
+            label: '',
+            errorMsg: '',
+            obscure: true,
           ),
           const SizedBox(height: 20),
           Consumer<AuthenticationProvider2>(builder: (context, auth, child) {
