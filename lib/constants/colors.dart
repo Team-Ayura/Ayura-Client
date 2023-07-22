@@ -9,4 +9,5 @@ class AppColors {
   static const Color backgroundColor = Color(0xFFFFFFFF);
   static const Color textColor = Color(0xFF000000);
   static const Color disabledColor = Color(0xFF9E9E9E);
+  static const Color shadowColor = Color.fromRGBO(93, 92, 92, 1);
 }

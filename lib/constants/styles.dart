@@ -109,4 +109,6 @@ class AppStyles {
   );
 
   // Add more styles as needed
+
+  
 }
