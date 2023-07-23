@@ -21,7 +21,7 @@ class SelectMood extends StatelessWidget {
     );
     return Scaffold(
       //top app bar with icons
-      appBar: CustomAppBar(Icons.arrow_back_outlined,Icons.calendar_month_outlined,"Mood Tracker"),
+      appBar: CustomAppBar(Icons.arrow_back_outlined,Icons.calendar_month_outlined,"Mood Tracker",leftCallback :()=>Navigator.of(context).pop()),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +31,7 @@ class SelectMood extends StatelessWidget {
             //top image
             Center(
               child: SvgPicture.asset(
-                'assets/images/mood_tracker_pg1.svg',
+                'assets/images/mood_tracking/mood_tracker_pg1.svg',
                 width: 350,
                 height: 350,
               ),
