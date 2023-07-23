@@ -38,6 +38,7 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/
+    - assets/images/mood_tracking/
     - assets/icons/
 
 
