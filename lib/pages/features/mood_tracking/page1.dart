@@ -1,5 +1,5 @@
 import 'package:ayura/constants/styles.dart';
-import 'package:ayura/widgets/features/register/mood_traking/mood_chips.dart';
+import 'package:ayura/widgets/features/mood_traking/mood_chips.dart';
 import 'package:ayura/widgets/global/custom_app_bar.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
