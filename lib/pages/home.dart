@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ayura/constants/styles.dart';
 
+import '../utils/router.dart';
+import 'features/activity_tracking/activity.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -87,20 +90,23 @@ class _HomeState extends State<Home> {
                   print(birthdayController.text);
                   print(convertDate(birthdayController.text));
                 },
-                child: Text('Save')
-            ),
+                child: Text('Save')),
             //move to mood tracker
             TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>const SelectMood(),
-                  ),
-                );
-              },
-              child: const Text('Mood')
-            ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SelectMood(),
+                    ),
+                  );
+                },
+                child: const Text('Mood')),
+            TextButton(
+                onPressed: () {
+                  PageNavigator(context: context).nextPage(Activities());
+                },
+                child: const Text('activity')),
           ],
         ),
       ),
