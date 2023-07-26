@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../widgets/features/activity_tracking/activity_type.dart';
+import '../../../widgets/global/custom_app_bar.dart';
 
 class Activities extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       // Define your named routes here
+      debugShowCheckedModeBanner: false,
       routes: {
         '/activities': (context) => ActivitiesPage(),
         '/running': (context) => RunningPage(),
@@ -20,12 +22,14 @@ class Activities extends StatelessWidget {
       },
       // Optionally, you can provide the initialRoute
       // if you want to start your app on a specific page.
-      // initialRoute: '/activities', // Uncomment and set the initial route if needed.
+      initialRoute:
+          '/activities', // Uncomment and set the initial route if needed.
     );
   }
 }
 
 class RunningPage extends StatelessWidget {
+  RunningPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -34,6 +38,7 @@ class RunningPage extends StatelessWidget {
 }
 
 class CyclingPage extends StatelessWidget {
+  CyclingPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -42,6 +47,7 @@ class CyclingPage extends StatelessWidget {
 }
 
 class StairsPage extends StatelessWidget {
+  StairsPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -50,6 +56,7 @@ class StairsPage extends StatelessWidget {
 }
 
 class SportsPage extends StatelessWidget {
+  SportsPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -58,6 +65,7 @@ class SportsPage extends StatelessWidget {
 }
 
 class WorkoutsPage extends StatelessWidget {
+  WorkoutsPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -81,7 +89,7 @@ class ActivitiesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Activity'),
+        title: const Center(child: Text('Activity')),
         backgroundColor: AppColors.primaryColor,
       ),
       body: SingleChildScrollView(
@@ -94,30 +102,35 @@ class ActivitiesPage extends StatelessWidget {
               imagePath: 'assets/images/activity_tracking/running.svg',
               mainText: 'Walking & Running',
               subText: 'Step by step, you\'re closer to your goals',
+              route: '/running',
             ),
             CustomBoxItem(
               index: 2,
               imagePath: 'assets/images/activity_tracking/cycling.svg',
               mainText: 'Cycling',
               subText: 'Pedal your way to strength and freedom.',
+              route: '/running',
             ),
             CustomBoxItem(
               index: 3,
               imagePath: 'assets/images/activity_tracking/stairs.svg',
               mainText: 'Stairs',
               subText: 'Climb higher, conquer your limits.',
+              route: '/running',
             ),
             CustomBoxItem(
               index: 4,
               imagePath: 'assets/images/activity_tracking/sports.svg',
               mainText: 'Sports',
               subText: 'Unleash your passion, embrace the challenge.',
+              route: '/running',
             ),
             CustomBoxItem(
               index: 5,
               imagePath: 'assets/images/activity_tracking/workout.svg',
               mainText: 'Workout',
               subText: 'Sweat, push, and transform your body and mind.',
+              route: '/running',
             ),
             // Add more widgets here for the scrollable body
           ],
