@@ -34,7 +34,7 @@ class _RulerPickerInputState extends State<RulerPickerInput> {
     print(widget.value);
     // widget.controller.text =
     //     (widget.value == 0) ? '50' : widget.value.toString();
-        print(widget.controller.text);
+    print(widget.controller.text);
     widget.controller.text = widget.value.toString();
   }
 
@@ -74,7 +74,7 @@ class _RulerPickerInputState extends State<RulerPickerInput> {
             return RulerPicker(
               controller: _rulerPickerController!,
               beginValue: 30,
-              endValue: 100,
+              endValue: 250,
               initValue: widget.value,
               scaleLineStyleList: const [
                 ScaleLineStyle(

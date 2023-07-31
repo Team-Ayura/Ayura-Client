@@ -37,6 +37,24 @@ class AppStyles {
     color: Color(0xFF878787),
   );
 
+  //mood tracking Questions styles
+  static const TextStyle mainQuestionsStyle = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 25,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+  );
+
+  //app bar title
+   static const TextStyle appBarTitleStyle = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 20,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+  );
+
+  
+
   InputDecoration inputDecoration(String placeholder, String error) {
     return InputDecoration(
       fillColor: Colors.transparent,
@@ -109,4 +127,6 @@ class AppStyles {
   );
 
   // Add more styles as needed
+
+  
 }

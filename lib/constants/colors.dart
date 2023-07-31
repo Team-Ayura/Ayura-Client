@@ -10,4 +10,5 @@ class AppColors {
   static const Color disabledColor = Color(0xFF9E9E9E);
   static const Color alternateGreyColor = Color.fromRGBO(185, 185, 185, 1);
   static const Color successColor = Color.fromRGBO(63, 241, 0, 1);
+  static const Color shadowColor = Color.fromRGBO(93, 92, 92, 1);
 }

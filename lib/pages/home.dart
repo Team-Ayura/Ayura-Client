@@ -1,13 +1,19 @@
 import 'dart:collection';
 
+import 'package:ayura/pages/features/mealPlan/meal_screen.dart';
+import 'package:ayura/pages/features/mood_tracking/page1.dart';
 import 'package:ayura/auth/login.dart';
 import 'package:ayura/provider/autProvider/authentication_provider.dart';
+import 'package:ayura/pages/features/mood_tracking/page1.dart';
 import 'package:ayura/utils/convertDate.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:dob_input_field/dob_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ayura/constants/styles.dart';
+
+import '../utils/router.dart';
+import 'features/activity_tracking/activity.dart';
 import 'package:provider/provider.dart';
 import 'package:ayura/pages/features/community/community_home.dart';
 
@@ -27,32 +33,40 @@ class _HomeState extends State<Home> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            PageNavigator(context: context).nextPage(const Login());
-          },
-        ),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: OutlinedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CommunityHome()),
-              );
-            },
-            child: const Text('Community'),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            onPressed: () {},
           ),
         ),
-      ),
-    );
+        body: Center(
+          child: Column(
+            children: [
+              //move to mood tracker
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SelectMood(),
+                      ),
+                    );
+                  },
+                  child: const Text('Mood')),
+
+              TextButton(
+                  onPressed: () {
+                    PageNavigator(context: context)
+                        .nextPage(const MealScreen());
+                  },
+                  child: const Text('Meal Plan')),
+            ],
+          ),
+        ));
   }
 }
