@@ -38,7 +38,7 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/
-    - assets/images/mealplan/
+    - assets/images/mealPlan/
     - assets/icons/
 
 
