@@ -15,6 +15,7 @@ import 'package:ayura/constants/styles.dart';
 import '../utils/router.dart';
 import 'features/activity_tracking/activity.dart';
 import 'package:provider/provider.dart';
+import 'package:ayura/pages/features/community/community_home.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

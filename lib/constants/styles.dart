@@ -27,7 +27,7 @@ class AppStyles {
 
   static const TextStyle bodyTextStyle = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 16,
+    fontSize: 14,
     color: Colors.black,
   );
 
