@@ -11,10 +11,10 @@ import 'package:dob_input_field/dob_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ayura/constants/styles.dart';
-import 'package:provider/provider.dart';
 
 import '../utils/router.dart';
 import 'features/activity_tracking/activity.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
