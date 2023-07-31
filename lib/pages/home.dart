@@ -4,6 +4,7 @@ import 'package:ayura/pages/features/mealPlan/meal_screen.dart';
 import 'package:ayura/pages/features/mood_tracking/page1.dart';
 import 'package:ayura/auth/login.dart';
 import 'package:ayura/provider/autProvider/authentication_provider.dart';
+import 'package:ayura/pages/features/mood_tracking/page1.dart';
 import 'package:ayura/utils/convertDate.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:dob_input_field/dob_input_field.dart';
@@ -11,6 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:provider/provider.dart';
+
+import '../utils/router.dart';
+import 'features/activity_tracking/activity.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

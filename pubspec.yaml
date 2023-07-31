@@ -23,6 +23,7 @@ dependencies:
   intl: ^0.18.1
   provider: ^6.0.5
   shared_preferences: ^2.1.2
+  buttons_tabbar: ^1.3.7+1
 
 dev_dependencies:
   flutter_test:
@@ -38,8 +39,10 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/
+    - assets/images/mood_tracking/
     - assets/images/mealPlan/
     - assets/icons/
+    - assets/images/activity_tracking/
 
 
   fonts:
