@@ -1,5 +1,5 @@
 import 'package:ayura/constants/styles.dart';
-import 'package:ayura/widgets/features/register/mood_traking/mood_chips.dart';
+import 'package:ayura/widgets/features/mood_traking/mood_chips.dart';
 import 'package:ayura/widgets/global/custom_app_bar.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +18,7 @@ class SelectMood extends StatelessWidget {
     );
     return Scaffold(
       //top app bar with icons
-      appBar: CustomAppBar(Icons.arrow_back_outlined,
-          Icons.calendar_month_outlined, "Mood Tracker"),
+      appBar: CustomAppBar(Icons.arrow_back_outlined,Icons.calendar_month_outlined,"Mood Tracker",leftCallback :()=>Navigator.of(context).pop()),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +30,7 @@ class SelectMood extends StatelessWidget {
             //top image
             Center(
               child: SvgPicture.asset(
-                'assets/images/mood_tracker_pg1.svg',
+                'assets/images/mood_tracking/mood_tracker_pg1.svg',
                 width: 350,
                 height: 350,
               ),
