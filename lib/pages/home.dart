@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:provider/provider.dart';
+import 'package:ayura/pages/features/community/community_home.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -27,21 +28,31 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            PageNavigator(context: context).nextPage(const Login());
+          },
+        ),
+      ),
+      body: SafeArea(
+        child: Center(
+          child: OutlinedButton(
             onPressed: () {
-              PageNavigator(context: context).nextPage(const Login());
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CommunityHome()),
+              );
             },
-          )),
-      body: const SafeArea(
-          child: Center(
-        child: Text('Hello'),
-      )),
+            child: const Text('Community'),
+          ),
+        ),
+      ),
     );
   }
 }
