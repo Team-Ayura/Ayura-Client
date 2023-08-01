@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class WalkingAndRunningProvider extends ChangeNotifier {
+class StairsProvider extends ChangeNotifier {
   String selectedFilter = 'D'; // Default filter is 'D' for Day
   Map<String, int> stepsData = {}; // Data for steps taken on each day
   double verticaldistance = 189; // Total distance covered

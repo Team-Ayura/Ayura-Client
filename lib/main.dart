@@ -2,6 +2,7 @@ import 'package:ayura/auth/onboarding_screen.dart';
 import 'package:ayura/pages/splash_screen.dart';
 import 'package:ayura/auth/signup.dart';
 import 'package:ayura/pages/home.dart';
+import 'package:ayura/provider/activityProviders/stairsProvider.dart';
 import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/provider/autProvider/auth_provider.dart';
 import 'package:ayura/provider/functions/init.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
         ChangeNotifierProvider(create: (_) => WalkingAndRunningProvider()),
+        ChangeNotifierProvider(create: (_) => StairsProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

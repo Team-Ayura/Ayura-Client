@@ -1,10 +1,9 @@
 import 'package:ayura/constants/colors.dart';
+import 'package:ayura/pages/features/activity_tracking/stairs_page.dart';
 import 'package:ayura/pages/features/activity_tracking/walking_and_running_page.dart';
+import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../widgets/features/activity_tracking/activity_type.dart';
-import '../../../widgets/global/custom_app_bar.dart';
 
 class Activities extends StatelessWidget {
   @override
@@ -40,15 +39,6 @@ class RunningPage extends StatelessWidget {
 
 class CyclingPage extends StatelessWidget {
   CyclingPage({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-}
-
-class StairsPage extends StatelessWidget {
-  StairsPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -117,7 +107,7 @@ class ActivitiesPage extends StatelessWidget {
               imagePath: 'assets/images/activity_tracking/stairs.svg',
               mainText: 'Stairs',
               subText: 'Climb higher, conquer your limits.',
-              route: '/walkingandrunning',
+              route: '/stairs',
             ),
             CustomBoxItem(
               index: 4,
