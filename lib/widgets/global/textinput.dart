@@ -11,6 +11,8 @@ class CustomInput extends StatelessWidget {
     this.width,
     this.height,
     this.obscure,
+    this.onInput,
+    required this.errorMsg,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -19,6 +21,8 @@ class CustomInput extends StatelessWidget {
   final double? width;
   final double? height;
   final bool? obscure;
+  final Function(String)? onInput;
+  final String errorMsg;
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +40,11 @@ class CustomInput extends StatelessWidget {
         SizedBox(
           width: width, // Set your desired width here
           child: TextField(
-            obscureText: obscure ?? true,
-            style: TextStyle(backgroundColor: Colors.white),
+            obscureText: obscure ?? false,
+            style: const TextStyle(backgroundColor: Colors.white),
             controller: controller,
-            decoration: AppStyles().inputDecoration(hintText),
+            onChanged: onInput,
+            decoration: AppStyles().inputDecoration(hintText, errorMsg),
           ),
         ),
       ],

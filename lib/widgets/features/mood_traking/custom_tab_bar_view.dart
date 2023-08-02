@@ -1,4 +1,7 @@
 import 'package:ayura/constants/colors.dart';
+import 'package:ayura/widgets/features/mood_traking/biweekcalendar.dart';
+import 'package:ayura/widgets/features/mood_traking/monthcalendar.dart';
+import 'package:ayura/widgets/features/mood_traking/weekcalendar.dart';
 import 'package:flutter/material.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 
@@ -7,7 +10,9 @@ class CustomTabBarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return DefaultTabController(
+      //tabbar part
       length: 3, 
       child: Padding(
         padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
@@ -35,20 +40,49 @@ class CustomTabBarView extends StatelessWidget {
                 ),
               ],  
             ),
-            const Expanded(
+
+            //tab contents
+            Expanded(
                   child: TabBarView(
                     children: <Widget>[
-                      Center(
-                        child: Text("Week"),
+                    //week tab
+                    SingleChildScrollView(
+                      child:Column(
+                        children:[
+                          const SizedBox(height: 10,),  
+                          WeekCalendar(),
+                          const SizedBox(height: 10,),
+                          // MoodVariationChart(),
+
+                        ],
                       ),
-                      Center(
-                        child: Text("Bi-Week"),
+                    ),
+                    //bi week tab
+                    SingleChildScrollView(
+                       child:Column(
+                        children:[ 
+                          const SizedBox(height: 10,),
+                          BiweekCalendar(),
+                          const SizedBox(height: 10,),
+                          // MoodVariationChart(),
+
+                        ],
                       ),
-                      Center(
-                        child: Text("Monthly"),
+                    ),
+                    //Monthly tab
+                    SingleChildScrollView(
+                      child:Column(
+                        children:[ 
+                          const SizedBox(height: 10,),
+                          MonthCalendar(),
+                          const SizedBox(height: 10,),
+                          // MoodVariationChart(),
+
+                        ],
                       ),
-                      
-                    ],
+                    ),
+                    
+                  ],
                   ),
                 ),
           ],
