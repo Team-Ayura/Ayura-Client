@@ -1,4 +1,5 @@
 import 'package:ayura/constants/colors.dart';
+import 'package:ayura/pages/features/activity_tracking/cycling_page.dart';
 import 'package:ayura/pages/features/activity_tracking/stairs_page.dart';
 import 'package:ayura/pages/features/activity_tracking/walking_and_running_page.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
@@ -25,24 +26,6 @@ class Activities extends StatelessWidget {
       initialRoute:
           '/activities', // Uncomment and set the initial route if needed.
     );
-  }
-}
-
-class RunningPage extends StatelessWidget {
-  RunningPage({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-}
-
-class CyclingPage extends StatelessWidget {
-  CyclingPage({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
   }
 }
 
@@ -100,7 +83,7 @@ class ActivitiesPage extends StatelessWidget {
               imagePath: 'assets/images/activity_tracking/cycling.svg',
               mainText: 'Cycling',
               subText: 'Pedal your way to strength and freedom.',
-              route: '/walkingandrunning',
+              route: '/cycling',
             ),
             CustomBoxItem(
               index: 3,
