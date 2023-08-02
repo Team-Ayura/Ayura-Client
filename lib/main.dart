@@ -5,6 +5,7 @@ import 'package:ayura/pages/home.dart';
 import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/provider/autProvider/auth_provider.dart';
 import 'package:ayura/provider/functions/init.dart';
+import 'package:ayura/provider/navigationProvider/navigation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
+        ChangeNotifierProvider(create: (_) => AuthenticationProvider2()),
+        ChangeNotifierProvider(create: (_) => AppNavigationProvider()),
         ChangeNotifierProvider(create: (_) => WalkingAndRunningProvider()),
       ],
       child: MaterialApp(

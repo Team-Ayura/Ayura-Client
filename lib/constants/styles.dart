@@ -37,23 +37,7 @@ class AppStyles {
     color: Color(0xFF878787),
   );
 
-  //app bar title
-   static const TextStyle appBarTitleStyle = TextStyle(
-    fontFamily: 'Inter',
-    fontSize: 20,
-    color: Colors.black,
-    fontWeight: FontWeight.bold,
-  );
-
-  //mood tracking Questions styles
-  static const TextStyle mainQuestionsStyle = TextStyle(
-    fontFamily: 'Inter',
-    fontSize: 25,
-    color: Colors.black,
-    fontWeight: FontWeight.bold,
-  );
-
-  InputDecoration inputDecoration(String placeholder) {
+  InputDecoration inputDecoration(String placeholder, String error) {
     return InputDecoration(
       fillColor: Colors.transparent,
       focusedBorder: OutlineInputBorder(
@@ -62,12 +46,21 @@ class AppStyles {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: AppColors.primaryColor, width: 1.5),
+        borderSide: const BorderSide(color: AppColors.primaryColor, width: 1.5),
       ),
       hintText: placeholder,
       hintStyle: const TextStyle(
         fontFamily: 'Inter',
         fontSize: 16,
+      ),
+      errorText: error.isNotEmpty ? error : null,
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Colors.red, width: 1.5),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Colors.red, width: 1.5),
       ),
     );
   }

@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
-   final IconData leftIcon;
-   final IconData rightIcon;
-   final String title;
+   final IconData ? leftIcon;
+   final IconData ? rightIcon;
+   final String ? title;
    final Function? leftCallback;
    final Function? rightCallback;
    CustomAppBar(this.leftIcon, this.rightIcon,this.title, {this.leftCallback,this.rightCallback});
@@ -34,8 +34,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
           ),
           //middle title
           Text(
-            title,
-            style: AppStyles.appBarTitleStyle,
+            title ?? "",
+            style: AppStyles.subheadingTextStyle2,
           ),
           //right icon
           GestureDetector(
