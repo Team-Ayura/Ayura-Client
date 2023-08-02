@@ -41,10 +41,12 @@ class _HomeState extends State<Home> {
               PageNavigator(context: context).nextPage(const Login());
             },
           )),
-      body: const SafeArea(
-          child: Center(
-        child: Text('Hello'),
-      )),
+      body: SafeArea(
+        child: Column(
+          children: [
+            const Center(
+              child: Text('Hello'),
+            ),
             TextButton(
                 onPressed: () {
                   print(birthdayController.text);
