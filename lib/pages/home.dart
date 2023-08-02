@@ -41,10 +41,12 @@ class _HomeState extends State<Home> {
               PageNavigator(context: context).nextPage(const Login());
             },
           )),
-      body: const SafeArea(
+      body: SafeArea(
           child: Center(
-        child: Text('Hello'),
-      )),
+        child: Column(
+          children:[
+            Text('Hello'),
+      
             TextButton(
                 onPressed: () {
                   print(birthdayController.text);
@@ -54,12 +56,7 @@ class _HomeState extends State<Home> {
             //move to mood tracker
             TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SelectMood(),
-                    ),
-                  );
+                  PageNavigator(context: context).nextPage(const SelectMood());
                 },
                 child: const Text('Mood')),
             TextButton(
@@ -67,9 +64,11 @@ class _HomeState extends State<Home> {
                   PageNavigator(context: context).nextPage(Activities());
                 },
                 child: const Text('activity')),
-          ],
+        ], 
+          
         ),
       ),
+    ),
     );
   }
 }
