@@ -1,4 +1,5 @@
 import 'package:ayura/constants/colors.dart';
+import 'package:ayura/pages/features/activity_tracking/walking_and_running_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -13,7 +14,7 @@ class Activities extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/activities': (context) => ActivitiesPage(),
-        '/running': (context) => RunningPage(),
+        '/walkingandrunning': (context) => WalkingAndRunningPage(),
         '/cycling': (context) => CyclingPage(),
         '/stairs': (context) => StairsPage(),
         '/sports': (context) => SportsPage(),
@@ -102,35 +103,35 @@ class ActivitiesPage extends StatelessWidget {
               imagePath: 'assets/images/activity_tracking/running.svg',
               mainText: 'Walking & Running',
               subText: 'Step by step, you\'re closer to your goals',
-              route: '/running',
+              route: '/walkingandrunning',
             ),
             CustomBoxItem(
               index: 2,
               imagePath: 'assets/images/activity_tracking/cycling.svg',
               mainText: 'Cycling',
               subText: 'Pedal your way to strength and freedom.',
-              route: '/running',
+              route: '/walkingandrunning',
             ),
             CustomBoxItem(
               index: 3,
               imagePath: 'assets/images/activity_tracking/stairs.svg',
               mainText: 'Stairs',
               subText: 'Climb higher, conquer your limits.',
-              route: '/running',
+              route: '/walkingandrunning',
             ),
             CustomBoxItem(
               index: 4,
               imagePath: 'assets/images/activity_tracking/sports.svg',
               mainText: 'Sports',
               subText: 'Unleash your passion, embrace the challenge.',
-              route: '/running',
+              route: '/walkingandrunning',
             ),
             CustomBoxItem(
               index: 5,
               imagePath: 'assets/images/activity_tracking/workout.svg',
               mainText: 'Workout',
               subText: 'Sweat, push, and transform your body and mind.',
-              route: '/running',
+              route: '/walkingandrunning',
             ),
             // Add more widgets here for the scrollable body
           ],
