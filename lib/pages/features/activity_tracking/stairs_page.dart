@@ -1,19 +1,19 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
+import 'package:ayura/provider/activityProviders/stairsProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class WalkingAndRunningPage extends StatefulWidget {
-  const WalkingAndRunningPage({Key? key}) : super(key: key);
+class StairsPage extends StatefulWidget {
+  const StairsPage({Key? key}) : super(key: key);
 
   @override
-  State<WalkingAndRunningPage> createState() => _WalkingAndRunningPageState();
+  State<StairsPage> createState() => _StairsPageState();
 }
 
-class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
+class _StairsPageState extends State<StairsPage> {
   int activeIndex = 0; // -1 means no active index
 
   @override
@@ -22,7 +22,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Walking & Running'),
+        title: const Text('Stairs'),
         backgroundColor: AppColors.primaryColor,
       ),
       body: SingleChildScrollView(
@@ -53,10 +53,10 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
             Container(
               height: 200,
               padding: const EdgeInsets.all(10),
-              child: Consumer<WalkingAndRunningProvider>(
+              child: Consumer<StairsProvider>(
                   builder: (context, walkingAndRunningProvider, _) {
                 return BarChartWeekly(
-                    yAxisLabel: 'Steps',
+                    yAxisLabel: 'Stairs',
                     filter: walkingAndRunningProvider.selectedFilter,
                     data: walkingAndRunningProvider.steps);
               }),
@@ -98,15 +98,15 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              'Steps',
+                              'Stairs',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
                             ),
-                            Consumer<WalkingAndRunningProvider>(builder:
-                                (context, walkingAndRunningProvider, _) {
+                            Consumer<StairsProvider>(
+                                builder: (context, stairsProvider, _) {
                               final String stepCount = numberFormat
-                                  .format(walkingAndRunningProvider.stepCount)
+                                  .format(stairsProvider.stairCount)
                                   .toString();
                               return Text(
                                 stepCount,
@@ -161,7 +161,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             const Text(
-                              'Distance',
+                              'Vertical Distance',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
@@ -171,11 +171,11 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                               crossAxisAlignment: CrossAxisAlignment.baseline,
                               textBaseline: TextBaseline.alphabetic,
                               children: [
-                                Consumer<WalkingAndRunningProvider>(builder:
-                                    (context, walkingAndRunningProvider, _) {
-                                  final String distance =
-                                      walkingAndRunningProvider.distance
-                                          .toString();
+                                Consumer<StairsProvider>(
+                                    builder: (context, stairsProvider, _) {
+                                  final String distance = stairsProvider
+                                      .verticaldistance
+                                      .toString();
                                   return Text(
                                     distance,
                                     style: const TextStyle(
@@ -188,7 +188,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                                   width: 5,
                                 ),
                                 const Text(
-                                  'Km',
+                                  'm',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
@@ -215,10 +215,9 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Consumer<WalkingAndRunningProvider>(
-                        builder: (context, walkingAndRunningProvider, _) {
-                      final String duration =
-                          walkingAndRunningProvider.duration;
+                    Consumer<StairsProvider>(
+                        builder: (context, stairsProvider, _) {
+                      final String duration = stairsProvider.duration;
                       return ActivityStatBox(
                         svgName: 'clock.svg',
                         value: duration,
@@ -228,10 +227,10 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Consumer<WalkingAndRunningProvider>(
-                        builder: (context, walkingAndRunningProvider, _) {
+                    Consumer<StairsProvider>(
+                        builder: (context, stairsProvider, _) {
                       final String calorieCount = numberFormat
-                          .format(walkingAndRunningProvider.calorieCount)
+                          .format(stairsProvider.calorieCount)
                           .toString();
                       return ActivityStatBox(
                         svgName: 'heart.svg',
@@ -242,10 +241,10 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Consumer<WalkingAndRunningProvider>(
-                        builder: (context, walkingAndRunningProvider, _) {
+                    Consumer<StairsProvider>(
+                        builder: (context, stairsProvider, _) {
                       final String improvement =
-                          walkingAndRunningProvider.improvement.toString();
+                          stairsProvider.improvement.toString();
                       return ActivityStatBox(
                         svgName: 'chart.svg',
                         value: improvement,
@@ -268,7 +267,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'About walking & Running',
+                    'About Stairs',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                   Container(
@@ -280,7 +279,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Text(
-                      'Discover the ultimate fitness app for tracking your walking and running activities. Set goals, monitor progress, and stay motivated as you achieve your health and wellness milestones. Let\'s start the journey!',
+                      'Take your fitness to new heights with our Stairs feature! Track your daily stair climbs and descents, turning every step into a rewarding exercise. Stay active, improve your health, and reach your fitness goals with ease!',
                       style: TextStyle(
                           fontSize: 16,
                           color: AppColors.textColor.withOpacity(0.4)),
@@ -295,9 +294,8 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
     );
   }
 
-  Consumer<WalkingAndRunningProvider> _buildCustomButton(
-      String buttonText, int index) {
-    return Consumer<WalkingAndRunningProvider>(
+  Consumer<StairsProvider> _buildCustomButton(String buttonText, int index) {
+    return Consumer<StairsProvider>(
         builder: (context, walkingAndRunningProvider, _) {
       bool isActive = walkingAndRunningProvider.selectedFilter == buttonText;
       return Expanded(
