@@ -40,7 +40,7 @@ class SelectMood extends StatelessWidget {
             //middle question
             const Center(child: Text(
               "What was your mood today?",
-              style: AppStyles.mainQuestionsStyle,
+              style: AppStyles.headingTextStyle,
               ),
             ),
             const SizedBox(height: 20,),
