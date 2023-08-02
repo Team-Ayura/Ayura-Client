@@ -2,15 +2,15 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
-  final IconData? leftIcon;
-  final IconData? rightIcon;
-  final String? title;
-  final Function? leftCallback;
-  final Function? rightCallback;
-  CustomAppBar(this.leftIcon, this.rightIcon, this.title,
-      {this.leftCallback, this.rightCallback});
+   final IconData ? leftIcon;
+   final IconData ? rightIcon;
+   final String ? title;
+   final Function? leftCallback;
+   final Function? rightCallback;
+   CustomAppBar(this.leftIcon, this.rightIcon,this.title, {this.leftCallback,this.rightCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -52,4 +52,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
+
 }
