@@ -1,11 +1,15 @@
 import 'dart:collection';
-
+import 'package:ayura/auth/login.dart';
+import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/pages/features/mood_tracking/page1.dart';
 import 'package:ayura/utils/convertDate.dart';
+import 'package:ayura/utils/router.dart';
+import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:dob_input_field/dob_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ayura/constants/styles.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/router.dart';
 import 'features/activity_tracking/activity.dart';
@@ -25,65 +29,24 @@ class _HomeState extends State<Home> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    @override
-    void initState() {
-      birthdayController.text = ""; //set the initial value of text field
-      super.initState();
-    }
-
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              PageNavigator(context: context).nextPage(const Login());
+            },
+          )),
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: width,
-              height: 50,
-              decoration: AppStyles.containerDecoration,
-              child: TextField(
-                controller: birthdayController,
-                decoration: InputDecoration(
-                  fillColor: Colors.transparent,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide:
-                        const BorderSide(color: Color(0xff23A6F0), width: 1.5),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.grey.shade300, width: 1.5),
-                  ),
-                  hintText: 'Birthday',
-                  hintStyle: const TextStyle(
-                    fontFamily: 'Inter',
-                    fontSize: 16,
-                  ),
-                ),
-                readOnly: true,
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1980),
-                      lastDate: DateTime.now());
-                  if (pickedDate != null) {
-                    print(
-                        pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                    String formattedDate =
-                        DateFormat('yyyy-MM-dd').format(pickedDate);
-                    print(
-                        formattedDate); //formatted date output using intl package =>  2021-03-16
-
-                    setState(() {
-                      birthdayController.text =
-                          formattedDate; //set output date to TextField value.
-                    });
-                  } else {
-                    print("Date is not selected");
-                  }
-                },
-              ),
+            const Center(
+              child: Text('Hello'),
             ),
             TextButton(
                 onPressed: () {
@@ -110,6 +73,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+      bottomNavigationBar: AppNavigation(),
     );
   }
 }

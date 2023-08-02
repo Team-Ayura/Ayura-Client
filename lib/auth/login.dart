@@ -1,32 +1,30 @@
 import 'package:ayura/auth/auth_screen.dart';
-import 'package:ayura/auth/signup.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/home.dart';
-import 'package:ayura/provider/autProvider/auth_provider.dart';
+import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/utils/snack_message.dart';
+import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../constants/colors.dart';
-import '../widgets/global/PrimaryBtn.dart';
 import '../widgets/global/textinput.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  LoginState createState() => LoginState();
 }
 
-class _LoginState extends State<Login> {
+class LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
   void dispose() {
-    emailController.clear();
-    passwordController.clear();
+    emailController.text = '';
+    passwordController.text = '';
     super.dispose();
   }
 
@@ -42,42 +40,43 @@ class _LoginState extends State<Login> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: ListView(
         children: [
-          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Image.asset(
-              'assets/images/logo.png',
-              width: 50,
-              height: 50,
+          const Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              "Login",
+              style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryColor),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10, left: 10),
-              child: Text(
-                'AYURA',
-                style: AppStyles.headingTextStyle,
-              ),
-            ),
-          ]),
-          const SizedBox(
-            height: 20,
           ),
+          SizedBox(height: height * 0.02),
           const Text(
-            'Login to your account here',
-            style: AppStyles.subHeadingTextStyle,
+            "Login to your account here ",
+            textAlign: TextAlign.left,
+            style: AppStyles.bodyTextStyle,
           ),
-          const SizedBox(height: 25),
+          SizedBox(height: height * 0.04),
+          Image.asset('assets/images/login.png', height: height * 0.4),
+          SizedBox(height: height * 0.01),
           CustomInput(
             controller: emailController,
             hintText: 'Email',
             label: '',
+            errorMsg: '',
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 5),
           CustomInput(
             controller: passwordController,
             hintText: 'Password',
             label: '',
+            errorMsg: '',
+            obscure: true,
           ),
           const SizedBox(height: 20),
-          Consumer<AuthenticationProvider>(builder: (context, auth, child) {
-            WidgetsBinding.instance!.addPostFrameCallback((_) {
+          Consumer<AuthenticationProvider2>(builder: (context, auth, child) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
               if (auth.resMessage != '') {
                 showMessage(context, auth.resMessage);
 
@@ -87,7 +86,7 @@ class _LoginState extends State<Login> {
             });
             return customButton(
               text: 'Login',
-              tap: () {
+              tap: () async {
                 if (emailController.text.isEmpty ||
                     passwordController.text.isEmpty) {
                   showMessage(context, 'All fields are required');
@@ -96,12 +95,19 @@ class _LoginState extends State<Login> {
                     email: emailController.text.trim(),
                     password: passwordController.text.trim(),
                     context: context,
+                    callback: (bool loginSuccess) {
+                      if (loginSuccess) {
+                        showMessage(context, auth.resMessage);
+                        PageNavigator(context: context).nextPage(const Home());
+                      } else {
+                        // Show an error message or handle the unsuccessful login case
+                        showMessage(context, auth.resMessage);
+                      }
+                    },
                   );
-                  PageNavigator(context: context).nextPage(const Home());
                 }
               },
               context: context,
-              status: auth.isLoading,
             );
           }),
           const SizedBox(height: 25),
