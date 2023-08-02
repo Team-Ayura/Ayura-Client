@@ -3,6 +3,7 @@ import 'package:ayura/pages/splash_screen.dart';
 import 'package:ayura/pages/home.dart';
 import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/provider/functions/init.dart';
+import 'package:ayura/provider/navigationProvider/navigation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthenticationProvider2()), 
+        ChangeNotifierProvider(create: (_) => AuthenticationProvider2()),
+        ChangeNotifierProvider(create: (_) => AppNavigationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

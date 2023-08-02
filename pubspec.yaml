@@ -42,6 +42,7 @@ flutter:
     - assets/images/
     - assets/images/mood_tracking/
     - assets/icons/
+    - assets/icons/navigation/
     - assets/images/activity_tracking/
 
 
