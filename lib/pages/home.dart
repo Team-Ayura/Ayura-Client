@@ -1,5 +1,5 @@
 import 'dart:collection';
-
+import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/pages/features/mealPlan/meal_screen.dart';
 import 'package:ayura/pages/features/mood_tracking/page1.dart';
 import 'package:ayura/auth/login.dart';
@@ -34,70 +34,23 @@ class _HomeState extends State<Home> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
-        body: Center(
-          child: Column(
-            children: [
-              //move to mood tracker
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SelectMood(),
-                      ),
-                    );
-                  },
-                  child: const Text('Mood')),
-
-              TextButton(
-                  onPressed: () {
-                    PageNavigator(context: context)
-                        .nextPage( MealScreen());
-                  },
-                  child: const Text('Meal Plan')),
-            ],
-          ),
-        ));
-            onPressed: () {
-              PageNavigator(context: context).nextPage(const Login());
-            },
-          )),
-      body: SafeArea(
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
+        child: CustomAppBar(
+          appbarTitle: 'Home',
+          onPressed: null,
+        ),
+      ),
+      body: const Center(
         child: Column(
           children: [
-            const Center(
-              child: Text('Hello'),
-            ),
-            TextButton(
-                onPressed: () {
-                  print(birthdayController.text);
-                  print(convertDate(birthdayController.text));
-                },
-                child: Text('Save')),
             //move to mood tracker
-            TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SelectMood(),
-                    ),
-                  );
-                },
-                child: const Text('Mood')),
-            TextButton(
-                onPressed: () {
-                  PageNavigator(context: context).nextPage(Activities());
-                },
-                child: const Text('activity')),
+            Center(
+              child: Text(
+                'Home Page',
+                style: TextStyle(fontFamily: 'Inter', fontSize: 20),
+              ),
+            )
           ],
         ),
       ),
