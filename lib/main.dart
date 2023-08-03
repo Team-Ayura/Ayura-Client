@@ -1,8 +1,12 @@
 import 'package:ayura/auth/onboarding_screen.dart';
 import 'package:ayura/pages/splash_screen.dart';
+import 'package:ayura/auth/signup.dart';
 import 'package:ayura/pages/home.dart';
-import 'package:ayura/provider/autProvider/authentication_provider.dart';
+import 'package:ayura/provider/activityProviders/stairsProvider.dart';
+import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
+import 'package:ayura/provider/autProvider/auth_provider.dart';
 import 'package:ayura/provider/functions/init.dart';
+import 'package:ayura/provider/navigationProvider/navigation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +21,10 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
+// void main() {
+//   runApp(MyApp());
+// }
+
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
@@ -27,7 +35,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthenticationProvider2()), 
+        ChangeNotifierProvider(create: (_) => AuthenticationProvider2()),
+        ChangeNotifierProvider(create: (_) => AppNavigationProvider()),
+        ChangeNotifierProvider(create: (_) => WalkingAndRunningProvider()),
+        ChangeNotifierProvider(create: (_) => StairsProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -36,7 +47,7 @@ class MyApp extends StatelessWidget {
           future: _initFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return isViewed != 0 ? const OnboardingScreen() : const Home();
+              return isViewed != 0 ? OnboardingScreen() : Home();
             } else {
               return const SplashScreen();
             }
