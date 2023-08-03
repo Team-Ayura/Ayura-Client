@@ -1,6 +1,7 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/widgets/features/mood_traking/biweekcalendar.dart';
 import 'package:ayura/widgets/features/mood_traking/monthcalendar.dart';
+import 'package:ayura/widgets/features/mood_traking/moodpiechart.dart';
 import 'package:ayura/widgets/features/mood_traking/weekcalendar.dart';
 import 'package:flutter/material.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
@@ -52,7 +53,7 @@ class CustomTabBarView extends StatelessWidget {
                           const SizedBox(height: 10,),  
                           WeekCalendar(),
                           const SizedBox(height: 10,),
-                          // MoodVariationChart(),
+                          MoodVariationChart(),
 
                         ],
                       ),
@@ -64,7 +65,7 @@ class CustomTabBarView extends StatelessWidget {
                           const SizedBox(height: 10,),
                           BiweekCalendar(),
                           const SizedBox(height: 10,),
-                          // MoodVariationChart(),
+                          MoodVariationChart(),
 
                         ],
                       ),
@@ -76,7 +77,7 @@ class CustomTabBarView extends StatelessWidget {
                           const SizedBox(height: 10,),
                           MonthCalendar(),
                           const SizedBox(height: 10,),
-                          // MoodVariationChart(),
+                          MoodVariationChart(),
 
                         ],
                       ),
