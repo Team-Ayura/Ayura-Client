@@ -3,6 +3,7 @@ import 'package:ayura/pages/features/activity_tracking/cycling_page.dart';
 import 'package:ayura/pages/features/activity_tracking/stairs_page.dart';
 import 'package:ayura/pages/features/activity_tracking/walking_and_running_page.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
+import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -49,15 +50,6 @@ class WorkoutsPage extends StatelessWidget {
 
 class ActivitiesPage extends StatelessWidget {
   ActivitiesPage({Key? key}) : super(key: key);
-
-  final List<String> _iconAssets = [
-    'assets/icons/bottomnav/mood.svg',
-    'assets/icons/bottomnav/activity.svg',
-    'assets/icons/bottomnav/home.svg',
-    'assets/icons/bottomnav/community.svg',
-    'assets/icons/bottomnav/meal.svg',
-    // Add other SVG asset paths for other navigation items
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -110,46 +102,7 @@ class ActivitiesPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1,
-        onTap: _onTabTapped,
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false, // Hide labels for selected items
-        showUnselectedLabels: false,
-        items: [
-          BottomNavigationBarItem(
-            icon: _buildSvgIcon(0),
-            label: 'Mood',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildSvgIcon(1),
-            label: 'Activity',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildSvgIcon(2),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildSvgIcon(3),
-            label: 'Community',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildSvgIcon(4),
-            label: 'Meal',
-          ),
-          // Add other navigation items here
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSvgIcon(int index) {
-    Color iconColor = 1 == index ? Colors.blue : Colors.black;
-    return SvgPicture.asset(
-      _iconAssets[index],
-      color: iconColor,
-      height: 24,
-      width: 24,
+      bottomNavigationBar: AppNavigation(),
     );
   }
 

@@ -59,8 +59,8 @@ class _ImageContainerState extends State<ImageContainer> {
     // The camera permission is granted, proceed with opening the camera
     try {
       final pickedFile = await ImagePicker().pickImage(
-          source:
-              ImageSource.camera); // change galary to camera to use tha camera.
+          source: ImageSource
+              .camera); // change gallery to camera to use tha camera.
       if (pickedFile != null) {
         // Navigate to the image preview screen with the image path
         // bool? keepImage = await Navigator.of(context).push<bool?>(
