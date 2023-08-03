@@ -18,7 +18,9 @@ class SelectMood extends StatelessWidget {
     );
     return Scaffold(
       //top app bar with icons
-      appBar: CustomAppBar(Icons.arrow_back_outlined,Icons.calendar_month_outlined,"Mood Tracker",leftCallback :()=>Navigator.of(context).pop()),
+      appBar: CustomAppBar(Icons.arrow_back_outlined,
+          Icons.calendar_month_outlined, "Mood Tracker",
+          leftCallback: () => Navigator.of(context).pop()),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +44,7 @@ class SelectMood extends StatelessWidget {
             const Center(
               child: Text(
                 "What was your mood today?",
-                style: AppStyles.mainQuestionsStyle,
+                style: AppStyles.headingTextStyle,
               ),
             ),
             const SizedBox(
@@ -56,7 +58,7 @@ class SelectMood extends StatelessWidget {
                   child: Wrap(
                     spacing: 8.0,
                     runSpacing: 8.0,
-                    children: const [
+                    children: [
                       MoodButton(emojiName: 'happy', mood: 'Happy'),
                       MoodButton(emojiName: 'tired', mood: 'Tired'),
                       MoodButton(emojiName: 'sleepy', mood: 'Sleepy'),

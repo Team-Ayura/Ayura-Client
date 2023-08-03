@@ -7,6 +7,7 @@ import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/pages/features/mood_tracking/page1.dart';
 import 'package:ayura/utils/convertDate.dart';
 import 'package:ayura/utils/router.dart';
+import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:dob_input_field/dob_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -41,9 +42,6 @@ class _HomeState extends State<Home> {
               Icons.arrow_back_ios,
               color: Colors.black,
             ),
-            onPressed: () {},
-          ),
-        ),
         body: Center(
           child: Column(
             children: [
@@ -68,5 +66,42 @@ class _HomeState extends State<Home> {
             ],
           ),
         ));
+            onPressed: () {
+              PageNavigator(context: context).nextPage(const Login());
+            },
+          )),
+      body: SafeArea(
+        child: Column(
+          children: [
+            const Center(
+              child: Text('Hello'),
+            ),
+            TextButton(
+                onPressed: () {
+                  print(birthdayController.text);
+                  print(convertDate(birthdayController.text));
+                },
+                child: Text('Save')),
+            //move to mood tracker
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SelectMood(),
+                    ),
+                  );
+                },
+                child: const Text('Mood')),
+            TextButton(
+                onPressed: () {
+                  PageNavigator(context: context).nextPage(Activities());
+                },
+                child: const Text('activity')),
+          ],
+        ),
+      ),
+      bottomNavigationBar: AppNavigation(),
+    );
   }
 }
