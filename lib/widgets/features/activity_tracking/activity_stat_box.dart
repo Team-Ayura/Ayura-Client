@@ -1,7 +1,6 @@
+import 'package:ayura/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../constants/colors.dart';
 
 class ActivityStatBox extends StatelessWidget {
   final String svgName;
