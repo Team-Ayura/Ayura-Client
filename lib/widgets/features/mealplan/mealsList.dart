@@ -1,3 +1,5 @@
+import 'package:ayura/pages/features/mealPlan/viewmeal_screen.dart';
+import 'package:ayura/utils/router.dart';
 import 'package:flutter/material.dart';
 
 class MealsList extends StatelessWidget {
@@ -5,15 +7,24 @@ class MealsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 20,
+    return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // Number of columns in the grid
+          crossAxisSpacing: 8.0, // Spacing between columns
+          mainAxisSpacing: 8.0, // Spacing between rows
+        ),
+        itemCount: 10,
         itemBuilder: (context, index) {
-          return Container(
-              height: 100,
-              width: 100,
+          return GestureDetector(
+            onTap: () {
+              print('clicked');
+              PageNavigator(context: context).nextPage(const ViewmealScreen());
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(12),
                   boxShadow: const [
                     BoxShadow(
                         color: Colors.black12,
@@ -21,16 +32,27 @@ class MealsList extends StatelessWidget {
                         blurRadius: 6.0)
                   ]),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/mealPlan/rice.png'),
-                  const SizedBox(height: 5),
-                  Row(children: const [
-                    Text('100 Cal'),
-                    SizedBox(width: 10),
-                    Text('40 min')
-                  ])
+                  Image.asset(
+                    'assets/images/mealPlan/rice.png',
+                    width: 140,
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const [
+                        Text('100 Cal'),
+                        SizedBox(width: 50),
+                        Text('40 min')
+                      ])
                 ],
-              ));
+              ),
+            ),
+          );
         });
   }
 }

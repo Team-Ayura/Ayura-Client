@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
               TextButton(
                   onPressed: () {
                     PageNavigator(context: context)
-                        .nextPage(const MealScreen());
+                        .nextPage( MealScreen());
                   },
                   child: const Text('Meal Plan')),
             ],
