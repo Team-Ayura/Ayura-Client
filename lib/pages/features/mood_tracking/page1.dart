@@ -51,9 +51,9 @@ class SelectMood extends StatelessWidget {
               height: 20,
             ),
             //moods chips
-            const Center(
+            Center(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                 child: Expanded(
                   child: Wrap(
                     spacing: 8.0,
