@@ -19,7 +19,7 @@ dependencies:
   flutter_animate: ^4.2.0
   flutter_ruler_picker: ^1.0.3
   flutter_svg: ^2.0.5
-  http: ^0.13.6
+  http: ^1.1.0
   intl: ^0.18.1
   provider: ^6.0.5
   shared_preferences: ^2.1.2

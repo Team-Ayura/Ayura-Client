@@ -4,6 +4,10 @@ import 'package:ayura/provider/navigationProvider/navigation_provider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ayura/pages/features/community/community_home.dart';
+import 'package:ayura/pages/features/mealPlan/meal_screen.dart';
+import 'package:ayura/pages/home.dart';
+
 import 'package:provider/provider.dart';
 // import 'navigation_provider/navigation_provider.dart'; // Update the import to your actual file path
 
@@ -65,13 +69,13 @@ class AppNavigation extends StatelessWidget {
       case AppTab.activity:
         return Activities(); // navigate to activities page
       case AppTab.home:
-        return Activities(); // navigate to home page
+        return const Home(); // navigate to home page
       case AppTab.community:
-        return Activities(); // navigate to community page
+        return const CommunityHome(); // navigate to community page
       case AppTab.mealplans:
-        return Activities(); // navigate to mealplans page
+        return const MealScreen(); // navigate to mealplans page
       default:
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
     }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:ayura/utils/router.dart';
+import 'package:ayura/widgets/global/bottom_navigation.dart';
 // Community Feature Widgets
 import 'package:ayura/widgets/features/community/chat_card.dart'; // Chat Card Widget
 import 'package:ayura/widgets/features/community/search_box.dart'; // SearchBox Widget
@@ -164,6 +165,7 @@ class _CommunityHomeState extends State<CommunityHome> {
           ],
         ),
       ),
+      bottomNavigationBar: AppNavigation(),
     );
   }
 }
