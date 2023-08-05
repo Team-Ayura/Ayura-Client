@@ -1,5 +1,6 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/activity_tracking/cycling_page.dart';
+import 'package:ayura/pages/features/activity_tracking/sports_page.dart';
 import 'package:ayura/pages/features/activity_tracking/stairs_page.dart';
 import 'package:ayura/pages/features/activity_tracking/walking_and_running_page.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
@@ -30,14 +31,14 @@ class Activities extends StatelessWidget {
   }
 }
 
-class SportsPage extends StatelessWidget {
-  SportsPage({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-}
+// class SportsPage extends StatelessWidget {
+//   SportsPage({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     throw UnimplementedError();
+//   }
+// }
 
 class WorkoutsPage extends StatelessWidget {
   WorkoutsPage({Key? key}) : super(key: key);
@@ -89,7 +90,7 @@ class ActivitiesPage extends StatelessWidget {
               imagePath: 'assets/images/activity_tracking/sports.svg',
               mainText: 'Sports',
               subText: 'Unleash your passion, embrace the challenge.',
-              route: '/walkingandrunning',
+              route: '/sports',
             ),
             CustomBoxItem(
               index: 5,

@@ -33,14 +33,17 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
+          leading: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                PageNavigator(context: context).nextPage(const Login());
+              },
             ),
-            onPressed: () {
-              PageNavigator(context: context).nextPage(const Login());
-            },
           )),
       body: SafeArea(
         child: Column(
