@@ -1,6 +1,7 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/activity_tracking/activity.dart';
 import 'package:ayura/pages/features/activity_tracking/cycling_on_ride.dart';
+import 'package:ayura/pages/features/activity_tracking/cycling_on_ride_alternate.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
 import 'package:ayura/utils/router.dart';

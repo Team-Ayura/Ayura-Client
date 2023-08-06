@@ -32,6 +32,7 @@ dependencies:
   path_provider: ^2.0.15
   pie_chart: ^5.3.2
   flutter_slidable: ^3.0.0
+  sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:

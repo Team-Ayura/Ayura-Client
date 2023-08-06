@@ -6,6 +6,7 @@ import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
 import 'package:ayura/provider/activityProviders/sportsProvider.dart';
 import 'package:ayura/provider/models/sportModel.dart';
 import 'package:ayura/utils/router.dart';
+import 'package:ayura/utils/snack_message.dart';
 // import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/add_time_popup.dart';
@@ -176,7 +177,7 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                                               .withOpacity(0.3),
                                         )),
                                     child: Text(
-                                      '${startTime.hour}:${finishTime.minute}',
+                                      '${startTime.hour}:${startTime.minute}',
                                       style: TextStyle(fontSize: 30),
                                     ),
                                   ),
@@ -284,6 +285,7 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                   if (isHiddenSectionActive) {
                     sportsProvider.addEntrySportHistory(
                         widget.selectedSport.id, startTime, finishTime);
+                    showMessage(context, "Successfully added!");
                   }
                   setState(() {
                     isHiddenSectionActive = !isHiddenSectionActive;

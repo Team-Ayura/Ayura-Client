@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:ayura/provider/models/sportModel.dart';
 import 'package:ayura/widgets/features/activity_tracking/multi_selection_popup.dart';
 import 'package:flutter/foundation.dart';
@@ -5,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class SportsProvider extends ChangeNotifier {
   String selectedFilter = 'D';
-  String duration = '01:23:45';
+  String duration = '01:45';
   int calorieCount = 1456;
   int improvement = 12;
   List<int> dayduration = [
@@ -198,5 +200,33 @@ class SportsProvider extends ChangeNotifier {
   }
 
   void addEntrySportHistory(
-      String sportid, TimeOfDay startTime, TimeOfDay finishedTime) {}
+      String sportid, TimeOfDay startTime, TimeOfDay finishedTime) {
+    List<int> minutesList = List.filled(24, 0);
+
+    for (int i = startTime.hour; i <= finishedTime.hour; i++) {
+      if (i == startTime.hour) {
+        minutesList[i] = 60 - startTime.minute;
+      } else if (i == finishedTime.hour) {
+        minutesList[i] = finishedTime.minute;
+      } else {
+        minutesList[i] = 60;
+      }
+    }
+
+    for (int i = 0; i < 12; i++) {
+      dayduration[i] = min(60, dayduration[i] + minutesList[i]);
+      chartduration[i] = min(60, chartduration[i] + minutesList[i]);
+    }
+    calorieCount += 27;
+
+    // update the duration
+    List<String> durationParts = duration.split(':');
+    int hours = int.parse(durationParts[0]);
+    int minutes = int.parse(durationParts[1]);
+    int totalMinutes = (hours * 60) + minutes;
+    hours += totalMinutes ~/ 60;
+    minutes += totalMinutes % 60;
+    duration = '$hours:$minutes';
+    notifyListeners();
+  }
 }

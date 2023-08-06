@@ -39,15 +39,15 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // the time navigation
-            Container(
-              margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-              child: MapContainer(
-                isRegular: true,
-                latitude: 37.7749,
-                longitude: -122.4194,
-                markerTitle: 'Title',
-              ),
-            ),
+            // Container(
+            //   margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            //   child: MapContainer(
+            //     isRegular: true,
+            //     latitude: 37.7749,
+            //     longitude: -122.4194,
+            //     markerTitle: 'Title',
+            //   ),
+            // ),
             const SizedBox(
               height: 10,
             ),
