@@ -49,11 +49,8 @@ class _MoodButtonState extends State<MoodButton> {
       shadowColor: AppColors.shadowColor,
       elevation: isSelected ? 1 : 1,
       avatar: SvgPicture.asset(
-        'assets/images/mood_tracking/${widget.emojiName}.svg',
-          
+        'assets/images/mood_tracking/${widget.emojiName}.svg',  
       ),
-      
-      
     );
   }
 }
