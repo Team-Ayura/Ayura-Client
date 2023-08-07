@@ -3,6 +3,7 @@ import 'package:ayura/pages/features/activity_tracking/activity.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
 import 'package:ayura/utils/router.dart';
+import 'package:ayura/widgets/global/custom_appbar.dart';
 // import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/chart.dart';
@@ -27,11 +28,15 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
   @override
   Widget build(BuildContext context) {
     final NumberFormat numberFormat = NumberFormat('#,###');
+    // title: const Text('Cycling Started'),
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cycling Started'),
-        backgroundColor: AppColors.primaryColor,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
+        child: CustomAppBar(
+          appbarTitle: 'Cycling Started',
+          isBackBtn: true,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -5,6 +5,7 @@ import 'package:ayura/pages/features/mealPlan/viewmeal_screen.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/mealplan/mealsList.dart';
 import 'package:flutter/material.dart';
+import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 
 class MealScreen extends StatefulWidget {
@@ -22,9 +23,11 @@ class MealScreenState extends State<MealScreen> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.arrow_back),
-        title: const Text('Meal Plan'),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
+        child: CustomAppBar(
+          appbarTitle: 'Meal Plan',
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -106,16 +109,19 @@ class MealScreenState extends State<MealScreen> {
                     Tab(text: 'Snacks'),
                   ],
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  height: height * 0.5,
-                  child: const TabBarView(
-                    children: [
-                      MealsList(),
-                      MealsList(),
-                      MealsList(),
-                      MealsList(),
-                    ],
+                const SizedBox(
+                  //Change the layout from container to sizedbox due to overflow error
+                  height: 350,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: TabBarView(
+                      children: [
+                        MealsList(),
+                        MealsList(),
+                        MealsList(),
+                        MealsList(),
+                      ],
+                    ),
                   ),
                 ),
               ],

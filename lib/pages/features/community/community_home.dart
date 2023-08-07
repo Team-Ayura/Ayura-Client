@@ -61,6 +61,7 @@ class _CommunityHomeState extends State<CommunityHome> {
         child: CustomAppBar(
           appbarTitle: 'Community',
           onPressed: openCreateCommunityOverlay,
+          iconName: Icons.add,
         ),
       ),
       body: Container(
