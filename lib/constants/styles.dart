@@ -18,12 +18,21 @@ class AppStyles {
     color: Color.fromARGB(255, 123, 123, 123),
   );
 
+ 
   static const TextStyle subheadingTextStyle2 = TextStyle(
     fontFamily: 'Inter',
     fontSize: 16,
     fontWeight: FontWeight.bold,
     color: Color.fromARGB(255, 0, 0, 0),
   );
+
+   static const TextStyle subHeadingTextStyle3 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
+  );
+
 
   static const TextStyle bodyTextStyle = TextStyle(
     fontFamily: 'Inter',

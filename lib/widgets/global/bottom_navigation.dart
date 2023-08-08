@@ -1,5 +1,6 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/activity_tracking/activity.dart';
+import 'package:ayura/pages/features/vitals/vitals.dart';
 import 'package:ayura/provider/navigationProvider/navigation_provider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class AppNavigation extends StatelessWidget {
   Widget _buildPageForTab(AppTab tab) {
     switch (tab) {
       case AppTab.vitals:
-        return Activities(); // navigate to vitals page
+        return const Vitals(); // navigate to vitals page
       case AppTab.activity:
         return Activities(); // navigate to activities page
       case AppTab.home:
