@@ -24,8 +24,8 @@ class _MapContainerState extends State<MapContainer> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: widget.isRegular ? MediaQuery.of(context).size.width - 40 : 80,
-        height: widget.isRegular ? MediaQuery.of(context).size.width - 40 : 80,
+        width: widget.isRegular ? MediaQuery.of(context).size.width : 80,
+        height: widget.isRegular ? MediaQuery.of(context).size.height : 80,
         decoration: widget.isRegular
             ? BoxDecoration(
                 boxShadow: [

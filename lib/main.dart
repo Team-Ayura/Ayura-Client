@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CyclingProvider()),
         ChangeNotifierProvider(create: (_) => CyclingOnRideProvider()),
         ChangeNotifierProvider(create: (_) => MoodProvider()),
+        ChangeNotifierProvider(create: (_) => SportsProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
