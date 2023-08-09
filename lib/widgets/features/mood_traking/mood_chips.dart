@@ -1,59 +1,45 @@
-import 'package:ayura/constants/colors.dart';
-import 'package:ayura/pages/features/mood_tracking/page2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+
+import '../../../constants/colors.dart';
+import '../../../provider/moodProviders/selectedmood.dart';
 
 
-class MoodButton extends StatefulWidget {
+class MoodButton extends StatelessWidget {
   final String emojiName;
   final String mood;
-  const MoodButton({super.key,
+
+  const MoodButton({
+    Key? key,
     required this.emojiName,
     required this.mood,
-  });
-
-  @override
-  State<MoodButton> createState() => _MoodButtonState();
-}
-
-class _MoodButtonState extends State<MoodButton> {
-  bool isSelected = false;
-  int selectedCount = 0;
-
-  void _onChipSelected(bool selected) {
-    setState(() {
-      isSelected = selected;
-    });
-  }
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ActionChip(
-      
-        onPressed: () {
-          _onChipSelected(!isSelected);
-          selectedCount++;
-        },
-
+    final moodProvider = Provider.of<MoodProvider>(context);
+    bool isSelected = moodProvider.selectedMood == mood;
     
+
+    return ActionChip(
+      onPressed: () {
+        moodProvider.selectMood(mood);
+      },
       label: Text(
-        widget.mood,
+        mood,
         style: TextStyle(
-          color: isSelected? Colors.white : Colors.black,
+          color: isSelected ? Colors.white : Colors.black,
         ),
       ),
       labelPadding: const EdgeInsets.all(10.0),
       clipBehavior: Clip.antiAlias,
-      backgroundColor: isSelected ? AppColors.primaryColor:Colors.white,
-      
+      backgroundColor: isSelected ? AppColors.primaryColor : Colors.white,
       shadowColor: AppColors.shadowColor,
       elevation: isSelected ? 1 : 1,
       avatar: SvgPicture.asset(
-        'assets/images/mood_tracking/${widget.emojiName}.svg',
-          
+        'assets/images/mood_tracking/$emojiName.svg',
       ),
-      
-      
     );
   }
 }

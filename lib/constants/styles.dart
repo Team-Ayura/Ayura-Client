@@ -18,6 +18,7 @@ class AppStyles {
     color: Color.fromARGB(255, 123, 123, 123),
   );
 
+ 
   static const TextStyle subheadingTextStyle2 = TextStyle(
     fontFamily: 'Inter',
     fontSize: 16,
@@ -25,9 +26,17 @@ class AppStyles {
     color: Color.fromARGB(255, 0, 0, 0),
   );
 
+   static const TextStyle subHeadingTextStyle3 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
+  );
+
+
   static const TextStyle bodyTextStyle = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 16,
+    fontSize: 14,
     color: Colors.black,
   );
 
@@ -36,6 +45,24 @@ class AppStyles {
     fontSize: 15,
     color: Color(0xFF878787),
   );
+
+  //mood tracking Questions styles
+  static const TextStyle mainQuestionsStyle = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 25,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+  );
+
+  //app bar title
+   static const TextStyle appBarTitleStyle = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 20,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+  );
+
+  
 
   InputDecoration inputDecoration(String placeholder, String error) {
     return InputDecoration(

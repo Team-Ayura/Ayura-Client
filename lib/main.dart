@@ -4,12 +4,12 @@ import 'package:ayura/pages/splash_screen.dart';
 import 'package:ayura/pages/home.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
-import 'package:ayura/provider/activityProviders/sportsProvider.dart';
 import 'package:ayura/provider/activityProviders/stairsProvider.dart';
 import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 // import 'package:ayura/provider/autProvider/auth_provider.dart';
 import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/provider/functions/init.dart';
+import 'package:ayura/provider/moodProviders/selectedmood.dart';
 import 'package:ayura/provider/navigationProvider/navigation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => StairsProvider()),
         ChangeNotifierProvider(create: (_) => CyclingProvider()),
         ChangeNotifierProvider(create: (_) => CyclingOnRideProvider()),
+        ChangeNotifierProvider(create: (_) => MoodProvider()),
         ChangeNotifierProvider(create: (_) => SportsProvider()),
       ],
       child: MaterialApp(

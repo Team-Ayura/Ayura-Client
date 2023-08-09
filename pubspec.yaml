@@ -19,11 +19,12 @@ dependencies:
   flutter_animate: ^4.2.0
   flutter_ruler_picker: ^1.0.3
   flutter_svg: ^2.0.5
-  http: ^0.13.6
+  http: ^1.1.0
   intl: ^0.18.1
   provider: ^6.0.5
   shared_preferences: ^2.1.2
   buttons_tabbar: ^1.3.7+1
+  percent_indicator: ^4.2.3
   flutter_calendar_carousel: ^2.4.2
   fl_chart: ^0.63.0
   google_maps_flutter: ^2.4.0
@@ -49,6 +50,7 @@ flutter:
     - assets/images/logo.png
     - assets/images/
     - assets/images/mood_tracking/
+    - assets/images/mealPlan/
     - assets/icons/
     - assets/icons/navigation/
     - assets/icons/features/activity_tracking/
