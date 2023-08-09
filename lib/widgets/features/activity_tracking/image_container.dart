@@ -150,7 +150,7 @@ class _ImageContainerState extends State<ImageContainer> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Icon(
                       Icons.camera_alt,
                       size: imageSize / 2,
