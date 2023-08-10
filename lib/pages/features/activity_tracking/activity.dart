@@ -3,6 +3,7 @@ import 'package:ayura/pages/features/activity_tracking/cycling_page.dart';
 import 'package:ayura/pages/features/activity_tracking/sports_page.dart';
 import 'package:ayura/pages/features/activity_tracking/stairs_page.dart';
 import 'package:ayura/pages/features/activity_tracking/walking_and_running_page.dart';
+import 'package:ayura/pages/features/activity_tracking/workouts_page.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -40,14 +41,14 @@ class Activities extends StatelessWidget {
 //   }
 // }
 
-class WorkoutsPage extends StatelessWidget {
-  WorkoutsPage({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-}
+// class WorkoutsPage extends StatelessWidget {
+//   WorkoutsPage({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     throw UnimplementedError();
+//   }
+// }
 
 class ActivitiesPage extends StatelessWidget {
   ActivitiesPage({Key? key}) : super(key: key);
@@ -97,7 +98,7 @@ class ActivitiesPage extends StatelessWidget {
               imagePath: 'assets/images/activity_tracking/workout.svg',
               mainText: 'Workout',
               subText: 'Sweat, push, and transform your body and mind.',
-              route: '/walkingandrunning',
+              route: '/workouts',
             ),
             // Add more widgets here for the scrollable body
           ],
