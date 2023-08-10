@@ -14,6 +14,12 @@ class CreateNewWorkoutPage extends StatefulWidget {
 class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
   TextEditingController workoutPlanNameController = TextEditingController();
   List<String> optionLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  late MultipleChoiceController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = MultipleChoiceController(optionLabels.length);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +53,7 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
               SizedBox(
                 height: 5,
               ),
-              MultipleChoiceWidget(labelList: optionLabels),
+              MultipleChoiceWidget(labelList: optionLabels, controller: controller,),
             ],
           ),
         ),
