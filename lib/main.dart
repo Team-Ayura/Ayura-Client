@@ -4,6 +4,7 @@ import 'package:ayura/pages/splash_screen.dart';
 import 'package:ayura/pages/home.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
+import 'package:ayura/provider/activityProviders/sportsProvider.dart';
 import 'package:ayura/provider/activityProviders/stairsProvider.dart';
 import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 // import 'package:ayura/provider/autProvider/auth_provider.dart';
@@ -11,6 +12,7 @@ import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/provider/functions/init.dart';
 import 'package:ayura/provider/moodProviders/selectedmood.dart';
 import 'package:ayura/provider/navigationProvider/navigation_provider.dart';
+import 'package:ayura/provider/symptomProviders/symptomlist.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,7 +22,7 @@ int? isViewed;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  isViewed = await prefs.getInt("isViewed");
+  isViewed = prefs.getInt("isViewed");
   await prefs.setInt("isViewed", 1);
   runApp(MyApp());
 }
@@ -47,6 +49,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CyclingOnRideProvider()),
         ChangeNotifierProvider(create: (_) => MoodProvider()),
         ChangeNotifierProvider(create: (_) => SportsProvider()),
+        ChangeNotifierProvider(create: (_) => SymptomsProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -55,7 +58,7 @@ class MyApp extends StatelessWidget {
           future: _initFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return isViewed != 0 ? OnboardingScreen() : Home();
+              return isViewed != 0 ? const OnboardingScreen() : const Home();
             } else {
               return const SplashScreen();
             }

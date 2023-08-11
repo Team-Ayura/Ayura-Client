@@ -1,11 +1,9 @@
 import 'package:ayura/widgets/features/community/custom_dropdown.dart';
-import 'package:ayura/widgets/features/community/header_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 
 //Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 class ChallengeDetailsView extends StatefulWidget {
   const ChallengeDetailsView({super.key});

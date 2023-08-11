@@ -9,7 +9,6 @@ import 'package:ayura/pages/features/community/community_chat/challenge_details_
 
 //Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 // Feature Widgets
 import 'package:ayura/widgets/features/community/community_appbar.dart';

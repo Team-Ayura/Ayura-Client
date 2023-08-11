@@ -9,7 +9,7 @@ class CyclingTripWidget extends StatelessWidget {
   final String duration;
   final String rideName;
 
-  CyclingTripWidget({
+  const CyclingTripWidget({super.key, 
     required this.date,
     required this.startTime,
     required this.distance,
@@ -25,8 +25,8 @@ class CyclingTripWidget extends StatelessWidget {
           // PageNavigator(context: context).nextPage(Activities());
         },
         child: Container(
-          margin: EdgeInsets.only(top: 7),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.only(top: 7),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8.0),
@@ -36,7 +36,7 @@ class CyclingTripWidget extends StatelessWidget {
           ),
           child: Row(
             children: [
-              MapContainer(
+              const MapContainer(
                 isRegular: false,
                 latitude: 37.7749,
                 longitude: -122.4194,
@@ -68,7 +68,7 @@ class CyclingTripWidget extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        date + ', ' + startTime,
+                        '$date, $startTime',
                         style: TextStyle(
                           color: Colors.black.withOpacity(0.3),
                           fontWeight: FontWeight.w500,

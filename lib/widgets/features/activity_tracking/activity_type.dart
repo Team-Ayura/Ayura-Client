@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../constants/colors.dart';
-import '../../../utils/router.dart';
 
 class CustomBoxItem extends StatelessWidget {
   final int index;
@@ -11,7 +10,7 @@ class CustomBoxItem extends StatelessWidget {
   final String subText;
   final String route;
 
-  CustomBoxItem({
+  const CustomBoxItem({super.key, 
     required this.index,
     required this.imagePath,
     required this.mainText,
@@ -28,8 +27,8 @@ class CustomBoxItem extends StatelessWidget {
         Navigator.pushNamed(context, route); // check this out
       },
       child: Container(
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),

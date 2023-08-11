@@ -1,20 +1,12 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/pages/features/activity_tracking/activity.dart';
-import 'package:ayura/pages/features/activity_tracking/cycling_on_ride.dart';
-import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
-import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
 import 'package:ayura/provider/activityProviders/sportsProvider.dart';
 import 'package:ayura/provider/models/sportModel.dart';
-import 'package:ayura/utils/router.dart';
 import 'package:ayura/utils/snack_message.dart';
 // import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/add_time_popup.dart';
 import 'package:ayura/widgets/features/activity_tracking/chart.dart';
-import 'package:ayura/widgets/features/activity_tracking/cycle_ride_box.dart';
-import 'package:ayura/widgets/features/activity_tracking/map.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -135,15 +127,15 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
             ),
             // if (isHiddenSectionActive)
             AnimatedOpacity(
-              duration: Duration(milliseconds: 100),
+              duration: const Duration(milliseconds: 100),
               opacity: isHiddenSectionActive ? 1.0 : 0.0,
               child: AnimatedContainer(
-                  duration: Duration(milliseconds: 100),
+                  duration: const Duration(milliseconds: 100),
                   child: isHiddenSectionActive
                       ? Container(
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(
                               // color: Colors.white,
                               // boxShadow: [
                               //   BoxShadow(
@@ -160,15 +152,15 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Started Time   ',
                                     style: TextStyle(fontSize: 18),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
                                   Container(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 7),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(50),
@@ -178,10 +170,10 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                                         )),
                                     child: Text(
                                       '${startTime.hour}:${startTime.minute}',
-                                      style: TextStyle(fontSize: 30),
+                                      style: const TextStyle(fontSize: 30),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   GestureDetector(
@@ -196,7 +188,7 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                                         }
                                       },
                                       child: Container(
-                                        padding: EdgeInsets.all(7),
+                                        padding: const EdgeInsets.all(7),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(50),
@@ -205,7 +197,7 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                                             border: Border.all(
                                                 color: AppColors.textColor
                                                     .withOpacity(0.1))),
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.timer_outlined,
                                           color: AppColors.primaryColor,
                                           size: 26,
@@ -213,22 +205,22 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                                       )),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Finished Time ',
                                     style: TextStyle(fontSize: 18),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
                                   Container(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 7),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(50),
@@ -238,10 +230,10 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                                         )),
                                     child: Text(
                                       '${finishTime.hour}:${finishTime.minute}',
-                                      style: TextStyle(fontSize: 30),
+                                      style: const TextStyle(fontSize: 30),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   GestureDetector(
@@ -256,7 +248,7 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                                         }
                                       },
                                       child: Container(
-                                        padding: EdgeInsets.all(7),
+                                        padding: const EdgeInsets.all(7),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(50),
@@ -265,7 +257,7 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                                             border: Border.all(
                                                 color: AppColors.textColor
                                                     .withOpacity(0.1))),
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.timer_outlined,
                                           color: AppColors.primaryColor,
                                           size: 26,
@@ -293,7 +285,7 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                 },
                 child: Container(
                   margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       color: AppColors.primaryColor,
                       borderRadius: BorderRadius.circular(8)),
@@ -315,18 +307,18 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
               height: 10,
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'About ${widget.selectedSport.name}',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                    style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
-                    padding: EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors
                           .grey.shade200, // Set your desired button color here

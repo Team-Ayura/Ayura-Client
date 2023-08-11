@@ -1,12 +1,9 @@
-import 'package:ayura/widgets/features/community/header_btn.dart';
 import 'package:flutter/material.dart';
 
 //Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 // Feature Widgets
-import 'package:ayura/widgets/features/community/community_appbar.dart';
 
 class PostsView extends StatefulWidget {
   const PostsView({super.key});

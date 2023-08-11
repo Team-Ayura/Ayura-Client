@@ -1,9 +1,10 @@
 // import 'dart:js_util';
-
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../../../provider/moodProviders/selectedmood.dart';
 
 
 class DateModel {
@@ -15,7 +16,7 @@ class DateModel {
 class HR_Calendar extends StatefulWidget {
   final DateTime? selectedDate;
 
-  HR_Calendar({this.selectedDate});
+  const HR_Calendar({super.key, this.selectedDate});
 
   @override
   _HR_CalendarState createState() => _HR_CalendarState(selectedDate);
@@ -29,19 +30,22 @@ class _HR_CalendarState extends State<HR_Calendar> {
 
   @override
 
- _HR_CalendarState(DateTime? selectedDate) {
-    _initializeDates(selectedDate);
+   _HR_CalendarState(DateTime? selectedDate) {
+    _initializeDates(selectedDate ?? DateTime.now());
   }
 
-  void _initializeDates(DateTime? selectedDate) {
-    // final selectedDate = _selectedDate ?? DateTime.now();
-
+  void _initializeDates(DateTime selectedDate) {
     final now = DateTime.now();
-    selectedDate ??= now;
     _startDate = selectedDate.subtract(Duration(days: selectedDate.weekday));
-    _endDate = selectedDate.add(Duration(days: DateTime.daysPerWeek - selectedDate.weekday - 1));
-    _selectedBoxIndex = selectedDate.weekday - 1;
+    if (selectedDate != now) {
+      _endDate =
+          selectedDate.add(Duration(days: DateTime.daysPerWeek - selectedDate.weekday - 2));
+    } else {
+      _endDate = selectedDate;
+    }
+    _selectedBoxIndex = selectedDate.weekday;
   }
+
   @override
   Widget build(BuildContext context) {
     List<DateModel> dates = generateDateList();
@@ -50,7 +54,7 @@ class _HR_CalendarState extends State<HR_Calendar> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             DateTimelinePicker(
               dates: dates,
               selectedBoxIndex: _selectedBoxIndex,
@@ -70,9 +74,9 @@ class _HR_CalendarState extends State<HR_Calendar> {
   DateTime currentDate = _startDate;
   DateTime today = DateTime.now();
 
-  while (currentDate.isBefore(_endDate.add(Duration(days: 1)))) {
+  while (currentDate.isBefore(_endDate.add(const Duration(days: 1)))) {
     dateList.add(DateModel(currentDate));
-    currentDate = currentDate.add(Duration(days: 1));
+    currentDate = currentDate.add(const Duration(days: 1));
   }
 
   if (_endDate.isAfter(today)) {
@@ -88,7 +92,7 @@ class DateTimelinePicker extends StatelessWidget {
   final int selectedBoxIndex;
   final Function(int) onBoxTap;
 
-  DateTimelinePicker({
+  const DateTimelinePicker({super.key, 
     required this.dates,
     required this.selectedBoxIndex,
     required this.onBoxTap,
@@ -96,21 +100,42 @@ class DateTimelinePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final moodProvider = Provider.of<MoodProvider>(context);// Add this line
     return Container(
       height: 130.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: dates.length,
+        
         itemBuilder: (context, index) {
           final dateModel = dates[index];
-          String formattedMonth = DateFormat.MMM().format(dateModel.date);
+          // String formattedMonth = DateFormat.MMM().format(dateModel.date);
+          // DateTime formateteddatemodeldate = DateFormat.YYYY.M.D(dateModel.date);
+
+          MoodHistory? moodHistory; // Initialize with null
+
+          // Find the mood history for the current date
+          for (var history in moodProvider.moodHistory) {
+            print('Mood History: ${history.date}');
+            print('Date: ${dateModel.date}');
+            if ( _isSameDay(history.date, dateModel.date)) {
+              moodHistory = history;
+              break;
+            }
+          }
+
+        
+
+          
+          // print('Mood History: ${moodHistory?.date}');
+          print('Mood History mood: ${moodHistory?.mood}');
 
           return GestureDetector(
             onTap: () {
               onBoxTap(index);
             },
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Container(
                 height: 60.0,
                 width: 100.0,
@@ -127,7 +152,7 @@ class DateTimelinePicker extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 1,
                       blurRadius: 2,
-                      offset: Offset(0, 1),
+                      offset: const Offset(0, 1),
                     ),
                   ],
                 ),
@@ -136,16 +161,31 @@ class DateTimelinePicker extends StatelessWidget {
                   children: [
                     Text(
                       dateModel.date.day.toString(),
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                      style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
                     Text(
                       DateFormat.MMM().format(dateModel.date),
-                      style: TextStyle(color: const Color.fromARGB(255, 128, 126, 126)),
+                      style: const TextStyle(color: Color.fromARGB(255, 128, 126, 126)),
                     ),
                     SizedBox(height: 10),
-                    SvgPicture.asset(
-                      'assets/images/bored.svg',
-                    ),
+                   
+                      // ignore: unnecessary_null_comparison
+                       if (moodHistory != null)
+                        SvgPicture.asset(
+                          'assets/images/mood_tracking/${moodHistory.mood}.svg',
+                        ),
+                      if (moodHistory == null) // Add a placeholder or nothing
+                        //  SvgPicture.asset(
+                        //   'assets/images/mood_tracking/Bored.svg',
+                        // ),
+                        SizedBox(
+                          width: 24,
+                          height: 24,
+                          // You can add a placeholder icon or leave it empty
+                          
+                        ),
+
+                        
                   ],
                 ),
               ),
@@ -156,3 +196,10 @@ class DateTimelinePicker extends StatelessWidget {
     );
   }
 }
+
+ // Compare only the date parts of two DateTime objects
+  bool _isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }

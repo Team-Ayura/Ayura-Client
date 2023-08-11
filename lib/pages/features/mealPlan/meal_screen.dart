@@ -1,7 +1,5 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/features/mealPlan/createmeal.dart';
-import 'package:ayura/pages/features/mealPlan/viewmeal_screen.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/mealplan/mealsList.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +30,7 @@ class MealScreenState extends State<MealScreen> {
           SizedBox(height: height * 0.03),
           GestureDetector(
             onTap: () {
-              PageNavigator(context: context).nextPage(Createmeal());
+              PageNavigator(context: context).nextPage(const Createmeal());
             },
             child: Container(
                 height: height * 0.17,
@@ -87,8 +85,8 @@ class MealScreenState extends State<MealScreen> {
             child: Column(
               children: [
                 TabBar(
-                  indicatorPadding: EdgeInsets.all(2),
-                  labelStyle: TextStyle(fontSize: 17),
+                  indicatorPadding: const EdgeInsets.all(2),
+                  labelStyle: const TextStyle(fontSize: 17),
                   unselectedLabelColor: Colors.grey,
                   //add border color to unselected tabs
                   labelColor: Colors.white,
@@ -107,7 +105,7 @@ class MealScreenState extends State<MealScreen> {
                   ],
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   height: height * 0.5,
                   child: const TabBarView(
                     children: [
@@ -123,7 +121,7 @@ class MealScreenState extends State<MealScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: AppNavigation(),
+      bottomNavigationBar: const AppNavigation(),
     );
   }
 }
