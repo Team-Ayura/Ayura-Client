@@ -173,7 +173,7 @@ class LoginState extends State<Login> {
                       InkWell(
                         onTap: () {
                           PageNavigator(context: context)
-                              .nextPage(const Home());
+                              .nextPage(const AuthScreen());
                         },
                         child: const Text(
                           'Sign up',
