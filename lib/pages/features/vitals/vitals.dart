@@ -8,7 +8,7 @@ class Vitals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: TextButton(child: Text("mood"),onPressed: () {PageNavigator(context: context).nextPage(SelectMood());}),
+      floatingActionButton: TextButton(child: const Text("mood"),onPressed: () {PageNavigator(context: context).nextPage(const SelectMood());}),
     );
   }
 }

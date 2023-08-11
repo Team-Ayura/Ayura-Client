@@ -33,7 +33,7 @@ class MoodVariationChart extends StatelessWidget {
         decoration:AppStyles.containerDecoration,
         margin: const EdgeInsets.symmetric(horizontal: 15),
         alignment: Alignment.center,
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child:Column(
           children: [
             const Align(

@@ -96,7 +96,7 @@ class SelectMood extends StatelessWidget {
                   if (moodProvider.selectedCount > 0) {
                     DateTime selectedDateTime = DateTime.now(); // Capture the current date and time
                     moodProvider.selectMood(moodProvider.selectedMood, selectedDateTime);
-                    PageNavigator(context: context).nextPage(SecondPage());
+                    PageNavigator(context: context).nextPage(const SecondPage());
                   } else {
                     // Show a snackbar or any other feedback that a mood should be selected
                     ScaffoldMessenger.of(context).showSnackBar(

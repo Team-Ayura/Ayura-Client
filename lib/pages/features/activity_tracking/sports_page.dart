@@ -1,16 +1,12 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/activity_tracking/selected_sport_page.dart';
 import 'package:ayura/provider/activityProviders/sportsProvider.dart';
-import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/provider/models/sportModel.dart';
 import 'package:ayura/utils/router.dart';
-import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
-import 'package:ayura/widgets/features/activity_tracking/chart.dart';
 import 'package:ayura/widgets/features/activity_tracking/multi_selection_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class SportsPage extends StatefulWidget {
@@ -128,7 +124,7 @@ class _SportsPageState extends State<SportsPage> {
                               Row(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(5),
+                                    padding: const EdgeInsets.all(5),
                                     width: 70,
                                     height: 70,
                                     decoration: BoxDecoration(
@@ -147,13 +143,13 @@ class _SportsPageState extends State<SportsPage> {
                                   ),
                                   Text(
                                     widget.sports[index].name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 18,
                                         color: AppColors.textColor),
                                   ),
                                 ],
                               ),
-                              Icon(Icons.arrow_forward_ios_rounded),
+                              const Icon(Icons.arrow_forward_ios_rounded),
                             ],
                           ),
                         ),

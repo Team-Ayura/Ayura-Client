@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:ayura/provider/models/sportModel.dart';
 import 'package:ayura/widgets/features/activity_tracking/multi_selection_popup.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SportsProvider extends ChangeNotifier {

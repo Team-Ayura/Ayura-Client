@@ -52,15 +52,15 @@ class CustomTabBarView extends StatelessWidget {
                       child:Column(
                         children:[
                           const SizedBox(height: 10,),  
-                          WeekCalendar(),
+                          const WeekCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
-                           SizedBox(height: 10.0,),
-                           TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            SizedBox(height: 10.0,),
-                            TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            SizedBox(height: 10.0,),
-                            TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                           const SizedBox(height: 10.0,),
+                           const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 10.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 10.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
 
                         ],
                       ),
@@ -70,15 +70,15 @@ class CustomTabBarView extends StatelessWidget {
                        child:Column(
                         children:[ 
                           const SizedBox(height: 10,),
-                          BiweekCalendar(),
+                          const BiweekCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
-                          SizedBox(height: 10.0,),
-                           TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            SizedBox(height: 10.0,),
-                            TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            SizedBox(height: 10.0,),
-                            TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                          const SizedBox(height: 10.0,),
+                           const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 10.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 10.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
 
 
                         ],
@@ -89,15 +89,15 @@ class CustomTabBarView extends StatelessWidget {
                       child:Column(
                         children:[ 
                           const SizedBox(height: 10,),
-                          MonthCalendar(),
+                          const MonthCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
-                          SizedBox(height: 5.0,),
-                           TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            SizedBox(height: 5.0,),
-                            TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            SizedBox(height: 5.0,),
-                            TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                          const SizedBox(height: 5.0,),
+                           const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 5.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 5.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
 
 
                         ],

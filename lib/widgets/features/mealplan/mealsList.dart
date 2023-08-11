@@ -21,7 +21,7 @@ class MealsList extends StatelessWidget {
               PageNavigator(context: context).nextPage(const ViewmealScreen());
             },
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -41,10 +41,10 @@ class MealsList extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                   const SizedBox(height: 8),
-                  Row(
+                  const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
+                      children: [
                         Text('100 Cal'),
                         SizedBox(width: 50),
                         Text('40 min')

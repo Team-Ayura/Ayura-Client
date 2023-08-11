@@ -24,7 +24,7 @@ class ViewmealScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
         child: CustomScrollView(slivers: [
           SliverToBoxAdapter(
-            child: Container(
+            child: SizedBox(
               height: height * 0.35,
               width: 100,
               child: Image.asset(
@@ -59,12 +59,12 @@ class ViewmealScreen extends StatelessWidget {
                           'assets/images/mealPlan/ingredient${index + 1}.png';
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Container(
+                        child: SizedBox(
                           width: 100, // Adjust the width as needed
                           child: Card(
                             child: Column(
                               children: [
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 ClipOval(
                                   child: Image.asset(
                                     ingredientImage,
@@ -73,9 +73,9 @@ class ViewmealScreen extends StatelessWidget {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Text(ingredients[index]),
-                                Text('2 cups'),
+                                const Text('2 cups'),
                               ],
                             ),
                           ),

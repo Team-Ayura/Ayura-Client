@@ -1,22 +1,17 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/pages/features/activity_tracking/activity.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
-import 'package:ayura/utils/router.dart';
 // import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
-import 'package:ayura/widgets/features/activity_tracking/chart.dart';
-import 'package:ayura/widgets/features/activity_tracking/cycle_ride_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/image_container.dart';
 import 'package:ayura/widgets/features/activity_tracking/map.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class CyclingOnRidePage extends StatefulWidget {
-  CyclingOnRidePage({Key? key}) : super(key: key);
+  const CyclingOnRidePage({Key? key}) : super(key: key);
 
   @override
   State<CyclingOnRidePage> createState() => _CyclingOnRidePageState();
@@ -38,7 +33,7 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
             maxHeight: panelHeightOpen,
             parallaxEnabled: true,
             parallaxOffset: 0.7,
-            body: MapContainer(
+            body: const MapContainer(
                 isRegular: true,
                 latitude: 37.7749,
                 longitude: -122.4194,
@@ -47,7 +42,7 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
               controller: controller,
               panelController: panelController,
             ),
-            borderRadius: BorderRadius.vertical(
+            borderRadius: const BorderRadius.vertical(
               top: Radius.circular(18),
             ),
           ),
@@ -61,7 +56,7 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
                   Navigator.of(context).pop();
                 },
               ),
-              title: Text(''),
+              title: const Text(''),
               backgroundColor: AppColors.textColor.withOpacity(0.2),
               elevation: 0,
             ),
@@ -122,7 +117,7 @@ class _PanelWidgetState extends State<PanelWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-        padding: EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.only(top: 10),
         controller: widget.controller,
         children: <Widget>[
           buildDragHandle(),

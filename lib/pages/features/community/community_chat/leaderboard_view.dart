@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 //Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 class LeaderboardView extends StatefulWidget {
   const LeaderboardView({super.key});

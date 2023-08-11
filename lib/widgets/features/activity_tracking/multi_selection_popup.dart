@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class CustomPopUp extends StatefulWidget {
   final List<Sport> sports;
 
-  CustomPopUp({required this.sports});
+  const CustomPopUp({super.key, required this.sports});
 
   @override
   _CustomPopUpState createState() => _CustomPopUpState();
@@ -52,7 +52,7 @@ class _CustomPopUpState extends State<CustomPopUp> {
             borderRadius: BorderRadius.circular(8),
             color: Colors.white,
           ),
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,8 +78,8 @@ class _CustomPopUpState extends State<CustomPopUp> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
-              Container(
+              const SizedBox(height: 10),
+              SizedBox(
                 height: 200,
                 child: Scrollbar(
                   thumbVisibility: true,
@@ -92,7 +92,7 @@ class _CustomPopUpState extends State<CustomPopUp> {
                           InkWell(
                             onTap: () => toggleSportSelection(sport),
                             child: Container(
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 color: sport.isSelected
@@ -101,7 +101,7 @@ class _CustomPopUpState extends State<CustomPopUp> {
                               ),
                               child: ListTile(
                                 leading: Container(
-                                  padding: EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(5),
                                   decoration: BoxDecoration(
                                     color: sport.isSelected
                                         ? Colors.white
@@ -142,7 +142,7 @@ class _CustomPopUpState extends State<CustomPopUp> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Center(
                 child: Consumer<SportsProvider>(
                     builder: (context, sportsProvider, _) {
