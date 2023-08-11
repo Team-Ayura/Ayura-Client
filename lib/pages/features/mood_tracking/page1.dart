@@ -30,14 +30,20 @@ class SelectMood extends StatelessWidget {
 
     return Scaffold(
       //top app bar with icons
-      appBar: CustomAppBar(Icons.arrow_back_outlined,
-          Icons.calendar_month_outlined, "Mood Tracker",
-          leftCallback: () => Navigator.of(context).pop(),
-          rightCallback: ()=>PageNavigator(context: context).nextPage(const ThirdPage())),
+      // appBar: CustomAppBar(Icons.arrow_back_outlined,
+      //     Icons.calendar_month_outlined, "Mood Tracker",
+      //     leftCallback: () => Navigator.of(context).pop(),
+      //     rightCallback: ()=>PageNavigator(context: context).nextPage(const ThirdPage())),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+IconButton(onPressed:(){PageNavigator(context: context).nextPage(const ThirdPage());} , icon:Icon(Icons.calendar_month_outlined) ),
+            ],),
+            
             const SizedBox(
               height: 20,
             ),
@@ -127,7 +133,7 @@ class SelectMood extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: AppNavigation(),
+      // bottomNavigationBar: AppNavigation(),
     );
   }
 }
