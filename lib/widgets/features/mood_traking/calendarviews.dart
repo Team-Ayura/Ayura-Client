@@ -7,6 +7,14 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
 show CalendarCarousel;
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:intl/intl.dart' 
+show DateFormat;
+import 'package:provider/provider.dart';
+
+import '../../../provider/moodProviders/selectedmood.dart';
+
+
 
 //Basic calendar view which can customize for duration
 class BaseCalendar extends StatefulWidget {
@@ -17,22 +25,22 @@ class BaseCalendar extends StatefulWidget {
   final double headermargintop;
   final double headermarginbottom;
   final double headermarginright;
-  final EventList<Event> markedDateMap;
+  EventList<Event> ? markedDateMap;
   final bool isScrollable;
   final bool weekFormat;
   final bool isheaderbutton;
   final bool isshowonlycurrentmonthdate;
   final double height;
   
-  BaseCalendar({super.key, 
+  BaseCalendar({
     this.startdate,
     this.enddate,
     this.currentDate,
     this.headerText,
+    this.markedDateMap,
     required this.headermargintop,
     required this.headermarginbottom,
     required this.headermarginright,
-    required this.markedDateMap,
     required this.isScrollable,
     required this.weekFormat,
     required this.isheaderbutton,
@@ -51,11 +59,12 @@ class _BaseCalendarState extends State<BaseCalendar> {
    
   @override
   Widget build(BuildContext context) {
-    
+    final moodProvider = Provider.of<MoodProvider>(context);
     final calendarCarousel =  CalendarCarousel<Event>(
+    
       //pass the taken different arguments to calendar
       headerText: widget.headerText,
-      markedDatesMap: widget.markedDateMap,
+      markedDatesMap:moodProvider.getMarkedDateList(),
       isScrollable: widget.isScrollable,
       showOnlyCurrentMonthDate: widget.isshowonlycurrentmonthdate,
       weekFormat: widget.weekFormat,
@@ -70,6 +79,7 @@ class _BaseCalendarState extends State<BaseCalendar> {
       markedDateCustomTextStyle:const TextStyle(color: Colors.white),
       markedDateIconBuilder: (event) => event.icon ?? const Icon(Icons.help_outline),
       showIconBehindDayText: true,
+      
 
       selectedDateTime: DateTime.now(),
       selectedDayTextStyle: const TextStyle(color: AppColors.primaryColor),
@@ -80,6 +90,8 @@ class _BaseCalendarState extends State<BaseCalendar> {
       weekdayTextStyle: const TextStyle(color:AppColors.shadowColor),
       todayButtonColor: Colors.transparent,
       todayBorderColor: AppColors.disabledColor,
+
+      
       
       customDayBuilder: (
         bool isSelectable,
@@ -161,7 +173,11 @@ class _BaseCalendarState extends State<BaseCalendar> {
                 // Only navigate for past and today's dates
                 if (day.isBefore(DateTime.now().add(const Duration(days: 1)))) {
                   setState(() => widget.currentDate = day);
-                 PageNavigator(context: context).nextPage(const SecondPage());
+                  
+
+                  // DateTime selectedDateTime = day; // Capture the current date and time
+                  // moodProvider.selectMood(moodProvider.selectedMood, selectedDateTime);
+                 PageNavigator(context: context).nextPage(SecondPage());
                 }
               },
               child: Center(
@@ -185,6 +201,17 @@ class _BaseCalendarState extends State<BaseCalendar> {
       );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
