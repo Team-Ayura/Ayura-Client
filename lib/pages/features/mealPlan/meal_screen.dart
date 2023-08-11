@@ -3,6 +3,7 @@ import 'package:ayura/pages/features/mealPlan/createmeal.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/mealplan/mealsList.dart';
 import 'package:flutter/material.dart';
+import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 
 class MealScreen extends StatefulWidget {
@@ -20,64 +21,73 @@ class MealScreenState extends State<MealScreen> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.arrow_back),
-        title: const Text('Meal Plan'),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
+        child: CustomAppBar(
+          appbarTitle: 'Meal Plan',
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: height * 0.03),
           GestureDetector(
             onTap: () {
               PageNavigator(context: context).nextPage(const Createmeal());
             },
             child: Container(
-                height: height * 0.17,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: const BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(12))),
-                child: Stack(
-                  children: [
-                    const Positioned(
-                      top: 10,
-                      left: 12,
-                      child: Text(
-                        'Wanna Create \nyour own healthy\nmeal ?',
-                        style: TextStyle(
-                          fontFamily: 'inter',
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                        width: 130,
-                        right: 12,
-                        child: Image.asset(
-                          'assets/images/mealPlan/mealImg.png',
-                          fit: BoxFit.contain,
-                        ))
-                  ],
-                )),
-          ),
-          SizedBox(height: height * 0.02),
-          const Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 29),
-                child: Text('Meals for you',
+              height: height * 0.17,
+              // padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(69, 158, 158, 158),
+                    blurRadius: 2.0,
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(
+                    width: 7,
+                  ),
+                  const Text(
+                    'Wanna create \nyour own healthy\nmeal ?',
                     style: TextStyle(
-                      fontFamily: 'inter',
-                      color: Colors.black,
-                      fontSize: 18,
+                      fontFamily: 'Inter',
+                      color: AppColors.textColor,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
-                    )),
-              )),
+                    ),
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(
+                      'assets/images/mealPlan/mealImage.png',
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: height * 0.03),
+          const Align(
+            alignment: Alignment.center,
+            child: Text(
+              'Meals for you',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
           SizedBox(height: height * 0.02),
           DefaultTabController(
             initialIndex: 0,
@@ -104,16 +114,19 @@ class MealScreenState extends State<MealScreen> {
                     Tab(text: 'Snacks'),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  height: height * 0.5,
-                  child: const TabBarView(
-                    children: [
-                      MealsList(),
-                      MealsList(),
-                      MealsList(),
-                      MealsList(),
-                    ],
+                SizedBox(
+                  //Change the layout from container to sizedbox due to overflow error
+                  height: height * 0.45,
+                  child: const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: TabBarView(
+                      children: [
+                        MealsList(),
+                        MealsList(),
+                        MealsList(),
+                        MealsList(),
+                      ],
+                    ),
                   ),
                 ),
               ],
