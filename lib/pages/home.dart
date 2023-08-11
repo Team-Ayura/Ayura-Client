@@ -75,119 +75,180 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          child: Column(
-            children: [
-              tipsCard(
-                height: height * 0.15,
-                title: 'Health Tips',
-                descritpion:
-                    'Smoke at least 4 cigarettes every day. It will reduce lung cancer risk by 99%.',
-                CTA: 'More Health tips',
-                icon: Icons.lightbulb,
-              ),
-              SizedBox(height: height * 0.02),
-              Expanded(
-                child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            child: CustomScrollView(slivers: [
+              SliverToBoxAdapter(
+                child: Container(
+                  height: height * 0.35,
+                  child: Column(
                     children: [
-                      activityCard(
-                          text: 'Step Count',
-                          number: 2548,
-                          image: 'assets/icons/step_icon.png'),
-                      SizedBox(width: width * 0.04),
-                      activityCard(
-                          text: 'Heart Rate',
-                          number: 2548,
-                          image: 'assets/icons/heart.png'),
-                      SizedBox(width: width * 0.04),
-                      activityCard(
-                          text: 'Calories',
-                          number: 2548,
-                          image: 'assets/icons/fire.png'),
-                    ]),
-              ),
-              SizedBox(height: height * 0.02),
-              tipsCard(
-                  height: height * 0.15,
-                  title: 'How are you feeling',
-                  CTA: 'See More'),
-              SizedBox(height: height * 0.02),
-              Container(
-                height: height * 0.15,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromARGB(69, 158, 158, 158),
-                      blurRadius: 2.0,
-                    ),
-                  ],
+                      tipsCard(
+                        height: height * 0.15,
+                        title: 'Health Tips',
+                        descritpion:
+                            'Smoke at least 4 cigarettes every day. It will reduce lung cancer risk by 99%.',
+                        CTA: 'More Health tips',
+                        icon: Icons.lightbulb,
+                      ),
+                      SizedBox(height: height * 0.01),
+                      Expanded(
+                        child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: false,
+                            children: [
+                              activityCard(
+                                  text: 'Step Count',
+                                  number: 2548,
+                                  image: 'assets/icons/step_icon.png'),
+                              SizedBox(width: width * 0.04),
+                              activityCard(
+                                  text: 'Heart Rate',
+                                  number: 2548,
+                                  image: 'assets/icons/heart.png'),
+                              SizedBox(width: width * 0.04),
+                              activityCard(
+                                  text: 'Calories',
+                                  number: 2548,
+                                  image: 'assets/icons/fire.png'),
+                            ]),
+                            
+                      ),
+                      SizedBox(height: height * 0.02)
+                    ],
+                  ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.star,
-                            size: 24.0,
-                            color: Color(0xFF4CAF50),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    tipsCard(
+                        height: height * 0.15,
+                        title: 'How are you feeling',
+                        CTA: 'See More'),
+                    SizedBox(height: height * 0.02),
+                    Container(
+                      height: height * 0.18,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color.fromARGB(69, 158, 158, 158),
+                            blurRadius: 2.0,
                           ),
-                          label: const Text('Featured Challenge',
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextButton.icon(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.star,
+                                  size: 24.0,
+                                  color: Color(0xFF4CAF50),
+                                ),
+                                label: const Text('Featured Challenge',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w400)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: TextButton.icon(
+                                  onPressed: () {},
+                                  label: const Text(
+                                    'See More',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  icon: const Icon(
+                                    Icons.arrow_forward_rounded,
+                                    size: 24.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10.0),
+                            child: Text("LSEG Running",
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.w600)),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10.0),
+                            child: Text(
+                              'running',
                               style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w400)),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: TextButton.icon(
-                            onPressed: () {},
-                            label: const Text(
-                              'See More',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w400),
-                            ),
-                            icon: const Icon(
-                              Icons.arrow_forward_rounded,
-                              size: 24.0,
+                                color: Color.fromARGB(255, 134, 134, 134),
+                                fontSize: 16.0,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10.0),
-                      child: const Text("LSEG Running",
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.w600)),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10.0),
-                      child: Text(
-                        'running',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 134, 134, 134),
-                          fontSize: 16.0,
-                        ),
+                          const SizedBox(height: 5),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: LinearProgressIndicator(
+                              minHeight: 8,
+                              value: 0.5,
+                              backgroundColor: Colors.grey[300],
+                              valueColor:
+                                  const AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    SizedBox(height: height * 0.02),
                   ],
                 ),
-              ),
-              SizedBox(height: height * 0.02),
-            ],
-          ),
-        ),
+              )
+            ])),
+
+        // child: Column(
+        //   children: [
+        //     tipsCard(
+        //       height: height * 0.15,
+        //       title: 'Health Tips',
+        //       descritpion:
+        //           'Smoke at least 4 cigarettes every day. It will reduce lung cancer risk by 99%.',
+        //       CTA: 'More Health tips',
+        //       icon: Icons.lightbulb,
+        //     ),
+        //     SizedBox(height: height * 0.02),
+        //     Expanded(
+        //       child: ListView(
+        //           scrollDirection: Axis.horizontal,
+        //           shrinkWrap: true,
+        //           children: [
+        //             activityCard(
+        //                 text: 'Step Count',
+        //                 number: 2548,
+        //                 image: 'assets/icons/step_icon.png'),
+        //             SizedBox(width: width * 0.04),
+        //             activityCard(
+        //                 text: 'Heart Rate',
+        //                 number: 2548,
+        //                 image: 'assets/icons/heart.png'),
+        //             SizedBox(width: width * 0.04),
+        //             activityCard(
+        //                 text: 'Calories',
+        //                 number: 2548,
+        //                 image: 'assets/icons/fire.png'),
+        //           ]),
+        //     ),
+        //     SizedBox(height: height * 0.02),
+
         bottomNavigationBar: const AppNavigation(),
       ),
     );
