@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ImagePreviewScreen extends StatelessWidget {
   final String imagePath;
 
-  ImagePreviewScreen({required this.imagePath});
+  const ImagePreviewScreen({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class ImagePreviewScreen extends StatelessWidget {
                   // Implement the logic to keep the image
                   Navigator.of(context).pop(true);
                 },
-                child: Text('Keep'),
+                child: const Text('Keep'),
               ),
               const SizedBox(width: 16),
               ElevatedButton(

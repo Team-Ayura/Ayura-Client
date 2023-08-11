@@ -1,5 +1,4 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/pages/features/activity_tracking/activity.dart';
 import 'package:ayura/pages/features/activity_tracking/cycling_on_ride.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
@@ -10,9 +9,7 @@ import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/chart.dart';
 import 'package:ayura/widgets/features/activity_tracking/cycle_ride_box.dart';
-import 'package:ayura/widgets/features/activity_tracking/map.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -76,7 +73,7 @@ class _CyclingPageState extends State<CyclingPage> {
             ),
             // distance
             Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor
                       .withOpacity(0.3), // Set your desired button color here
@@ -214,11 +211,11 @@ class _CyclingPageState extends State<CyclingPage> {
               return GestureDetector(
                 onTap: () {
                   cyclingOnRideProvider.startTimer();
-                  PageNavigator(context: context).nextPage(CyclingOnRidePage());
+                  PageNavigator(context: context).nextPage(const CyclingOnRidePage());
                 },
                 child: Container(
                   margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       color: AppColors.primaryColor,
                       borderRadius: BorderRadius.circular(8)),
@@ -242,11 +239,11 @@ class _CyclingPageState extends State<CyclingPage> {
             Container(
               margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Ride History',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
@@ -281,7 +278,7 @@ class _CyclingPageState extends State<CyclingPage> {
               height: 10,
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,8 +288,8 @@ class _CyclingPageState extends State<CyclingPage> {
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
-                    padding: EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors
                           .grey.shade200, // Set your desired button color here

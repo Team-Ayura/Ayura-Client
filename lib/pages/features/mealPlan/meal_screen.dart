@@ -30,57 +30,64 @@ class MealScreenState extends State<MealScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: height * 0.03),
           GestureDetector(
             onTap: () {
-              PageNavigator(context: context).nextPage(Createmeal());
+              PageNavigator(context: context).nextPage(const Createmeal());
             },
             child: Container(
-                height: height * 0.17,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: const BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(12))),
-                child: Stack(
-                  children: [
-                    const Positioned(
-                      top: 10,
-                      left: 12,
-                      child: Text(
-                        'Wanna Create \nyour own healthy\nmeal ?',
-                        style: TextStyle(
-                          fontFamily: 'inter',
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                        width: 130,
-                        right: 12,
-                        child: Image.asset(
-                          'assets/images/mealPlan/mealImg.png',
-                          fit: BoxFit.contain,
-                        ))
-                  ],
-                )),
-          ),
-          SizedBox(height: height * 0.02),
-          const Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 29),
-                child: Text('Meals for you',
+              height: height * 0.17,
+              // padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(69, 158, 158, 158),
+                    blurRadius: 2.0,
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(
+                    width: 7,
+                  ),
+                  const Text(
+                    'Wanna create \nyour own healthy\nmeal ?',
                     style: TextStyle(
-                      fontFamily: 'inter',
-                      color: Colors.black,
-                      fontSize: 18,
+                      fontFamily: 'Inter',
+                      color: AppColors.textColor,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
-                    )),
-              )),
+                    ),
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(
+                      'assets/images/mealPlan/mealImage.png',
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: height * 0.03),
+          const Align(
+            alignment: Alignment.center,
+            child: Text(
+              'Meals for you',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
           SizedBox(height: height * 0.02),
           DefaultTabController(
             initialIndex: 0,
@@ -88,8 +95,8 @@ class MealScreenState extends State<MealScreen> {
             child: Column(
               children: [
                 TabBar(
-                  indicatorPadding: EdgeInsets.all(2),
-                  labelStyle: TextStyle(fontSize: 17),
+                  indicatorPadding: const EdgeInsets.all(2),
+                  labelStyle: const TextStyle(fontSize: 17),
                   unselectedLabelColor: Colors.grey,
                   //add border color to unselected tabs
                   labelColor: Colors.white,
@@ -109,9 +116,9 @@ class MealScreenState extends State<MealScreen> {
                 ),
                 SizedBox(
                   //Change the layout from container to sizedbox due to overflow error
-                  height: height * 0.4,
+                  height: height * 0.45,
                   child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.all(10),
                     child: TabBarView(
                       children: [
                         MealsList(),
@@ -127,7 +134,7 @@ class MealScreenState extends State<MealScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: AppNavigation(),
+      bottomNavigationBar: const AppNavigation(),
     );
   }
 }

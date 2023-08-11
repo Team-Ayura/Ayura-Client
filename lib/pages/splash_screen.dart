@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Animate(
-      effects: [FadeEffect()],
+      effects: const [FadeEffect()],
       child: Scaffold(
         backgroundColor: AppColors.primaryColor,
         body: Center(

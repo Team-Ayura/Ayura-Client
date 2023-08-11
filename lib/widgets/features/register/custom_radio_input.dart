@@ -36,7 +36,7 @@ class CustomRadioButton extends StatelessWidget {
             side: BorderSide(
                 color: value == index
                     ? AppColors.primaryColor
-                    : Color(0xFF9C9C9C)),
+                    : const Color(0xFF9C9C9C)),
           ),
         ),
       ),
@@ -46,14 +46,14 @@ class CustomRadioButton extends StatelessWidget {
                 Icon(
                   icon,
                   size: 25,
-                  color: (value == index) ? Colors.white : Color(0xFF9C9C9C),
+                  color: (value == index) ? Colors.white : const Color(0xFF9C9C9C),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 Text(
                   text,
                   style: TextStyle(
                     fontSize: 16,
-                    color: (value == index) ? Colors.white : Color(0xFF9C9C9C),
+                    color: (value == index) ? Colors.white : const Color(0xFF9C9C9C),
                   ),
                 ),
               ],
@@ -62,7 +62,7 @@ class CustomRadioButton extends StatelessWidget {
               text,
               style: TextStyle(
                 fontSize: 16,
-                color: (value == index) ? Colors.white : Color(0xFF9C9C9C),
+                color: (value == index) ? Colors.white : const Color(0xFF9C9C9C),
               ),
             ),
     );

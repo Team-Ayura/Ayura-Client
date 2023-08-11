@@ -5,6 +5,7 @@ import 'package:ayura/widgets/features/mood_traking/moodpiechart.dart';
 import 'package:ayura/widgets/features/mood_traking/weekcalendar.dart';
 import 'package:flutter/material.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
+import 'package:ayura/widgets/global/tip_chip.dart';
 
 class CustomTabBarView extends StatelessWidget {
   const CustomTabBarView({super.key});
@@ -51,9 +52,15 @@ class CustomTabBarView extends StatelessWidget {
                       child:Column(
                         children:[
                           const SizedBox(height: 10,),  
-                          WeekCalendar(),
+                          const WeekCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
+                           const SizedBox(height: 10.0,),
+                           const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 10.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 10.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
 
                         ],
                       ),
@@ -63,9 +70,16 @@ class CustomTabBarView extends StatelessWidget {
                        child:Column(
                         children:[ 
                           const SizedBox(height: 10,),
-                          BiweekCalendar(),
+                          const BiweekCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
+                          const SizedBox(height: 10.0,),
+                           const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 10.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 10.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+
 
                         ],
                       ),
@@ -75,9 +89,16 @@ class CustomTabBarView extends StatelessWidget {
                       child:Column(
                         children:[ 
                           const SizedBox(height: 10,),
-                          MonthCalendar(),
+                          const MonthCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
+                          const SizedBox(height: 5.0,),
+                           const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 5.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                            const SizedBox(height: 5.0,),
+                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+
 
                         ],
                       ),

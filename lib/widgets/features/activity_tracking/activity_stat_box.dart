@@ -8,7 +8,7 @@ class ActivityStatBox extends StatelessWidget {
   final String label;
   final bool isPercentageValue;
 
-  ActivityStatBox({
+  const ActivityStatBox({super.key, 
     required this.svgName,
     required this.value,
     required this.label,

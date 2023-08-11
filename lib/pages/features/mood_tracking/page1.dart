@@ -6,6 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ayura/pages/features/mood_tracking/page2.dart';
+import 'package:provider/provider.dart';
+
+import '../../../provider/moodProviders/selectedmood.dart';
+import '../../../utils/router.dart';
+
 // import 'package:ayura/widgets/features/mood_tracking/mood_chips.dart';
 
 class SelectMood extends StatelessWidget {
@@ -16,6 +21,7 @@ class SelectMood extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
     );
+    final moodProvider = Provider.of<MoodProvider>(context);
     return Scaffold(
       //top app bar with icons
       appBar: CustomAppBar(Icons.arrow_back_outlined,
@@ -51,9 +57,9 @@ class SelectMood extends StatelessWidget {
               height: 20,
             ),
             //moods chips
-            Center(
+            const Center(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                padding:EdgeInsets.fromLTRB(8, 0, 8, 0),
                 child: Expanded(
                   child: Wrap(
                     spacing: 8.0,
@@ -86,13 +92,20 @@ class SelectMood extends StatelessWidget {
             Center(
               child: customButton(
                   tap: () {
-                    // SecondPage();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SecondPage()),
+                    //if atleast one mood selected then move to next page otherwise display snackbar
+                  if (moodProvider.selectedCount > 0) {
+                    DateTime selectedDateTime = DateTime.now(); // Capture the current date and time
+                    moodProvider.selectMood(moodProvider.selectedMood, selectedDateTime);
+                    PageNavigator(context: context).nextPage(const SecondPage());
+                  } else {
+                    // Show a snackbar or any other feedback that a mood should be selected
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please select a mood before proceeding.'),
+                      ),
                     );
-                    //  PageNavigator(context: context).nextPage(const Home());
-                  },
+                  }
+                },
                   icon: Icons.arrow_forward,
                   text: 'This is how I feel',
                   width: 200,
