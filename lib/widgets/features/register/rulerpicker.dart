@@ -47,7 +47,7 @@ class _RulerPickerInputState extends State<RulerPickerInput> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
+          SizedBox(
               width: MediaQuery.of(context).size.width * 0.10,
               child: Consumer<AuthenticationProvider2>(
                   builder: (context, auth, child) {

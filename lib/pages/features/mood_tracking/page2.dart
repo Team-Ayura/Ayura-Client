@@ -12,6 +12,8 @@ import '../../../provider/moodProviders/selectedmood.dart';
 import '../../../widgets/features/mood_traking/hr_calendar.dart';
 
 class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final moodProvider = Provider.of<MoodProvider>(context);
@@ -21,19 +23,19 @@ class SecondPage extends StatelessWidget {
     
     return Scaffold(
       
-      appBar: CustomAppBar(Icons.arrow_back_outlined,Icons.calendar_month_outlined,"Mood Tracker",leftCallback :()=>Navigator.of(context).pop(), rightCallback :()=>Navigator.push(context,MaterialPageRoute(builder: (context) => ThirdPage()))),
+      appBar: CustomAppBar(Icons.arrow_back_outlined,Icons.calendar_month_outlined,"Mood Tracker",leftCallback :()=>Navigator.of(context).pop(), rightCallback :()=>Navigator.push(context,MaterialPageRoute(builder: (context) => const ThirdPage()))),
       body:  SingleChildScrollView(
         child:Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
             child: Column(  
               children:[
-                HR_Calendar(),
+                const HR_Calendar(),
                 const SizedBox(height: 10.0,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("${formattedDate}",style: TextStyle(color:AppColors.disabledColor),),
-                    Text("${formattedTime}",style: TextStyle(color: AppColors.disabledColor),),
+                    Text(formattedDate,style: const TextStyle(color:AppColors.disabledColor),),
+                    Text(formattedTime,style: const TextStyle(color: AppColors.disabledColor),),
                   ],
                 ),
                Row(
@@ -44,7 +46,7 @@ class SecondPage extends StatelessWidget {
                       style: AppStyles.subheadingTextStyle2,
                     ),
                   ),
-                  SizedBox(width: 100.0,),
+                  const SizedBox(width: 100.0,),
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -58,14 +60,14 @@ class SecondPage extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Confirm Delete"),
-                            content: Text("Are you sure you want to delete this entry?"),
+                            title: const Text("Confirm Delete"),
+                            content: const Text("Are you sure you want to delete this entry?"),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop(); // Close the dialog
                                 },
-                                child: Text("Cancel"),
+                                child: const Text("Cancel"),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -75,14 +77,14 @@ class SecondPage extends StatelessWidget {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: Text(""),
-                                        content: Text("Successfully deleted."),
+                                        title: const Text(""),
+                                        content: const Text("Successfully deleted."),
                                         actions: [
                                           TextButton(
                                             onPressed: () {
                                               Navigator.of(context).pop(); // Close the dialog
                                             },
-                                            child: Text("OK"),
+                                            child: const Text("OK"),
                                           ),
                                           
                                         ],
@@ -90,7 +92,7 @@ class SecondPage extends StatelessWidget {
                                     },
                                   );// Close the dialog
                                 },
-                                child: Text("Delete"),
+                                child: const Text("Delete"),
                               ),
                             ],
                           );

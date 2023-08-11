@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 //Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 class HeaderButton extends StatefulWidget {
   const HeaderButton({

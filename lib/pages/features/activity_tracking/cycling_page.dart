@@ -67,7 +67,7 @@ class _CyclingPageState extends State<CyclingPage> {
             ),
             // distance
             Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor
                       .withOpacity(0.3), // Set your desired button color here
@@ -205,11 +205,11 @@ class _CyclingPageState extends State<CyclingPage> {
               return GestureDetector(
                 onTap: () {
                   cyclingOnRideProvider.startTimer();
-                  PageNavigator(context: context).nextPage(CyclingOnRidePage());
+                  PageNavigator(context: context).nextPage(const CyclingOnRidePage());
                 },
                 child: Container(
                   margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       color: AppColors.primaryColor,
                       borderRadius: BorderRadius.circular(8)),
@@ -233,11 +233,11 @@ class _CyclingPageState extends State<CyclingPage> {
             Container(
               margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Ride History',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
@@ -272,7 +272,7 @@ class _CyclingPageState extends State<CyclingPage> {
               height: 10,
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -282,8 +282,8 @@ class _CyclingPageState extends State<CyclingPage> {
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
-                    padding: EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors
                           .grey.shade200, // Set your desired button color here

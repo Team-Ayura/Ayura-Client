@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ayura/constants/styles.dart';
 
 class CustomInput extends StatelessWidget {
-  CustomInput({
+  const CustomInput({
     Key? key,
     required this.controller,
     required this.hintText,

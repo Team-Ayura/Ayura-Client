@@ -5,7 +5,7 @@ class TipChip extends StatelessWidget {
   final String description;
   final String image;
 
-  const TipChip({required this.title, required this.description, required this.image});
+  const TipChip({super.key, required this.title, required this.description, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,8 @@ class TipChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
         border: Border.all(color: Colors.grey), // Border color
       ),
-      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      padding: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      padding: const EdgeInsets.all(16.0),
       child: ListTile(
         title: Text(title),
         subtitle: Text(description),

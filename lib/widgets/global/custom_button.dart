@@ -1,5 +1,4 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 import 'package:flutter/material.dart';
 
 Widget customButton(

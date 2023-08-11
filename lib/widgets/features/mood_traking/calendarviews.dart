@@ -7,8 +7,6 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
 show CalendarCarousel;
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
-import 'package:intl/intl.dart' 
-show DateFormat;
 
 //Basic calendar view which can customize for duration
 class BaseCalendar extends StatefulWidget {
@@ -26,7 +24,7 @@ class BaseCalendar extends StatefulWidget {
   final bool isshowonlycurrentmonthdate;
   final double height;
   
-  BaseCalendar({
+  BaseCalendar({super.key, 
     this.startdate,
     this.enddate,
     this.currentDate,
@@ -120,7 +118,7 @@ class _BaseCalendarState extends State<BaseCalendar> {
                     // Only navigate for past and today's dates
                     if (day.isBefore(DateTime.now().add(const Duration(days: 1)))) {
                       setState(() => widget.currentDate = day);
-                      PageNavigator(context: context).nextPage(SecondPage());
+                      PageNavigator(context: context).nextPage(const SecondPage());
                     }
                   },
                   child: Center(
@@ -163,7 +161,7 @@ class _BaseCalendarState extends State<BaseCalendar> {
                 // Only navigate for past and today's dates
                 if (day.isBefore(DateTime.now().add(const Duration(days: 1)))) {
                   setState(() => widget.currentDate = day);
-                 PageNavigator(context: context).nextPage(SecondPage());
+                 PageNavigator(context: context).nextPage(const SecondPage());
                 }
               },
               child: Center(

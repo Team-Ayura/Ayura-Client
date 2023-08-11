@@ -1,6 +1,5 @@
 // import 'dart:js_util';
 
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -15,7 +14,7 @@ class DateModel {
 class HR_Calendar extends StatefulWidget {
   final DateTime? selectedDate;
 
-  HR_Calendar({this.selectedDate});
+  const HR_Calendar({super.key, this.selectedDate});
 
   @override
   _HR_CalendarState createState() => _HR_CalendarState(selectedDate);
@@ -50,7 +49,7 @@ class _HR_CalendarState extends State<HR_Calendar> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             DateTimelinePicker(
               dates: dates,
               selectedBoxIndex: _selectedBoxIndex,
@@ -70,9 +69,9 @@ class _HR_CalendarState extends State<HR_Calendar> {
   DateTime currentDate = _startDate;
   DateTime today = DateTime.now();
 
-  while (currentDate.isBefore(_endDate.add(Duration(days: 1)))) {
+  while (currentDate.isBefore(_endDate.add(const Duration(days: 1)))) {
     dateList.add(DateModel(currentDate));
-    currentDate = currentDate.add(Duration(days: 1));
+    currentDate = currentDate.add(const Duration(days: 1));
   }
 
   if (_endDate.isAfter(today)) {
@@ -88,7 +87,7 @@ class DateTimelinePicker extends StatelessWidget {
   final int selectedBoxIndex;
   final Function(int) onBoxTap;
 
-  DateTimelinePicker({
+  const DateTimelinePicker({super.key, 
     required this.dates,
     required this.selectedBoxIndex,
     required this.onBoxTap,
@@ -96,7 +95,7 @@ class DateTimelinePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 130.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -110,7 +109,7 @@ class DateTimelinePicker extends StatelessWidget {
               onBoxTap(index);
             },
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Container(
                 height: 60.0,
                 width: 100.0,
@@ -127,7 +126,7 @@ class DateTimelinePicker extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 1,
                       blurRadius: 2,
-                      offset: Offset(0, 1),
+                      offset: const Offset(0, 1),
                     ),
                   ],
                 ),
@@ -136,13 +135,13 @@ class DateTimelinePicker extends StatelessWidget {
                   children: [
                     Text(
                       dateModel.date.day.toString(),
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                      style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
                     Text(
                       DateFormat.MMM().format(dateModel.date),
-                      style: TextStyle(color: const Color.fromARGB(255, 128, 126, 126)),
+                      style: const TextStyle(color: Color.fromARGB(255, 128, 126, 126)),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     SvgPicture.asset(
                       'assets/images/bored.svg',
                     ),

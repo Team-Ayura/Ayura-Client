@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ayura/widgets/global/custom_button.dart';
-import 'package:ayura/widgets/global/custom_grey_btn.dart';
-import 'package:ayura/utils/router.dart';
 
 // Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 class ChallengeCard extends StatelessWidget {
   const ChallengeCard(

@@ -6,21 +6,22 @@ import 'package:ayura/pages/features/activity_tracking/walking_and_running_page.
 import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class Activities extends StatelessWidget {
+  const Activities({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       // Define your named routes here
       debugShowCheckedModeBanner: false,
       routes: {
-        '/activities': (context) => ActivitiesPage(),
-        '/walkingandrunning': (context) => WalkingAndRunningPage(),
-        '/cycling': (context) => CyclingPage(),
-        '/stairs': (context) => StairsPage(),
+        '/activities': (context) => const ActivitiesPage(),
+        '/walkingandrunning': (context) => const WalkingAndRunningPage(),
+        '/cycling': (context) => const CyclingPage(),
+        '/stairs': (context) => const StairsPage(),
         '/sports': (context) => SportsPage(),
-        '/workouts': (context) => WorkoutsPage(),
+        '/workouts': (context) => const WorkoutsPage(),
         // Add more named routes as needed
       },
       // Optionally, you can provide the initialRoute
@@ -41,7 +42,7 @@ class Activities extends StatelessWidget {
 // }
 
 class WorkoutsPage extends StatelessWidget {
-  WorkoutsPage({Key? key}) : super(key: key);
+  const WorkoutsPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -50,7 +51,7 @@ class WorkoutsPage extends StatelessWidget {
 }
 
 class ActivitiesPage extends StatelessWidget {
-  ActivitiesPage({Key? key}) : super(key: key);
+  const ActivitiesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,7 @@ class ActivitiesPage extends StatelessWidget {
         title: const Center(child: Text('Activity')),
         backgroundColor: AppColors.primaryColor,
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +104,7 @@ class ActivitiesPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: AppNavigation(),
+      bottomNavigationBar: const AppNavigation(),
     );
   }
 
