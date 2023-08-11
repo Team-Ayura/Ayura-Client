@@ -1,3 +1,4 @@
+import 'package:ayura/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class TipChip extends StatelessWidget {
@@ -19,7 +20,7 @@ class TipChip extends StatelessWidget {
       child: ListTile(
         title: Text(title),
         subtitle: Text(description),
-        trailing: Image.asset(image),
+        trailing: Image.asset(image,width: 100.0,height:100.0,),
       ),
     );
   }
