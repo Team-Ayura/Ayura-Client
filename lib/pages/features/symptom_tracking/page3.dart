@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import '../../../widgets/global/tip_chip.dart';
 import 'package:ayura/pages/features/symptom_tracking/nearbyhospitals.dart';
 
+import '../vitals/vitals.dart';
+
 class Page3 extends StatelessWidget {
   const Page3({super.key});
 
@@ -18,7 +20,7 @@ class Page3 extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             // Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomePage()));
-            PageNavigator(context: context).nextPage(const WelcomePage());
+            PageNavigator(context: context).nextPage(const Vitals());
           },
         ),
         actions: [
