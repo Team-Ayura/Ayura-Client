@@ -9,27 +9,33 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Symptom Tracker'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.calendar_today),
-            onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => Page2()));
-              PageNavigator(context: context).nextPage(Page2());
-            },
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Symptom Tracker'),
+      //   leading: IconButton(
+      //     icon: const Icon(Icons.arrow_back),
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //   ),
+      //   actions: [
+      //     IconButton(
+      //       icon: const Icon(Icons.calendar_today),
+      //       onPressed: () {
+      //         // Navigator.push(context, MaterialPageRoute(builder: (context) => Page2()));
+      //         PageNavigator(context: context).nextPage(Page2());
+      //       },
+      //     ),
+      //   ],
+      // ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+IconButton(onPressed:(){PageNavigator(context: context).nextPage(const Page2());} , icon:Icon(Icons.calendar_month_outlined) ),
+            ],),
+          
           const Padding(
             padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
             child: Text(
