@@ -10,7 +10,8 @@ class CustomBoxItem extends StatelessWidget {
   final String subText;
   final String route;
 
-  const CustomBoxItem({super.key, 
+  const CustomBoxItem({
+    super.key,
     required this.index,
     required this.imagePath,
     required this.mainText,
@@ -28,7 +29,7 @@ class CustomBoxItem extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsets.all(10),
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
@@ -56,6 +57,7 @@ class CustomBoxItem extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
+                    const SizedBox(height: 5),
                     Text(
                       subText,
                       style: const TextStyle(
@@ -92,6 +94,7 @@ class CustomBoxItem extends StatelessWidget {
                       ),
                       textAlign: TextAlign.right,
                     ),
+                    const SizedBox(height: 5),
                     Text(
                       subText,
                       style: const TextStyle(

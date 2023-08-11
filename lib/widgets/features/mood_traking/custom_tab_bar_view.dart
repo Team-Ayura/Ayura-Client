@@ -6,12 +6,23 @@ import 'package:ayura/widgets/features/mood_traking/weekcalendar.dart';
 import 'package:flutter/material.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:ayura/widgets/global/tip_chip.dart';
+import 'package:provider/provider.dart';
+
+import '../../../provider/moodProviders/selectedmood.dart';
 
 class CustomTabBarView extends StatelessWidget {
   const CustomTabBarView({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final moodProvider = Provider.of<MoodProvider>(context);
+    
+    //take habits from provider
+    final habits = moodProvider.getHabitsForMood("angry"); 
+    final habit1 = habits.isNotEmpty ? habits[0] : null;
+    final habit2 = habits.length > 1 ? habits[1] : null;
+    final habit3 = habits.length > 2 ? habits[2] : null;
     
     return DefaultTabController(
       //tabbar part
@@ -55,12 +66,24 @@ class CustomTabBarView extends StatelessWidget {
                           const WeekCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
-                           const SizedBox(height: 10.0,),
-                           const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            const SizedBox(height: 10.0,),
-                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            const SizedBox(height: 10.0,),
-                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                           SizedBox(height: 10.0,),
+                            TipChip(
+                              title: habit1 != null ? habit1['title'] : "",
+                              description: habit1 != null ? habit1['description'] : "",
+                              image: habit1 != null ? habit1['image'] : "",
+                            ),
+                            SizedBox(height: 10.0,),
+                            TipChip(
+                              title: habit2 != null ? habit2['title'] : "",
+                              description: habit2 != null ? habit2['description'] : "",
+                              image: habit2 != null ? habit2['image'] : "",
+                            ),
+                            SizedBox(height: 10.0,),
+                             TipChip(
+                                title: habit3 != null ? habit3['title'] : "",
+                                description: habit3 != null ? habit3['description'] : "",
+                                image: habit3 != null ? habit3['image'] : "",
+                              ),
 
                         ],
                       ),
@@ -73,12 +96,24 @@ class CustomTabBarView extends StatelessWidget {
                           const BiweekCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
-                          const SizedBox(height: 10.0,),
-                           const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            const SizedBox(height: 10.0,),
-                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            const SizedBox(height: 10.0,),
-                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
+                           SizedBox(height: 10.0,),
+                            TipChip(
+                              title: habit1 != null ? habit1['title'] : "",
+                              description: habit1 != null ? habit1['description'] : "",
+                              image: habit1 != null ? habit1['image'] : "",
+                            ),
+                            SizedBox(height: 10.0,),
+                            TipChip(
+                              title: habit2 != null ? habit2['title'] : "",
+                              description: habit2 != null ? habit2['description'] : "",
+                              image: habit2 != null ? habit2['image'] : "",
+                            ),
+                            SizedBox(height: 10.0,),
+                             TipChip(
+                                title: habit3 != null ? habit3['title'] : "",
+                                description: habit3 != null ? habit3['description'] : "",
+                                image: habit3 != null ? habit3['image'] : "",
+                              ),
 
 
                         ],
@@ -92,14 +127,24 @@ class CustomTabBarView extends StatelessWidget {
                           const MonthCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
-                          const SizedBox(height: 5.0,),
-                           const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            const SizedBox(height: 5.0,),
-                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-                            const SizedBox(height: 5.0,),
-                            const TipChip(title: "Calm your mind with Yoga", description: "5 min", image: "assets/images/mood_tracking/sport1.png"),
-
-
+                          SizedBox(height: 10.0,),
+                            TipChip(
+                              title: habit1 != null ? habit1['title'] : "",
+                              description: habit1 != null ? habit1['description'] : "",
+                              image: habit1 != null ? habit1['image'] : "",
+                            ),
+                            SizedBox(height: 10.0,),
+                            TipChip(
+                              title: habit2 != null ? habit2['title'] : "",
+                              description: habit2 != null ? habit2['description'] : "",
+                              image: habit2 != null ? habit2['image'] : "",
+                            ),
+                            SizedBox(height: 10.0,),
+                             TipChip(
+                                title: habit3 != null ? habit3['title'] : "",
+                                description: habit3 != null ? habit3['description'] : "",
+                                image: habit3 != null ? habit3['image'] : "",
+                              ),
                         ],
                       ),
                     ),
