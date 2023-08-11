@@ -12,6 +12,7 @@ import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/provider/functions/init.dart';
 import 'package:ayura/provider/moodProviders/selectedmood.dart';
 import 'package:ayura/provider/navigationProvider/navigation_provider.dart';
+import 'package:ayura/provider/symptomProviders/symptomlist.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CyclingOnRideProvider()),
         ChangeNotifierProvider(create: (_) => MoodProvider()),
         ChangeNotifierProvider(create: (_) => SportsProvider()),
+        ChangeNotifierProvider(create: (_) => SymptomsProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
