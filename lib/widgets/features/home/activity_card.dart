@@ -8,8 +8,9 @@ Widget activityCard({
   String? image
 }) {
   return Container(
-    width: 100,
-    height: 50,
+    padding: EdgeInsets.all(8),
+    width: 110,
+    height: 55,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       color: Colors.white,
