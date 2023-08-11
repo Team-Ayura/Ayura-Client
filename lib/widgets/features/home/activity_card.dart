@@ -1,16 +1,10 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-Widget activityCard({
-
-  int? number,
-  String? text,
-  String? image
-}) {
+Widget activityCard({int? number, String? text, String? image}) {
   return Container(
-    padding: EdgeInsets.all(8),
+    padding: const EdgeInsets.all(10),
     width: 110,
-    height: 55,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       color: Colors.white,
@@ -28,23 +22,32 @@ Widget activityCard({
         Text(
           text!,
           style: const TextStyle(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400),
+            color: Colors.black,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            fontFamily: "Inter",
+          ),
         ),
-        const SizedBox(height: 5),
-        Text(
-          number.toString(),
-          style: const TextStyle(
-              color: AppColors.primaryColor,
-              fontSize: 30,
-              fontWeight: FontWeight.w400),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              '$image',
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
+              number.toString(),
+              style: const TextStyle(
+                  color: AppColors.primaryColor,
+                  fontSize: 18,
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w500),
+            ),
+          ],
         ),
-        Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: Align(
-                alignment: Alignment.bottomRight,
-                child: Image.asset(
-                  '$image',
-                )))
       ],
     ),
   );
