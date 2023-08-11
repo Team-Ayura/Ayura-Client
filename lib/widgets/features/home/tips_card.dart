@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 Widget tipsCard({
   IconData? icon,
   String? title,
-  String? CTA,
+  required String cta,
   Color? iconColor,
   String? descritpion,
   required double height,
 }) {
   return Container(
     height: height,
+    padding: const EdgeInsets.all(10.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       color: Colors.white,
@@ -27,49 +28,62 @@ Widget tipsCard({
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           icon != null ? TextButton.icon(
+            icon != null
+                ? TextButton.icon(
+                    onPressed: () {},
+                    icon: Icon(
+                      icon,
+                      size: 24.0,
+                      color: iconColor ?? AppColors.yellowColor,
+                    ),
+                    label: Text(
+                      title!,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontFamily: "Inter",
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  )
+                : TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      title!,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontFamily: "Inter",
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+            TextButton.icon(
               onPressed: () {},
-              icon: Icon(
-                icon,
-                size: 24.0,
-                color: iconColor ?? AppColors.primaryColor,
+              label: const Icon(
+                Icons.arrow_forward_rounded,
+                size: 18,
+                color: AppColors.primaryColor,
               ),
-              label: Text(title!,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400)),
-            ): TextButton(
-              onPressed: () {},
-              child: Text(title!,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400)),
-            ),  
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: TextButton.icon(
-                onPressed: () {},
-                label: Text(
-                  CTA!,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                ),
-                icon: const Icon(
-                  Icons.arrow_forward_rounded,
-                  size: 24.0,
+              icon: Text(
+                cta,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "Inter",
                 ),
               ),
-            ),
+            )
           ],
         ),
         Padding(
-          padding: EdgeInsets.only(left: 10.0),
+          padding: const EdgeInsets.only(left: 10.0),
           child: Text(
             descritpion ?? '',
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 134, 134, 134),
-              fontSize: 16.0,
+              fontSize: 14.0,
+              fontFamily: "Inter",
             ),
           ),
         )

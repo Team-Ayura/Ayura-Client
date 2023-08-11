@@ -4,13 +4,13 @@ import 'package:ayura/constants/colors.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     required this.appbarTitle,
-    this.iconName = Icons.add, //Default Icon , Lightbulb icon
+    this.iconName, //Default Icon = null
     this.isBackBtn = false,
     this.onPressed,
     super.key,
   });
   final String appbarTitle; // Appbar main title
-  final IconData iconName; // Appbar Icon
+  final IconData? iconName; // Appbar Icon
   final bool isBackBtn; //Back Btn availaibility
   final VoidCallback? onPressed;
 
@@ -35,11 +35,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 10.0),
-          child: IconButton(
-            onPressed: onPressed,
-            icon: Icon(iconName),
-            color: AppColors.primaryColor,
-          ),
+          child: iconName != null
+              ? IconButton(
+                  onPressed: onPressed,
+                  icon: Icon(iconName),
+                  color: AppColors.primaryColor,
+                )
+              : const SizedBox(), // Use SizedBox to occupy space when the icon is null
         ),
       ],
     );

@@ -34,7 +34,7 @@ class CustomInput extends StatelessWidget {
           style: const TextStyle(
             fontSize: 12,
             fontFamily: 'Inter',
-            color: AppColors.primaryColor,
+            color: AppColors.alternateGreyColor,
           ),
         ),
         SizedBox(
