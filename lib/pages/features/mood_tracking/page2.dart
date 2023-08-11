@@ -1,6 +1,7 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/features/mood_tracking/page1.dart';
+import 'package:ayura/pages/features/vitals/vitals.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/global/tip_chip.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,7 @@ class SecondPage extends StatelessWidget {
                                         actions: [
                                           TextButton(
                                             onPressed: () {
-                                              PageNavigator(context: context).nextPage(const SelectMood()); // Close the dialog
+                                              PageNavigator(context: context).nextPage(const Vitals()); // Close the dialog
                                             },
                                             child: const Text("OK"),
                                           ),

@@ -137,7 +137,7 @@ class MoodProvider with ChangeNotifier {
     {
       "title": "Take Deep Breaths",
       "description": "Inhale deeply and exhale slowly to calm down.",
-      "image": "assets/images/mood_tracking/nature_walk.jpg",
+      "image": "assets/images/mood_tracking/deep_breathing.jpg",
     },
     {
       "title": "Physical Activity",
@@ -147,7 +147,7 @@ class MoodProvider with ChangeNotifier {
     {
       "title": "Practice Mindfulness",
       "description": "Focus on the present moment and let go of anger.",
-      "image": "assets/images/mood_tracking/nature_walk.jpg",
+      "image": "assets/images/mood_tracking/meditation.jpg",
     },
   ],
   "stressed" : [
