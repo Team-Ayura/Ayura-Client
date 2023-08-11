@@ -1,4 +1,6 @@
 import 'dart:collection';
+import 'package:ayura/constants/colors.dart';
+
 import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/pages/features/mealPlan/meal_screen.dart';
 import 'package:ayura/pages/features/mood_tracking/page1.dart';
@@ -34,12 +36,51 @@ class _HomeState extends State<Home> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
-        child: CustomAppBar(
-          appbarTitle: 'Home',
-          onPressed: null,
-        ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(120.0),
+        child: AppBar(
+            elevation: 0, //dropshadow
+            automaticallyImplyLeading: false,
+            toolbarHeight: 120.0,
+            backgroundColor: AppColors.backgroundColor,
+            title: const Padding(
+              padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        'Good Morning!',
+                        style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: 22,
+                            color: Color.fromRGBO(75, 75, 75, 1),
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        'Dilanga Harshani',
+                        style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: 17,
+                            color: Color.fromRGBO(75, 75, 75, 1),
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: SizedBox(),
+                  ),
+                  IconButton(
+                    onPressed: null,
+                    icon: Icon(Icons.notifications_none_rounded),
+                  ),
+                ],
+              ),
+            )),
       ),
       body: const Center(
         child: Column(

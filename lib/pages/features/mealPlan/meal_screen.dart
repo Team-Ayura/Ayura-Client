@@ -1,7 +1,5 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/features/mealPlan/createmeal.dart';
-import 'package:ayura/pages/features/mealPlan/viewmeal_screen.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/mealplan/mealsList.dart';
 import 'package:flutter/material.dart';
@@ -109,10 +107,10 @@ class MealScreenState extends State<MealScreen> {
                     Tab(text: 'Snacks'),
                   ],
                 ),
-                const SizedBox(
+                SizedBox(
                   //Change the layout from container to sizedbox due to overflow error
-                  height: 350,
-                  child: Padding(
+                  height: height * 0.4,
+                  child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: TabBarView(
                       children: [
