@@ -61,7 +61,7 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
               label,
               style: TextStyle(
                 color: widget.controller!.selectedOptions[index]
-                    ? const Color.fromRGBO(255, 255, 255, 0)
+                    ? const Color.fromRGBO(255, 255, 255, 1)
                     : AppColors.primaryColor,
               ),
             ),
