@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
                         height: height * 0.15,
                         title: 'Health Tips',
                         descritpion:
-                            'Smoke at least 4 cigarettes every day. It will reduce lung cancer risk by 99%.',
+                            ' Stay hydrated! Drinking enough water throughout the day is essential for maintaining good health.',
                         CTA: 'More Health tips',
                         icon: Icons.lightbulb,
                       ),
