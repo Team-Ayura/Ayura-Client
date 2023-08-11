@@ -32,6 +32,7 @@ class MoodButton extends StatelessWidget {
           color: isSelected ? Colors.white : Colors.black,
         ),
       ),
+      visualDensity: const VisualDensity(horizontal: 4.0, vertical: 2.0),
       labelPadding: const EdgeInsets.all(10.0),
       clipBehavior: Clip.antiAlias,
       backgroundColor: isSelected ? AppColors.primaryColor : Colors.white,

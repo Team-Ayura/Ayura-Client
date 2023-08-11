@@ -10,20 +10,36 @@ class MoodVariationChart extends StatelessWidget {
   //map mood,no of days with that mood
   //days with that mood/total days * 100%
   Map<String,double> dataMap = {
-    "Happy": 18.47,
-    "MIld Happy": 17.70,
-    "Average": 4.25,
-    "Sad": 3.51,
-    "Worse": 2.83,
+    "Happy": 8.47,
+    // "Calm": 17.70,
+    "Tired": 14.25,
+    "Sad": 6.51,
+    "Angry": 12.83,
+    "Stressed": 9.83,
+    // "Lonely": 2.83,
+    // "Sick": 2.83,
+    "Bored": 4.83,
   };
 
   List<Color> colorList = [
-      const Color(0xFF00DF59),
-      const Color(0xFFADFF00),
-      const Color(0xFFFFD600),
-      const Color(0xFF00DF59),
-      const Color(0xFFF36C24),
-      const Color(0xFFFF0000),
+      // const Color(0xFF00DF59), //happy
+      // const Color(0xFF00DF59), //calm
+      // const Color(0xFFADFF00), //
+      // const Color(0xFFFFD600),
+      // const Color(0xFFF36C24),
+      // const Color(0xFFFF0000),
+
+      const Color(0xFF00DF59), //happy
+      // const Color(0xFFA6D8DE), //calm
+      const Color(0xFFFFD600), //tired
+      Color.fromARGB(255, 110, 160, 3), //sad
+      const Color(0xFFFF2400), //angry
+      const Color(0xFF6E8B7E), //stressed
+      // const Color(0xFF4B0082), //lonelyg
+      // const Color(0xFF98FB98), //sick
+      Color.fromARGB(255, 105, 206, 236), //bored
+
+      
 
   ];
 
@@ -33,7 +49,7 @@ class MoodVariationChart extends StatelessWidget {
         decoration:AppStyles.containerDecoration,
         margin: const EdgeInsets.symmetric(horizontal: 15),
         alignment: Alignment.center,
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.fromLTRB(25, 20, 15, 20),
         child:Column(
           children: [
             const Align(

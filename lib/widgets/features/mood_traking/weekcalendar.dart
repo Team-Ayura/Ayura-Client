@@ -19,27 +19,27 @@ class _WeekCalendarState extends State<WeekCalendar> {
   late String _minSelectedDate;
   late String _maxSelectedDate;
 
-   final EventList<Event> _markedDateMap = EventList<Event>(
-    events: {
-      DateTime(2023, 7, 30): [
-        Event(
-            date: DateTime(2023, 7, 30),
-            icon: const CircleAvatar(radius: 10, backgroundColor: Colors.green)),
-      ],
-      DateTime(2023, 7, 31): [
-        Event(
-            date: DateTime(2023, 7, 31),
-            icon: const CircleAvatar(radius: 10, backgroundColor: Colors.lightGreen,)
-            ),
-      ],
-      DateTime(2023, 8, 1): [
-        Event(
-            date: DateTime(2023, 8, 1),
-            icon: const CircleAvatar(radius: 10, backgroundColor: Colors.yellow,)
-            ),
-      ],
-    },
-  );
+  //  final EventList<Event> _markedDateMap = EventList<Event>(
+  //   events: {
+  //     DateTime(2023, 7, 30): [
+  //       Event(
+  //           date: DateTime(2023, 7, 30),
+  //           icon: const CircleAvatar(radius: 10, backgroundColor: Colors.green)),
+  //     ],
+  //     DateTime(2023, 7, 31): [
+  //       Event(
+  //           date: DateTime(2023, 7, 31),
+  //           icon: const CircleAvatar(radius: 10, backgroundColor: Colors.lightGreen,)
+  //           ),
+  //     ],
+  //     DateTime(2023, 8, 1): [
+  //       Event(
+  //           date: DateTime(2023, 8, 1),
+  //           icon: const CircleAvatar(radius: 10, backgroundColor: Colors.yellow,)
+  //           ),
+  //     ],
+  //   },
+  // );
 
     @override
   void initState() {
@@ -64,7 +64,7 @@ class _WeekCalendarState extends State<WeekCalendar> {
       headermarginright: 220,
       isheaderbutton: false,
       isshowonlycurrentmonthdate: false,
-      markedDateMap: _markedDateMap,
+      // markedDateMap: _markedDateMap,
       isScrollable: false, 
       weekFormat: true,    
       height: 150.0,       
