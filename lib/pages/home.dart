@@ -169,8 +169,8 @@ class _HomeState extends State<Home> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            MoodButton(emojiName: 'happy', mood: 'Happy'),
-                            MoodButton(emojiName: 'tired', mood: 'Tired'),
+                            MoodButton(emojiName: 'Happy', mood: 'Happy'),
+                            MoodButton(emojiName: 'Tired', mood: 'Tired'),
                           ],
                         ),
                       )
