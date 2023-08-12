@@ -33,6 +33,8 @@ class _CommunityChatState extends State<CommunityChat> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       resizeToAvoidBottomInset: false,
@@ -46,7 +48,7 @@ class _CommunityChatState extends State<CommunityChat> {
       ),
       body: Container(
         width: double.infinity, //Take the whole available width of the device
-        padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        padding:  EdgeInsets.fromLTRB(width*0.02, height*0.01, width*0.02, height*0.01),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

@@ -36,8 +36,8 @@ class LoginState extends State<Login> {
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       body: SizedBox(
-        width: width,
-        height: height,
+        width: double.infinity,
+        height: double.infinity,
         child: ListView(
           children: [
             SizedBox(
