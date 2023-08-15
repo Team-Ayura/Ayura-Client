@@ -106,40 +106,49 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
                   Container(
                     child: Consumer<WorkoutsProvider>(
                       builder: (context, workoutsProvider, _) {
+                        final activityMap = workoutsProvider.newWorkoutActivities;
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  for (ActivityItem activity in workoutsProvider.newWorkoutActivities)
-                                    ExerciseItemWidget(activityid: activity.activityId,
-                                    activityname: activity.activityName,
-                                    count: activity.countPerSet,
-                                    sets: activity.numOfSets,),
+                                  for (int index = 0; index < activityMap.length; index++)
+                                    ExerciseItemWidget(
+                                      activityid: activityMap[index].activityId,
+                                      activityname: activityMap[index].activityName,
+                                      count: activityMap[index].countPerSet,
+                                      sets: activityMap[index].numOfSets,
+                                      index: index,
+                                    ),
                                 ],
                               );
                       }
                     ),
                         ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      },
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(8)),
-                      child: const Center(
-                        child: Text(
-                          'Save',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
+                  Consumer<WorkoutsProvider>(
+                    builder: (context, workoutsProvider, _) {
+                      return GestureDetector(
+                        onTap: () {
+                          workoutsProvider.addNewWorkoutPlan(workoutPlanNameController.text);
+                          Navigator.of(context).pop();
+                          },
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                          padding: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              color: AppColors.primaryColor,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: const Center(
+                            child: Text(
+                              'Save',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
+                      );
+                    }
                   )
                 ],
               ),
@@ -415,7 +424,7 @@ class _WorkoutDialogState extends State<WorkoutDialog> {
         TextButton(
           onPressed: () {
 
-            final workoutProvider = Provider.of<WorkoutsProvider>(context, listen: true,);
+            final workoutProvider = Provider.of<WorkoutsProvider>(context, listen: false,);
             int countPerSet = int.tryParse(_countController.text) ?? 0;
             int numOfSets = int.tryParse(_setsController.text) ?? 0;
             workoutProvider.addActivityToNewWorkout(widget.activity, countPerSet, numOfSets);

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 class WorkoutsProvider extends ChangeNotifier {
   List<ActivityItem> newWorkoutActivities = [];
+  List<WorkoutPlan> currentWorkoutPlans = [];
 
   void addActivityToNewWorkout(Activity activity, int countPerSet, int numOfSets){
     ActivityItem item = ActivityItem(
@@ -21,6 +22,33 @@ class WorkoutsProvider extends ChangeNotifier {
     newWorkoutActivities.add(item);
     notifyListeners();
   }
+
+  void removeActivityFromNewWorkout(int index){
+    newWorkoutActivities.removeAt(index);
+    notifyListeners();
+  }
+
+  void addNewWorkoutPlan(String workoutPlanName){
+    WorkoutPlan workoutPlan = WorkoutPlan(
+      workoutPlanName: workoutPlanName,
+      listOfActivity: newWorkoutActivities,
+    );
+    currentWorkoutPlans.add(workoutPlan);
+    newWorkoutActivities.clear();
+    notifyListeners();
+  }
+
+  void removeWorkoutPlanAtIndex(int index){
+    currentWorkoutPlans.removeAt(index);
+    notifyListeners();
+  }
+}
+
+class WorkoutPlan {
+  final String workoutPlanName;
+  final List<ActivityItem> listOfActivity;
+
+  WorkoutPlan({required this.workoutPlanName, required this.listOfActivity,});
 }
 
 class ActivityItem{

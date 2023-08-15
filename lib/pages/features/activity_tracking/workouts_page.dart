@@ -3,6 +3,7 @@ import 'package:ayura/pages/features/activity_tracking/createNewWorkoutPage.dart
 import 'package:ayura/pages/features/activity_tracking/selected_sport_page.dart';
 import 'package:ayura/provider/activityProviders/sportsProvider.dart';
 import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
+import 'package:ayura/provider/activityProviders/workoutsProvider.dart';
 import 'package:ayura/provider/models/sportModel.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
@@ -17,7 +18,7 @@ import 'package:provider/provider.dart';
 
 class WorkoutsPage extends StatefulWidget {
   WorkoutsPage({Key? key}) : super(key: key);
-  List<SportModel> workoutplans = [];
+  List<WorkoutPlan> workoutplans = [];
   @override
   State<WorkoutsPage> createState() => _WorkoutsPageState();
 }
@@ -28,8 +29,8 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
   @override
   Widget build(BuildContext context) {
     // final NumberFormat numberFormat = NumberFormat('#,###');
-    final sportsProvider = Provider.of<SportsProvider>(context);
-    widget.workoutplans = sportsProvider.selectedSports;
+    final workoutsProvider = Provider.of<WorkoutsProvider>(context);
+    widget.workoutplans = workoutsProvider.currentWorkoutPlans;
     return Scaffold(
       appBar: CustomAppBar(
         appbarTitle: 'Workouts',
@@ -38,7 +39,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
       ),
       body: SingleChildScrollView(
         child: Consumer<SportsProvider>(builder: (context, sportsProvider, _) {
-          widget.workoutplans = sportsProvider.selectedSports;
+          widget.workoutplans = workoutsProvider.currentWorkoutPlans;
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,39 +48,29 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
               if (widget.workoutplans.isNotEmpty)
                 for (int index = 0; index < widget.workoutplans.length; index++)
                   Slidable(
-                    key: Key(widget.workoutplans[index].id),
+                    key: Key(widget.workoutplans[index].workoutPlanName),
                     endActionPane: ActionPane(
                       motion: const StretchMotion(),
                       dismissible: DismissiblePane(
                         onDismissed: () =>
-                            sportsProvider.removeSportFromWorkspace(widget
-                                .workoutplans[index]
-                                .id), // move the sport to allsports
+                            workoutsProvider.removeWorkoutPlanAtIndex(index)
+                            // sportsProvider.removeSportFromWorkspace(widget
+                            //     .workoutplans[index]
+                            //     .id), // move the sport to allsports
                       ),
                       children: [
                         SlidableAction(
                             icon: Icons.delete,
                             backgroundColor: Colors.redAccent,
                             onPressed: (context) => {
-                                  sportsProvider.removeSportFromWorkspace(
-                                      widget.workoutplans[index].id),
+                              workoutsProvider.removeWorkoutPlanAtIndex(index)
                                 })
                       ],
                     ),
                     child: Builder(builder: (context) {
                       return GestureDetector(
                         onTap: () {
-                          // navigate to the selected sport page
-                          final slidable = Slidable.of(context)!;
-                          final isOpen = slidable.actionPaneType.value !=
-                              ActionPaneType.none;
-                          if (isOpen) {
-                            slidable.close();
-                          } else {
-                            PageNavigator(context: context).nextPage(
-                                SelectedSportPage(
-                                    selectedSport: widget.workoutplans[index]));
-                          }
+                          // navigate to the selected workout startnow page
                         },
                         child: Container(
                           // margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -88,13 +79,6 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                             color: AppColors
                                 .backgroundColor, // Set your desired box color here
                             borderRadius: BorderRadius.circular(8.0),
-                            // boxShadow: [
-                            //   BoxShadow(
-                            //     color: Colors.grey.shade300,
-                            //     blurRadius: 5,
-                            //     offset: const Offset(0, 3),
-                            //   ),
-                            // ],
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -111,7 +95,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: SvgPicture.asset(
-                                      'assets/icons/features/activity_tracking/sports/${widget.workoutplans[index].name.trim().toLowerCase()}.svg',
+                                      'assets/images/activity_tracking/workoutitem.svg',
                                       width: 50,
                                       height: 50,
                                     ),
@@ -120,14 +104,14 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                                     width: 10,
                                   ),
                                   Text(
-                                    widget.workoutplans[index].name,
+                                    widget.workoutplans[index].workoutPlanName,
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: AppColors.textColor),
                                   ),
                                 ],
                               ),
-                              Icon(Icons.arrow_forward_ios_rounded),
+                              // Icon(Icons.arrow_forward_ios_rounded),
                             ],
                           ),
                         ),
