@@ -53,6 +53,16 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                 ],
               ),
             ),
+            Container(margin: EdgeInsets.only(left: 25), child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Average Step Count', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+                SizedBox(height:5),
+                Text('Aug 12 - Aug 14', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.textColor.withOpacity(0.5))),
+              ],
+            )),
+            SizedBox(height:5),
             // the chart
             Container(
               height: 200,
@@ -60,7 +70,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
               child: Consumer<WalkingAndRunningProvider>(
                   builder: (context, walkingAndRunningProvider, _) {
                 return BarChartWeekly(
-                    yAxisLabel: 'Steps',
+                    yAxisLabel: 'Average Steps',
                     filter: walkingAndRunningProvider.selectedFilter,
                     data: walkingAndRunningProvider.steps);
               }),
@@ -102,7 +112,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              'Steps',
+                              'Average Steps',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
@@ -165,7 +175,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             const Text(
-                              'Distance',
+                              'Average Distance',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
