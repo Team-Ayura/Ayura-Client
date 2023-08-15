@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../constants/colors.dart';
 import '../widgets/global/textinput.dart';
+import 'package:ayura/constants/colors.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -121,7 +122,17 @@ class LoginState extends State<Login> {
                     errorMsg: '',
                     obscure: true,
                   ),
-                  const SizedBox(height: 40),
+                  const TextButton(
+                    onPressed: null,
+                    child: Text(
+                      "Forgot your password ?",
+                      style: TextStyle(
+                        fontFamily: "Inter",
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
                   Consumer<AuthenticationProvider2>(
                       builder: (context, auth, child) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {

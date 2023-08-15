@@ -246,7 +246,7 @@ class _LeaderboardViewState extends State<LeaderboardView> {
                       leaderboardWinners(
                         winnerName: 'Namadee Ken',
                         points: '253',
-                        height: height * 0.25,
+                        height: height * 0.28,
                         width: width * 0.3,
                         position: '1',
                       ),

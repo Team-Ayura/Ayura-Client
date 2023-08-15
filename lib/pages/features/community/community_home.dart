@@ -95,7 +95,7 @@ class _CommunityHomeState extends State<CommunityHome> {
             ),
             SizedBox(
               // Main Chats Container
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.35,
               child: const SingleChildScrollView(
                 //Making the container Scrollabble
                 child: Column(

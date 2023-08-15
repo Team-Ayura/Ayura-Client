@@ -16,7 +16,7 @@ class TipChip extends StatelessWidget {
         border: Border.all(color: Colors.grey), // Border color
       ),
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(10.0),
       child: ListTile(
         title: Text(title),
         subtitle: Text(description),

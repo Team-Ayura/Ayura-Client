@@ -116,12 +116,12 @@ class _HomeState extends State<Home> {
                           SizedBox(width: width * 0.04),
                           activityCard(
                               text: 'Heart Rate',
-                              number: 2548,
+                              number: 100,
                               image: 'assets/icons/heart.png'),
                           SizedBox(width: width * 0.04),
                           activityCard(
                               text: 'Calories',
-                              number: 2548,
+                              number: 243,
                               image: 'assets/icons/fire.png'),
                         ]),
                   ),
@@ -196,11 +196,11 @@ class _HomeState extends State<Home> {
                             SizedBox(
                               width: 10,
                             ),
-                            MoodButton(emojiName: 'Tired', mood: 'Tired'),
+                            MoodButton(emojiName: 'Bored', mood: 'Bored'),
                             SizedBox(
                               width: 10,
                             ),
-                            MoodButton(emojiName: 'Tired', mood: 'Tired'),
+                            MoodButton(emojiName: 'Angry', mood: 'Angry'),
                           ],
                         ),
                       )
