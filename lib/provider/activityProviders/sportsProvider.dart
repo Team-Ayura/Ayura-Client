@@ -6,16 +6,20 @@ import 'package:flutter/material.dart';
 
 class SportsProvider extends ChangeNotifier {
   String selectedFilter = 'D';
-  String duration = '01:45';
-  int calorieCount = 1456;
-  int improvement = 12;
+  String duration = '00:00';
+  String timePeriod = "Aug 14";
+  String daytimePeriod = "Aug 14";
+  String weektimePeriod = "Aug 12 - Aug 14";
+  String monthtimePeriod = "Aug 01 - Aug 14";
+  String yeartimePeriod = "Jan 01 - Aug 14";
+  int calorieCount = 0;
+  int improvement = 0;
   List<int> dayduration = [
     0,
     0,
     0,
     0,
     0,
-    30,
     0,
     0,
     0,
@@ -24,10 +28,11 @@ class SportsProvider extends ChangeNotifier {
     0,
     0,
     0,
-    15,
-    60,
-    60,
-    30,
+    0,
+    0,
+    0,
+    0,
+    0,
     0,
     0,
     0,
@@ -42,7 +47,6 @@ class SportsProvider extends ChangeNotifier {
     0,
     0,
     0,
-    30,
     0,
     0,
     0,
@@ -51,10 +55,11 @@ class SportsProvider extends ChangeNotifier {
     0,
     0,
     0,
-    15,
-    60,
-    60,
-    30,
+    0,
+    0,
+    0,
+    0,
+    0,
     0,
     0,
     0,
@@ -63,41 +68,41 @@ class SportsProvider extends ChangeNotifier {
     0,
     0,
   ];
-  List<int> weekduration = [80, 70, 120, 150, 30, 0, 80];
+  List<int> weekduration = [0, 0, 0, 0, 0, 0, 0];
   List<int> monthduration = [
-    5,
-    7,
-    5,
-    8,
-    9,
-    12,
-    7,
-    3,
-    2,
-    6,
-    1,
-    10,
-    4,
-    11,
-    6,
-    8,
-    2,
-    5,
-    9,
-    12,
-    4,
-    7,
-    3,
-    1,
-    11,
-    10,
-    6,
-    9,
-    5,
-    8,
-    2
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
   ];
-  List<int> yearduration = [15, 17, 15, 18, 19, 22, 17, 15, 18, 9, 12, 22];
+  List<int> yearduration = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
   List<SportModel> selectedSports = [];
   final List<SportModel> _allSports = [
     SportModel(
@@ -157,15 +162,19 @@ class SportsProvider extends ChangeNotifier {
     switch (selectedFilter) {
       case 'D':
         chartduration = dayduration;
+        timePeriod = daytimePeriod;
         break;
       case 'W':
         chartduration = weekduration;
+        timePeriod = weektimePeriod;
         break;
       case 'M':
         chartduration = monthduration;
+        timePeriod = monthtimePeriod;
         break;
       case 'Y':
         chartduration = yearduration;
+        timePeriod = yeartimePeriod;
         break;
     }
     // steps[5]--;

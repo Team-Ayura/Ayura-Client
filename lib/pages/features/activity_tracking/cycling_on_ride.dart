@@ -38,8 +38,8 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
             parallaxOffset: 0.7,
             body: const MapContainer(
                 isRegular: true,
-                latitude: 37.7749,
-                longitude: -122.4194,
+                latitude: 6.90221215135692,
+                longitude: 79.86115227454063,
                 markerTitle: "Colombo"),
             panelBuilder: (controller) => PanelWidget(
               controller: controller,
