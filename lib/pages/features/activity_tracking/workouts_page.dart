@@ -32,10 +32,15 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
     final workoutsProvider = Provider.of<WorkoutsProvider>(context);
     widget.workoutplans = workoutsProvider.currentWorkoutPlans;
     return Scaffold(
-      appBar: CustomAppBar(
-        appbarTitle: 'Workouts',
-        isBackBtn: true,
-        onPressed: _addNewWorkoutPlan,
+      appBar: PreferredSize(
+        preferredSize:
+        const Size.fromHeight(90.0),
+        child: CustomAppBar(
+          appbarTitle: 'Workouts',
+          iconName: Icons.add,
+          isBackBtn: true,
+          onPressed: _addNewWorkoutPlan,
+        ),
       ),
       body: SingleChildScrollView(
         child: Consumer<SportsProvider>(builder: (context, sportsProvider, _) {

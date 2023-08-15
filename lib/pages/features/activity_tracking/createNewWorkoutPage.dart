@@ -59,6 +59,7 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
         appbarTitle: 'Create new plan',
         isBackBtn: true,
         onPressed: openPanel,
+        iconName: Icons.add,
       ),
       body: Stack(
         children: [
