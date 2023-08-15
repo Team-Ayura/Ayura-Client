@@ -1,8 +1,11 @@
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
 import 'package:ayura/pages/features/symptom_tracking/page3.dart';
 import 'package:flutter/material.dart';
+import 'package:ayura/widgets/global/custom_app_bar.dart';
+import 'package:ayura/constants/styles.dart';
 
 import '../../../utils/router.dart';
+import '../../../widgets/global/custom_button.dart';
 
 class Page1 extends StatefulWidget {
   const Page1({super.key});
@@ -14,11 +17,12 @@ class Page1 extends StatefulWidget {
 class _Page1State extends State<Page1> {
   List<CustomListItem> customList = [
     CustomListItem('Headache'),
-    CustomListItem('Fatigue'),
     CustomListItem('Nausea'),
     CustomListItem('Dizziness'),
-    CustomListItem('Abdominal Pain'),
-    CustomListItem('Chest Pain'),
+    CustomListItem("Loss of balance"),
+    CustomListItem('Fatigue'),
+    CustomListItem('Mental confusion'),
+    CustomListItem('Blurry vision'),
   ];
 
   List<int> selectedButtonIndexes = List.generate(8, (index) => -1);
@@ -26,23 +30,12 @@ class _Page1State extends State<Page1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Head'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.calendar_today),
-            onPressed: () {
-              PageNavigator(context: context).nextPage(Page2());
-            },
-          ),
-        ],
-      ),
+      appBar: CustomAppBar(
+          Icons.arrow_back_outlined,
+          Icons.calendar_month_outlined,
+          "Head",
+          leftCallback :()=>Navigator.of(context).pop(),
+          rightCallback :()=>PageNavigator(context: context).nextPage(const Page2())),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -50,7 +43,7 @@ class _Page1State extends State<Page1> {
             padding: EdgeInsets.fromLTRB(16.0, 30.0, 16.0, 20.0),
             child: Text(
               'What did you feel?',
-              style: TextStyle(fontSize: 24.0),
+              style: AppStyles.headingTextStyle,
             ),
           ),
           Expanded(
@@ -152,11 +145,14 @@ class _Page1State extends State<Page1> {
             ),
           ),
           Center(
-            child: ElevatedButton(
-              onPressed: () {
-                PageNavigator(context: context).nextPage(Page3());
+            child: customButton(
+              tap: () {
+                PageNavigator(context: context).nextPage(const Page3());
               },
-              child: const Text('Done'),
+                text: 'Done',
+                width: 200,
+                height: 60,
+                context: context
             ),
           ),
         ],
