@@ -33,13 +33,17 @@ dependencies:
   flutter_slidable: ^3.0.0
   sliding_up_panel: ^2.0.0+1
   table_calendar: ^3.0.9
+  lottie: ^2.6.0
+  reorderables: ^0.6.0
+  time_duration_picker: ^0.0.1
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.13.1"
   flutter_lints: ^2.0.0
-  
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
@@ -59,8 +63,10 @@ flutter:
     - assets/icons/navigation/
     - assets/icons/features/activity_tracking/
     - assets/images/activity_tracking/
+    - assets/images/activity_tracking/activities/
     - assets/icons/features/activity_tracking/sports/
     - assets/images/symptom_tracking/
+    - assets/images/sleep_tracking/
 
   fonts:
     - family: Inter
