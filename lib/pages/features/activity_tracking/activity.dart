@@ -1,11 +1,13 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/widgets/global/custom_appbar.dart';
+// import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/pages/features/activity_tracking/cycling_page.dart';
 import 'package:ayura/pages/features/activity_tracking/sports_page.dart';
 import 'package:ayura/pages/features/activity_tracking/stairs_page.dart';
 import 'package:ayura/pages/features/activity_tracking/walking_and_running_page.dart';
+import 'package:ayura/pages/features/activity_tracking/workouts_page.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
+import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class Activities extends StatelessWidget {
@@ -17,12 +19,12 @@ class Activities extends StatelessWidget {
       // Define your named routes here
       debugShowCheckedModeBanner: false,
       routes: {
-        '/activities': (context) => const ActivitiesPage(),
+        '/activities': (context) =>  ActivitiesPage(),
         '/walkingandrunning': (context) => const WalkingAndRunningPage(),
         '/cycling': (context) => const CyclingPage(),
         '/stairs': (context) => const StairsPage(),
         '/sports': (context) => SportsPage(),
-        '/workouts': (context) => const WorkoutsPage(),
+        '/workouts': (context) =>  WorkoutsPage(),
         // Add more named routes as needed
       },
       // Optionally, you can provide the initialRoute
@@ -33,24 +35,6 @@ class Activities extends StatelessWidget {
   }
 }
 
-// class SportsPage extends StatelessWidget {
-//   SportsPage({Key? key}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     throw UnimplementedError();
-//   }
-// }
-
-class WorkoutsPage extends StatelessWidget {
-  const WorkoutsPage({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-}
-
 class ActivitiesPage extends StatelessWidget {
   const ActivitiesPage({Key? key}) : super(key: key);
 
@@ -58,10 +42,11 @@ class ActivitiesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
+        preferredSize:
+        Size.fromHeight(90.0),
         child: CustomAppBar(
           appbarTitle: 'Activity',
-          onPressed: null,
+          isBackBtn: true,
         ),
       ),
       body: SingleChildScrollView(
@@ -102,13 +87,13 @@ class ActivitiesPage extends StatelessWidget {
               imagePath: 'assets/images/activity_tracking/workout.svg',
               mainText: 'Workout',
               subText: 'Sweat, push, and transform your body and mind.',
-              route: '/walkingandrunning',
+              route: '/workouts',
             ),
             // Add more widgets here for the scrollable body
           ],
         ),
       ),
-      bottomNavigationBar: const AppNavigation(),
+      bottomNavigationBar: AppNavigation(),
     );
   }
 

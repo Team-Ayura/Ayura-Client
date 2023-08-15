@@ -7,6 +7,7 @@ import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
 import 'package:ayura/provider/activityProviders/sportsProvider.dart';
 import 'package:ayura/provider/activityProviders/stairsProvider.dart';
 import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
+import 'package:ayura/provider/activityProviders/workoutsProvider.dart';
 // import 'package:ayura/provider/autProvider/auth_provider.dart';
 import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/provider/functions/init.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CyclingOnRideProvider()),
         ChangeNotifierProvider(create: (_) => MoodProvider()),
         ChangeNotifierProvider(create: (_) => SportsProvider()),
+        ChangeNotifierProvider(create: (_) => WorkoutsProvider()),
         ChangeNotifierProvider(create: (_) => SymptomsProvider()),
       ],
       child: MaterialApp(
