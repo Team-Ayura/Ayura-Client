@@ -53,8 +53,8 @@ class CustomBoxItem extends StatelessWidget {
                       mainText,
                       style: const TextStyle(
                         color: AppColors.textColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     const SizedBox(height: 5),
@@ -62,15 +62,15 @@ class CustomBoxItem extends StatelessWidget {
                       subText,
                       style: const TextStyle(
                         color: Colors.black54,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                     ),
                   ],
                 ),
               ),
             Container(
-              width: 120,
-              height: 120,
+              width: 90,
+              height: 90,
               decoration: const BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.transparent,
@@ -89,8 +89,8 @@ class CustomBoxItem extends StatelessWidget {
                       mainText,
                       style: const TextStyle(
                         color: AppColors.textColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                       ),
                       textAlign: TextAlign.right,
                     ),
@@ -99,7 +99,7 @@ class CustomBoxItem extends StatelessWidget {
                       subText,
                       style: const TextStyle(
                         color: Colors.black54,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                       textAlign: TextAlign.right,
                     ),

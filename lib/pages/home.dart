@@ -147,9 +147,9 @@ class _HomeState extends State<Home> {
                             'How are you feeling today?',
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 17,
+                              fontSize: 16,
                               fontFamily: "Inter",
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           Expanded(
@@ -167,11 +167,27 @@ class _HomeState extends State<Home> {
                       ),
                       SizedBox(height: 10),
                       //Moods
-                      SizedBox(
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             MoodButton(emojiName: 'Happy', mood: 'Happy'),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            MoodButton(emojiName: 'Tired', mood: 'Tired'),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            MoodButton(emojiName: 'calm', mood: 'Calm'),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            MoodButton(emojiName: 'Tired', mood: 'Tired'),
+                            SizedBox(
+                              width: 10,
+                            ),
                             MoodButton(emojiName: 'Tired', mood: 'Tired'),
                           ],
                         ),
@@ -200,17 +216,17 @@ class _HomeState extends State<Home> {
                         children: [
                           Icon(
                             Icons.bar_chart_rounded,
-                            size: 22,
-                            color: AppColors.successColor,
+                            size: 24.0,
+                            color: AppColors.yellowColor,
                           ),
                           SizedBox(width: 10),
                           Text(
                             'Featured Challenge',
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 17,
+                              fontSize: 16,
                               fontFamily: "Inter",
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           Expanded(
@@ -226,7 +242,6 @@ class _HomeState extends State<Home> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 5),
                       // const Padding(
                       //   padding: EdgeInsets.only(left: 10.0),
                       //   child: Text("LSEG Running",
