@@ -26,21 +26,46 @@ class _LeaderboardViewState extends State<LeaderboardView> {
   }
 
   // Leaderbaord winners box
-  SizedBox leaderboardWinners(
-      String winnerName, String points, MainAxisAlignment alignment) {
-    return SizedBox(
-      height: 150,
-      width: 100,
+  Container leaderboardWinners({
+    required String winnerName,
+    required String points,
+    required double height,
+    required double width,
+    required String position,
+  }) {
+    return Container(
+      color: Colors.white,
+      height: height,
+      width: width,
       child: Column(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: alignment,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const CircleAvatar(
             backgroundImage: AssetImage('assets/images/profileIcon.png'),
-            radius: 25,
+            radius: 30,
           ),
           const SizedBox(
-            height: 10,
+            height: 5,
+          ),
+          Container(
+            width: 25,
+            height: 25,
+            decoration: const BoxDecoration(
+                color: AppColors.primaryColor, shape: BoxShape.circle),
+            child: Center(
+              child: Text(
+                position,
+                style: const TextStyle(
+                  fontFamily: "Inter",
+                  color: Colors.white,
+                  fontSize: 13,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 5,
           ),
           Text(
             winnerName,
@@ -59,7 +84,7 @@ class _LeaderboardViewState extends State<LeaderboardView> {
             style: const TextStyle(
               fontFamily: 'Inter',
               color: AppColors.primaryColor,
-              fontSize: 12,
+              fontSize: 13,
               fontWeight: FontWeight.w600,
             ),
             textAlign: TextAlign.center,
@@ -125,6 +150,8 @@ class _LeaderboardViewState extends State<LeaderboardView> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Column(
       children: [
         const Text(
@@ -184,7 +211,7 @@ class _LeaderboardViewState extends State<LeaderboardView> {
           height: MediaQuery.of(context).size.height * 0.53,
           child: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color: Colors.white,
@@ -197,26 +224,40 @@ class _LeaderboardViewState extends State<LeaderboardView> {
                     'Challenge was to complete a 1km run for three consecutive days',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'Inter',
-                      color: AppColors.textColor,
-                      fontSize: 14,
-                    ),
+                        fontFamily: 'Inter',
+                        color: AppColors.textColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       leaderboardWinners(
-                          'Ruchira Bogahawatta', '178', MainAxisAlignment.end),
+                        winnerName: 'Ruchira Bogahawatta',
+                        points: '178',
+                        height: height * 0.2,
+                        width: width * 0.3,
+                        position: '3',
+                      ),
                       leaderboardWinners(
-                          'Namadee Ken', '253', MainAxisAlignment.start),
+                        winnerName: 'Namadee Ken',
+                        points: '253',
+                        height: height * 0.25,
+                        width: width * 0.3,
+                        position: '1',
+                      ),
                       leaderboardWinners(
-                          'Esitha Jayakody', '124', MainAxisAlignment.end),
+                        winnerName: 'Pasan Amare',
+                        points: '178',
+                        height: height * 0.2,
+                        width: width * 0.3,
+                        position: '2',
+                      ),
                     ],
-                  ),
-                  const SizedBox(
-                    height: 15,
                   ),
                   Column(
                     children: [
