@@ -53,16 +53,30 @@ class _StairsPageState extends State<StairsPage> {
                 ],
               ),
             ),
+            Consumer<StairsProvider>(
+                builder: (context, stairsProvider, _) {
+                  return Container(margin: EdgeInsets.only(left: 25), child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Average Stairs Count', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+                      SizedBox(height:5),
+                      Text(stairsProvider.timePeriod, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.textColor.withOpacity(0.5))),
+                    ],
+                  ));
+                }
+            ),
+            SizedBox(height:5),
             // the chart
             Container(
               height: 200,
               padding: const EdgeInsets.all(10),
               child: Consumer<StairsProvider>(
-                  builder: (context, walkingAndRunningProvider, _) {
+                  builder: (context, stairsProvider, _) {
                 return BarChartWeekly(
                     yAxisLabel: 'Stairs',
-                    filter: walkingAndRunningProvider.selectedFilter,
-                    data: walkingAndRunningProvider.steps);
+                    filter: stairsProvider.selectedFilter,
+                    data: stairsProvider.steps);
               }),
             ),
             // steps & distance
@@ -300,11 +314,11 @@ class _StairsPageState extends State<StairsPage> {
 
   Consumer<StairsProvider> _buildCustomButton(String buttonText, int index) {
     return Consumer<StairsProvider>(
-        builder: (context, walkingAndRunningProvider, _) {
-      bool isActive = walkingAndRunningProvider.selectedFilter == buttonText;
+        builder: (context, stairsProvider, _) {
+      bool isActive = stairsProvider.selectedFilter == buttonText;
       return Expanded(
         child: GestureDetector(
-          onTap: () => walkingAndRunningProvider.updateFilter(buttonText),
+          onTap: () => stairsProvider.updateFilter(buttonText),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.all(8.0),

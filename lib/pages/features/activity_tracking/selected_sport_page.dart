@@ -56,6 +56,20 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                 ],
               ),
             ),
+            Consumer<SportsProvider>(
+                builder: (context, sportsProvider, _) {
+                  return Container(margin: EdgeInsets.only(left: 25), child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Average Duration', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+                      SizedBox(height:5),
+                      Text(sportsProvider.timePeriod, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.textColor.withOpacity(0.5))),
+                    ],
+                  ));
+                }
+            ),
+            SizedBox(height:5),
             // the chart
             Container(
               height: 200,

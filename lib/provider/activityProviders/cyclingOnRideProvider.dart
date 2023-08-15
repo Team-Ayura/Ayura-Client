@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 class CyclingOnRideProvider extends ChangeNotifier {
   final List<String> _imagePaths = [];
   List<String> get imagePaths => _imagePaths;
-  final int _calorieCounter = 324;
-  final double _cyclingSpeed = 4.2;
+  final int _calorieCounter = 0;
+  final double _cyclingSpeed = 0.0;
   String imagePath(int index) => _imagePaths[index];
   int get calorieCounter => _calorieCounter;
   double get cyclingSpeed => _cyclingSpeed;
