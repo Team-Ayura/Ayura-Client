@@ -40,9 +40,9 @@ Widget tipsCard({
                       title!,
                       style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 17,
+                        fontSize: 16,
                         fontFamily: "Inter",
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   )
