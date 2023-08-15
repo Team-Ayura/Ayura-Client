@@ -1,8 +1,10 @@
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
 import 'package:ayura/pages/features/symptom_tracking/welcome.dart';
 import 'package:ayura/utils/router.dart';
+import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
-
+import 'package:ayura/widgets/global/custom_app_bar.dart';
+import '../../../constants/styles.dart';
 import '../../../widgets/global/tip_chip.dart';
 import 'package:ayura/pages/features/symptom_tracking/nearbyhospitals.dart';
 
@@ -14,24 +16,12 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Daily Symptom Alert'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomePage()));
-            PageNavigator(context: context).nextPage(const Vitals());
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.calendar_today),
-            onPressed: () {
-              PageNavigator(context: context).nextPage(const Page2());
-            },
-          ),
-        ],
-      ),
+      appBar: CustomAppBar(
+          Icons.arrow_back_outlined,
+          Icons.calendar_month_outlined,
+          "Daily Symptom Alert",
+          leftCallback :()=>PageNavigator(context: context).nextPage(const Vitals()),
+          rightCallback :()=>PageNavigator(context: context).nextPage(const Page2())),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,32 +29,35 @@ class Page3 extends StatelessWidget {
             padding: EdgeInsets.all(20.0),
             child: Text(
               'We have noticed a continuous headache over the past few days',
-              style: TextStyle(fontSize: 18.0),
+              style: AppStyles.headingTextStyle,
             ),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               'We suggest you to see a doctor, because there might be an underlying reason',
-              style: TextStyle(fontSize: 16.0),
+              style: AppStyles.subHeadingTextStyle,
             ),
           ),
           const SizedBox(height: 16.0),
           Center(
-            child: ElevatedButton(
-              onPressed: () {
+            child: customButton(
+              tap: () {
                 PageNavigator(context: context).nextPage(const NearbyHospitalsPage());
 
               },
-              child: const Text('Nearby Government Hospitals'),
+                text: 'Nearby Government Hospitals',
+                width: 300,
+                height: 60,
+                context: context
             ),
           ),
           const Center(
             child:Padding(
               padding: EdgeInsets.all(20.0),
               child: Text(
-                'General Tips',
-                style: TextStyle(fontSize: 20.0),
+                'General Health Tips',
+                style: AppStyles.headingTextStyle,
               ),
             ),
           ),

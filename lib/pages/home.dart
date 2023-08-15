@@ -1,4 +1,6 @@
 import 'package:ayura/constants/colors.dart';
+import 'package:ayura/pages/features/sleep_tracking/page1.dart';
+import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/home/activity_card.dart';
 import 'package:ayura/widgets/features/home/tips_card.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
@@ -286,6 +288,30 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 SizedBox(height: height * 0.02),
+
+
+
+                //sleep
+                Card(
+                elevation: 1, // Adjust elevation for shadow
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0), // Adjust the border radius
+                ),
+                child: ListTile(
+                    horizontalTitleGap: 25.0,
+                  contentPadding: const EdgeInsets.fromLTRB(15, 10, 10, 8),
+                  title: const Text('How many hours did you sleep? ',style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  )),
+                  subtitle: const Text("Establish a consistent Sleep Schedule"),
+                  trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepFirstPage());}, child:Icon( Icons.arrow_forward,))
+                ),
+                  ),
+
+
               ],
             ),
           )
