@@ -13,7 +13,7 @@ class ExerciseItemWidget extends StatelessWidget {
   final int sets;
   final int index;
 
-  ExerciseItemWidget({required this.activityid, required this.activityname, required this.count, required this.sets, required this.index,});
+  ExerciseItemWidget({Key? key, required this.activityid, required this.activityname, required this.count, required this.sets, required this.index,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

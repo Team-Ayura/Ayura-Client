@@ -42,6 +42,16 @@ class WorkoutsProvider extends ChangeNotifier {
     currentWorkoutPlans.removeAt(index);
     notifyListeners();
   }
+
+  void reorderWorkoutPlans(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final WorkoutPlan workoutPlan = currentWorkoutPlans.removeAt(oldIndex);
+    currentWorkoutPlans.insert(newIndex, workoutPlan);
+    notifyListeners();
+  }
+
 }
 
 class WorkoutPlan {

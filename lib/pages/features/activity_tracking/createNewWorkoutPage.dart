@@ -5,8 +5,6 @@ import 'package:ayura/widgets/features/activity_tracking/multiplechoice.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/widgets/global/textinput.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -123,6 +121,33 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
                       }
                     ),
                         ),
+                  // Consumer<WorkoutsProvider>(
+                  //   builder: (context, workoutsProvider, _) {
+                  //     final activityMap = workoutsProvider.newWorkoutActivities;
+                  //     return ReorderableListView(
+                  //       onReorder: (oldIndex, newIndex) {
+                  //         workoutsProvider.reorderWorkoutPlans(oldIndex, newIndex);
+                  //         // if (oldIndex != newIndex) {
+                  //         //   // Reorder the activityMap based on the drag-and-drop action
+                  //         //   final movedActivity = activityMap.removeAt(oldIndex);
+                  //         //   activityMap.insert(newIndex, movedActivity);
+                  //         // }
+                  //       },
+                  //       children: [
+                  //         for (int index = 0; index < activityMap.length; index++)
+                  //           ExerciseItemWidget(
+                  //             key: ValueKey(index),
+                  //             activityid: activityMap[index].activityId,
+                  //             activityname: activityMap[index].activityName,
+                  //             count: activityMap[index].countPerSet,
+                  //             sets: activityMap[index].numOfSets,
+                  //             index: index,
+                  //           ),
+                  //       ],
+                  //     );
+                  //   }
+                  // ),
+
                   Consumer<WorkoutsProvider>(
                     builder: (context, workoutsProvider, _) {
                       return GestureDetector(
