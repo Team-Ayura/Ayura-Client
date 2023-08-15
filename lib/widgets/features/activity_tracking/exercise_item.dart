@@ -2,6 +2,7 @@ import 'package:ayura/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:lottie/lottie.dart';
 
 class ExerciseItemWidget extends StatelessWidget {
   final String activityid;
@@ -58,8 +59,8 @@ class ExerciseItemWidget extends StatelessWidget {
                             color: Colors.blueGrey.withOpacity(0.1), // Replace with your desired color
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: SvgPicture.asset(
-                            'assets/icons/features/activity_tracking/sports/${activityname.replaceAll(' ', '').toLowerCase()}.svg', // Replace with your SVG asset path
+                          child: Lottie.asset(
+                            'assets/images/activity_tracking/activities/${activityname.replaceAll(' ', '').toLowerCase()}.json', // Replace with your SVG asset path
                             width: 50,
                             height: 50,
                           ),
@@ -67,12 +68,39 @@ class ExerciseItemWidget extends StatelessWidget {
                         const SizedBox(
                           width: 10,
                         ),
-                        Text(
-                          activityname,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black, // Replace with your desired text color
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              activityname,
+                              style: TextStyle(
+                                color: AppColors.textColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Sets: $sets',
+                                  style: TextStyle(
+                                    color: AppColors.textColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  'Count: $count',
+                                  style: TextStyle(
+                                    color: AppColors.textColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                          ],
                         ),
                       ],
                     ),

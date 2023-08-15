@@ -1,4 +1,5 @@
 import 'package:ayura/constants/colors.dart';
+import 'package:ayura/provider/activityProviders/workoutsProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/exercise_item.dart';
 import 'package:ayura/widgets/features/activity_tracking/multiplechoice.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
@@ -6,6 +7,8 @@ import 'package:ayura/widgets/global/textinput.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class CreateNewWorkoutPage extends StatefulWidget {
@@ -17,12 +20,13 @@ class CreateNewWorkoutPage extends StatefulWidget {
 
 class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
   var panelController = PanelController();
+  // final workoutProvider = Provider.of<WorkoutsProvider>(context);
   TextEditingController workoutPlanNameController = TextEditingController();
   List<String> optionLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   List<Activity> selectedActivities = [
-    Activity(activityId: "1",activityName: "Basketball",isTimeBased: false, caloriesPerHour: 12),
-    Activity(activityId: "2",activityName: "Cricket",isTimeBased: false, caloriesPerHour: 12),
-    Activity(activityId: "3",activityName: "Tennis",isTimeBased: false, caloriesPerHour: 12),
+    Activity(activityId: "1",activityName: "T Plank",isTimeBased: false, caloriesPerHour: 12),
+    Activity(activityId: "2",activityName: "Push Ups",isTimeBased: false, caloriesPerHour: 12),
+    Activity(activityId: "3",activityName: "Reverse Crunches",isTimeBased: false, caloriesPerHour: 12),
   ];
   late MultipleChoiceController controller;
   @override
@@ -33,75 +37,132 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
   @override
   Widget build(BuildContext context) {
     final panelHeightOpen = MediaQuery.of(context).size.height * 0.7;
-    final panelHeightClosed = MediaQuery.of(context).size.height * 0.35;
+    final panelHeightClosed = MediaQuery.of(context).size.height * 0;
+    var isPanelOpen = false;
+    void openPanel() {
+      panelController.open();
+      setState(() {
+        isPanelOpen = true;
+      });
+      print(isPanelOpen);
+    }
+
+    void closePanel() {
+      panelController.close();
+      setState(() {
+        isPanelOpen = false;
+      });
+      print(isPanelOpen);
+    }
+
 
     return Scaffold(
       appBar: CustomAppBar(
         appbarTitle: 'Create new plan',
         isBackBtn: true,
+        onPressed: openPanel,
       ),
-      body: SlidingUpPanel(
-        controller: panelController,
-        minHeight: panelHeightClosed,
-        maxHeight: panelHeightOpen,
-        body: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomInput(
-                  controller: workoutPlanNameController,
-                  hintText: 'Morning Routine',
-                  label: 'Workout plan name',
-                  errorMsg: '',
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  'Setup repeats',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: 'Inter',
-                    color: AppColors.primaryColor,
+      body: Stack(
+        children: [
+          SlidingUpPanel(
+          controller: panelController,
+          minHeight: panelHeightClosed,
+          maxHeight: panelHeightOpen,
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomInput(
+                    controller: workoutPlanNameController,
+                    hintText: 'Morning Routine',
+                    label: 'Workout plan name',
+                    errorMsg: '',
                   ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                MultipleChoiceWidget(labelList: optionLabels, controller: controller,),
-                const Text(
-                  'Activities',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: 'Inter',
-                    color: AppColors.primaryColor,
+                  SizedBox(
+                    height: 10,
                   ),
-                ),
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            for (Activity activity in selectedActivities)
-                              ExerciseItemWidget(activityid: activity.activityId,
-                              activityname: activity.activityName,
-                              count: 0,
-                              sets: 0,),
-                          ],
+                  // const Text(
+                  //   'Setup repeats',
+                  //   style: TextStyle(
+                  //     fontSize: 12,
+                  //     fontFamily: 'Inter',
+                  //     color: AppColors.primaryColor,
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 5,
+                  // ),
+                  // MultipleChoiceWidget(labelList: optionLabels, controller: controller,),
+                  const Text(
+                    'Activities',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Inter',
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                  Container(
+                    child: Consumer<WorkoutsProvider>(
+                      builder: (context, workoutsProvider, _) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  for (ActivityItem activity in workoutsProvider.newWorkoutActivities)
+                                    ExerciseItemWidget(activityid: activity.activityId,
+                                    activityname: activity.activityName,
+                                    count: activity.countPerSet,
+                                    sets: activity.numOfSets,),
+                                ],
+                              );
+                      }
+                    ),
                         ),
-                      )
-              ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      },
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: const Center(
+                        child: Text(
+                          'Save',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
+          panelBuilder: (controller) => PanelWidget(
+            controller: controller,
+            panelController: panelController,
+          ),
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(18),
+          ),
         ),
-        panelBuilder: (controller) => PanelWidget(
-          controller: controller,
-          panelController: panelController,
-        ),
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(18),
-        ),
+        if(isPanelOpen)
+          GestureDetector(
+            onTap: closePanel,
+            child: Container(
+                color: Colors.transparent,
+                width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            ),
+          ),
+        ]
       ),
     );
   }
@@ -136,6 +197,20 @@ class PanelWidget extends StatefulWidget {
 
 class _PanelWidgetState extends State<PanelWidget> {
   // final NumberFormat numberFormat = NumberFormat('#,###');
+  List<Activity> allActivities = [
+    Activity(activityId: "1",activityName: "T Plank",isTimeBased: false, caloriesPerHour: 12),
+    Activity(activityId: "2",activityName: "Push Ups",isTimeBased: false, caloriesPerHour: 12),
+    Activity(activityId: "3",activityName: "Reverse Crunches",isTimeBased: false, caloriesPerHour: 12),
+  ];
+  void searchSports(String query) {
+    setState(() {
+      // Filter the sports list based on the search query
+      // filteredSports = widget.sports
+      //     .where(
+      //         (sport) => sport.name.toLowerCase().contains(query.toLowerCase()))
+      //     .toList();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -146,7 +221,7 @@ class _PanelWidgetState extends State<PanelWidget> {
           const SizedBox(
             height: 10,
           ),
-          buildOnRideScreenContent(),
+          buildPanelScreenContent(),
           const SizedBox(
             height: 10,
           ),
@@ -175,14 +250,180 @@ class _PanelWidgetState extends State<PanelWidget> {
     ),
   );
 
-  Widget buildOnRideScreenContent() => Column(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      const SizedBox(
-        height: 10,
-      ),
+  // void showPopUp(){
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return WorkoutDialog();
+  //     },
+  //   );
+  // }
 
-    ],
+  Widget buildPanelScreenContent() => Container(
+    padding: EdgeInsets.all(10),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const SizedBox(
+          height: 10,
+        ),
+        TextField(
+          onChanged: searchSports,
+          decoration: InputDecoration(
+            hintText: 'Search activities',
+            prefixIcon: const Icon(
+              Icons.search,
+              color: Colors.grey,
+            ),
+            filled: true,
+            fillColor: AppColors.textColor.withOpacity(0.075),
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Colors.transparent), // Remove the underline
+            ),
+            focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: Colors.transparent), // Remove the underline
+            ),
+          ),
+        ),
+        SizedBox(height: 10),
+        Container(
+          height: 600,
+          child: Scrollbar(
+            thumbVisibility: true,
+            child: ListView.builder(
+              itemCount: allActivities.length,
+              itemBuilder: (context, index) {
+                final activity = allActivities[index];
+                return Column(
+                  children: [
+                    InkWell(
+                      onTap: () => addActivity(activity),
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.transparent,
+                        ),
+                        child: ListTile(
+                          onTap: (){
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return WorkoutDialog(activity: activity);
+                              },
+                            );
+                          },
+                          leading: Container(
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: AppColors.textColor.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Lottie.asset(
+                              'assets/images/activity_tracking/activities/${activity.activityName.replaceAll(' ', '').toLowerCase()}.json',
+                              width: 40,
+                              height: 40,
+                              // color:
+                              //     sport.isSelected ? Colors.white : null,
+                            ),
+                          ),
+                          title: Text(
+                            activity.activityName,
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: AppColors.textColor.withOpacity(0.3),
+                      height: 1,
+                      thickness: 1,
+                      indent: 16,
+                      endIndent: 16,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ],
+    ),
   );
+
+  addActivity(Activity activity) {
+    // do nothing
+  }
+}
+
+class WorkoutDialog extends StatefulWidget {
+  final Activity activity;
+  WorkoutDialog({Key? key, required this.activity}) : super(key: key);
+  @override
+  _WorkoutDialogState createState() => _WorkoutDialogState();
+}
+
+class _WorkoutDialogState extends State<WorkoutDialog> {
+  late TextEditingController _countController;
+  late TextEditingController _setsController;
+
+  @override
+  void initState() {
+    super.initState();
+    _countController = TextEditingController();
+    _setsController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _countController.dispose();
+    _setsController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('Set Workout'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: _countController,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(labelText: 'Count Per Set'),
+          ),
+          TextField(
+            controller: _setsController,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(labelText: 'Number of Sets'),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () {
+
+            final workoutProvider = Provider.of<WorkoutsProvider>(context, listen: true,);
+            int countPerSet = int.tryParse(_countController.text) ?? 0;
+            int numOfSets = int.tryParse(_setsController.text) ?? 0;
+            workoutProvider.addActivityToNewWorkout(widget.activity, countPerSet, numOfSets);
+            Navigator.of(context).pop();
+          },
+          child: Text('OK'),
+        ),
+      ],
+    );
+  }
 }
