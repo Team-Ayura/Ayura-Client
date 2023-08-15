@@ -1,14 +1,9 @@
-import 'package:ayura/constants/colors.dart';
-import 'package:ayura/provider/activityProviders/sportsProvider.dart';
-import 'package:ayura/provider/models/sportModel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 
 class AddTimePopUp extends StatefulWidget {
   final String sportid;
 
-  AddTimePopUp({required this.sportid});
+  const AddTimePopUp({super.key, required this.sportid});
 
   @override
   _AddTimePopUpState createState() => _AddTimePopUpState();
@@ -33,7 +28,7 @@ class _AddTimePopUpState extends State<AddTimePopUp> {
             borderRadius: BorderRadius.circular(8),
             color: Colors.white,
           ),
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +54,7 @@ class _AddTimePopUpState extends State<AddTimePopUp> {
                         }
                       });
                     },
-                    child: Icon(Icons.timer_outlined),
+                    child: const Icon(Icons.timer_outlined),
                   ),
                 ],
               ),
@@ -79,7 +74,7 @@ class _AddTimePopUpState extends State<AddTimePopUp> {
                         }
                       });
                     },
-                    child: Icon(Icons.timer_outlined),
+                    child: const Icon(Icons.timer_outlined),
                   ),
                 ],
               ),

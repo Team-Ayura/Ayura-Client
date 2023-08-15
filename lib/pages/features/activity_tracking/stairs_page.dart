@@ -4,6 +4,7 @@ import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart'
 import 'package:ayura/widgets/features/activity_tracking/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:provider/provider.dart';
 
 class StairsPage extends StatefulWidget {
@@ -21,9 +22,12 @@ class _StairsPageState extends State<StairsPage> {
     final NumberFormat numberFormat = NumberFormat('#,###');
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stairs'),
-        backgroundColor: AppColors.primaryColor,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
+        child: CustomAppBar(
+          appbarTitle: 'Stairs',
+          isBackBtn: true,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -63,7 +67,7 @@ class _StairsPageState extends State<StairsPage> {
             ),
             // steps & distance
             Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor
                       .withOpacity(0.3), // Set your desired button color here
@@ -261,7 +265,7 @@ class _StairsPageState extends State<StairsPage> {
               height: 10,
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,8 +275,8 @@ class _StairsPageState extends State<StairsPage> {
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
-                    padding: EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors
                           .grey.shade200, // Set your desired button color here

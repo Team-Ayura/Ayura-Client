@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/pages/features/activity_tracking/image_preview.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -13,7 +11,7 @@ import 'package:provider/provider.dart';
 class ImageContainer extends StatefulWidget {
   final CyclingOnRideProvider cyclingOnRideProvider;
 
-  ImageContainer({required this.cyclingOnRideProvider});
+  const ImageContainer({super.key, required this.cyclingOnRideProvider});
   @override
   _ImageContainerState createState() => _ImageContainerState();
 }
@@ -33,7 +31,7 @@ class _ImageContainerState extends State<ImageContainer> {
     try {
       final appDir = await getExternalStorageDirectory();
       final fileName =
-          DateTime.now().millisecondsSinceEpoch.toString() + '.jpg';
+          '${DateTime.now().millisecondsSinceEpoch}.jpg';
       final savedImage = await imageFile.copy('${appDir!.path}/$fileName');
       return savedImage.path;
     } catch (e) {
@@ -97,7 +95,7 @@ class _ImageContainerState extends State<ImageContainer> {
   Widget build(BuildContext context) {
     // Calculate the available width to determine the number of images in each row
     final screenWidth = MediaQuery.of(context).size.width;
-    final imagesPerRow = 3;
+    const imagesPerRow = 3;
     final imageSize =
         (screenWidth - (imagesPerRow - 1) * 5 - 2 * 8) / imagesPerRow;
     List<String> imagePaths = widget.cyclingOnRideProvider.imagePaths;
@@ -109,7 +107,7 @@ class _ImageContainerState extends State<ImageContainer> {
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: imagesPerRow,
           crossAxisSpacing: 5,
           mainAxisSpacing: 5,

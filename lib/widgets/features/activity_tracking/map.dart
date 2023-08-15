@@ -7,7 +7,7 @@ class MapContainer extends StatefulWidget {
   final double longitude;
   final String markerTitle;
 
-  MapContainer({
+  const MapContainer({super.key, 
     required this.isRegular,
     required this.latitude,
     required this.longitude,

@@ -13,6 +13,8 @@ import 'package:provider/provider.dart';
 // import 'navigation_provider/navigation_provider.dart'; // Update the import to your actual file path
 
 class AppNavigation extends StatelessWidget {
+  const AppNavigation({super.key});
+
   @override
   Widget build(BuildContext context) {
     AppNavigationProvider appNavigationProvider =
@@ -68,7 +70,7 @@ class AppNavigation extends StatelessWidget {
       case AppTab.vitals:
         return const Vitals(); // navigate to vitals page
       case AppTab.activity:
-        return Activities(); // navigate to activities page
+        return const Activities(); // navigate to activities page
       case AppTab.home:
         return const Home(); // navigate to home page
       case AppTab.community:

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ayura/widgets/global/custom_button.dart';
-import 'package:ayura/utils/router.dart';
 // Constants
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
@@ -58,6 +56,5 @@ class CommunityList extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

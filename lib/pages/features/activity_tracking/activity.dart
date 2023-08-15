@@ -1,4 +1,5 @@
 import 'package:ayura/constants/colors.dart';
+import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/pages/features/activity_tracking/cycling_page.dart';
 import 'package:ayura/pages/features/activity_tracking/sports_page.dart';
 import 'package:ayura/pages/features/activity_tracking/stairs_page.dart';
@@ -10,18 +11,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Activities extends StatelessWidget {
+  const Activities({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       // Define your named routes here
       debugShowCheckedModeBanner: false,
       routes: {
-        '/activities': (context) => ActivitiesPage(),
-        '/walkingandrunning': (context) => WalkingAndRunningPage(),
-        '/cycling': (context) => CyclingPage(),
-        '/stairs': (context) => StairsPage(),
+        '/activities': (context) =>  ActivitiesPage(),
+        '/walkingandrunning': (context) => const WalkingAndRunningPage(),
+        '/cycling': (context) => const CyclingPage(),
+        '/stairs': (context) => const StairsPage(),
         '/sports': (context) => SportsPage(),
-        '/workouts': (context) => WorkoutsPage(),
+        '/workouts': (context) =>  WorkoutsPage(),
         // Add more named routes as needed
       },
       // Optionally, you can provide the initialRoute
@@ -51,14 +54,17 @@ class Activities extends StatelessWidget {
 // }
 
 class ActivitiesPage extends StatelessWidget {
-  ActivitiesPage({Key? key}) : super(key: key);
+  const ActivitiesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('Activity')),
-        backgroundColor: AppColors.primaryColor,
+    return const Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
+        child: CustomAppBar(
+          appbarTitle: 'Activity',
+          onPressed: null,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -98,7 +104,7 @@ class ActivitiesPage extends StatelessWidget {
               imagePath: 'assets/images/activity_tracking/workout.svg',
               mainText: 'Workout',
               subText: 'Sweat, push, and transform your body and mind.',
-              route: '/workouts',
+              route: '/walkingandrunning',
             ),
             // Add more widgets here for the scrollable body
           ],

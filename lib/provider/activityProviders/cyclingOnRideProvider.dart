@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 
 class CyclingOnRideProvider extends ChangeNotifier {
-  List<String> _imagePaths = [];
+  final List<String> _imagePaths = [];
   List<String> get imagePaths => _imagePaths;
-  int _calorieCounter = 324;
-  double _cyclingSpeed = 4.2;
+  final int _calorieCounter = 324;
+  final double _cyclingSpeed = 4.2;
   String imagePath(int index) => _imagePaths[index];
   int get calorieCounter => _calorieCounter;
   double get cyclingSpeed => _cyclingSpeed;
@@ -23,7 +23,7 @@ class CyclingOnRideProvider extends ChangeNotifier {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!_isPaused) {
         _secondsElapsed++;
         notifyListeners();
