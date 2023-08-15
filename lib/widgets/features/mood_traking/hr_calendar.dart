@@ -37,12 +37,13 @@ class _HR_CalendarState extends State<HR_Calendar> {
   void _initializeDates(DateTime selectedDate) {
     final now = DateTime.now();
     _startDate = selectedDate.subtract(Duration(days: selectedDate.weekday));
-    if (selectedDate != now) {
-      _endDate =
-          selectedDate.add(Duration(days: DateTime.daysPerWeek - selectedDate.weekday - 2));
-    } else {
-      _endDate = selectedDate;
-    }
+    // if (selectedDate != now) {
+    //   _endDate =
+    //       selectedDate.add(Duration(days: DateTime.daysPerWeek - selectedDate.weekday - 2));
+    // } else {
+    //   _endDate = now;
+    // }
+    _endDate = now;
     _selectedBoxIndex = selectedDate.weekday;
   }
 
@@ -74,7 +75,7 @@ class _HR_CalendarState extends State<HR_Calendar> {
   DateTime currentDate = _startDate;
   DateTime today = DateTime.now();
 
-  while (currentDate.isBefore(_endDate.add(const Duration(days: 1)))) {
+  while (currentDate.isBefore(_endDate)) {
     dateList.add(DateModel(currentDate));
     currentDate = currentDate.add(const Duration(days: 1));
   }

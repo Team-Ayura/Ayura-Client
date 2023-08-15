@@ -43,11 +43,11 @@ class MoodProvider with ChangeNotifier {
 
   // Method to add initial mood data to the history
   void _addInitialMoodsToHistory() {
-    addMoodToHistory("Happy", DateTime(2023, 8, 6));
-    addMoodToHistory("Stressed", DateTime(2023, 8, 7));
-    addMoodToHistory("Angry", DateTime(2023, 8, 8));
-    addMoodToHistory("Stressed", DateTime(2023, 8, 9));
-    addMoodToHistory("Sad", DateTime(2023, 8, 10));
+    // addMoodToHistory("Happy", DateTime(2023, 8, 9));
+    // addMoodToHistory("Stressed", DateTime(2023, 8, 10));
+    // addMoodToHistory("Angry", DateTime(2023, 8, 12));
+    addMoodToHistory("Stressed", DateTime(2023, 8, 13));
+    addMoodToHistory("Sad", DateTime(2023, 8, 14));
     // ... Add more initial mood data as needed ...
   }
 
