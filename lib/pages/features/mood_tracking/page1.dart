@@ -41,8 +41,8 @@ class SelectMood extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-IconButton(onPressed:(){PageNavigator(context: context).nextPage(const ThirdPage());} , icon:Icon(Icons.calendar_month_outlined) ),
-            ],),
+                IconButton(onPressed:(){PageNavigator(context: context).nextPage(const ThirdPage());} , icon:Icon(Icons.calendar_month_outlined) ),
+              ],),
             
             const SizedBox(
               height: 20,

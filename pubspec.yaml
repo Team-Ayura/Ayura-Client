@@ -33,6 +33,8 @@ dependencies:
   flutter_slidable: ^3.0.0
   sliding_up_panel: ^2.0.0+1
   table_calendar: ^3.0.9
+  time_duration_picker: ^0.0.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +63,7 @@ flutter:
     - assets/images/activity_tracking/
     - assets/icons/features/activity_tracking/sports/
     - assets/images/symptom_tracking/
+    - assets/images/sleep_tracking/
 
   fonts:
     - family: Inter
