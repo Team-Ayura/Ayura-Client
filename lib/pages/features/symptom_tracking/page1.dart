@@ -1,3 +1,4 @@
+import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
 import 'package:ayura/pages/features/symptom_tracking/page3.dart';
 import 'package:ayura/pages/features/vitals/vitals.dart';
@@ -32,19 +33,19 @@ class _Page1State extends State<Page1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          Icons.arrow_back_outlined,
-          Icons.calendar_month_outlined,
-          "Head",
-          leftCallback :()=>Navigator.of(context).pop(),
-          rightCallback :()=>PageNavigator(context: context).nextPage(const Page2())),
+          Icons.arrow_back_outlined, Icons.calendar_month_outlined, "Head",
+          leftCallback: () => Navigator.of(context).pop(),
+          rightCallback: () =>
+              PageNavigator(context: context).nextPage(const Page2())),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Padding(
             padding: EdgeInsets.fromLTRB(16.0, 30.0, 16.0, 20.0),
             child: Text(
               'What did you feel?',
               style: AppStyles.headingTextStyle,
+              textAlign: TextAlign.center,
             ),
           ),
           Expanded(
@@ -60,7 +61,8 @@ class _Page1State extends State<Page1> {
                         const SizedBox(height: 10),
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
+                            border:
+                                Border.all(color: AppColors.alternateGreyColor),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Column(
@@ -72,13 +74,15 @@ class _Page1State extends State<Page1> {
                                   });
                                 },
                                 child: ListTile(
-                                  leading: const Icon(Icons.sentiment_satisfied),
+                                  leading:
+                                      const Icon(Icons.sentiment_satisfied),
                                   title: Text(customList[index].title),
                                   trailing: Checkbox(
                                     value: selectedButtonIndexes[index] != -1,
                                     onChanged: (value) {
                                       setState(() {
-                                        selectedButtonIndexes[index] = value == true ? 0 : -1;
+                                        selectedButtonIndexes[index] =
+                                            value == true ? 0 : -1;
                                       });
                                     },
                                   ),
@@ -95,12 +99,21 @@ class _Page1State extends State<Page1> {
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: selectedButtonIndexes[index] == 1
-                                            ? Colors.green
-                                            : Colors.white,
-                                        onPrimary: selectedButtonIndexes[index] == 1 ? Colors.white : Colors.grey,
+                                        primary:
+                                            selectedButtonIndexes[index] == 1
+                                                ? Colors.green
+                                                : Colors.white,
+                                        onPrimary:
+                                            selectedButtonIndexes[index] == 1
+                                                ? Colors.white
+                                                : Colors.grey,
                                       ),
-                                      child: const Text('Light, It did not interrupt my daily routine'),
+                                      child: const Text(
+                                        'Light, It did not interrupt my daily routine',
+                                        style: TextStyle(
+                                          fontFamily: "Inter",
+                                        ),
+                                      ),
                                     ),
                                     const SizedBox(width: 16.0),
                                     ElevatedButton(
@@ -110,12 +123,21 @@ class _Page1State extends State<Page1> {
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: selectedButtonIndexes[index] == 2
-                                            ? Colors.orange
-                                            : Colors.white,
-                                        onPrimary: selectedButtonIndexes[index] == 2 ? Colors.white : Colors.grey,
+                                        primary:
+                                            selectedButtonIndexes[index] == 2
+                                                ? Colors.orange
+                                                : Colors.white,
+                                        onPrimary:
+                                            selectedButtonIndexes[index] == 2
+                                                ? Colors.white
+                                                : Colors.grey,
                                       ),
-                                      child: const Text('Moderate, It was hard but manageable'),
+                                      child: const Text(
+                                        'Moderate, It was hard but manageable',
+                                        style: TextStyle(
+                                          fontFamily: "Inter",
+                                        ),
+                                      ),
                                     ),
                                     const SizedBox(width: 16.0),
                                     ElevatedButton(
@@ -125,12 +147,21 @@ class _Page1State extends State<Page1> {
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: selectedButtonIndexes[index] == 3
-                                            ? Colors.red
-                                            : Colors.white,
-                                        onPrimary: selectedButtonIndexes[index] == 3 ? Colors.white : Colors.grey,
+                                        primary:
+                                            selectedButtonIndexes[index] == 3
+                                                ? Colors.red
+                                                : Colors.white,
+                                        onPrimary:
+                                            selectedButtonIndexes[index] == 3
+                                                ? Colors.white
+                                                : Colors.grey,
                                       ),
-                                      child: const Text('Unbearable, I could not even stand straight'),
+                                      child: const Text(
+                                        'Unbearable, I could not even stand straight',
+                                        style: TextStyle(
+                                          fontFamily: "Inter",
+                                        ),
+                                      ),
                                     ),
                                     const SizedBox(width: 16.0),
                                   ],

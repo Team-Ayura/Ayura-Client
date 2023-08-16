@@ -1,3 +1,4 @@
+import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
 import 'package:ayura/pages/features/symptom_tracking/welcome.dart';
 import 'package:ayura/utils/router.dart';
@@ -16,12 +17,12 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-          Icons.arrow_back_outlined,
-          Icons.calendar_month_outlined,
-          "Daily Symptom Alert",
-          leftCallback :()=>PageNavigator(context: context).nextPage(const Vitals()),
-          rightCallback :()=>PageNavigator(context: context).nextPage(const Page2())),
+      appBar: CustomAppBar(Icons.arrow_back_outlined,
+          Icons.calendar_month_outlined, "Daily Symptom Alert",
+          leftCallback: () =>
+              PageNavigator(context: context).nextPage(const Vitals()),
+          rightCallback: () =>
+              PageNavigator(context: context).nextPage(const Page2())),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,30 +31,32 @@ class Page3 extends StatelessWidget {
             child: Text(
               'We have noticed a continuous headache over the past few days',
               style: AppStyles.headingTextStyle,
+              textAlign: TextAlign.center,
             ),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              'We suggest you to see a doctor, because there might be an underlying reason',
-              style: AppStyles.subHeadingTextStyle,
-            ),
+                'We suggest you to see a doctor, because there might be an underlying reason',
+                style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 16,
+                    color: AppColors.textColor)),
           ),
           const SizedBox(height: 16.0),
           Center(
             child: customButton(
-              tap: () {
-                PageNavigator(context: context).nextPage(const NearbyHospitalsPage());
-
-              },
+                tap: () {
+                  PageNavigator(context: context)
+                      .nextPage(const NearbyHospitalsPage());
+                },
                 text: 'Nearby Government Hospitals',
                 width: 300,
-                height: 60,
-                context: context
-            ),
+                height: null,
+                context: context),
           ),
           const Center(
-            child:Padding(
+            child: Padding(
               padding: EdgeInsets.all(20.0),
               child: Text(
                 'General Health Tips',
@@ -63,7 +66,7 @@ class Page3 extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               children: const [
                 TipChip(
                   title: 'Stay Hydrated',
@@ -98,7 +101,6 @@ class Page3 extends StatelessWidget {
               ],
             ),
           ),
-
         ],
       ),
     );

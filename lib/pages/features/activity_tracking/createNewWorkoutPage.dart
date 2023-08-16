@@ -236,6 +236,9 @@ class _PanelWidgetState extends State<PanelWidget> {
     Activity(activityId: "1",activityName: "T Plank",isTimeBased: false, caloriesPerHour: 12),
     Activity(activityId: "2",activityName: "Push Ups",isTimeBased: false, caloriesPerHour: 12),
     Activity(activityId: "3",activityName: "Reverse Crunches",isTimeBased: false, caloriesPerHour: 12),
+    Activity(activityId: "4",activityName: "Jumping Jacks",isTimeBased: false, caloriesPerHour: 12),
+    Activity(activityId: "5",activityName: "Seated Abs Circle",isTimeBased: false, caloriesPerHour: 12),
+    Activity(activityId: "6",activityName: "Staggered Push Ups",isTimeBased: false, caloriesPerHour: 12),
   ];
   void searchSports(String query) {
     setState(() {

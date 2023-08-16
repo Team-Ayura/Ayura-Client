@@ -59,6 +59,20 @@ class _CyclingPageState extends State<CyclingPage> {
                 ],
               ),
             ),
+            Consumer<CyclingProvider>(
+                builder: (context, cyclingProvider, _) {
+                  return Container(margin: EdgeInsets.only(left: 25), child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Average Distance', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+                      SizedBox(height:5),
+                      Text(cyclingProvider.timePeriod, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.textColor.withOpacity(0.5))),
+                    ],
+                  ));
+                }
+            ),
+            SizedBox(height:5),
             // the chart
             Container(
               height: 200,
@@ -194,7 +208,7 @@ class _CyclingPageState extends State<CyclingPage> {
                       return ActivityStatBox(
                         svgName: 'chart.svg',
                         value: improvement,
-                        label: 'Improvement',
+                        label: 'Speed',
                         isPercentageValue: true,
                       );
                     }),
@@ -253,18 +267,22 @@ class _CyclingPageState extends State<CyclingPage> {
                   Column(
                     children: [
                       CyclingTripWidget(
-                        date: 'June 10',
+                        date: 'Aug 10',
                         startTime: '6:00 AM',
                         distance: '5.6 Km',
                         duration: '1:30:00',
                         rideName: 'Cycling at Bellanwila park',
+                        latitude: 6.84163999014293,
+                        longitude: 79.89381156999976,
                       ),
                       CyclingTripWidget(
-                        date: 'June 07',
+                        date: 'Aug 07',
                         startTime: '6:13 AM',
                         distance: '4.2 Km',
                         duration: '00:59:00',
                         rideName: 'Cycling at Galle Face',
+                        latitude: 6.925880961397556,
+                        longitude: 79.84372231557587,
                       ),
                     ],
                   ),

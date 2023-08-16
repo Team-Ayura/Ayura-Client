@@ -39,10 +39,10 @@ Widget tipsCard({
                     label: Text(
                       title!,
                       style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 17,
+                        color: AppColors.textColor,
+                        fontSize: 16,
                         fontFamily: "Inter",
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   )
@@ -51,10 +51,10 @@ Widget tipsCard({
                     child: Text(
                       title!,
                       style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 17,
+                        color: AppColors.textColor,
+                        fontSize: 16,
                         fontFamily: "Inter",
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
