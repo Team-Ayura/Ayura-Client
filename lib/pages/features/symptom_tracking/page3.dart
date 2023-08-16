@@ -66,34 +66,34 @@ class Page3 extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               children: const [
                 TipChip(
-                  title: 'Sleep 8 Hours',
-                  description: 'Adequate sleep is crucial for your overall health and well-being. Aim for at least 8 hours of quality sleep each night.',
-                  image: 'assets/images/symptom_tracking/sleep.png',
-                ),
-                TipChip(
                   title: 'Stay Hydrated',
-                  description: 'Drink plenty of water throughout the day to stay hydrated and maintain proper bodily functions.',
-                  image: 'assets/images/symptom_tracking/water.jpg',
-                ),
-                TipChip(
-                  title: 'Healthy Diet',
-                  description: 'Maintain a balanced diet rich in fruits, vegetables, whole grains, lean proteins, and healthy fats.',
-                  image: 'assets/images/symptom_tracking/diet.jpg',
-                ),
-                TipChip(
-                  title: 'Regular Exercise',
-                  description: 'Engage in regular physical activity to improve your cardiovascular health, strengthen muscles, and boost mood.',
-                  image: 'assets/images/symptom_tracking/sleep.png',
+                  description: 'Drink plenty of water throughout the day to stay hydrated.',
+                  image: 'assets/images/symptom_tracking/water.png',
                 ),
                 TipChip(
                   title: 'Manage Stress',
-                  description: 'Practice stress-reduction techniques such as meditation, deep breathing, and mindfulness to improve mental well-being.',
-                  image: 'assets/images/symptom_tracking/sleep.png',
+                  description: 'Practice relaxation techniques to reduce stress and ease headache symptoms.',
+                  image: 'assets/images/symptom_tracking/stress.png',
                 ),
                 TipChip(
-                  title: 'Limit Sugary Intake',
-                  description: 'Reduce consumption of sugary foods and beverages to maintain healthy blood sugar levels and oral health.',
-                  image: 'assets/images/symptom_tracking/sleep.png',
+                  title: 'Take Breaks',
+                  description: 'If you spend long hours in front of a screen, take regular breaks to rest your eyes and prevent tension headaches.',
+                  image: 'assets/images/symptom_tracking/breath.png',
+                ),
+                TipChip(
+                  title: 'Adequate Sleep',
+                  description: 'Ensure you get enough sleep. Lack of sleep can contribute to headaches. Aim for 7-9 hours of quality sleep each night.',
+                  image: 'assets/images/symptom_tracking/sleep2.png',
+                ),
+                TipChip(
+                  title: 'Limit Caffeine',
+                  description: 'Excessive caffeine intake can trigger headaches. Limit your caffeine consumption, especially if sensitive to it.',
+                  image: 'assets/images/symptom_tracking/caffaine.png',
+                ),
+                TipChip(
+                  title: 'Gentle Exercise',
+                  description: 'Engage in light physical activity like walking or stretching to improve blood circulation and alleviate headaches.',
+                  image: 'assets/images/symptom_tracking/exercise.png',
                 ),
               ],
             ),

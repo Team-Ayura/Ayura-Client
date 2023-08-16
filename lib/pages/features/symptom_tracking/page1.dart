@@ -1,5 +1,6 @@
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
 import 'package:ayura/pages/features/symptom_tracking/page3.dart';
+import 'package:ayura/pages/features/vitals/vitals.dart';
 import 'package:flutter/material.dart';
 import 'package:ayura/widgets/global/custom_app_bar.dart';
 import 'package:ayura/constants/styles.dart';
@@ -144,17 +145,30 @@ class _Page1State extends State<Page1> {
               ),
             ),
           ),
-          Center(
-            child: customButton(
-              tap: () {
-                PageNavigator(context: context).nextPage(const Page3());
-              },
-                text: 'Done',
-                width: 200,
-                height: 60,
-                context: context
-            ),
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              customButton(
+                tap: () {
+                  PageNavigator(context: context).nextPage(const Vitals());
+                },
+                  text: 'More Areas',
+                  width: 120,
+                  height: 60,
+                  context: context
+              ),
+              const SizedBox(width: 50),
+              customButton(
+                  tap: () {
+                    PageNavigator(context: context).nextPage(const Page3());
+                  },
+                  text: 'Done',
+                  width: 120,
+                  height: 60,
+                  context: context
+              ),
+            ],
+          )
         ],
       ),
     );

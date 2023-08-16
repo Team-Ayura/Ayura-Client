@@ -6,7 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 class SymptomList extends StatelessWidget {
   final DateTime selectedDay;
 
-  SymptomList({required this.selectedDay});
+  const SymptomList({super.key, required this.selectedDay});
 
   @override
   Widget build(BuildContext context) {

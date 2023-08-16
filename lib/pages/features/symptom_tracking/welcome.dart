@@ -1,5 +1,7 @@
+import 'package:ayura/pages/features/symptom_tracking/chest.dart';
 import 'package:ayura/pages/features/symptom_tracking/page1.dart';
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
+import 'package:ayura/pages/features/symptom_tracking/stomach.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:flutter/material.dart';
 
@@ -100,7 +102,7 @@ class WelcomePage extends StatelessWidget {
                     top: 120,
                     child: GestureDetector(
                       onTap: () {
-                        PageNavigator(context: context).nextPage(const Page1());
+                        PageNavigator(context: context).nextPage(const Chest());
                         print('Tapped on Chest');
                       },
                       child: Container(
@@ -118,7 +120,7 @@ class WelcomePage extends StatelessWidget {
                     top: 190,
                     child: GestureDetector(
                       onTap: () {
-                        PageNavigator(context: context).nextPage(const Page1());
+                        PageNavigator(context: context).nextPage(const Stomach());
                         print('Tapped on Stomach');
                       },
                       child: Container(
