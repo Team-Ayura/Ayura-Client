@@ -1,3 +1,4 @@
+import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
 import 'package:ayura/pages/features/symptom_tracking/welcome.dart';
 import 'package:ayura/utils/router.dart';
@@ -16,12 +17,12 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-          Icons.arrow_back_outlined,
-          Icons.calendar_month_outlined,
-          "Daily Symptom Alert",
-          leftCallback :()=>PageNavigator(context: context).nextPage(const Vitals()),
-          rightCallback :()=>PageNavigator(context: context).nextPage(const Page2())),
+      appBar: CustomAppBar(Icons.arrow_back_outlined,
+          Icons.calendar_month_outlined, "Daily Symptom Alert",
+          leftCallback: () =>
+              PageNavigator(context: context).nextPage(const Vitals()),
+          rightCallback: () =>
+              PageNavigator(context: context).nextPage(const Page2())),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,30 +31,32 @@ class Page3 extends StatelessWidget {
             child: Text(
               'We have noticed a continuous headache over the past few days',
               style: AppStyles.headingTextStyle,
+              textAlign: TextAlign.center,
             ),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              'We suggest you to see a doctor, because there might be an underlying reason',
-              style: AppStyles.subHeadingTextStyle,
-            ),
+                'We suggest you to see a doctor, because there might be an underlying reason',
+                style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 16,
+                    color: AppColors.textColor)),
           ),
           const SizedBox(height: 16.0),
           Center(
             child: customButton(
-              tap: () {
-                PageNavigator(context: context).nextPage(const NearbyHospitalsPage());
-
-              },
+                tap: () {
+                  PageNavigator(context: context)
+                      .nextPage(const NearbyHospitalsPage());
+                },
                 text: 'Nearby Government Hospitals',
                 width: 300,
-                height: 60,
-                context: context
-            ),
+                height: null,
+                context: context),
           ),
           const Center(
-            child:Padding(
+            child: Padding(
               padding: EdgeInsets.all(20.0),
               child: Text(
                 'General Health Tips',
@@ -63,42 +66,47 @@ class Page3 extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               children: const [
                 TipChip(
                   title: 'Sleep 8 Hours',
-                  description: 'Adequate sleep is crucial for your overall health and well-being. Aim for at least 8 hours of quality sleep each night.',
+                  description:
+                      'Adequate sleep is crucial for your overall health and well-being. Aim for at least 8 hours of quality sleep each night.',
                   image: 'assets/images/symptom_tracking/sleep.png',
                 ),
                 TipChip(
                   title: 'Stay Hydrated',
-                  description: 'Drink plenty of water throughout the day to stay hydrated and maintain proper bodily functions.',
+                  description:
+                      'Drink plenty of water throughout the day to stay hydrated and maintain proper bodily functions.',
                   image: 'assets/images/symptom_tracking/water.jpg',
                 ),
                 TipChip(
                   title: 'Healthy Diet',
-                  description: 'Maintain a balanced diet rich in fruits, vegetables, whole grains, lean proteins, and healthy fats.',
+                  description:
+                      'Maintain a balanced diet rich in fruits, vegetables, whole grains, lean proteins, and healthy fats.',
                   image: 'assets/images/symptom_tracking/diet.jpg',
                 ),
                 TipChip(
                   title: 'Regular Exercise',
-                  description: 'Engage in regular physical activity to improve your cardiovascular health, strengthen muscles, and boost mood.',
+                  description:
+                      'Engage in regular physical activity to improve your cardiovascular health, strengthen muscles, and boost mood.',
                   image: 'assets/images/symptom_tracking/sleep.png',
                 ),
                 TipChip(
                   title: 'Manage Stress',
-                  description: 'Practice stress-reduction techniques such as meditation, deep breathing, and mindfulness to improve mental well-being.',
+                  description:
+                      'Practice stress-reduction techniques such as meditation, deep breathing, and mindfulness to improve mental well-being.',
                   image: 'assets/images/symptom_tracking/sleep.png',
                 ),
                 TipChip(
                   title: 'Limit Sugary Intake',
-                  description: 'Reduce consumption of sugary foods and beverages to maintain healthy blood sugar levels and oral health.',
+                  description:
+                      'Reduce consumption of sugary foods and beverages to maintain healthy blood sugar levels and oral health.',
                   image: 'assets/images/symptom_tracking/sleep.png',
                 ),
               ],
             ),
           ),
-
         ],
       ),
     );

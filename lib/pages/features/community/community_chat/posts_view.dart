@@ -6,7 +6,20 @@ import 'package:ayura/constants/colors.dart';
 // Feature Widgets
 
 class PostsView extends StatefulWidget {
-  const PostsView({super.key});
+  final String username;
+  final String timeAgo;
+  final String challengeDescription;
+  final String? postImagePath;
+  final String? profileImagePath;
+
+  const PostsView({
+    super.key,
+    required this.username,
+    required this.timeAgo,
+    required this.challengeDescription,
+    this.postImagePath,
+    this.profileImagePath,
+  });
 
   @override
   State<PostsView> createState() {
@@ -26,26 +39,27 @@ class _PostsViewState extends State<PostsView> {
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       child: Column(
         children: [
-          const Row(
+          Row(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage('assets/images/profileIcon.png'),
+                backgroundImage: AssetImage(
+                    widget.profileImagePath ?? 'assets/images/profileIcon.png'),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Text(
-                'Ruchira Bogahawatta',
-                style: TextStyle(
+                widget.username,
+                style: const TextStyle(
                     fontFamily: 'Inter',
                     color: AppColors.textColor,
                     fontSize: 14,
                     fontWeight: FontWeight.w600),
               ),
-              Expanded(child: SizedBox()),
+              const Expanded(child: SizedBox()),
               Text(
-                '20 mins ago',
-                style: TextStyle(
+                widget.timeAgo,
+                style: const TextStyle(
                   fontFamily: 'Inter',
                   color: AppColors.alternateGreyColor,
                   fontSize: 12,
@@ -56,9 +70,9 @@ class _PostsViewState extends State<PostsView> {
           const SizedBox(
             height: 15,
           ),
-          const Text(
-            'Challenge was to complete a 1 kilometer run for three consecutive days',
-            style: TextStyle(
+          Text(
+            widget.challengeDescription,
+            style: const TextStyle(
               fontFamily: 'Inter',
               color: AppColors.textColor,
               fontSize: 14,
@@ -68,7 +82,7 @@ class _PostsViewState extends State<PostsView> {
             height: 20,
           ),
           Image.asset(
-            'assets/images/postImage.png',
+            widget.postImagePath ?? 'assets/images/postImage.png',
             width: 300,
             height: 300,
             fit: BoxFit.contain,

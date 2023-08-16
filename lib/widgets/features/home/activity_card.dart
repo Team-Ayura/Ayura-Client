@@ -23,7 +23,7 @@ Widget activityCard({int? number, String? text, String? image}) {
           text!,
           style: const TextStyle(
             color: Colors.black,
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: FontWeight.w500,
             fontFamily: "Inter",
           ),
@@ -41,10 +41,11 @@ Widget activityCard({int? number, String? text, String? image}) {
             Text(
               number.toString(),
               style: const TextStyle(
-                  color: AppColors.primaryColor,
-                  fontSize: 18,
-                  fontFamily: "Inter",
-                  fontWeight: FontWeight.w500),
+                color: AppColors.primaryColor,
+                fontSize: 18,
+                fontFamily: "Inter",
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:ayura/constants/colors.dart';
 import 'package:ayura/widgets/features/mealplan/nutritions.dart';
 import 'package:ayura/widgets/global/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class ViewmealScreen extends StatelessWidget {
       'Beans',
       'Dhal',
       'Chicken',
-      'Item 5',
+      'Onion',
       // Add more items as needed.
     ];
     return Scaffold(
@@ -90,7 +91,14 @@ class ViewmealScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: height * 0.02),
-                const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisl eget nunc aliquam aliquet. Sed vitae nisl eget nunc aliquam aliquet. Sed vitae nisl eget nunc aliquam aliquet. Sed vitae nisl eget nunc aliquam aliquet. Sed vitae nisl eget nunc aliquam aliquet. Sed vitae nisl eget nunc aliquam aliquet. Sed vitae nisl eget nunc aliquam aliquet. Sed vitae nisl eget nunc aliquam aliquet.')
+                const Text(
+                  "To make rice curry, start by washing and cooking 1 cup of rice until it's fluffy; set it aside. In a pot, heat 2 tablespoons of oil and add 1 teaspoon of cumin seeds, letting them splutter. Sauté 1 chopped onion until it turns golden, then add 2 cloves of minced garlic and 1-inch of minced ginger, and sauté for another minute. Mix in 2 chopped tomatoes, 1 teaspoon of turmeric, 1 teaspoon of ground coriander, 1 teaspoon of ground cumin, 1/2 teaspoon of red chili powder, and salt to taste. Add 1 cup of mixed vegetables, cover, and cook until they're tender. Combine the cooked vegetables with the rice, gently mixing them together. Sprinkle 1/2 teaspoon of garam masala and mix gently. Garnish the dish with fresh cilantro leaves, and serve the rice curry hot with yogurt or pickle. Feel free to adjust the spices and vegetables according to your preferences.",
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontFamily: "Inter",
+                    color: AppColors.textColor,
+                  ),
+                ),
               ],
             ),
           ),

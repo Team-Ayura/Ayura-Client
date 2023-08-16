@@ -17,50 +17,48 @@ class VitalsTabBarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
- 
-    
     return DefaultTabController(
       //tabbar part
-      length: 2, 
+      length: 2,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
         child: Column(
-          children:[
+          children: [
             ButtonsTabBar(
-              height:65 ,
               contentPadding: const EdgeInsets.fromLTRB(32, 10, 32, 10),
-              backgroundColor:AppColors.primaryColor,
+              backgroundColor: AppColors.primaryColor,
               borderColor: Colors.transparent,
-              unselectedBorderColor: AppColors.disabledColor,borderWidth: 1,
+              unselectedBorderColor: AppColors.disabledColor,
+              borderWidth: 1,
               unselectedBackgroundColor: Colors.white,
-              unselectedLabelStyle:const  TextStyle(color: AppColors.disabledColor),
-              labelStyle:
-                  const TextStyle(color: Colors.white),
-              tabs:const [
+              unselectedLabelStyle:
+                  const TextStyle(color: AppColors.disabledColor),
+              labelStyle: const TextStyle(
+                color: Colors.white,
+                fontFamily: "Inter",
+                fontSize: 15,
+              ),
+              tabs: const [
                 Tab(
                   text: "Symptom Tracker",
                 ),
                 Tab(
                   text: "Mood Tracker",
                 ),
-              ],  
+              ],
             ),
 
             //tab contents
             const Expanded(
-                  child: TabBarView(
-                    children: <Widget>[
-
-                      //symptom tab
-                      WelcomePage(),
-                      //mood tab
-                      SelectMood()
-                    
-                    
-                  ],
-                  ),
-                ),
+              child: TabBarView(
+                children: <Widget>[
+                  //symptom tab
+                  WelcomePage(),
+                  //mood tab
+                  SelectMood()
+                ],
+              ),
+            ),
           ],
         ),
       ),

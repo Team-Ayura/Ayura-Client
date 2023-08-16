@@ -39,15 +39,29 @@ class CommunityList extends StatelessWidget {
               child: ListView(
                 children: const [
                   ChatCard(
-                    communityName: 'Diabetes Control Circle',
-                    visibiity: 'Private',
-                    memberCount: '55',
-                  ),
+                      communityName: 'Colombo Positivity Pathway',
+                      visibiity: 'Public',
+                      memberCount: '184'),
                   ChatCard(
-                    communityName: 'Diabetes Control Circle',
-                    visibiity: 'Private',
-                    memberCount: '55',
-                  ),
+                      communityName: 'Diabetes Control Circle',
+                      visibiity: 'Private',
+                      memberCount: '72'),
+                  ChatCard(
+                      communityName: 'CardioBuddy - Colombo',
+                      visibiity: 'Public',
+                      memberCount: '310'),
+                  ChatCard(
+                      communityName: 'Wellness Waves Community',
+                      visibiity: 'Public',
+                      memberCount: '515'),
+                  ChatCard(
+                      communityName: 'Joyful Wellness Journey',
+                      visibiity: 'Private',
+                      memberCount: '40'),
+                  ChatCard(
+                      communityName: 'DiabetesCare',
+                      visibiity: 'Private',
+                      memberCount: '10'),
                   // Add more ChatCard widgets as needed
                 ],
               ),
