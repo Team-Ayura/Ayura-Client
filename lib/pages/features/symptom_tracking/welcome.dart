@@ -99,8 +99,7 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                  Positioned(
-                    left: 195,
+                  Positioned(left: 195,
                     top: 120,
                     child: GestureDetector(
                       onTap: () {
