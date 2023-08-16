@@ -16,11 +16,11 @@ class StairsProvider extends ChangeNotifier {
   double monthverticaldistance = 36;
   double yeartimeverticaldistance = 34;
 
-  int stairCount = 567;
-  int daystairCount = 567;
-  int weekstairCount = 624;
-  int monthstairCount = 670;
-  int yeartimestairCount = 584;
+  int stairCount = 45;
+  int daystairCount = 45;
+  int weekstairCount = 62;
+  int monthstairCount = 67;
+  int yeartimestairCount = 58;
 
 
   String duration = '00:23:00';

@@ -1,6 +1,9 @@
 import 'dart:async';
-
+import 'dart:io';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class CyclingOnRideProvider extends ChangeNotifier {
   final List<String> _imagePaths = [];
@@ -74,4 +77,5 @@ class CyclingOnRideProvider extends ChangeNotifier {
 
     return '$hoursStr:$minutesStr:$secondsStr';
   }
+
 }

@@ -2,16 +2,21 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
 import 'package:ayura/utils/router.dart';
+import 'package:ayura/widgets/features/activity_tracking/sharable_image_collage.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 
 // import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/image_container.dart';
 import 'package:ayura/widgets/features/activity_tracking/map.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'dart:ui' as ui;
 
 class CyclingOnRidePage extends StatefulWidget {
   const CyclingOnRidePage({Key? key}) : super(key: key);
@@ -21,6 +26,7 @@ class CyclingOnRidePage extends StatefulWidget {
 }
 
 class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
+  final GlobalKey<State<StatefulWidget>> _widgetKey = GlobalKey();
   var panelController = PanelController();
   @override
   Widget build(BuildContext context) {
@@ -116,6 +122,7 @@ class PanelWidget extends StatefulWidget {
 }
 
 class _PanelWidgetState extends State<PanelWidget> {
+  final GlobalKey<State<StatefulWidget>> _collageKey = GlobalKey();
   final NumberFormat numberFormat = NumberFormat('#,###');
   @override
   Widget build(BuildContext context) {
@@ -270,6 +277,8 @@ class _PanelWidgetState extends State<PanelWidget> {
                       return GestureDetector(
                         onTap: () {
                           cyclingOnRideProvider.stopCycling();
+                          // _showCollageDialog(context);
+                          // here I should show the caputred snapshot of the widget and make it sharable
                           Navigator.of(context).pop();
                         },
                         child: Container(
@@ -330,4 +339,70 @@ class _PanelWidgetState extends State<PanelWidget> {
           ),
         ],
       );
+
+  Future<Uint8List> captureWidget(GlobalKey key) async {
+    RenderRepaintBoundary boundary =
+    key.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    ui.Image image = await boundary.toImage();
+    ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+
+    if (byteData != null) {
+      return byteData.buffer.asUint8List();
+    } else {
+      throw Exception('Failed to capture widget snapshot.');
+    }
+  }
+
+  Future<void> shareCapturedImage(Uint8List imageBytes) async {
+    await Share.shareXFiles(
+      [
+        XFile.fromData(imageBytes, name: 'activity_snapshot.png')
+      ],
+      text: 'Check out my cycling activity!',
+    );
+  }
+
+
+  void _showCollageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Container(
+            width: MediaQuery.of(context).size.width - 40,
+            height: MediaQuery.of(context).size.height - 300,
+            child: Consumer<CyclingOnRideProvider>(
+              builder: (context, cyclingOnRideProvider, _) {
+                return Column(
+                  children: [
+                    RepaintBoundary(
+                      key: _collageKey,
+                      child: CollageWithStatsWidget(
+                        imagePaths: cyclingOnRideProvider.imagePaths,
+                        locationName: 'Bellanwila Park Ride',
+                        durationValue: cyclingOnRideProvider.getFormattedTime(),
+                        caloriesValue: cyclingOnRideProvider.calorieCounter,
+                        speedValue: cyclingOnRideProvider.cyclingSpeed,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(onPressed: () async {
+                      final imageBytes = await captureWidget(_collageKey);
+                      await shareCapturedImage(imageBytes);
+                    }, child: Text('Share')),
+                  ],
+                );
+              }
+            ),
+          ),
+        );
+      },
+    );
+  }
+
 }

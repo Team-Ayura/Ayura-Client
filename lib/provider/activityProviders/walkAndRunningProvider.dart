@@ -16,11 +16,11 @@ class WalkingAndRunningProvider extends ChangeNotifier {
   double monthdistance = 4.20;
   double yearsdistance = 3.31;
 
-  int stepCount = 1208;
-  int daystepCount = 1208;
-  int weekstepcount = 1455;
-  int monthstepcount = 2090;
-  int yearstepcount = 1567;
+  int stepCount = 824;
+  int daystepCount = 824;
+  int weekstepcount = 755;
+  int monthstepcount = 766;
+  int yearstepcount = 734;
 
   String duration = '1:23:00';
   String dayduration = '01:23:00';

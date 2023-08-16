@@ -208,7 +208,7 @@ class _CyclingPageState extends State<CyclingPage> {
                       return ActivityStatBox(
                         svgName: 'chart.svg',
                         value: improvement,
-                        label: 'Improvement',
+                        label: 'Speed',
                         isPercentageValue: true,
                       );
                     }),
