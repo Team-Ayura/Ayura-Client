@@ -50,18 +50,6 @@ class _WeeklyChartState extends State<WeeklyChart> {
                   ),
                   const Text('Week 1'),
                   const SizedBox(width: 16),
-                  // Container(
-                    
-                  //   margin: const EdgeInsets.symmetric(horizontal: 8),
-                  //   width: 16,
-                  //   height: 16,
-                    
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.purple.withOpacity(0.3),
-                  //     shape: BoxShape.circle,
-                  //   ),
-                  // ),
-                  // const Text('Week 2'),
                 ],
               ),
             ),
@@ -82,6 +70,8 @@ class _WeeklyChartState extends State<WeeklyChart> {
                       sideTitles: SideTitles(showTitles: false),
                     ),
                     bottomTitles: AxisTitles(
+                      axisNameWidget: Text("Days of Week"),
+                     
                       sideTitles: SideTitles(
                         showTitles: true,
                         reservedSize: 30,
@@ -90,6 +80,8 @@ class _WeeklyChartState extends State<WeeklyChart> {
                       ),
                     ),
                     leftTitles: AxisTitles(
+                      axisNameWidget: Text("sleeping hours"),
+                      axisNameSize: 25,
                       sideTitles: SideTitles(
                         showTitles: true,
                         interval: 1,
@@ -98,43 +90,7 @@ class _WeeklyChartState extends State<WeeklyChart> {
                       ),
                     ),
                   ),
-                  // titlesData: FlTitlesData(
-                  // showTitles: true,
-                  //   bottomTitles: AxisTitles(
-                  //     sideTitles: SideTitles(
-                  //       getTitlesWidget: getTitles: (value) {
-                  //       switch (value.toInt()) {
-                  //         case 0:
-                  //           return 'M';
-                  //         case 1:
-                  //           return 'T';
-                  //         case 2:
-                  //           return 'W';
-                  //         case 3:
-                  //           return 'T';
-                  //         case 4:
-                  //           return 'F';
-                  //         case 5:
-                  //           return 'S';
-                  //         case 6:
-                  //           return 'S';
-                  //         default:
-                  //           return '';
-                  //       }
-                  //     },
-                  //     ),
-                      
-                  //   ),
-                  //   leftTitles: SideTitles(
-                  //     showTitles: true,
-                  //     getTitles: leftTitleWidgets(value, meta)
-                  //     margin: 16,
-                  //     reservedSize: 30,
-                  //     interval: 2,
-                  //   ),
-                  //   rightTitles: SideTitles(showTitles: false), // Hide right side titles
-                  //   topTitles: SideTitles(showTitles: false),   // Hide top side titles
-                  // ),
+                  
                   borderData: FlBorderData(
                     show: false, // Set to false to remove the border and axis lines
                     border: Border.all(color: const Color(0xff37434d), width: 1),
@@ -146,13 +102,13 @@ class _WeeklyChartState extends State<WeeklyChart> {
                   lineBarsData: [
                     LineChartBarData(
                       spots: [
-                        const FlSpot(0, 2),
-                        const FlSpot(1, 4),
-                        const FlSpot(2, 6),
-                        const FlSpot(3, 5),
-                        const FlSpot(4, 7),
-                        const FlSpot(5, 5),
-                        const FlSpot(6, 8),
+                        const FlSpot(0, 5),
+                        const FlSpot(1, 2),
+                        const FlSpot(2, 4),
+                        const FlSpot(3, 2),
+                        // const FlSpot(4, 7),
+                        // const FlSpot(5, 5),
+                        // const FlSpot(6, 8),
                       ],
                       isCurved: true,
                       gradient: LinearGradient(
@@ -164,26 +120,6 @@ class _WeeklyChartState extends State<WeeklyChart> {
                           colors: [Colors.blue.withOpacity(0.1),Color.fromARGB(255, 117, 174, 209)],
                         ),),
                     ),
-                    // LineChartBarData(
-                    //   spots: [
-                    //     const FlSpot(0, 5),
-                    //     const FlSpot(1, 4),
-                    //     const FlSpot(2, 2),
-                    //     const FlSpot(3, 4),
-                    //     const FlSpot(4, 5),
-                    //     const FlSpot(5, 3),
-                    //     const FlSpot(6, 7),
-                    //   ],
-                    //   isCurved: true,
-                    //    gradient: LinearGradient(
-                    //       colors: [Colors.purple.withOpacity(0.3),Color.fromARGB(255, 224, 154, 234)],
-                    //     ),
-                    //   // colors: [Colors.purple.withOpacity(0.3)],
-                    //   dotData: const FlDotData(show: false),
-                    //   belowBarData: BarAreaData(show: true, gradient: LinearGradient(
-                    //       colors: [Colors.purple.withOpacity(0.1),Color.fromARGB(255, 224, 154, 234)],
-                    //     ),),
-                    // ),
                   ],
                  
                 ),
@@ -234,22 +170,22 @@ class _WeeklyChartState extends State<WeeklyChart> {
     Widget text;
     switch (value.toInt()) {
       case 0:
-        text = const Text('M', style: style);
+        text = const Text('S', style: style);
         break;
       case 1:
-        text = const Text('T', style: style);
+        text = const Text('M', style: style);
         break;
       case 2:
-        text = const Text('W', style: style);
-        break;
-      case 3:
         text = const Text('T', style: style);
         break;
+      case 3:
+        text = const Text('W', style: style);
+        break;
       case 4:
-        text = const Text('F', style: style);
+        text = const Text('T', style: style);
         break;
       case 5:
-        text = const Text('S', style: style);
+        text = const Text('F', style: style);
         break;
       case 6:
         text = const Text('S', style: style);

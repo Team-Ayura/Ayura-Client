@@ -1,5 +1,6 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/sleep_tracking/page1.dart';
+import 'package:ayura/pages/features/sleep_tracking/page2.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/home/activity_card.dart';
 import 'package:ayura/widgets/features/home/tips_card.dart';
@@ -292,7 +293,7 @@ class _HomeState extends State<Home> {
                     color: Colors.black,
                   )),
                   subtitle: const Text("Establish a consistent Sleep Schedule"),
-                  trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepFirstPage());}, child:Icon( Icons.arrow_forward,))
+                  trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepHistory());}, child:Icon( Icons.arrow_forward,))
                 ),
                   ),
 

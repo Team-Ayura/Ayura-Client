@@ -48,6 +48,7 @@ class MoodProvider with ChangeNotifier {
     // addMoodToHistory("Angry", DateTime(2023, 8, 12));
     addMoodToHistory("Stressed", DateTime(2023, 8, 13));
     addMoodToHistory("Sad", DateTime(2023, 8, 14));
+    addMoodToHistory("Angry", DateTime(2023, 8, 15));
     // ... Add more initial mood data as needed ...
   }
 

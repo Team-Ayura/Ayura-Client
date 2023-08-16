@@ -30,10 +30,10 @@ class _SleepSchedulesState extends State<SleepSchedules> {
   List<SleepSchedule> sleepSchedules = [
     SleepSchedule('Today', const TimeOfDay(hour: 22, minute: 0), const TimeOfDay(hour: 6, minute: 0), false, false),
     SleepSchedule('Tomorrow', const TimeOfDay(hour: 23, minute: 0), const TimeOfDay(hour: 7, minute: 0), false, false),
-    SleepSchedule('Thursday', const TimeOfDay(hour: 21, minute: 30), const TimeOfDay(hour: 6, minute: 30), false, false),
-    SleepSchedule('Friday', const TimeOfDay(hour: 23, minute: 0), const TimeOfDay(hour: 6, minute: 0), false, false),
-    SleepSchedule('Saturday', const TimeOfDay(hour: 22, minute: 0), const TimeOfDay(hour: 5, minute:30), false, false),
-    SleepSchedule('Sunday', const TimeOfDay(hour: 21, minute: 0), const TimeOfDay(hour: 6, minute: 0), false, false),
+    SleepSchedule('Friday', const TimeOfDay(hour: 21, minute: 30), const TimeOfDay(hour: 6, minute: 30), false, false),
+    // SleepSchedule('Friday', const TimeOfDay(hour: 23, minute: 0), const TimeOfDay(hour: 6, minute: 0), false, false),
+    // SleepSchedule('Saturday', const TimeOfDay(hour: 22, minute: 0), const TimeOfDay(hour: 5, minute:30), false, false),
+    // SleepSchedule('Sunday', const TimeOfDay(hour: 21, minute: 0), const TimeOfDay(hour: 6, minute: 0), false, false),
     
     // Add more schedules for different days
   ];
