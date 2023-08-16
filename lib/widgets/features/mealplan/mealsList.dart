@@ -44,7 +44,7 @@ class MealsList extends StatelessWidget {
                       topRight: Radius.circular(12),
                     ),
                     child: Image.asset(
-                      'assets/images/mealPlan/riceandcurry.png',
+                      'assets/images/mealPlan/riceandcurry${index}.png',
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
