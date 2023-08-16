@@ -8,6 +8,8 @@ class CyclingTripWidget extends StatelessWidget {
   final String distance;
   final String duration;
   final String rideName;
+  final double latitude;
+  final double longitude;
 
   const CyclingTripWidget({super.key, 
     required this.date,
@@ -15,6 +17,8 @@ class CyclingTripWidget extends StatelessWidget {
     required this.distance,
     required this.duration,
     required this.rideName,
+    required this.latitude,
+    required this.longitude,
   });
 
   @override
@@ -36,10 +40,10 @@ class CyclingTripWidget extends StatelessWidget {
           ),
           child: Row(
             children: [
-              const MapContainer(
+               MapContainer(
                 isRegular: false,
-                latitude: 37.7749,
-                longitude: -122.4194,
+                latitude: latitude,
+                longitude: longitude,
                 markerTitle: 'Title',
               ),
               const SizedBox(
