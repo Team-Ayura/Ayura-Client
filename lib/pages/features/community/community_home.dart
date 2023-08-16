@@ -95,35 +95,35 @@ class _CommunityHomeState extends State<CommunityHome> {
             ),
             SizedBox(
               // Main Chats Container
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.35,
               child: const SingleChildScrollView(
                 //Making the container Scrollabble
                 child: Column(
                   children: [
                     ChatCard(
-                        communityName: 'Diabetes Control Circle',
-                        visibiity: 'Private',
-                        memberCount: '55'),
+                        communityName: 'Colombo Active Life',
+                        visibiity: 'Public',
+                        memberCount: '184'),
                     ChatCard(
                         communityName: 'Diabetes Control Circle',
                         visibiity: 'Private',
-                        memberCount: '55'),
+                        memberCount: '72'),
                     ChatCard(
-                        communityName: 'Diabetes Control Circle',
-                        visibiity: 'Private',
-                        memberCount: '55'),
+                        communityName: 'CardioBuddy - Colombo',
+                        visibiity: 'Public',
+                        memberCount: '310'),
                     ChatCard(
-                        communityName: 'Diabetes Control Circle',
-                        visibiity: 'Private',
-                        memberCount: '55'),
+                        communityName: 'Wellness Waves Community',
+                        visibiity: 'Public',
+                        memberCount: '515'),
                     ChatCard(
-                        communityName: 'Diabetes Control Circle',
+                        communityName: 'Joyful Wellness Journey',
                         visibiity: 'Private',
-                        memberCount: '55'),
+                        memberCount: '40'),
                     ChatCard(
-                        communityName: 'Diabetes Control Circle',
+                        communityName: 'DiabetesCare',
                         visibiity: 'Private',
-                        memberCount: '55'),
+                        memberCount: '10'),
                   ],
                 ),
               ),
@@ -153,12 +153,12 @@ class _CommunityHomeState extends State<CommunityHome> {
               // Challenge Container
               child: ChallengeCard(
                 //Must Pass other data also, such as challenge data
-                communityName: 'Diabetes Support Circle',
-                challengeName: 'LSEG Running',
-                challengeType: 'Running',
+                communityName: 'Colombo Active Life',
+                challengeName: 'Cycle Strong Series',
+                challengeType: 'Cycling',
                 remainingTime: '7 Days',
-                completedCount: '1.6',
-                totalCount: '2 km',
+                completedCount: '12.6',
+                totalCount: '20 km',
               ),
             ),
           ],

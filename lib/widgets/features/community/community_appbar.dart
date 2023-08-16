@@ -43,7 +43,7 @@ class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
                   style: const TextStyle(
                     fontFamily: 'Inter',
                     color: AppColors.textColor,
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -57,7 +57,7 @@ class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
                       style: const TextStyle(
                         fontFamily: 'Inter',
                         color: AppColors.textColor,
-                        fontSize: 13,
+                        fontSize: 14,
                       ),
                     ),
                     const SizedBox(

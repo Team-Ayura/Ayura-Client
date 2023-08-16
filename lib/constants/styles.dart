@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 class AppStyles {
   static const TextStyle headingTextStyle = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    color: Colors.black,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textColor,
   );
 
   static const TextStyle subHeadingTextStyle = TextStyle(
@@ -18,7 +18,6 @@ class AppStyles {
     color: Color.fromARGB(255, 123, 123, 123),
   );
 
- 
   static const TextStyle subheadingTextStyle2 = TextStyle(
     fontFamily: 'Inter',
     fontSize: 16,
@@ -26,13 +25,12 @@ class AppStyles {
     color: Color.fromARGB(255, 0, 0, 0),
   );
 
-   static const TextStyle subHeadingTextStyle3 = TextStyle(
+  static const TextStyle subHeadingTextStyle3 = TextStyle(
     fontFamily: 'Inter',
     fontSize: 14,
     fontWeight: FontWeight.w700,
     color: Colors.black,
   );
-
 
   static const TextStyle bodyTextStyle = TextStyle(
     fontFamily: 'Inter',
@@ -55,14 +53,12 @@ class AppStyles {
   );
 
   //app bar title
-   static const TextStyle appBarTitleStyle = TextStyle(
+  static const TextStyle appBarTitleStyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 20,
     color: Colors.black,
     fontWeight: FontWeight.bold,
   );
-
-  
 
   InputDecoration inputDecoration(String placeholder, String error) {
     return InputDecoration(
@@ -73,7 +69,8 @@ class AppStyles {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: AppColors.alternateGreyColor, width: 1),
+        borderSide:
+            const BorderSide(color: AppColors.alternateGreyColor, width: 1),
       ),
       hintText: placeholder,
       hintStyle: const TextStyle(
@@ -136,6 +133,4 @@ class AppStyles {
   );
 
   // Add more styles as needed
-
-  
 }
