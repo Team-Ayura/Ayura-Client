@@ -157,8 +157,8 @@ class SportsProvider extends ChangeNotifier {
 
     // testing code to check if the provider is working
     // stepCount++;
-    calorieCount++;
-    improvement--;
+    // calorieCount++;
+    // improvement--;
     switch (selectedFilter) {
       case 'D':
         chartduration = dayduration;
