@@ -140,8 +140,10 @@ class BarChartWeeklyState extends State<BarChartWeekly> {
           ),
         ),
         leftTitles: const AxisTitles(
+          axisNameSize: 12,
           sideTitles: SideTitles(
-            showTitles: false,
+            reservedSize: 40,
+            showTitles: true,
           ),
         ),
       ),
