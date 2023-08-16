@@ -1,5 +1,6 @@
 import 'package:ayura/auth/auth_screen.dart';
 import 'package:ayura/auth/login.dart';
+import 'package:ayura/pages/home.dart';
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:ayura/utils/router.dart';
@@ -68,7 +69,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        PageNavigator(context: context).nextPage(const Login());
+                        PageNavigator(context: context).nextPage(const Home());
                       },
                       child: const Text(
                         'Sign in',

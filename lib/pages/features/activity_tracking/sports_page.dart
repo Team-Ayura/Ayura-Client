@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:ayura/widgets/global/custom_appbar.dart';
 
 class SportsPage extends StatefulWidget {
   SportsPage({Key? key}) : super(key: key);
@@ -182,12 +183,14 @@ class _SportsPageState extends State<SportsPage> {
                                 text:
                                     'You currently have not selected any sports. Use the add ',
                                 style: TextStyle(
+                                  fontFamily: "Inter",
                                   color: AppColors.textColor.withOpacity(0.4),
                                 ),
                               ),
                               const TextSpan(
                                 text: '"+"', // The "+" symbol
                                 style: TextStyle(
+                                  fontFamily: "Inter",
                                   color: AppColors
                                       .textColor, // Change the color of "+" here
                                 ),
@@ -196,6 +199,7 @@ class _SportsPageState extends State<SportsPage> {
                                 text:
                                     ' button to include sports in your sports collection.',
                                 style: TextStyle(
+                                  fontFamily: "Inter",
                                   color: AppColors.textColor.withOpacity(0.4),
                                 ),
                               ),
