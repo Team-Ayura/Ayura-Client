@@ -1,5 +1,7 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
+import 'package:ayura/pages/features/mood_tracking/page1.dart';
+import 'package:ayura/pages/features/vitals/vitals.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/pages/features/mood_tracking/page2.dart';
 import 'package:flutter/material.dart';
@@ -104,6 +106,7 @@ class _BaseCalendarState extends State<BaseCalendar> {
         bool isThisMonthDay,
         DateTime day,
       ) {
+        
         //check if calendar type is monthly(monthly calendar does not exist startdate and enddate)
         if(widget.startdate !=null && widget.enddate !=null){
           //check dates are in the selected duration
@@ -114,11 +117,28 @@ class _BaseCalendarState extends State<BaseCalendar> {
                 shape: BoxShape.circle,
                 color: Colors.transparent,
               ),
-              child: Center(
-                child: Text(
-                  day.day.toString(),
-                  style: textStyle.copyWith(
-                    color: AppColors.disabledColor, // grey to represent disabled state
+              child: GestureDetector(
+                onTap: () {
+                    // Check if the selected date has events in the markedDateMap
+                    bool hasEvent = moodProvider.getMarkedDateList().getEvents(day).isNotEmpty;
+                    print("selected date: " + day.toString());
+                    print("events: " +hasEvent.toString());
+                    // Only navigate for past and today's dates
+                    if (day.isBefore(DateTime.now().add(const Duration(days: 1)))) {
+                      setState(() => widget.currentDate = day);
+                       if (hasEvent) {
+                        PageNavigator(context: context).nextPage(const SecondPage());
+                      } else {
+                        PageNavigator(context: context).nextPage(Vitals()); // Navigate to the first page when no event
+                      }
+                    }
+                },
+                child: Center(
+                  child: Text(
+                    day.day.toString(),
+                    style: textStyle.copyWith(
+                      color: AppColors.disabledColor, // grey to represent disabled state
+                    ),
                   ),
                 ),
               ),
@@ -127,10 +147,18 @@ class _BaseCalendarState extends State<BaseCalendar> {
             if  ((widget.startdate == null || day.isAfter(widget.startdate!)) && (widget.enddate == null || day.isBefore(widget.enddate!))) {
                 return InkWell(
                   onTap: () {
+                    // Check if the selected date has events in the markedDateMap
+                    bool hasEvent = moodProvider.getMarkedDateList().getEvents(day).isNotEmpty;
+                    print("selected date: " + day.toString());
+                    print("events: " +hasEvent.toString());
                     // Only navigate for past and today's dates
                     if (day.isBefore(DateTime.now().add(const Duration(days: 1)))) {
                       setState(() => widget.currentDate = day);
-                      PageNavigator(context: context).nextPage(const SecondPage());
+                       if (hasEvent) {
+                        PageNavigator(context: context).nextPage(const SecondPage());
+                      } else {
+                        PageNavigator(context: context).nextPage(Vitals()); // Navigate to the first page when no event
+                      }
                     }
                   },
                   child: Center(

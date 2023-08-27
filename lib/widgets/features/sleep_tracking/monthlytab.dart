@@ -2,6 +2,7 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/sleep_tracking/page1.dart';
 import 'package:ayura/widgets/features/sleep_tracking/averagesleeptimecard.dart';
 import 'package:ayura/widgets/features/sleep_tracking/biweekline_chart.dart';
+import 'package:ayura/widgets/features/sleep_tracking/monthlycalendar.dart';
 import 'package:ayura/widgets/features/sleep_tracking/sleepqualitypiechart.dart';
 import 'package:ayura/widgets/features/sleep_tracking/weeklinechart.dart';
 import 'package:ayura/widgets/features/symptom_tracking/calendar.dart';
@@ -62,27 +63,34 @@ class _MonthlyTabState extends State<MonthlyTab> {
                   Container(
                     padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
                     color: Colors.white,
-                    child: CalendarWidget()
-                  ),
-
-
-                  const SizedBox(height: 10.0,),
-                  const TipChip(
-                    title: "Consistent Sleep Schedule",
-                    description:"Establish a steady sleep schedule for better sleep",
-                    image:"assets/images/mood_tracking/meditation.jpg",
+                    // child: CalendarWidget()
+                    child: BaseCalendar()
                   ),
                   const SizedBox(height: 10.0,),
+                  const Row(
+                    children: [
+                      Text("Try these things to improve your sleep quality.",style: AppStyles.subHeadingTextStyle3,),
+                    ],
+                  ),
+                
+
+                  const SizedBox(height: 10.0,),
+                   const TipChip(
+                    title: "Consistent Schedule",
+                    description:"Stick to a regular sleep schedule, even on weekends.",
+                    image:"assets/images/sleep_tracking/sleep_schedule.jpg",
+                  ),
+                  const SizedBox(height: 10.0,),
                   const TipChip(
-                    title: "Consistent Sleep Schedule",
-                    description:"Establish a steady sleep schedule for better sleep",
+                    title: "Manage Stress",
+                    description:"Practice relaxation techniques like deep breathing or meditation.",
                     image:"assets/images/mood_tracking/meditation.jpg",
                   ),
                   const SizedBox(height: 10.0,),
                     const TipChip(
-                    title: "Consistent Sleep Schedule",
-                    description:"Establish a steady sleep schedule for better sleep",
-                    image:"assets/images/mood_tracking/meditation.jpg",
+                    title: "Limit Screen Time",
+                    description:"Avoid screens (phones, tablets, TVs) before bedtime.",
+                    image:"assets/images/sleep_tracking/screen_time.jpg",
                   ), 
 
 

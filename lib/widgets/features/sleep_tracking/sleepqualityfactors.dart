@@ -102,7 +102,7 @@ class _SleepQualityFactorSelectionState extends State<SleepQualityFactorSelectio
                 Icon(Icons.bed),
                 SizedBox(width: 10,),
                 Text(
-                  "During Sleep",
+                  "After Sleep",
                   style:AppStyles.subheadingTextStyle2
                 ),
               ],

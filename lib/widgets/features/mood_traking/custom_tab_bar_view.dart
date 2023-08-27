@@ -8,6 +8,7 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:ayura/widgets/global/tip_chip.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/styles.dart';
 import '../../../provider/moodProviders/selectedmood.dart';
 
 class CustomTabBarView extends StatelessWidget {
@@ -46,7 +47,7 @@ class CustomTabBarView extends StatelessWidget {
                   text: "Weekly",
                 ),
                 Tab(
-                  text: "Bi-Weekly",
+                  text: "Fortnight",
                 ),
                 Tab(
                   text: "Monthly",
@@ -67,6 +68,15 @@ class CustomTabBarView extends StatelessWidget {
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
                            SizedBox(height: 10.0,),
+                           Padding(
+                             padding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
+                             child: Row(
+                                children: [
+                                  Text("Try these things to fix your mental health status.",style: AppStyles.subHeadingTextStyle3,),
+                                ],
+                              ),
+                           ),
+                            const SizedBox(height: 10.0,),
                             TipChip(
                               title: habit1 != null ? habit1['title'] : "",
                               description: habit1 != null ? habit1['description'] : "",
@@ -97,6 +107,12 @@ class CustomTabBarView extends StatelessWidget {
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
                            SizedBox(height: 10.0,),
+                           const Row(
+                              children: [
+                                Text("Try these things to fix your mental health status.",style: AppStyles.subHeadingTextStyle3,),
+                              ],
+                            ),
+                            const SizedBox(height: 10.0,),
                             TipChip(
                               title: habit1 != null ? habit1['title'] : "",
                               description: habit1 != null ? habit1['description'] : "",
@@ -128,6 +144,12 @@ class CustomTabBarView extends StatelessWidget {
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
                           SizedBox(height: 10.0,),
+                          const Row(
+                            children: [
+                              Text("Try these things to fix your mental health status.",style: AppStyles.subHeadingTextStyle3,),
+                            ],
+                          ),
+                          const SizedBox(height: 10.0,),
                             TipChip(
                               title: habit1 != null ? habit1['title'] : "",
                               description: habit1 != null ? habit1['description'] : "",
