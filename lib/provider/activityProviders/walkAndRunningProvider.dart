@@ -1,6 +1,13 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:ayura/provider/activityProviders/googleAuthProvider.dart';
 import 'package:flutter/foundation.dart';
 
+enum StepBucketType {hourly, daily, weekly, monthly}
+
 class WalkingAndRunningProvider extends ChangeNotifier {
+  final GoogleAuthProvider _googleAuthProvider = GoogleAuthProvider();
+
   String selectedFilter = 'D'; // Default filter is 'D' for Day
   Map<String, int> stepsData = {}; // Data for steps taken on each day
 
@@ -155,4 +162,69 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     // After updating the state, notify listeners to rebuild widgets that depend on this provider.
     notifyListeners();
   }
+
+  // this works now think how to manage the accesstoken seamlessly
+  Future<void> fetchStepsData() async {
+    // steps today
+    steps = await getStepCounts(StepBucketType.hourly, 864000000, 1691830747677, 1693040311298);
+    // steps this week
+
+    // steps this month
+
+    // steps this year
+
+  }
+
+  Future<List<int>> getStepCounts(StepBucketType type, int bucketTime, int startMillis, int endMillis) async {
+    final url = Uri.parse('https://fitness.googleapis.com/fitness/v1/users/me/dataset:aggregate');
+    List<int> result = [];
+    final headers = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ${_googleAuthProvider.getAccessToken()}',
+    };
+
+    // Rest of your code remains the same...
+    final requestBody = {
+      "aggregateBy": [
+        {"dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"}
+      ],
+      "bucketByTime": {"durationMillis": bucketTime},
+      "startTimeMillis": startMillis,
+      "endTimeMillis": endMillis,
+    };
+
+    final response = await http.post(url, headers: headers, body: jsonEncode(requestBody));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      for (var bucket in data['bucket']) {
+        for (var dataset in bucket['dataset']) {
+          for (var point in dataset['point']) {
+            for (var value in point['value']) {
+              result.add(value['intVal']);
+            }
+          }
+        }
+      }
+    } else {
+      print('Request failed with status: ${response.statusCode}');
+    }
+    print(result);
+    if(result.isEmpty){
+      int listsize = type == StepBucketType.hourly ? 24 : type == StepBucketType.hourly ? 7 : type == StepBucketType.hourly ? 30 : 12;
+      return generateIntArray(listsize);
+    }else{
+      return result;
+    }
+  }
+}
+
+List<int> generateIntArray(int size) {
+  List<int> result = [];
+
+  for (int i = 0; i < size; i++) {
+    result.add(i);
+  }
+
+  return result;
 }

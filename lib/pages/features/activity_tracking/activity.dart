@@ -5,10 +5,13 @@ import 'package:ayura/pages/features/activity_tracking/sports_page.dart';
 import 'package:ayura/pages/features/activity_tracking/stairs_page.dart';
 import 'package:ayura/pages/features/activity_tracking/walking_and_running_page.dart';
 import 'package:ayura/pages/features/activity_tracking/workouts_page.dart';
+import 'package:ayura/provider/activityProviders/googleAuthProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class Activities extends StatelessWidget {
   const Activities({super.key});
@@ -35,12 +38,19 @@ class Activities extends StatelessWidget {
   }
 }
 
-class ActivitiesPage extends StatelessWidget {
+class ActivitiesPage extends StatefulWidget {
+
   const ActivitiesPage({Key? key}) : super(key: key);
 
   @override
+  State<ActivitiesPage> createState() => _ActivitiesPageState();
+}
+
+class _ActivitiesPageState extends State<ActivitiesPage> {
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: PreferredSize(
         preferredSize:
         Size.fromHeight(90.0),
@@ -54,6 +64,21 @@ class ActivitiesPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Consumer<GoogleAuthProvider>(
+                  builder: (context, googleAuthProvider, _) {
+                    return Switch(
+                      value: googleAuthProvider.isUserAuthorized,
+                      onChanged: (bool togglebtn){
+                        googleAuthProvider.toggleGoogleAuthorization(togglebtn);
+                      },
+                    );
+                  }
+                ),
+              ],
+            ),
             CustomBoxItem(
               index: 1,
               imagePath: 'assets/images/activity_tracking/running.svg',
