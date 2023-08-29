@@ -40,8 +40,8 @@ dependencies:
   image_cropper: ^5.0.0
   flutter_native_image: ^0.0.6
   share_plus: ^7.1.0
-  google_sign_in: ^6.1.4
-  flutter_secure_storage: ^8.0.0
+#  google_sign_in: ^6.1.4
+#  flutter_secure_storage: ^8.0.0
 
 
 dev_dependencies:

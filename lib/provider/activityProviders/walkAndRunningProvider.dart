@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 enum StepBucketType {hourly, daily, weekly, monthly}
 
 class WalkingAndRunningProvider extends ChangeNotifier {
-  final GoogleAuthProvider _googleAuthProvider = GoogleAuthProvider();
+  // final GoogleAuthProvider _googleAuthProvider = GoogleAuthProvider();
 
   String selectedFilter = 'D'; // Default filter is 'D' for Day
   Map<String, int> stepsData = {}; // Data for steps taken on each day
@@ -180,7 +180,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     List<int> result = [];
     final headers = {
       'Content-type': 'application/json',
-      'Authorization': 'Bearer ${_googleAuthProvider.getAccessToken()}',
+      // 'Authorization': 'Bearer ${_googleAuthProvider.getAccessToken()}',
     };
 
     // Rest of your code remains the same...
