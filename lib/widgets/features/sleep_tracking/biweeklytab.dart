@@ -27,7 +27,16 @@ class _BiWeeklyTabState extends State<BiWeeklyTab> {
               child:Column(
                 children:[
                   const SizedBox(height: 10,),  
-                  AverageSleepCard(duration: 'Bi Weekly',),
+                   const Padding(
+                    padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                     child: Row(
+                      children: [
+                        Text("Aug 6 - Aug 19",style: AppStyles.subheadingTextStyle2,)
+                      ],
+                                     ),
+                   ),
+                  const SizedBox(height: 10,),  
+                  AverageSleepCard(duration: 'Fortnight',),
 
 
                   const SizedBox(height: 10,),
@@ -61,22 +70,29 @@ class _BiWeeklyTabState extends State<BiWeeklyTab> {
                   const BiWeeklyChart(),
 
                   const SizedBox(height: 10.0,),
-                  const TipChip(
-                    title: "Consistent Sleep Schedule",
-                    description:"Establish a steady sleep schedule for better sleep",
-                    image:"assets/images/mood_tracking/meditation.jpg",
+
+                  const Row(
+                    children: [
+                      Text("Try these things to improve your sleep quality.",style: AppStyles.subHeadingTextStyle3,),
+                    ],
                   ),
                   const SizedBox(height: 10.0,),
                   const TipChip(
-                    title: "Consistent Sleep Schedule",
-                    description:"Establish a steady sleep schedule for better sleep",
+                    title: "Consistent Schedule",
+                    description:"Stick to a regular sleep schedule, even on weekends.",
+                    image:"assets/images/sleep_tracking/sleep_schedule.jpg",
+                  ),
+                  const SizedBox(height: 10.0,),
+                  const TipChip(
+                    title: "Manage Stress",
+                    description:"Practice relaxation techniques like deep breathing or meditation.",
                     image:"assets/images/mood_tracking/meditation.jpg",
                   ),
                   const SizedBox(height: 10.0,),
                     const TipChip(
-                    title: "Consistent Sleep Schedule",
-                    description:"Establish a steady sleep schedule for better sleep",
-                    image:"assets/images/mood_tracking/meditation.jpg",
+                    title: "Limit Screen Time",
+                    description:"Avoid screens (phones, tablets, TVs) before bedtime.",
+                    image:"assets/images/sleep_tracking/screen_time.jpg",
                   ), 
 
 
