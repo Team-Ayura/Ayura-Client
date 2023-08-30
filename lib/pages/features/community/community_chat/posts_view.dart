@@ -11,6 +11,7 @@ class PostsView extends StatefulWidget {
   final String challengeDescription;
   final String? postImagePath;
   final String? profileImagePath;
+  final VoidCallback? onPressed;
 
   const PostsView({
     super.key,
@@ -19,6 +20,7 @@ class PostsView extends StatefulWidget {
     required this.challengeDescription,
     this.postImagePath,
     this.profileImagePath,
+    this.onPressed,
   });
 
   @override
@@ -91,104 +93,92 @@ class _PostsViewState extends State<PostsView> {
             height: 15,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ElevatedButton.icon(
-                onPressed: () {},
-                style: ButtonStyle(
-                  elevation: MaterialStateProperty.all(0.0),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(12), // Adjust the radius as needed
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.alternateGreyColor
+                          .withOpacity(0.2), // Shadow color with low opacity
+                      spreadRadius: 1, // Spread radius
+                      blurRadius: 1, // Blur radius
+                      offset: const Offset(0,
+                          1), // Offset from the top to create a bottom shadow
                     ),
-                  ),
-                  side: MaterialStateProperty.all(
-                    const BorderSide(
-                      color: AppColors.primaryColor, // Set the border color
-                      width: 1.0, // Set the border width
-                    ),
-                  ),
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.transparent),
+                  ],
                 ),
-                icon: const Icon(
-                  Icons.thumb_up,
-                  size: 20,
-                  color: AppColors.primaryColor,
-                ),
-                label: const Text(
-                  '',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
+                child: const IconButton(
+                  onPressed: null,
+                  icon: Icon(
+                    Icons.thumb_up,
+                    size: 20,
                     color: AppColors.primaryColor,
-                    fontSize: 13,
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 20,
-              ),
-              ElevatedButton.icon(
-                onPressed: () {},
-                style: ButtonStyle(
-                  elevation: MaterialStateProperty.all(0.0),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(12), // Adjust the radius as needed
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.alternateGreyColor
+                          .withOpacity(0.2), // Shadow color with low opacity
+                      spreadRadius: 1, // Spread radius
+                      blurRadius: 1, // Blur radius
+                      offset: const Offset(0,
+                          1), // Offset from the top to create a bottom shadow
                     ),
-                  ),
-                  side: MaterialStateProperty.all(
-                    const BorderSide(
-                      color: AppColors.primaryColor, // Set the border color
-                      width: 1.0, // Set the border width
-                    ),
-                  ),
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.transparent),
+                  ],
                 ),
-                icon: const Icon(
-                  Icons.arrow_forward,
-                  size: 20,
-                  color: AppColors.primaryColor,
-                ),
-                label: const Text(
-                  'Participate',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
+                child: IconButton(
+                  onPressed: widget.onPressed,
+                  icon: const Icon(
+                    Icons.message_outlined,
+                    size: 20,
                     color: AppColors.primaryColor,
-                    fontSize: 13,
                   ),
                 ),
               ),
-              ElevatedButton.icon(
-                onPressed: () {},
-                style: ButtonStyle(
-                  elevation: MaterialStateProperty.all(0.0),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(12), // Adjust the radius as needed
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.alternateGreyColor
+                          .withOpacity(0.2), // Shadow color with low opacity
+                      spreadRadius: 1, // Spread radius
+                      blurRadius: 1, // Blur radius
+                      offset: const Offset(0,
+                          1), // Offset from the top to create a bottom shadow
                     ),
-                  ),
-                  side: MaterialStateProperty.all(
-                    const BorderSide(
-                      color: AppColors.primaryColor, // Set the border color
-                      width: 1.0, // Set the border width
-                    ),
-                  ),
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.transparent),
+                  ],
                 ),
-                icon: const Icon(
-                  Icons.arrow_forward,
-                  size: 20,
-                  color: AppColors.primaryColor,
-                ),
-                label: const Text(
-                  'Participate',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
+                child: ElevatedButton.icon(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    elevation:
+                        MaterialStateProperty.all(0.0), // Remove elevation
+
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent),
+                  ),
+                  icon: const Icon(
+                    Icons.arrow_forward,
+                    size: 20,
                     color: AppColors.primaryColor,
-                    fontSize: 13,
+                  ),
+                  label: const Text(
+                    'Participate',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      color: AppColors.primaryColor,
+                      fontSize: 13,
+                    ),
                   ),
                 ),
               ),

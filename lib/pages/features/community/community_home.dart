@@ -58,6 +58,7 @@ class _CommunityHomeState extends State<CommunityHome> {
     );
   }
 
+ // Init State
   @override
   Widget build(BuildContext context) {
     return Scaffold(

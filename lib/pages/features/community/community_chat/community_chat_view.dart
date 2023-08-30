@@ -1,9 +1,13 @@
+import 'package:ayura/constants/styles.dart';
 import 'package:ayura/widgets/features/community/header_btn.dart';
+import 'package:ayura/widgets/features/community/input_fields.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ayura/pages/features/community/community_chat/posts_view.dart';
 import 'package:ayura/pages/features/community/community_chat/leaderboard_view.dart';
 import 'package:ayura/pages/features/community/community_chat/challenge_details_view.dart';
+import 'package:ayura/pages/features/community/create_community.dart';
+import 'package:ayura/widgets/features/community/comment_section.dart';
 
 //Constants
 import 'package:ayura/constants/colors.dart';
@@ -29,19 +33,133 @@ class _CommunityChatState extends State<CommunityChat> {
     });
   }
 
+  void openCommentSection() {
+    //Open the Comment Section
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => const CommentSection(),
+    );
+  }
+
+  void openCommunitySettingsOverlay() {
+    // Open the Community Settings Section
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) {
+        return communitySettings(); // Call the function to return the widget
+      },
+    );
+  }
+
+  // Community Settings Section Widget
+  Padding communitySettings() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 25, 10, 15),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.4,
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Text(
+              "Community Settings",
+              style: AppStyles.subheadingTextStyle2,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            // Settings
+            GestureDetector(
+              onTap: null,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+                width: MediaQuery.of(context).size.width * 0.8,
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Text(
+                  "Add Members",
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: AppColors.textColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: null,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+                width: MediaQuery.of(context).size.width * 0.8,
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Text(
+                  "Update Community",
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: null,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+                width: MediaQuery.of(context).size.width * 0.8,
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Text(
+                  "Delete",
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w600,
+                    color: Colors.redAccent,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       resizeToAvoidBottomInset: false,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(90.0),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(90.0),
         child: CommunityAppBar(
           appbarTitle: 'Colombo Active Life',
           visibility: 'Public',
           memberCount: '210',
+          onPressed: openCommunitySettingsOverlay,
         ),
       ),
       body: Container(
@@ -77,39 +195,159 @@ class _CommunityChatState extends State<CommunityChat> {
               height: 20,
             ),
             if (activeComponent == 'Overview') //Posts View
-              const Expanded(
+              Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(
+                      //FEEDSHARE BOX
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                const CircleAvatar(
+                                  backgroundImage: AssetImage(
+                                      'assets/images/profileIcon.png'),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: TextFormField(
+                                    maxLines: 2,
+                                    style: const TextStyle(
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                    ),
+                                    decoration: InputDecoration(
+                                      filled: true, // Set filled to true
+                                      fillColor: AppColors.backgroundColor,
+                                      hintText: "What are your thoughts today?",
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 15, vertical: 10),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        borderSide: const BorderSide(
+                                            color: AppColors.alternateGreyColor,
+                                            width: 1.0),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const IconButton(
+                                  onPressed: null,
+                                  icon: Icon(
+                                    Icons.perm_media_rounded,
+                                    size: 20,
+                                    color: AppColors.primaryColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    // Add your onPressed action here
+                                  },
+                                  style: ButtonStyle(
+                                    side: MaterialStateProperty.all(
+                                      const BorderSide(
+                                        color: AppColors
+                                            .primaryColor, // Border color
+                                        width: 1.0, // Border width
+                                      ),
+                                    ),
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            12.0), // Adjust the border radius
+                                      ),
+                                    ),
+                                  ),
+                                  child: const Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Share',
+                                        style: TextStyle(
+                                          fontSize: 14, // Adjust the text size
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.primaryColor,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        Icons.send_rounded,
+                                        color: AppColors
+                                            .primaryColor, // Set the icon color
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const SizedBox(
                         width: double.infinity,
                         child: Text(
                           'Checkout the latest posts',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: 'Inter',
-                              color: AppColors.textColor,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
+                            fontFamily: 'Inter',
+                            color: AppColors.textColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                       PostsView(
                         username: "Ruchira Bogahawatta",
                         timeAgo: "10 mins ago",
                         challengeDescription:
                             "Challenge : Complete a 1 kilometer run in 3 consecutive days",
+                        onPressed: openCommentSection,
                       ),
                       PostsView(
-                        username: "Dinuka A",
-                        timeAgo: "45 mins ago",
+                        username: "Ruchira Bogahawatta",
+                        timeAgo: "10 mins ago",
                         challengeDescription:
-                            "Challenge : Complete a 10km cycling ride in 5 consecutive days",
-                      ),
-                      PostsView(
-                        username: "Namadee Shakya",
-                        timeAgo: "2 hrs ago",
-                        challengeDescription:
-                            "Challenge :  Complete a 10km walk within a week",
+                            "Challenge : Complete a 1 kilometer run in 3 consecutive days",
+                        onPressed: openCommentSection,
                       ),
                     ],
                   ),
