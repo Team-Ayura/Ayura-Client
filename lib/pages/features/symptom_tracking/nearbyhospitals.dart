@@ -7,6 +7,23 @@ class NearbyHospitalsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // List of markers representing hospitals
+    final List<Marker> hospitals = [
+      const Marker(
+        markerId: MarkerId('hospital_1'),
+        position: LatLng(6.55, 79.52), // Hospital A coordinates
+        infoWindow: InfoWindow(
+          title: 'Hospital A',
+          snippet: 'Coordinates: 6°55\'09" N, 79°52\'05" E',
+        ),
+      ),
+      // const Marker(
+      //   markerId: MarkerId('hospital_2'),
+      //   position: LatLng(37.7816, -122.4300), // Hospital B coordinates
+      //   infoWindow: InfoWindow(title: 'Hospital B'), // Marker title
+      // ),
+      // Add more markers for other hospitals
+    ];
     return Scaffold(
       appBar: CustomAppBar(
           Icons.arrow_back_outlined,
@@ -15,16 +32,10 @@ class NearbyHospitalsPage extends StatelessWidget {
           leftCallback :()=>Navigator.of(context).pop()),
       body: GoogleMap(
         initialCameraPosition: const CameraPosition(
-          target: LatLng(37.7749, -122.4194), // Initial map center
-          zoom: 12.0, // Initial zoom level
+          target: LatLng(6.9, 80.1), // Initial map center
+          zoom: 10, // Initial zoom level
         ),
-        markers: {
-          const Marker(
-            markerId: MarkerId('marker_1'),
-            position: LatLng(37.7749, -122.4194), // Marker position
-            infoWindow: InfoWindow(title: 'Hospital A'), // Marker title
-          ),
-        },
+        markers: Set<Marker>.from(hospitals),
       ),
     );
   }

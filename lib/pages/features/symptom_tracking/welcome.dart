@@ -1,5 +1,7 @@
+import 'package:ayura/pages/features/symptom_tracking/chest.dart';
 import 'package:ayura/pages/features/symptom_tracking/page1.dart';
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
+import 'package:ayura/pages/features/symptom_tracking/stomach.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:flutter/material.dart';
 
@@ -97,42 +99,41 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  left: 195,
-                  top: 120,
-                  child: GestureDetector(
-                    onTap: () {
-                      PageNavigator(context: context).nextPage(const Page1());
-                      print('Tapped on Chest');
-                    },
-                    child: Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
+                  Positioned(left: 195,
+                    top: 120,
+                    child: GestureDetector(
+                      onTap: () {
+                        PageNavigator(context: context).nextPage(const Chest());
+                        print('Tapped on Chest');
+                      },
+                      child: Container(
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  left: 195,
-                  top: 190,
-                  child: GestureDetector(
-                    onTap: () {
-                      PageNavigator(context: context).nextPage(const Page1());
-                      print('Tapped on Stomach');
-                    },
-                    child: Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
+                  Positioned(
+                    left: 195,
+                    top: 190,
+                    child: GestureDetector(
+                      onTap: () {
+                        PageNavigator(context: context).nextPage(const Stomach());
+                        print('Tapped on Stomach');
+                      },
+                      child: Container(
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
                     ),
                   ),
-                ),
                 Positioned(
                   left: 175,
                   top: 325,
@@ -157,7 +158,7 @@ class WelcomePage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       PageNavigator(context: context).nextPage(const Page1());
-                      print('Tapped on Knee');
+                      print('Tapped on Foot');
                     },
                     child: Container(
                       width: 10,

@@ -37,7 +37,7 @@ class SleepTabBarView extends StatelessWidget {
                   text: "Weekly",
                 ),
                 Tab(
-                  text: "Bi Weekly",
+                  text: "Fortnight",
                 ),
                 Tab(
                   text: "Monthly",
