@@ -52,6 +52,7 @@ class _CommunityHomeState extends State<CommunityHome> {
     );
   }
 
+ // Init State
   @override
   void initState() {
     super.initState();
@@ -59,8 +60,6 @@ class _CommunityHomeState extends State<CommunityHome> {
 
   @override
   Widget build(BuildContext context) {
-    final data = Provider.of<CommunityProvider>(context, listen: false)
-        .getCommunitiesList();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       resizeToAvoidBottomInset: false,

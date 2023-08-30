@@ -37,35 +37,4 @@ class CommunityProvider extends ChangeNotifier {
     _communityModel.members = community.members;
     notifyListeners();
   }
-
-  Future<void> getCommunitiesList() async {
-    final url = '$requestBaseUrl/api/communities';
-
-    final body = _communityModel.toJson();
-
-    try {
-      http.Response req = await http.post(
-        Uri.parse(url),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: json.encode(body),
-      );
-      final res = json.decode(req.body);
-
-      if (req.statusCode == 200 || req.statusCode == 201) {
-        print(res);
-        notifyListeners();
-        return res;
-      } else {
-        print("Error Occured $res");
-        return res;
-        notifyListeners();
-      }
-
-      notifyListeners();
-    } catch (error) {
-      print(error);
-    }
-  }
 }
