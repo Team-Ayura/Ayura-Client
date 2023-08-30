@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ayura/constants/colors.dart';
 
 class InputField extends StatelessWidget {
-  const InputField({this.maxLines = 1, super.key});
+  InputField({this.maxLines = 1, super.key, this.onchanged});
 
   final int maxLines;
-
+  final Function(String)? onchanged;
   @override
   Widget build(BuildContext context) {
     return TextFormField(

@@ -60,6 +60,17 @@ class AppStyles {
     fontWeight: FontWeight.bold,
   );
 
+  static InputDecoration inputdec = InputDecoration(
+    contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.0),
+      borderSide: BorderSide(color: AppColors.primaryColor, width: 2.0),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.0),
+      borderSide: BorderSide(color: AppColors.primaryColor, width: 1.0),
+    ),
+  );
   InputDecoration inputDecoration(String placeholder, String error) {
     return InputDecoration(
       fillColor: Colors.transparent,

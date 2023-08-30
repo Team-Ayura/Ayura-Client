@@ -1,4 +1,6 @@
 import 'package:ayura/auth/onboarding_screen.dart';
+import 'package:ayura/pages/features/community/community_home.dart';
+import 'package:ayura/pages/features/community/test.dart';
 import 'package:ayura/pages/splash_screen.dart';
 // import 'package:ayura/auth/signup.dart';
 import 'package:ayura/pages/home.dart';
@@ -63,7 +65,7 @@ class MyApp extends StatelessWidget {
           future: _initFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return isViewed != 0 ? const OnboardingScreen() : const Home();
+              return isViewed != 0 ? CommunityHome() : const Home();
             } else {
               return const SplashScreen();
             }

@@ -28,6 +28,12 @@ class CommunityHome extends StatefulWidget {
 }
 
 class _CommunityHomeState extends State<CommunityHome> {
+   @override
+  void initState() {
+    super.initState();
+    Provider.of<CommunityProvider>(context, listen: false).getCommunitiesList();
+  }
+
   void openCreateCommunityOverlay() {
     showModalBottomSheet(
       isScrollControlled: true,
@@ -53,14 +59,7 @@ class _CommunityHomeState extends State<CommunityHome> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final data = Provider.of<CommunityProvider>(context, listen: false)
-        .getCommunitiesList();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       resizeToAvoidBottomInset: false,
@@ -89,13 +88,10 @@ class _CommunityHomeState extends State<CommunityHome> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Consumer<CommunityProvider>(
-                    builder: (context, community, child) {
-                  return Text(
-                    community.communityName,
-                    style: AppStyles.subheadingTextStyle2,
-                  );
-                }),
+                Text(
+                  'text',
+                  style: AppStyles.subheadingTextStyle2,
+                ),
                 TextButton(
                   onPressed: openCommunityListOverlay,
                   child: const Text(
@@ -112,38 +108,20 @@ class _CommunityHomeState extends State<CommunityHome> {
             SizedBox(
               // Main Chats Container
               height: MediaQuery.of(context).size.height * 0.35,
-              child: const SingleChildScrollView(
-                //Making the container Scrollabble
-                // GET Community List
-                child: Column(
-                  children: [
-                    ChatCard(
-                        communityName: 'Colombo Active Life',
-                        visibiity: 'Public',
-                        memberCount: '184'),
-                    ChatCard(
-                        communityName: 'Diabetes Control Circle',
-                        visibiity: 'Private',
-                        memberCount: '72'),
-                    ChatCard(
-                        communityName: 'CardioBuddy - Colombo',
-                        visibiity: 'Public',
-                        memberCount: '310'),
-                    ChatCard(
-                        communityName: 'Wellness Waves Community',
-                        visibiity: 'Public',
-                        memberCount: '515'),
-                    ChatCard(
-                        communityName: 'Joyful Wellness Journey',
-                        visibiity: 'Private',
-                        memberCount: '40'),
-                    ChatCard(
-                        communityName: 'DiabetesCare',
-                        visibiity: 'Private',
-                        memberCount: '10'),
-                  ],
-                ),
-              ),
+              child: Consumer<CommunityProvider>(
+                  builder: (context, communityProvider, _) {
+                List<CommunityModel> communities =
+                    communityProvider.communityList;
+                return ListView.builder(
+                    itemCount: communities.length,
+                    itemBuilder: (context, index) {
+                      CommunityModel community = communities[index];
+                      return ChatCard(
+                          communityName: community.communityName,
+                          visibiity: community.isPublic ? 'Public' : 'Private',
+                          memberCount: community.members.length.toString());
+                    });
+              }),
             ),
             const SizedBox(
               height: 10,

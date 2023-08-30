@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io';
 import 'package:ayura/constants/constants.dart';
 import 'package:ayura/provider/models/community_model.dart';
 
 class CommunityProvider extends ChangeNotifier {
-  // Get BaseURL
   final requestBaseUrl = AppUrls.baseUrl;
-
-  //Community Object
   final CommunityModel _communityModel = CommunityModel(
     id: "",
     communityName: "",
@@ -18,8 +14,9 @@ class CommunityProvider extends ChangeNotifier {
     categories: [],
     members: [],
   );
+  List<CommunityModel> _communityList = [];
 
-  // Getters
+  List<CommunityModel> get communityList => _communityList;
   String get id => _communityModel.id;
   String get communityName => _communityModel.communityName;
   String get communityDescription => _communityModel.communityDescription;
@@ -27,7 +24,6 @@ class CommunityProvider extends ChangeNotifier {
   List get categories => _communityModel.categories;
   List get members => _communityModel.members;
 
-  // Setter Function
   void updateCommunityInfo(CommunityModel community) {
     _communityModel.id = community.id;
     _communityModel.communityName = community.communityName;
@@ -38,12 +34,43 @@ class CommunityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //Get the communities from database
   Future<void> getCommunitiesList() async {
     final url = '$requestBaseUrl/api/communities';
 
-    final body = _communityModel.toJson();
+    try {
+      print('Inside getCommunitiesList');
+      http.Response req = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      );
+      final res = json.decode(req.body);
+      print('API Response: $res');
+      print('Status Code: ${req.statusCode}');
+
+      if (req.statusCode == 200 || req.statusCode == 201) {
+        _communityList = List<CommunityModel>.from(res.map<CommunityModel>(
+          (communityData) => CommunityModel.fromJson(communityData),
+        ));
+        print('Community List Fetched: $_communityList');
+      } else {
+        print("Error Occurred $res");
+      }
+    } catch (error) {
+      print('Error: $error');
+    }
+    notifyListeners();
+  }
+
+  //Create community
+  Future<void> createCommunity(CommunityModel community) async {
+    final url = '$requestBaseUrl/api/communities/create';
 
     try {
+      final body = community.toJson(); // Convert the community model to JSON
+      print('JSON Body: ${json.encode(body)}');
       http.Response req = await http.post(
         Uri.parse(url),
         headers: {
@@ -51,21 +78,19 @@ class CommunityProvider extends ChangeNotifier {
         },
         body: json.encode(body),
       );
+
       final res = json.decode(req.body);
+      print('Create Community Response: $res');
+      print('Create Community Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
-        print(res);
-        notifyListeners();
-        return res;
+        await getCommunitiesList(); // Fetch the updated community list
       } else {
-        print("Error Occured $res");
-        return res;
-        notifyListeners();
+        print("Error Occurred $res");
       }
-
-      notifyListeners();
     } catch (error) {
-      print(error);
+      print('Error: $error');
     }
+    notifyListeners();
   }
 }

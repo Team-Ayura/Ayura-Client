@@ -4,7 +4,7 @@ class CommunityModel {
   String communityDescription;
   bool isPublic;
   List<String> categories;
-  List<String> members;
+  List<Map<String, dynamic>> members;
 
   // Constructor
   CommunityModel({
@@ -12,26 +12,27 @@ class CommunityModel {
     required this.communityName,
     required this.communityDescription,
     required this.isPublic,
-    required this.categories,
-    required this.members,
-  });
+    List<String>? categories, // Initialize as empty list
+    List<Map<String, dynamic>>? members, // Initialize as empty list
+  })  : categories = categories ?? [],
+        members = members ?? [];
 
   // Factory constructor to create CommunityModel from JSON data
   factory CommunityModel.fromJson(Map<String, dynamic> json) {
     return CommunityModel(
-      id: json['_id'],
-      communityName: json['communityName'],
-      communityDescription: json['communityDescription'],
-      isPublic: json['isPublic'],
-      categories: List<String>.from(json['categories']),
-      members: List<String>.from(json['members']),
+      id: json['id'] ?? '',
+      communityName: json['communityName'] ?? '',
+      communityDescription: json['communityDescription'] ?? '',
+      isPublic: json['isPublic'] ?? false,
+      categories: List<String>.from(json['categories'] ?? []),
+      members: List<Map<String, dynamic>>.from(json['members'] ?? []),
     );
   }
 
   // Convert the object to JSON format for API requests.
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      '_id': id,
       'communityName': communityName,
       'communityDescription': communityDescription,
       'isPublic': isPublic,
@@ -39,5 +40,4 @@ class CommunityModel {
       'members': members,
     };
   }
-
 }
