@@ -6,13 +6,13 @@ class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.appbarTitle,
     required this.visibility,
     required this.memberCount,
-    // this.onPressed,
+    this.onPressed,
     super.key,
   });
   final String appbarTitle; // Appbar main title
   final String visibility;
   final String memberCount;
-  // final VoidCallback? onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -89,10 +89,7 @@ class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
             Icons.more_vert,
             color: AppColors.textColor,
           ), // Replace with your desired icon
-          onPressed: () {
-            // Handle the action of the right-side icon here.
-            // For example, you can open a settings screen.
-          },
+          onPressed: onPressed,
         ),
       ],
     );
