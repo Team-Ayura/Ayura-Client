@@ -5,11 +5,8 @@ import 'package:ayura/pages/features/community/community_chat/posts_view.dart';
 import 'package:ayura/pages/features/community/community_chat/leaderboard_view.dart';
 import 'package:ayura/pages/features/community/community_chat/challenge_details_view.dart';
 
-
-
 //Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 // Feature Widgets
 import 'package:ayura/widgets/features/community/community_appbar.dart';
@@ -34,20 +31,23 @@ class _CommunityChatState extends State<CommunityChat> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       resizeToAvoidBottomInset: false,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(90.0),
         child: CommunityAppBar(
-          appbarTitle: 'Diabetes Support Circle',
+          appbarTitle: 'Colombo Active Life',
           visibility: 'Public',
-          memberCount: '20',
+          memberCount: '210',
         ),
       ),
       body: Container(
         width: double.infinity, //Take the whole available width of the device
-        padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        padding: EdgeInsets.fromLTRB(
+            width * 0.02, height * 0.01, width * 0.02, height * 0.01),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -67,7 +67,7 @@ class _CommunityChatState extends State<CommunityChat> {
                   isActive: activeComponent == 'Leaderboard',
                 ),
                 HeaderButton(
-                  buttonName: 'Challenge',
+                  buttonName: 'Challenges',
                   onPressed: () => updateActiveComponent('Challenge'),
                   isActive: activeComponent == 'Challenge',
                 ),
@@ -85,6 +85,7 @@ class _CommunityChatState extends State<CommunityChat> {
                         width: double.infinity,
                         child: Text(
                           'Checkout the latest posts',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: 'Inter',
                               color: AppColors.textColor,
@@ -92,10 +93,24 @@ class _CommunityChatState extends State<CommunityChat> {
                               fontWeight: FontWeight.w600),
                         ),
                       ),
-                      PostsView(),
-                      PostsView(),
-                      PostsView(),
-                      PostsView(),
+                      PostsView(
+                        username: "Ruchira Bogahawatta",
+                        timeAgo: "10 mins ago",
+                        challengeDescription:
+                            "Challenge : Complete a 1 kilometer run in 3 consecutive days",
+                      ),
+                      PostsView(
+                        username: "Dinuka A",
+                        timeAgo: "45 mins ago",
+                        challengeDescription:
+                            "Challenge : Complete a 10km cycling ride in 5 consecutive days",
+                      ),
+                      PostsView(
+                        username: "Namadee Shakya",
+                        timeAgo: "2 hrs ago",
+                        challengeDescription:
+                            "Challenge :  Complete a 10km walk within a week",
+                      ),
                     ],
                   ),
                 ),

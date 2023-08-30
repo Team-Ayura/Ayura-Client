@@ -86,8 +86,9 @@ class PageTwoState extends State<PageTwo> {
                         trailing: SvgPicture.asset(
                           'assets/icons/activity${index + 1}.svg',
                           height: 70,
-                          color:
-                              selected == index ? Colors.white : Colors.black,
+                          color: selected == index
+                              ? Colors.white
+                              : const Color.fromARGB(255, 77, 77, 77),
                         ),
                         selected: selected == index ? true : false,
                         onTap: () {
@@ -103,7 +104,7 @@ class PageTwoState extends State<PageTwo> {
                             borderRadius: BorderRadius.circular(10),
                             side: BorderSide(
                                 color: selected != index
-                                    ? Colors.black
+                                    ? const Color.fromARGB(255, 77, 77, 77)
                                     : AppColors.primaryColor,
                                 width: 1)),
                       );

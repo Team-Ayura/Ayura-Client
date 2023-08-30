@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 class AppStyles {
   static const TextStyle headingTextStyle = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    color: Colors.black,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textColor,
   );
 
   static const TextStyle subHeadingTextStyle = TextStyle(
@@ -25,15 +25,22 @@ class AppStyles {
     color: Color.fromARGB(255, 0, 0, 0),
   );
 
+  static const TextStyle subHeadingTextStyle3 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
+  );
+
   static const TextStyle bodyTextStyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 14,
-    color: Colors.black,
+    color: AppColors.textColor,
   );
 
   static const TextStyle bodyTextStyle2 = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 15,
+    fontSize: 14,
     color: Color(0xFF878787),
   );
 
@@ -46,25 +53,24 @@ class AppStyles {
   );
 
   //app bar title
-   static const TextStyle appBarTitleStyle = TextStyle(
+  static const TextStyle appBarTitleStyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 20,
     color: Colors.black,
     fontWeight: FontWeight.bold,
   );
 
-  
-
   InputDecoration inputDecoration(String placeholder, String error) {
     return InputDecoration(
       fillColor: Colors.transparent,
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(color: Color(0xff23A6F0), width: 1.5),
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: AppColors.primaryColor, width: 1.5),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(color: AppColors.primaryColor, width: 1.5),
+        borderRadius: BorderRadius.circular(12),
+        borderSide:
+            const BorderSide(color: AppColors.alternateGreyColor, width: 1),
       ),
       hintText: placeholder,
       hintStyle: const TextStyle(
@@ -127,6 +133,4 @@ class AppStyles {
   );
 
   // Add more styles as needed
-
-  
 }

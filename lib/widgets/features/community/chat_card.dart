@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ayura/utils/router.dart';
 // Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 // Pages //Must navigate to the relevant Community Chat
 import 'package:ayura/pages/features/community/community_chat/community_chat_view.dart';

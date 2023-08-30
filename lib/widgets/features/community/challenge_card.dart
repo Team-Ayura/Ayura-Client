@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ayura/widgets/global/custom_button.dart';
-import 'package:ayura/widgets/global/custom_grey_btn.dart';
-import 'package:ayura/utils/router.dart';
 
 // Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 class ChallengeCard extends StatelessWidget {
   const ChallengeCard(
@@ -15,6 +11,8 @@ class ChallengeCard extends StatelessWidget {
       required this.remainingTime,
       required this.completedCount,
       required this.totalCount,
+      this.margin = 10,
+      this.padding = 20,
       super.key});
 
   //Challenge Name, Challenge Type, Community Name
@@ -24,6 +22,8 @@ class ChallengeCard extends StatelessWidget {
   final String remainingTime;
   final String completedCount;
   final String totalCount;
+  final double margin;
+  final double padding;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +32,8 @@ class ChallengeCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
       ),
-      padding: const EdgeInsets.all(20),
-      margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+      padding: EdgeInsets.all(padding),
+      margin: EdgeInsets.fromLTRB(0, margin, 0, margin),
       child: Column(
         children: [
           Row(

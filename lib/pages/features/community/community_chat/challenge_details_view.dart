@@ -1,11 +1,9 @@
 import 'package:ayura/widgets/features/community/custom_dropdown.dart';
-import 'package:ayura/widgets/features/community/header_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 
 //Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 class ChallengeDetailsView extends StatefulWidget {
   const ChallengeDetailsView({super.key});
@@ -29,9 +27,14 @@ class _ChallengeDetailsViewState extends State<ChallengeDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    Container challengeDetailsContainer() {
+    Container challengeDetailsContainer({
+      required String challengeTitle,
+      required String challenge,
+      required String highestScore,
+      required String attempted,
+    }) {
       return Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -40,18 +43,18 @@ class _ChallengeDetailsViewState extends State<ChallengeDetailsView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'Running Challenge 1',
-              style: TextStyle(
+            Text(
+              challengeTitle,
+              style: const TextStyle(
                 fontFamily: 'Inter',
                 color: AppColors.textColor,
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 25),
-            const Text(
-              'Your challenge is to complete a 1KM run for three consecutive days',
-              style: TextStyle(
+            Text(
+              challenge,
+              style: const TextStyle(
                 fontFamily: 'Inter',
                 color: AppColors.primaryColor,
                 fontWeight: FontWeight.w600,
@@ -97,19 +100,19 @@ class _ChallengeDetailsViewState extends State<ChallengeDetailsView> {
               context: context,
             ),
             const SizedBox(height: 30),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Highest Score - 150 Points',
-                  style: TextStyle(
+                  'Highest Score - $highestScore Points',
+                  style: const TextStyle(
                       fontFamily: 'Inter',
                       color: AppColors.alternateGreyColor,
                       fontSize: 13),
                 ),
                 Text(
-                  'Attempted - 21',
-                  style: TextStyle(
+                  'Attempted - $attempted',
+                  style: const TextStyle(
                       fontFamily: 'Inter',
                       color: AppColors.alternateGreyColor,
                       fontSize: 13),
@@ -145,17 +148,27 @@ class _ChallengeDetailsViewState extends State<ChallengeDetailsView> {
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.6,
-          child: Expanded(
-              child: SingleChildScrollView(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                challengeDetailsContainer(),
-                challengeDetailsContainer(),
-                challengeDetailsContainer(),
-                challengeDetailsContainer(),
+                challengeDetailsContainer(
+                  challengeTitle: "Running Routine 1",
+                  challenge:
+                      "Your challenge is to complete a 1KM run in 3 consecutive days",
+                  attempted: "25",
+                  highestScore: "150",
+                ),
+                challengeDetailsContainer(
+                  challengeTitle: "Daily Walk",
+                  challenge:
+                      "Your challenge is to complete a 1KM walk throughout a week",
+                  attempted: "32",
+                  highestScore: "80",
+                ),
               ],
             ),
-          )),
+          ),
         )
       ],
     );

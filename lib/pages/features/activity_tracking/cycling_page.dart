@@ -1,16 +1,15 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/pages/features/activity_tracking/activity.dart';
 import 'package:ayura/pages/features/activity_tracking/cycling_on_ride.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
 import 'package:ayura/utils/router.dart';
+import 'package:ayura/widgets/global/custom_appbar.dart';
+
 // import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/chart.dart';
 import 'package:ayura/widgets/features/activity_tracking/cycle_ride_box.dart';
-import 'package:ayura/widgets/features/activity_tracking/map.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -29,9 +28,12 @@ class _CyclingPageState extends State<CyclingPage> {
     final NumberFormat numberFormat = NumberFormat('#,###');
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cycling'),
-        backgroundColor: AppColors.primaryColor,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
+        child: CustomAppBar(
+          appbarTitle: 'Cycling',
+          isBackBtn: true,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -57,6 +59,20 @@ class _CyclingPageState extends State<CyclingPage> {
                 ],
               ),
             ),
+            Consumer<CyclingProvider>(
+                builder: (context, cyclingProvider, _) {
+                  return Container(margin: EdgeInsets.only(left: 25), child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Average Distance', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+                      SizedBox(height:5),
+                      Text(cyclingProvider.timePeriod, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.textColor.withOpacity(0.5))),
+                    ],
+                  ));
+                }
+            ),
+            SizedBox(height:5),
             // the chart
             Container(
               height: 200,
@@ -71,7 +87,7 @@ class _CyclingPageState extends State<CyclingPage> {
             ),
             // distance
             Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor
                       .withOpacity(0.3), // Set your desired button color here
@@ -192,7 +208,7 @@ class _CyclingPageState extends State<CyclingPage> {
                       return ActivityStatBox(
                         svgName: 'chart.svg',
                         value: improvement,
-                        label: 'Improvement',
+                        label: 'Speed',
                         isPercentageValue: true,
                       );
                     }),
@@ -209,11 +225,11 @@ class _CyclingPageState extends State<CyclingPage> {
               return GestureDetector(
                 onTap: () {
                   cyclingOnRideProvider.startTimer();
-                  PageNavigator(context: context).nextPage(CyclingOnRidePage());
+                  PageNavigator(context: context).nextPage(const CyclingOnRidePage());
                 },
                 child: Container(
                   margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       color: AppColors.primaryColor,
                       borderRadius: BorderRadius.circular(8)),
@@ -237,11 +253,11 @@ class _CyclingPageState extends State<CyclingPage> {
             Container(
               margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Ride History',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
@@ -251,18 +267,22 @@ class _CyclingPageState extends State<CyclingPage> {
                   Column(
                     children: [
                       CyclingTripWidget(
-                        date: 'June 10',
+                        date: 'Aug 10',
                         startTime: '6:00 AM',
                         distance: '5.6 Km',
                         duration: '1:30:00',
                         rideName: 'Cycling at Bellanwila park',
+                        latitude: 6.84163999014293,
+                        longitude: 79.89381156999976,
                       ),
                       CyclingTripWidget(
-                        date: 'June 07',
+                        date: 'Aug 07',
                         startTime: '6:13 AM',
                         distance: '4.2 Km',
                         duration: '00:59:00',
                         rideName: 'Cycling at Galle Face',
+                        latitude: 6.925880961397556,
+                        longitude: 79.84372231557587,
                       ),
                     ],
                   ),
@@ -276,7 +296,7 @@ class _CyclingPageState extends State<CyclingPage> {
               height: 10,
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -286,8 +306,8 @@ class _CyclingPageState extends State<CyclingPage> {
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
-                    padding: EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors
                           .grey.shade200, // Set your desired button color here

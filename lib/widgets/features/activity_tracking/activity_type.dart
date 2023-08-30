@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../constants/colors.dart';
-import '../../../utils/router.dart';
 
 class CustomBoxItem extends StatelessWidget {
   final int index;
@@ -11,7 +10,8 @@ class CustomBoxItem extends StatelessWidget {
   final String subText;
   final String route;
 
-  CustomBoxItem({
+  const CustomBoxItem({
+    super.key,
     required this.index,
     required this.imagePath,
     required this.mainText,
@@ -28,8 +28,8 @@ class CustomBoxItem extends StatelessWidget {
         Navigator.pushNamed(context, route); // check this out
       },
       child: Container(
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
@@ -53,23 +53,24 @@ class CustomBoxItem extends StatelessWidget {
                       mainText,
                       style: const TextStyle(
                         color: AppColors.textColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
+                    const SizedBox(height: 5),
                     Text(
                       subText,
                       style: const TextStyle(
                         color: Colors.black54,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                     ),
                   ],
                 ),
               ),
             Container(
-              width: 120,
-              height: 120,
+              width: 90,
+              height: 90,
               decoration: const BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: Colors.transparent,
@@ -88,16 +89,17 @@ class CustomBoxItem extends StatelessWidget {
                       mainText,
                       style: const TextStyle(
                         color: AppColors.textColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                       ),
                       textAlign: TextAlign.right,
                     ),
+                    const SizedBox(height: 5),
                     Text(
                       subText,
                       style: const TextStyle(
                         color: Colors.black54,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                       textAlign: TextAlign.right,
                     ),

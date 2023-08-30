@@ -1,17 +1,21 @@
 import 'dart:io';
-
+import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class ImagePreviewScreen extends StatelessWidget {
   final String imagePath;
 
-  ImagePreviewScreen({required this.imagePath});
+  const ImagePreviewScreen({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Image Preview'),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
+        child: CustomAppBar(
+          appbarTitle: 'Image Preview',
+          isBackBtn: true,
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +30,7 @@ class ImagePreviewScreen extends StatelessWidget {
                   // Implement the logic to keep the image
                   Navigator.of(context).pop(true);
                 },
-                child: Text('Keep'),
+                child: const Text('Keep'),
               ),
               const SizedBox(width: 16),
               ElevatedButton(

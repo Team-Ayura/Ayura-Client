@@ -21,7 +21,6 @@ class AuthScreenState extends State<AuthScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _curr = 0;
   AuthenticationProvider2 auth = AuthenticationProvider2();
- 
 
   @override
   Widget build(BuildContext context) {
@@ -75,10 +74,10 @@ class AuthScreenState extends State<AuthScreen> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(color: Colors.grey)),
-                          child: Row(
+                          child: const Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Icon(
                                 Icons.arrow_back,
                               ),
@@ -98,23 +97,22 @@ class AuthScreenState extends State<AuthScreen> {
                       return customButton(
                           tap: () {
                             if (_curr == 3) {
-                             if(auth.isValid == true){
+                              if (auth.isValid == true) {
                                 auth.register();
                                 PageNavigator(context: context)
                                     .nextPage(const Home());
-                             }else{
-                               ScaffoldMessenger.of(context).showSnackBar(
-                                 const SnackBar(
-                                   content: Text('Please fill all fields'),
-                                 ),
-                               );
-                             }
-                              
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Please fill all fields'),
+                                  ),
+                                );
+                              }
                             }
 
-                                 _pageController.animateToPage(++_curr,
-                                    duration: const Duration(milliseconds: 250),
-                                    curve: Curves.bounceInOut);
+                            _pageController.animateToPage(++_curr,
+                                duration: const Duration(milliseconds: 250),
+                                curve: Curves.bounceInOut);
                           },
                           icon: Icons.arrow_forward,
                           text: 'Next',

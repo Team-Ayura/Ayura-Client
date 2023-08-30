@@ -4,6 +4,7 @@ import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart'
 import 'package:ayura/widgets/features/activity_tracking/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:provider/provider.dart';
 
 class StairsPage extends StatefulWidget {
@@ -21,9 +22,12 @@ class _StairsPageState extends State<StairsPage> {
     final NumberFormat numberFormat = NumberFormat('#,###');
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stairs'),
-        backgroundColor: AppColors.primaryColor,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(90.0), // Set the preferred size here.
+        child: CustomAppBar(
+          appbarTitle: 'Stairs',
+          isBackBtn: true,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -49,21 +53,35 @@ class _StairsPageState extends State<StairsPage> {
                 ],
               ),
             ),
+            Consumer<StairsProvider>(
+                builder: (context, stairsProvider, _) {
+                  return Container(margin: EdgeInsets.only(left: 25), child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Average Stairs Count', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+                      SizedBox(height:5),
+                      Text(stairsProvider.timePeriod, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.textColor.withOpacity(0.5))),
+                    ],
+                  ));
+                }
+            ),
+            SizedBox(height:5),
             // the chart
             Container(
               height: 200,
               padding: const EdgeInsets.all(10),
               child: Consumer<StairsProvider>(
-                  builder: (context, walkingAndRunningProvider, _) {
+                  builder: (context, stairsProvider, _) {
                 return BarChartWeekly(
                     yAxisLabel: 'Stairs',
-                    filter: walkingAndRunningProvider.selectedFilter,
-                    data: walkingAndRunningProvider.steps);
+                    filter: stairsProvider.selectedFilter,
+                    data: stairsProvider.steps);
               }),
             ),
             // steps & distance
             Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor
                       .withOpacity(0.3), // Set your desired button color here
@@ -261,7 +279,7 @@ class _StairsPageState extends State<StairsPage> {
               height: 10,
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,8 +289,8 @@ class _StairsPageState extends State<StairsPage> {
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
-                    padding: EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors
                           .grey.shade200, // Set your desired button color here
@@ -296,11 +314,11 @@ class _StairsPageState extends State<StairsPage> {
 
   Consumer<StairsProvider> _buildCustomButton(String buttonText, int index) {
     return Consumer<StairsProvider>(
-        builder: (context, walkingAndRunningProvider, _) {
-      bool isActive = walkingAndRunningProvider.selectedFilter == buttonText;
+        builder: (context, stairsProvider, _) {
+      bool isActive = stairsProvider.selectedFilter == buttonText;
       return Expanded(
         child: GestureDetector(
-          onTap: () => walkingAndRunningProvider.updateFilter(buttonText),
+          onTap: () => stairsProvider.updateFilter(buttonText),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.all(8.0),

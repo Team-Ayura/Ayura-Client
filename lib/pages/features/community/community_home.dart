@@ -1,7 +1,9 @@
+import 'package:ayura/provider/communityProviders/community_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
-import 'package:ayura/widgets/global/custom_button.dart';
-import 'package:ayura/utils/router.dart';
+import 'package:ayura/widgets/global/bottom_navigation.dart';
+import 'package:provider/provider.dart';
+import 'package:ayura/provider/communityProviders/community_provider.dart';
 // Community Feature Widgets
 import 'package:ayura/widgets/features/community/chat_card.dart'; // Chat Card Widget
 import 'package:ayura/widgets/features/community/search_box.dart'; // SearchBox Widget
@@ -14,6 +16,7 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
 // Community Pages
 import 'package:ayura/pages/features/community/create_community.dart';
+import 'package:ayura/provider/models/community_model.dart';
 
 class CommunityHome extends StatefulWidget {
   const CommunityHome({super.key});
@@ -50,7 +53,14 @@ class _CommunityHomeState extends State<CommunityHome> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final data = Provider.of<CommunityProvider>(context, listen: false)
+        .getCommunitiesList();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       resizeToAvoidBottomInset: false,
@@ -60,6 +70,7 @@ class _CommunityHomeState extends State<CommunityHome> {
         child: CustomAppBar(
           appbarTitle: 'Community',
           onPressed: openCreateCommunityOverlay,
+          iconName: Icons.add,
         ),
       ),
       body: Container(
@@ -78,8 +89,13 @@ class _CommunityHomeState extends State<CommunityHome> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Your Communities',
-                    style: AppStyles.subheadingTextStyle2),
+                Consumer<CommunityProvider>(
+                    builder: (context, community, child) {
+                  return Text(
+                    community.communityName,
+                    style: AppStyles.subheadingTextStyle2,
+                  );
+                }),
                 TextButton(
                   onPressed: openCommunityListOverlay,
                   child: const Text(
@@ -95,35 +111,36 @@ class _CommunityHomeState extends State<CommunityHome> {
             ),
             SizedBox(
               // Main Chats Container
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.35,
               child: const SingleChildScrollView(
                 //Making the container Scrollabble
+                // GET Community List
                 child: Column(
                   children: [
                     ChatCard(
-                        communityName: 'Diabetes Control Circle',
-                        visibiity: 'Private',
-                        memberCount: '55'),
+                        communityName: 'Colombo Active Life',
+                        visibiity: 'Public',
+                        memberCount: '184'),
                     ChatCard(
                         communityName: 'Diabetes Control Circle',
                         visibiity: 'Private',
-                        memberCount: '55'),
+                        memberCount: '72'),
                     ChatCard(
-                        communityName: 'Diabetes Control Circle',
-                        visibiity: 'Private',
-                        memberCount: '55'),
+                        communityName: 'CardioBuddy - Colombo',
+                        visibiity: 'Public',
+                        memberCount: '310'),
                     ChatCard(
-                        communityName: 'Diabetes Control Circle',
-                        visibiity: 'Private',
-                        memberCount: '55'),
+                        communityName: 'Wellness Waves Community',
+                        visibiity: 'Public',
+                        memberCount: '515'),
                     ChatCard(
-                        communityName: 'Diabetes Control Circle',
+                        communityName: 'Joyful Wellness Journey',
                         visibiity: 'Private',
-                        memberCount: '55'),
+                        memberCount: '40'),
                     ChatCard(
-                        communityName: 'Diabetes Control Circle',
+                        communityName: 'DiabetesCare',
                         visibiity: 'Private',
-                        memberCount: '55'),
+                        memberCount: '10'),
                   ],
                 ),
               ),
@@ -153,17 +170,18 @@ class _CommunityHomeState extends State<CommunityHome> {
               // Challenge Container
               child: ChallengeCard(
                 //Must Pass other data also, such as challenge data
-                communityName: 'Diabetes Support Circle',
-                challengeName: 'LSEG Running',
-                challengeType: 'Running',
+                communityName: 'Colombo Active Life',
+                challengeName: 'Cycle Strong Series',
+                challengeType: 'Cycling',
                 remainingTime: '7 Days',
-                completedCount: '1.6',
-                totalCount: '2 km',
+                completedCount: '12.6',
+                totalCount: '20 km',
               ),
             ),
           ],
         ),
       ),
+      bottomNavigationBar: const AppNavigation(),
     );
   }
 }

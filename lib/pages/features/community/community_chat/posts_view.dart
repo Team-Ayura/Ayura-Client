@@ -1,15 +1,25 @@
-import 'package:ayura/widgets/features/community/header_btn.dart';
 import 'package:flutter/material.dart';
 
 //Constants
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 
 // Feature Widgets
-import 'package:ayura/widgets/features/community/community_appbar.dart';
 
 class PostsView extends StatefulWidget {
-  const PostsView({super.key});
+  final String username;
+  final String timeAgo;
+  final String challengeDescription;
+  final String? postImagePath;
+  final String? profileImagePath;
+
+  const PostsView({
+    super.key,
+    required this.username,
+    required this.timeAgo,
+    required this.challengeDescription,
+    this.postImagePath,
+    this.profileImagePath,
+  });
 
   @override
   State<PostsView> createState() {
@@ -29,26 +39,27 @@ class _PostsViewState extends State<PostsView> {
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       child: Column(
         children: [
-          const Row(
+          Row(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage('assets/images/profileIcon.png'),
+                backgroundImage: AssetImage(
+                    widget.profileImagePath ?? 'assets/images/profileIcon.png'),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Text(
-                'Ruchira Bogahawatta',
-                style: TextStyle(
+                widget.username,
+                style: const TextStyle(
                     fontFamily: 'Inter',
                     color: AppColors.textColor,
                     fontSize: 14,
                     fontWeight: FontWeight.w600),
               ),
-              Expanded(child: SizedBox()),
+              const Expanded(child: SizedBox()),
               Text(
-                '20 mins ago',
-                style: TextStyle(
+                widget.timeAgo,
+                style: const TextStyle(
                   fontFamily: 'Inter',
                   color: AppColors.alternateGreyColor,
                   fontSize: 12,
@@ -59,9 +70,9 @@ class _PostsViewState extends State<PostsView> {
           const SizedBox(
             height: 15,
           ),
-          const Text(
-            'Challenge was to complete a 1 kilometer run for three consecutive days',
-            style: TextStyle(
+          Text(
+            widget.challengeDescription,
+            style: const TextStyle(
               fontFamily: 'Inter',
               color: AppColors.textColor,
               fontSize: 14,
@@ -71,7 +82,7 @@ class _PostsViewState extends State<PostsView> {
             height: 20,
           ),
           Image.asset(
-            'assets/images/postImage.png',
+            widget.postImagePath ?? 'assets/images/postImage.png',
             width: 300,
             height: 300,
             fit: BoxFit.contain,
@@ -106,7 +117,7 @@ class _PostsViewState extends State<PostsView> {
                   color: AppColors.primaryColor,
                 ),
                 label: const Text(
-                  'Like',
+                  '',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: AppColors.primaryColor,
@@ -116,6 +127,38 @@ class _PostsViewState extends State<PostsView> {
               ),
               const SizedBox(
                 width: 20,
+              ),
+              ElevatedButton.icon(
+                onPressed: () {},
+                style: ButtonStyle(
+                  elevation: MaterialStateProperty.all(0.0),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                  side: MaterialStateProperty.all(
+                    const BorderSide(
+                      color: AppColors.primaryColor, // Set the border color
+                      width: 1.0, // Set the border width
+                    ),
+                  ),
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.transparent),
+                ),
+                icon: const Icon(
+                  Icons.arrow_forward,
+                  size: 20,
+                  color: AppColors.primaryColor,
+                ),
+                label: const Text(
+                  'Participate',
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    color: AppColors.primaryColor,
+                    fontSize: 13,
+                  ),
+                ),
               ),
               ElevatedButton.icon(
                 onPressed: () {},

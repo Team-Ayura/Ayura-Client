@@ -1,12 +1,15 @@
 import 'dart:async';
-
+import 'dart:io';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class CyclingOnRideProvider extends ChangeNotifier {
-  List<String> _imagePaths = [];
+  final List<String> _imagePaths = [];
   List<String> get imagePaths => _imagePaths;
-  int _calorieCounter = 324;
-  double _cyclingSpeed = 4.2;
+  final int _calorieCounter = 0;
+  final double _cyclingSpeed = 0.0;
   String imagePath(int index) => _imagePaths[index];
   int get calorieCounter => _calorieCounter;
   double get cyclingSpeed => _cyclingSpeed;
@@ -23,7 +26,7 @@ class CyclingOnRideProvider extends ChangeNotifier {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!_isPaused) {
         _secondsElapsed++;
         notifyListeners();
@@ -74,4 +77,5 @@ class CyclingOnRideProvider extends ChangeNotifier {
 
     return '$hoursStr:$minutesStr:$secondsStr';
   }
+
 }

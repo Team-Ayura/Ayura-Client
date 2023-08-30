@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ayura/widgets/global/custom_button.dart';
-import 'package:ayura/utils/router.dart';
 // Constants
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
@@ -42,67 +40,50 @@ class ChallengeList extends StatelessWidget {
                 children: const [
                   ChallengeCard(
                     //Must Pass other data also, such as challenge data
-                    communityName: 'Diabetes Support Circle',
-                    challengeName: 'LSEG Running',
+                    communityName: 'Colombo Active Life',
+                    challengeName: 'Cycle Strong Series',
+                    challengeType: 'Cycling',
+                    remainingTime: '7 Days',
+                    completedCount: '12.6',
+                    totalCount: '20 km',
+                  ),
+                  ChallengeCard(
+                    //Must Pass other data also, such as challenge data
+                    communityName: 'CardioBuddy - Colombo',
+                    challengeName: 'Speed Boost Challenge',
                     challengeType: 'Running',
                     remainingTime: '7 Days',
-                    completedCount: '1.6',
-                    totalCount: '2 km',
+                    completedCount: '2.3',
+                    totalCount: '12 km',
                   ),
                   ChallengeCard(
                     //Must Pass other data also, such as challenge data
                     communityName: 'Diabetes Support Circle',
-                    challengeName: 'LSEG Running',
-                    challengeType: 'Running',
-                    remainingTime: '7 Days',
-                    completedCount: '1.6',
-                    totalCount: '2 km',
+                    challengeName: 'Walk for Health',
+                    challengeType: 'Walking',
+                    remainingTime: '2 Days',
+                    completedCount: '3.6',
+                    totalCount: '5 km',
                   ),
                   ChallengeCard(
                     //Must Pass other data also, such as challenge data
-                    communityName: 'Diabetes Support Circle',
-                    challengeName: 'LSEG Running',
+                    communityName: 'DiabetesCare',
+                    challengeName: 'Walk the Talk Challenge',
                     challengeType: 'Running',
-                    remainingTime: '7 Days',
-                    completedCount: '1.6',
-                    totalCount: '2 km',
+                    remainingTime: '12 Days',
+                    completedCount: '4',
+                    totalCount: '10 km',
                   ),
                   ChallengeCard(
                     //Must Pass other data also, such as challenge data
-                    communityName: 'Diabetes Support Circle',
-                    challengeName: 'LSEG Running',
+                    communityName: 'CardioBuddy - Colombo',
+                    challengeName: 'Marathon Month',
                     challengeType: 'Running',
-                    remainingTime: '7 Days',
-                    completedCount: '1.6',
-                    totalCount: '2 km',
+                    remainingTime: '27 Days',
+                    completedCount: '3.1',
+                    totalCount: '20 km',
                   ),
-                  ChallengeCard(
-                    //Must Pass other data also, such as challenge data
-                    communityName: 'Diabetes Support Circle',
-                    challengeName: 'LSEG Running',
-                    challengeType: 'Running',
-                    remainingTime: '7 Days',
-                    completedCount: '1.6',
-                    totalCount: '2 km',
-                  ),
-                  ChallengeCard(
-                    //Must Pass other data also, such as challenge data
-                    communityName: 'Diabetes Support Circle',
-                    challengeName: 'LSEG Running',
-                    challengeType: 'Running',
-                    remainingTime: '7 Days',
-                    completedCount: '1.6',
-                    totalCount: '2 km',
-                  ),
-                  ChallengeCard(
-                    //Must Pass other data also, such as challenge data
-                    communityName: 'Diabetes Support Circle',
-                    challengeName: 'LSEG Running',
-                    challengeType: 'Running',
-                    remainingTime: '7 Days',
-                    completedCount: '1.6',
-                    totalCount: '2 km',
-                  ),
+
                   // Add more ChatCard widgets as needed
                 ],
               ),
@@ -111,6 +92,5 @@ class ChallengeList extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

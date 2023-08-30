@@ -1,5 +1,4 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 import 'package:flutter/material.dart';
 
 Widget customButton(
@@ -7,6 +6,7 @@ Widget customButton(
     String? text = 'Save',
     IconData? icon,
     double? width,
+    double? fontSize = 14,
     double? height,
     BuildContext? context}) {
   return GestureDetector(
@@ -25,9 +25,9 @@ Widget customButton(
               children: [
                 Text(
                   text!,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'Inter',
-                    fontSize: 14,
+                    fontSize: fontSize,
                     color: Colors.white,
                   ),
                 ),
@@ -40,9 +40,9 @@ Widget customButton(
             )
           : Text(
               text!,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'Inter',
-                fontSize: 14,
+                fontSize: fontSize,
                 color: Colors.white,
               ),
             ),

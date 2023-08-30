@@ -16,8 +16,10 @@ class PageOne extends StatefulWidget {
 class PageOneState extends State<PageOne> {
   int weightval = 1;
   int heightval = 1;
-  final TextEditingController weightEditingController = TextEditingController(text: '50');
-  final TextEditingController heightEditingController = TextEditingController(text: '50');
+  final TextEditingController weightEditingController =
+      TextEditingController(text: '50');
+  final TextEditingController heightEditingController =
+      TextEditingController(text: '50');
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +29,7 @@ class PageOneState extends State<PageOne> {
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.01),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           const Align(
             alignment: Alignment.topCenter,
@@ -132,7 +132,6 @@ class PageOneState extends State<PageOne> {
               controller: weightEditingController,
               update: auth.updateWeight,
               onChanged: (newValue) {
-               
                 selectedValues.updateWeight(int.tryParse(newValue) ?? 0);
                 setState(() {
                   weightEditingController.text = newValue;
@@ -185,9 +184,8 @@ class PageOneState extends State<PageOne> {
                 auth.updateHeight(value);
               },
               onChanged: (newValue) {
-                
                 selectedValues.updateWeight(int.tryParse(newValue) ?? 0);
-                 setState(() {
+                setState(() {
                   heightEditingController.text = newValue;
                 });
               },
