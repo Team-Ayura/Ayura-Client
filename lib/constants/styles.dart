@@ -35,12 +35,12 @@ class AppStyles {
   static const TextStyle bodyTextStyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 14,
-    color: Colors.black,
+    color: AppColors.textColor,
   );
 
   static const TextStyle bodyTextStyle2 = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 15,
+    fontSize: 14,
     color: Color(0xFF878787),
   );
 

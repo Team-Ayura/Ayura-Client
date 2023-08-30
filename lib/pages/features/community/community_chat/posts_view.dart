@@ -117,7 +117,7 @@ class _PostsViewState extends State<PostsView> {
                   color: AppColors.primaryColor,
                 ),
                 label: const Text(
-                  'Like',
+                  '',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: AppColors.primaryColor,
@@ -127,6 +127,38 @@ class _PostsViewState extends State<PostsView> {
               ),
               const SizedBox(
                 width: 20,
+              ),
+              ElevatedButton.icon(
+                onPressed: () {},
+                style: ButtonStyle(
+                  elevation: MaterialStateProperty.all(0.0),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                  side: MaterialStateProperty.all(
+                    const BorderSide(
+                      color: AppColors.primaryColor, // Set the border color
+                      width: 1.0, // Set the border width
+                    ),
+                  ),
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.transparent),
+                ),
+                icon: const Icon(
+                  Icons.arrow_forward,
+                  size: 20,
+                  color: AppColors.primaryColor,
+                ),
+                label: const Text(
+                  'Participate',
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    color: AppColors.primaryColor,
+                    fontSize: 13,
+                  ),
+                ),
               ),
               ElevatedButton.icon(
                 onPressed: () {},
