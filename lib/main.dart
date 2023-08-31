@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SportsProvider()),
         ChangeNotifierProvider(create: (_) => WorkoutsProvider()),
         ChangeNotifierProvider(create: (_) => SymptomsProvider()),
-        // ChangeNotifierProvider(create: (_) => GoogleAuthProvider()),
+        ChangeNotifierProvider(create: (_) => GoogleAuthProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

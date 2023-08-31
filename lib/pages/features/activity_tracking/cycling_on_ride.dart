@@ -1,6 +1,7 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
+import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/activity_tracking/sharable_image_collage.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
@@ -75,7 +76,7 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
     );
   }
 
-  Consumer<CyclingProvider> _buildCustomButton(String buttonText, int index) {
+  Consumer<CyclingProvider> _buildCustomButton(ChartFilterType buttonText, int index) {
     return Consumer<CyclingProvider>(
         builder: (context, walkingAndRunningProvider, _) {
       bool isActive = walkingAndRunningProvider.selectedFilter == buttonText;
@@ -94,7 +95,7 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
                 duration: const Duration(milliseconds: 300),
                 opacity: isActive ? 1.0 : 0.7,
                 child: Text(
-                  buttonText,
+                  buttonText.label.substring(0, 1).toUpperCase(),
                   style: TextStyle(
                     color: isActive ? Colors.white : AppColors.textColor,
                     fontWeight: FontWeight.w500,

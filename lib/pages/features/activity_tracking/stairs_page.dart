@@ -1,5 +1,6 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/provider/activityProviders/stairsProvider.dart';
+import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/chart.dart';
 import 'package:flutter/material.dart';
@@ -46,10 +47,10 @@ class _StairsPageState extends State<StairsPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _buildCustomButton('D', 0),
-                  _buildCustomButton('W', 1),
-                  _buildCustomButton('M', 2),
-                  _buildCustomButton('Y', 3),
+                  _buildCustomButton(ChartFilterType.day, 0),
+                  _buildCustomButton(ChartFilterType.week, 1),
+                  _buildCustomButton(ChartFilterType.month, 2),
+                  _buildCustomButton(ChartFilterType.year, 3),
                 ],
               ),
             ),
@@ -312,7 +313,7 @@ class _StairsPageState extends State<StairsPage> {
     );
   }
 
-  Consumer<StairsProvider> _buildCustomButton(String buttonText, int index) {
+  Consumer<StairsProvider> _buildCustomButton(ChartFilterType buttonText, int index) {
     return Consumer<StairsProvider>(
         builder: (context, stairsProvider, _) {
       bool isActive = stairsProvider.selectedFilter == buttonText;
@@ -331,7 +332,7 @@ class _StairsPageState extends State<StairsPage> {
                 duration: const Duration(milliseconds: 300),
                 opacity: isActive ? 1.0 : 0.7,
                 child: Text(
-                  buttonText,
+                  buttonText.label.substring(0,1).toUpperCase(),
                   style: TextStyle(
                     color: isActive ? Colors.white : AppColors.textColor,
                     fontWeight: FontWeight.w500,

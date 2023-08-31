@@ -2,6 +2,7 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/activity_tracking/cycling_on_ride.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
+import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 
@@ -52,10 +53,10 @@ class _CyclingPageState extends State<CyclingPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _buildCustomButton('D', 0),
-                  _buildCustomButton('W', 1),
-                  _buildCustomButton('M', 2),
-                  _buildCustomButton('Y', 3),
+                  _buildCustomButton(ChartFilterType.day, 0),
+                  _buildCustomButton(ChartFilterType.week, 1),
+                  _buildCustomButton(ChartFilterType.month, 2),
+                  _buildCustomButton(ChartFilterType.year, 3),
                 ],
               ),
             ),
@@ -329,7 +330,7 @@ class _CyclingPageState extends State<CyclingPage> {
     );
   }
 
-  Consumer<CyclingProvider> _buildCustomButton(String buttonText, int index) {
+  Consumer<CyclingProvider> _buildCustomButton(ChartFilterType buttonText, int index) {
     return Consumer<CyclingProvider>(
         builder: (context, walkingAndRunningProvider, _) {
       bool isActive = walkingAndRunningProvider.selectedFilter == buttonText;
@@ -348,7 +349,7 @@ class _CyclingPageState extends State<CyclingPage> {
                 duration: const Duration(milliseconds: 300),
                 opacity: isActive ? 1.0 : 0.7,
                 child: Text(
-                  buttonText,
+                  buttonText.label.substring(0,1).toUpperCase(),
                   style: TextStyle(
                     color: isActive ? Colors.white : AppColors.textColor,
                     fontWeight: FontWeight.w500,

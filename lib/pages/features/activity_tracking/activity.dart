@@ -64,21 +64,21 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.start,
-            //   children: [
-            //     Consumer<GoogleAuthProvider>(
-            //       builder: (context, googleAuthProvider, _) {
-            //         return Switch(
-            //           value: googleAuthProvider.isUserAuthorized,
-            //           onChanged: (bool togglebtn){
-            //             googleAuthProvider.toggleGoogleAuthorization(togglebtn);
-            //           },
-            //         );
-            //       }
-            //     ),
-            //   ],
-            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Consumer<GoogleAuthProvider>(
+                  builder: (context, googleAuthProvider, _) {
+                    return Switch(
+                      value: googleAuthProvider.isUserAuthorized,
+                      onChanged: (bool togglebtn){
+                        googleAuthProvider.toggleGoogleAuthorization(!togglebtn);
+                      },
+                    );
+                  }
+                ),
+              ],
+            ),
             CustomBoxItem(
               index: 1,
               imagePath: 'assets/images/activity_tracking/running.svg',
