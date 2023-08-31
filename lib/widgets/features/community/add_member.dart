@@ -2,6 +2,7 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/community/community_chat/community_chat_view.dart';
 import 'package:ayura/provider/communityProviders/community_provider.dart';
 import 'package:ayura/provider/models/community_model.dart';
+import 'package:ayura/provider/models/memberModel.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/community/member_card.dart';
 import 'package:ayura/widgets/global/custom_app_bar.dart';
@@ -19,16 +20,36 @@ class AddMember extends StatefulWidget {
 }
 
 class _AddMemberState extends State<AddMember> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<CommunityProvider>(context, listen: false)
+        .getMembersList(widget.communityId);
+  }
+
   TextEditingController _emailController = TextEditingController();
   List<String> _membersList = [];
 
-  void _addMember() {
+  void _addMember(String communityId) async {
     String newMember = _emailController.text.trim();
     if (newMember.isNotEmpty && !_membersList.contains(newMember)) {
-      //call provider method to add members to community by email
-      _membersList.add(newMember);
-      _emailController.clear();
-      setState(() {});
+      try {
+        await Provider.of<CommunityProvider>(context, listen: false)
+            .addMember(communityId, newMember);
+        _membersList.add(newMember);
+        _emailController.clear();
+        await Provider.of<CommunityProvider>(context, listen: false)
+            .getMembersList(widget.communityId);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Member Added')));
+
+        setState(() {});
+      } catch (e) {
+        // Handle error, e.g., display a snackbar with an error message
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('User not Found')));
+        print('Error: $e');
+      }
     }
   }
 
@@ -65,7 +86,7 @@ class _AddMemberState extends State<AddMember> {
                   labelText: 'Add Member by Email',
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.add),
-                    onPressed: _addMember,
+                    onPressed: (() => _addMember(widget.communityId)),
                   ),
                 ),
               ),
@@ -78,15 +99,14 @@ class _AddMemberState extends State<AddMember> {
                 //When I add a member it should go to the database and display in here realtime
                 child: Consumer<CommunityProvider>(
                     builder: (context, communityProvider, _) {
-                  List<CommunityModel> communities =
-                      communityProvider.communityList;
+                  List<MemberModel> members = communityProvider.memberList;
                   return ListView.builder(
-                      itemCount: communities.length,
+                      itemCount: members.length,
                       itemBuilder: (context, index) {
-                        CommunityModel community = communities[index];
-                        return const MemberCard(
-                          memberName: 'Ruchira Bogahawatta',
-                          memberMail: 'ruchira@gmail.com',
+                        MemberModel member = members[index];
+                        return MemberCard(
+                          memberName: member.firstName + ' ' + member.lastName,
+                          memberMail: member.email,
                         );
                       });
                 }),
@@ -94,7 +114,7 @@ class _AddMemberState extends State<AddMember> {
               const SizedBox(height: 16),
               customButton(
                   tap: (() {
-                    PageNavigator(context: context).nextPage(CommunityChat());
+                    Navigator.pop(context);
                   }),
                   width: MediaQuery.of(context).size.width * 0.4,
                   text: 'Save',
