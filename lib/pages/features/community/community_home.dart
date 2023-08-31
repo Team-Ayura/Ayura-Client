@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:provider/provider.dart';
-import 'package:ayura/provider/communityProviders/community_provider.dart';
 // Community Feature Widgets
 import 'package:ayura/widgets/features/community/chat_card.dart'; // Chat Card Widget
-import 'package:ayura/widgets/features/community/search_box.dart'; // SearchBox Widget
 import 'package:ayura/widgets/features/community/challenge_card.dart'; // Challenge Card Widget
 import 'package:ayura/pages/features/community/community_list.dart';
 import 'package:ayura/pages/features/community/challenge_list.dart';
@@ -28,10 +26,11 @@ class CommunityHome extends StatefulWidget {
 }
 
 class _CommunityHomeState extends State<CommunityHome> {
-   @override
+  @override
   void initState() {
     super.initState();
-    Provider.of<CommunityProvider>(context, listen: false).getCommunitiesList();
+    Provider.of<CommunityProvider>(context, listen: false)
+        .getCommunitiesList(); //Initializing the community list
   }
 
   void openCreateCommunityOverlay() {
@@ -58,7 +57,7 @@ class _CommunityHomeState extends State<CommunityHome> {
     );
   }
 
- // Init State
+  // Init State
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,22 +80,17 @@ class _CommunityHomeState extends State<CommunityHome> {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
-            //Search Box
-            const SearchBox(),
-            const SizedBox(
-              height: 10,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'text',
+                const Text(
+                  'Your Communities',
                   style: AppStyles.subheadingTextStyle2,
                 ),
                 TextButton(
                   onPressed: openCommunityListOverlay,
                   child: const Text(
-                    'View All',
+                    'Explore',
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w500,
@@ -108,21 +102,32 @@ class _CommunityHomeState extends State<CommunityHome> {
             ),
             SizedBox(
               // Main Chats Container
-              height: MediaQuery.of(context).size.height * 0.35,
+              height: MediaQuery.of(context).size.height * 0.4,
               child: Consumer<CommunityProvider>(
-                  builder: (context, communityProvider, _) {
-                List<CommunityModel> communities =
-                    communityProvider.communityList;
-                return ListView.builder(
-                    itemCount: communities.length,
-                    itemBuilder: (context, index) {
-                      CommunityModel community = communities[index];
-                      return ChatCard(
-                          communityName: community.communityName,
-                          visibiity: community.isPublic ? 'Public' : 'Private',
-                          memberCount: community.members.length.toString());
-                    });
-              }),
+                builder: (context, communityProvider, _) {
+                  List<CommunityModel> communities =
+                      communityProvider.communityList; // Getter
+
+                  // Check for loading
+                  if (communityProvider.isLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return ListView.builder(
+                      itemCount: communities.length,
+                      itemBuilder: (context, index) {
+                        CommunityModel community = communities[index];
+                        return ChatCard(
+                            communityName: community.communityName,
+                            visibiity:
+                                community.isPublic ? 'Public' : 'Private',
+                            memberCount: community.members.length.toString());
+                      },
+                    );
+                  }
+                },
+              ),
             ),
             const SizedBox(
               height: 10,

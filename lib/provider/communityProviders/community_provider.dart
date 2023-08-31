@@ -5,6 +5,7 @@ import 'package:ayura/constants/constants.dart';
 import 'package:ayura/provider/models/community_model.dart';
 
 class CommunityProvider extends ChangeNotifier {
+  bool isLoading = false; // For Loading animation
   final requestBaseUrl = AppUrls.baseUrl;
   final CommunityModel _communityModel = CommunityModel(
     id: "",
@@ -16,6 +17,7 @@ class CommunityProvider extends ChangeNotifier {
   );
   List<CommunityModel> _communityList = [];
 
+  // Getters
   List<CommunityModel> get communityList => _communityList;
   String get id => _communityModel.id;
   String get communityName => _communityModel.communityName;
@@ -37,7 +39,8 @@ class CommunityProvider extends ChangeNotifier {
   //Get the communities from database
   Future<void> getCommunitiesList() async {
     final url = '$requestBaseUrl/api/communities';
-
+    isLoading = true;
+    notifyListeners();
     try {
       print('Inside getCommunitiesList');
       http.Response req = await http.get(
@@ -55,13 +58,14 @@ class CommunityProvider extends ChangeNotifier {
           (communityData) => CommunityModel.fromJson(communityData),
         ));
         print('Community List Fetched: $_communityList');
+        isLoading = false;
+        notifyListeners();
       } else {
         print("Error Occurred $res");
       }
     } catch (error) {
       print('Error: $error');
     }
-    notifyListeners();
   }
 
   //Create community

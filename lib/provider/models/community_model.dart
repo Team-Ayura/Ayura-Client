@@ -4,7 +4,7 @@ class CommunityModel {
   String communityDescription;
   bool isPublic;
   List<String> categories;
-  List<Map<String, dynamic>> members;
+  List<String> members;
 
   // Constructor
   CommunityModel({
@@ -13,9 +13,9 @@ class CommunityModel {
     required this.communityDescription,
     required this.isPublic,
     List<String>? categories, // Initialize as empty list
-    List<Map<String, dynamic>>? members, // Initialize as empty list
+    List<String>? members, // Initialize as empty list
   })  : categories = categories ?? [],
-        members = members ?? [];
+        members = members ?? [];  
 
   // Factory constructor to create CommunityModel from JSON data
   factory CommunityModel.fromJson(Map<String, dynamic> json) {
@@ -25,7 +25,7 @@ class CommunityModel {
       communityDescription: json['communityDescription'] ?? '',
       isPublic: json['isPublic'] ?? false,
       categories: List<String>.from(json['categories'] ?? []),
-      members: List<Map<String, dynamic>>.from(json['members'] ?? []),
+      members: List<String>.from(json['members'] ?? []),
     );
   }
 

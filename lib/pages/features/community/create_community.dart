@@ -30,7 +30,6 @@ class _CreateCommunityState extends State<CreateCommunity> {
   String _communityName = '';
   String _communityDescription = '';
 
-
   void handleCategorySelection(String category, bool isSelected) {
     // Handle the selection change here
     if (isSelected) {
@@ -57,6 +56,9 @@ class _CreateCommunityState extends State<CreateCommunity> {
       Provider.of<CommunityProvider>(context, listen: false)
           .createCommunity(newCommunity);
     }
+    
+    // Navigate back to the community home screen
+    Navigator.pop(context);
   }
 
   @override
@@ -164,7 +166,7 @@ class _CreateCommunityState extends State<CreateCommunity> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Container(
+                    SizedBox(
                       width: 100,
                       height: 50,
                       child: DropdownButtonFormField(
