@@ -51,7 +51,6 @@ class WelcomePage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       PageNavigator(context: context).nextPage(const Page1());
-                      print('Tapped on Head');
                     },
                     child: Container(
                       width: 10,
@@ -69,7 +68,6 @@ class WelcomePage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       PageNavigator(context: context).nextPage(const Page1());
-                      print('Tapped on Shoulder');
                     },
                     child: Container(
                       width: 10,
@@ -87,7 +85,6 @@ class WelcomePage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       PageNavigator(context: context).nextPage(const Page1());
-                      print('Tapped on Arm');
                     },
                     child: Container(
                       width: 10,
@@ -104,7 +101,6 @@ class WelcomePage extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         PageNavigator(context: context).nextPage(const Chest());
-                        print('Tapped on Chest');
                       },
                       child: Container(
                         width: 10,
@@ -122,7 +118,6 @@ class WelcomePage extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         PageNavigator(context: context).nextPage(const Stomach());
-                        print('Tapped on Stomach');
                       },
                       child: Container(
                         width: 10,
@@ -140,7 +135,6 @@ class WelcomePage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       PageNavigator(context: context).nextPage(const Page1());
-                      print('Tapped on Knee');
                     },
                     child: Container(
                       width: 10,
@@ -158,7 +152,6 @@ class WelcomePage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       PageNavigator(context: context).nextPage(const Page1());
-                      print('Tapped on Foot');
                     },
                     child: Container(
                       width: 10,

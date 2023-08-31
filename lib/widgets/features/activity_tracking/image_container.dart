@@ -13,10 +13,10 @@ class ImageContainer extends StatefulWidget {
 
   const ImageContainer({super.key, required this.cyclingOnRideProvider});
   @override
-  _ImageContainerState createState() => _ImageContainerState();
+  ImageContainerState createState() => ImageContainerState();
 }
 
-class _ImageContainerState extends State<ImageContainer> {
+class ImageContainerState extends State<ImageContainer> {
   // List<String> imagePaths = [
   // 'assets/images/activity_tracking/cycling/image1.jpg',
   // 'assets/images/activity_tracking/cycling/image2.jpg',
@@ -35,7 +35,6 @@ class _ImageContainerState extends State<ImageContainer> {
       final savedImage = await imageFile.copy('${appDir!.path}/$fileName');
       return savedImage.path;
     } catch (e) {
-      print('Error saving image: $e');
       return ''; // Return an empty string if saving fails
     }
   }
@@ -53,7 +52,6 @@ class _ImageContainerState extends State<ImageContainer> {
         return;
       }
     }
-    print("Tapped");
     // The camera permission is granted, proceed with opening the camera
     try {
       final pickedFile = await ImagePicker().pickImage(
@@ -87,7 +85,6 @@ class _ImageContainerState extends State<ImageContainer> {
         // }
       }
     } catch (e) {
-      print('Error picking image: $e');
     }
   }
 

@@ -1,34 +1,54 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/pages/features/community/community_chat/community_chat_view.dart';
 import 'package:ayura/provider/communityProviders/community_provider.dart';
-import 'package:ayura/provider/models/community_model.dart';
-import 'package:ayura/utils/router.dart';
+import 'package:ayura/provider/models/memberModel.dart';
 import 'package:ayura/widgets/features/community/member_card.dart';
 import 'package:ayura/widgets/global/custom_app_bar.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
-import 'package:flutter/material.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AddMember extends StatefulWidget {
   final String communityId;
-  AddMember({required this.communityId});
+  const AddMember({super.key, required this.communityId});
   @override
-  _AddMemberState createState() => _AddMemberState();
+  AddMemberState createState() => AddMemberState();
 }
 
-class _AddMemberState extends State<AddMember> {
-  TextEditingController _emailController = TextEditingController();
-  List<String> _membersList = [];
+class AddMemberState extends State<AddMember> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<CommunityProvider>(context, listen: false)
+        .getMembersList(widget.communityId);
+  }
 
-  void _addMember() {
+  final TextEditingController _emailController = TextEditingController();
+  final List<String> _membersList = [];
+
+  void _addMember(String communityId) async {
     String newMember = _emailController.text.trim();
     if (newMember.isNotEmpty && !_membersList.contains(newMember)) {
-      //call provider method to add members to community by email
-      _membersList.add(newMember);
-      _emailController.clear();
-      setState(() {});
+      try {
+        final communityProvider =
+            Provider.of<CommunityProvider>(context, listen: false);
+        // Add the new member to the community
+        await communityProvider.addMember(communityId, newMember);
+        // Update the local list of members
+        setState(() {
+          _membersList.add(newMember);
+        });
+        // Clear the email controller
+        _emailController.clear();
+        // Fetch updated member list from the provider
+        await communityProvider.getMembersList(widget.communityId);
+        // Show a snackbar to indicate successful addition
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Member Added')));
+      } catch (error) {
+        // Handle any errors that occur during the process
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('User not found')));
+      }
     }
   }
 
@@ -65,7 +85,7 @@ class _AddMemberState extends State<AddMember> {
                   labelText: 'Add Member by Email',
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.add),
-                    onPressed: _addMember,
+                    onPressed: (() => _addMember(widget.communityId)),
                   ),
                 ),
               ),
@@ -78,15 +98,14 @@ class _AddMemberState extends State<AddMember> {
                 //When I add a member it should go to the database and display in here realtime
                 child: Consumer<CommunityProvider>(
                     builder: (context, communityProvider, _) {
-                  List<CommunityModel> communities =
-                      communityProvider.communityList;
+                  List<MemberModel> members = communityProvider.memberList;
                   return ListView.builder(
-                      itemCount: communities.length,
+                      itemCount: members.length,
                       itemBuilder: (context, index) {
-                        CommunityModel community = communities[index];
-                        return const MemberCard(
-                          memberName: 'Ruchira Bogahawatta',
-                          memberMail: 'ruchira@gmail.com',
+                        MemberModel member = members[index];
+                        return MemberCard(
+                          memberName: '${member.firstName} ${member.lastName}',
+                          memberMail: member.email,
                         );
                       });
                 }),
@@ -94,7 +113,7 @@ class _AddMemberState extends State<AddMember> {
               const SizedBox(height: 16),
               customButton(
                   tap: (() {
-                    PageNavigator(context: context).nextPage(CommunityChat());
+                    Navigator.pop(context);
                   }),
                   width: MediaQuery.of(context).size.width * 0.4,
                   text: 'Save',

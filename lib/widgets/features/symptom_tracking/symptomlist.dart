@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class SymptomList extends StatelessWidget {
   final DateTime selectedDay;
@@ -23,10 +21,10 @@ class SymptomList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: Text(
             DateFormat('MMM dd, yyyy').format(selectedDay),
-            style: TextStyle(fontSize: 18.0),
+            style: const TextStyle(fontSize: 18.0),
           ),
         ),
         ListView.builder(
@@ -34,8 +32,8 @@ class SymptomList extends StatelessWidget {
           itemCount: symptomEntries.length,
           itemBuilder: (context, index) {
             return Container(
-              margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-              padding: EdgeInsets.all(16.0),
+              margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 color: _getBackgroundColor(symptomEntries[index].severity),
                 borderRadius: BorderRadius.circular(10.0),

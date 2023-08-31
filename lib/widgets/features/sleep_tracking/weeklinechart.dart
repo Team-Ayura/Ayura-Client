@@ -112,12 +112,12 @@ class _WeeklyChartState extends State<WeeklyChart> {
                       ],
                       isCurved: true,
                       gradient: LinearGradient(
-                          colors: [Colors.blue.withOpacity(0.3),Color.fromARGB(255, 117, 174, 209)],
+                          colors: [Colors.blue.withOpacity(0.3),const Color.fromARGB(255, 117, 174, 209)],
                       ),
                       // colors: [Colors.blue.withOpacity(0.3)],
                       dotData: const FlDotData(show: false),
                       belowBarData: BarAreaData(show: true, gradient: LinearGradient(
-                          colors: [Colors.blue.withOpacity(0.1),Color.fromARGB(255, 117, 174, 209)],
+                          colors: [Colors.blue.withOpacity(0.1),const Color.fromARGB(255, 117, 174, 209)],
                         ),),
                     ),
                   ],

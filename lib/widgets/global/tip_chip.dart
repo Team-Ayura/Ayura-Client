@@ -1,4 +1,3 @@
-import 'package:ayura/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class TipChip extends StatelessWidget {

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/widgets/features/sleep_tracking/alarmdescription.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +25,8 @@ class _SetAlarmState extends State<SetAlarm> {
 
     return  Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-      decoration:BoxDecoration(color: Colors.white),
+      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+      decoration:const BoxDecoration(color: Colors.white),
       child: Column(
         children: [
           TimeDurationPicker(

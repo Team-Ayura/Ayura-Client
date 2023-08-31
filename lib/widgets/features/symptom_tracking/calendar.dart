@@ -3,11 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatefulWidget {
+  const CalendarWidget({super.key});
+
   @override
-  _CalendarWidgetState createState() => _CalendarWidgetState();
+  CalendarWidgetState createState() => CalendarWidgetState();
 }
 
-class _CalendarWidgetState extends State<CalendarWidget> {
+class CalendarWidgetState extends State<CalendarWidget> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -40,7 +42,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
               _focusedDay = focusedDay;
             },
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           if (_selectedDay != null)
             SymptomList(selectedDay: _selectedDay!), // Use non-null assertion operator
         ],

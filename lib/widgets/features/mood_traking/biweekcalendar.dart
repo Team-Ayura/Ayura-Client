@@ -1,10 +1,6 @@
-import 'package:ayura/provider/moodProviders/selectedmood.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_calendar_carousel/classes/event.dart';
-import 'package:flutter_calendar_carousel/classes/event_list.dart';
 import 'package:intl/intl.dart' 
 show DateFormat;
-import 'package:provider/provider.dart';
 import 'calendarviews.dart';
 
 class BiweekCalendar extends StatefulWidget {

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
    IconData ? leftIcon;
    IconData ? rightIcon;
    String ? title;

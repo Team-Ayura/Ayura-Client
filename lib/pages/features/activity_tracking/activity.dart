@@ -1,5 +1,3 @@
-import 'package:ayura/constants/colors.dart';
-// import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/pages/features/activity_tracking/cycling_page.dart';
 import 'package:ayura/pages/features/activity_tracking/sports_page.dart';
 import 'package:ayura/pages/features/activity_tracking/stairs_page.dart';
@@ -19,7 +17,7 @@ class Activities extends StatelessWidget {
       // Define your named routes here
       debugShowCheckedModeBanner: false,
       routes: {
-        '/activities': (context) =>  ActivitiesPage(),
+        '/activities': (context) =>  const ActivitiesPage(),
         '/walkingandrunning': (context) => const WalkingAndRunningPage(),
         '/cycling': (context) => const CyclingPage(),
         '/stairs': (context) => const StairsPage(),
@@ -97,8 +95,8 @@ class ActivitiesPage extends StatelessWidget {
     );
   }
 
-  void _onTabTapped(int index) {
-    // Add your logic here to handle the navigation
-    print("Tapped index: $index");
-  }
+  // void _onTabTapped(int index) {
+  //   // Add your logic here to handle the navigation
+  //   print("Tapped index: $index");
+  // }
 }

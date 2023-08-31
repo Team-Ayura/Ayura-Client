@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:provider/provider.dart';
-import 'package:ayura/provider/communityProviders/community_provider.dart';
 // Community Feature Widgets
 import 'package:ayura/widgets/features/community/chat_card.dart'; // Chat Card Widget
 import 'package:ayura/widgets/features/community/search_box.dart'; // SearchBox Widget
@@ -89,7 +88,7 @@ class _CommunityHomeState extends State<CommunityHome> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Your Communities',
                   style: AppStyles.subheadingTextStyle2,
                 ),

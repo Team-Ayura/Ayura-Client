@@ -1,5 +1,3 @@
-import 'package:ayura/pages/features/sleep_tracking/page3.dart';
-import 'package:ayura/utils/router.dart';
 import 'package:flutter/material.dart';
 
 import '../../../widgets/features/sleep_tracking/sleeptabbarview.dart';
@@ -17,7 +15,7 @@ class SleepHistory extends StatelessWidget {
           leftCallback: () => Navigator.of(context).pop(),
           // rightCallback: ()=>PageNavigator(context: context).nextPage( )
           ),
-      body:SleepTabBarView(),
+      body:const SleepTabBarView(),
       bottomNavigationBar: const AppNavigation(),
     );
   }

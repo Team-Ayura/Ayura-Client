@@ -12,10 +12,10 @@ class PageThree extends StatefulWidget {
   const PageThree({Key? key}) : super(key: key);
 
   @override
-  _PageThreeState createState() => _PageThreeState();
+  PageThreeState createState() => PageThreeState();
 }
 
-class _PageThreeState extends State<PageThree> {
+class PageThreeState extends State<PageThree> {
   late TextEditingController firstNameController = TextEditingController();
   late TextEditingController lastNameController = TextEditingController();
   late TextEditingController emailController = TextEditingController();
@@ -170,12 +170,9 @@ class _PageThreeState extends State<PageThree> {
                                 firstDate: DateTime(1980),
                                 lastDate: DateTime.now());
                             if (pickedDate != null) {
-                              print(
-                                  pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                               String formattedDate =
                                   DateFormat('yyyy-MM-dd').format(pickedDate);
-                              print(
-                                  formattedDate); //formatted date output using intl package =>  2021-03-16
+
                               auth.updateBirthday(convertDate(formattedDate));
                               auth.getUserData();
                               setState(() {
@@ -183,7 +180,6 @@ class _PageThreeState extends State<PageThree> {
                                     formattedDate; //set output date to TextField value.
                               });
                             } else {
-                              print("Date is not selected");
                             }
                           },
                         ),
@@ -273,7 +269,6 @@ class _PageThreeState extends State<PageThree> {
                               nationalityController.text =
                                   code?.name ?? 'Sri Lanka';
                               nationality = nationalityController.text;
-                              print(code!.name);
                               auth.updateNationality(
                                   nationalityController.text);
                               // print(code.code);

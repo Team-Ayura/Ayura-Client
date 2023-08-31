@@ -4,10 +4,10 @@ class CreateChallenege extends StatefulWidget {
   const CreateChallenege({Key? key}) : super(key: key);
 
   @override
-  _CreateChallenegeState createState() => _CreateChallenegeState();
+  CreateChallenegeState createState() => CreateChallenegeState();
 }
 
-class _CreateChallenegeState extends State<CreateChallenege> {
+class CreateChallenegeState extends State<CreateChallenege> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -16,11 +16,9 @@ class MealScreenState extends State<MealScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90.0),
+        preferredSize: const Size.fromHeight(90.0),
         child: CustomAppBar(
           Icons.arrow_back,
           Icons.more_vert,
@@ -52,9 +50,9 @@ class MealScreenState extends State<MealScreen> {
                   Tab(text: 'Snacks'),
                 ],
               ),
-              Expanded(
+              const Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
                   child: TabBarView(
                     children: [MealsList(), MealsList(), MealsList()],
                   ),

@@ -56,7 +56,7 @@ class CollageWithStatsWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         // Location Name
         // Activity Statistics
         Container(

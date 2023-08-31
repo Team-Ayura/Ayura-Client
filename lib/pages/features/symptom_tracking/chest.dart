@@ -1,6 +1,5 @@
 import 'package:ayura/pages/features/symptom_tracking/chesttips.dart';
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
-import 'package:ayura/pages/features/symptom_tracking/chesttips.dart';
 import 'package:ayura/pages/features/vitals/vitals.dart';
 import 'package:flutter/material.dart';
 import 'package:ayura/widgets/global/custom_app_bar.dart';
@@ -13,10 +12,10 @@ class Chest extends StatefulWidget {
   const Chest({super.key});
 
   @override
-  _ChestState createState() => _ChestState();
+  ChestState createState() => ChestState();
 }
 
-class _ChestState extends State<Chest> {
+class ChestState extends State<Chest> {
   List<CustomListItem> customList = [
     CustomListItem('Chest Pain'),
     CustomListItem('Shortness of Breath'),

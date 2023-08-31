@@ -3,7 +3,6 @@ import 'package:ayura/pages/features/sleep_tracking/page1.dart';
 import 'package:ayura/widgets/features/sleep_tracking/averagesleeptimecard.dart';
 import 'package:ayura/widgets/features/sleep_tracking/biweekline_chart.dart';
 import 'package:ayura/widgets/features/sleep_tracking/sleepqualitypiechart.dart';
-import 'package:ayura/widgets/features/sleep_tracking/weeklinechart.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +35,7 @@ class _BiWeeklyTabState extends State<BiWeeklyTab> {
                                      ),
                    ),
                   const SizedBox(height: 10,),  
-                  AverageSleepCard(duration: 'Fortnight',),
+                  const AverageSleepCard(duration: 'Fortnight',),
 
 
                   const SizedBox(height: 10,),
@@ -61,7 +60,7 @@ class _BiWeeklyTabState extends State<BiWeeklyTab> {
                         color: AppColors.primaryColor,
                       )),
                       subtitle: const Text("Establish a consistent Sleep Schedule"),
-                      trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepSchedules());}, child:Icon( Icons.arrow_forward,))
+                      trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepSchedules());}, child:const Icon( Icons.arrow_forward,))
                     ),
                                   ),
                   ),

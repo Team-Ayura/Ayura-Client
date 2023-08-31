@@ -3,13 +3,10 @@ import 'package:ayura/pages/features/community/add_challenge.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/community/add_member.dart';
 import 'package:ayura/widgets/features/community/header_btn.dart';
-import 'package:ayura/widgets/features/community/input_fields.dart';
 import 'package:flutter/material.dart';
-
 import 'package:ayura/pages/features/community/community_chat/posts_view.dart';
 import 'package:ayura/pages/features/community/community_chat/leaderboard_view.dart';
 import 'package:ayura/pages/features/community/community_chat/challenge_details_view.dart';
-import 'package:ayura/pages/features/community/create_community.dart';
 import 'package:ayura/widgets/features/community/comment_section.dart';
 
 //Constants

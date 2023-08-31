@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:ayura/widgets/global/custom_grey_btn.dart';
 // Community Feature Widgets
-import 'package:ayura/widgets/features/community/input_fields.dart';
-import 'package:ayura/widgets/features/community/custom_dropdown.dart';
 import 'package:ayura/widgets/features/community/multiselect_card.dart';
 
 // Constants
@@ -26,7 +24,7 @@ class _CreateCommunityState extends State<CreateCommunity> {
   final List<String> dropdownItems = ['Public', 'Private'];
   final _formKey = GlobalKey<FormState>();
   String _selectedItem = 'Public'; // Default selected item
-  List<String> _selectedCategories = [];
+  final List<String> _selectedCategories = [];
   String _communityName = '';
   String _communityDescription = '';
 
