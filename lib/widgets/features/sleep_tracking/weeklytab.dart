@@ -36,7 +36,7 @@ class _WeeklyTabState extends State<WeeklyTab> {
                                      ),
                    ),
                   const SizedBox(height: 10,),   
-                  AverageSleepCard(duration: 'Weekly',),
+                  const AverageSleepCard(duration: 'Weekly',),
 
 
                   const SizedBox(height: 10,),
@@ -61,7 +61,7 @@ class _WeeklyTabState extends State<WeeklyTab> {
                         color: AppColors.primaryColor,
                       )),
                       subtitle: const Text("Establish a consistent Sleep Schedule"),
-                      trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepSchedules());}, child:Icon( Icons.arrow_forward,))
+                      trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepSchedules());}, child:const Icon( Icons.arrow_forward,))
                     ),
                                   ),
                   ),

@@ -1,5 +1,4 @@
 import 'package:ayura/auth/auth_screen.dart';
-import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/home.dart';
 import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/utils/router.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../constants/colors.dart';
 import '../widgets/global/textinput.dart';
-import 'package:ayura/constants/colors.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -31,7 +29,6 @@ class LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,

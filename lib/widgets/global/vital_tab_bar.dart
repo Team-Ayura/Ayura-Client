@@ -1,16 +1,9 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/mood_tracking/page1.dart';
 import 'package:ayura/pages/features/symptom_tracking/welcome.dart';
-import 'package:ayura/widgets/features/mood_traking/biweekcalendar.dart';
-import 'package:ayura/widgets/features/mood_traking/monthcalendar.dart';
-import 'package:ayura/widgets/features/mood_traking/moodpiechart.dart';
-import 'package:ayura/widgets/features/mood_traking/weekcalendar.dart';
 import 'package:flutter/material.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
-import 'package:ayura/widgets/global/tip_chip.dart';
-import 'package:provider/provider.dart';
 
-import '../../../provider/moodProviders/selectedmood.dart';
 
 class VitalsTabBarView extends StatelessWidget {
   const VitalsTabBarView({super.key});

@@ -32,12 +32,12 @@ class MoodVariationChart extends StatelessWidget {
       const Color(0xFF00DF59), //happy
       // const Color(0xFFA6D8DE), //calm
       const Color(0xFFFFD600), //tired
-      Color.fromARGB(255, 110, 160, 3), //sad
+      const Color.fromARGB(255, 110, 160, 3), //sad
       const Color(0xFFFF2400), //angry
       const Color(0xFF6E8B7E), //stressed
       // const Color(0xFF4B0082), //lonelyg
       // const Color(0xFF98FB98), //sick
-      Color.fromARGB(255, 105, 206, 236), //bored
+      const Color.fromARGB(255, 105, 206, 236), //bored
 
       
 
@@ -49,7 +49,7 @@ class MoodVariationChart extends StatelessWidget {
         decoration:AppStyles.containerDecoration,
         margin: const EdgeInsets.symmetric(horizontal: 15),
         alignment: Alignment.center,
-        padding: EdgeInsets.fromLTRB(25, 20, 15, 20),
+        padding: const EdgeInsets.fromLTRB(25, 20, 15, 20),
         child:Column(
           children: [
             const Align(

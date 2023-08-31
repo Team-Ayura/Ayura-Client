@@ -12,16 +12,16 @@ class MultipleChoiceController {
 class MultipleChoiceWidget extends StatefulWidget {
   final List<String> labelList;
   final MultipleChoiceController? controller;
-  MultipleChoiceWidget({Key? key, required this.labelList, required this.controller}) : super(key: key);
+  const MultipleChoiceWidget({Key? key, required this.labelList, required this.controller}) : super(key: key);
   @override
-  _MultipleChoiceWidgetState createState() => _MultipleChoiceWidgetState();
+  MultipleChoiceWidgetState createState() => MultipleChoiceWidgetState();
 }
 
-class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
+class MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: (widget.labelList.length / 3 + 1).ceil() * 40,
       child: GridView.builder(
         itemCount: widget.labelList.length,
@@ -45,7 +45,7 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
         });
       },
       child: Padding(
-        padding: EdgeInsets.all(3),
+        padding: const EdgeInsets.all(3),
         child: Container(
           // width: 50,
           height: 40,

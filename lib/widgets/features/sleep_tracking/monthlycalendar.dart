@@ -1,4 +1,5 @@
-import 'package:ayura/pages/features/sleep_tracking/page1.dart';
+// ignore_for_file: unused_local_variable
+
 import 'package:ayura/pages/features/sleep_tracking/page2.dart';
 import 'package:ayura/widgets/features/sleep_tracking/alarmdescription.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/styles.dart';
-import '../../../pages/features/sleep_tracking/sleepdetailspage.dart';
 import '../../../utils/router.dart';
 
 class SleepData {
@@ -38,11 +38,13 @@ enum SleepQuality {
 
 
 class BaseCalendar extends StatefulWidget {
+  const BaseCalendar({super.key});
+
   @override
-  _BaseCalendarState createState() => _BaseCalendarState();
+  BaseCalendarState createState() => BaseCalendarState();
 }
 
-class _BaseCalendarState extends State<BaseCalendar> {
+class BaseCalendarState extends State<BaseCalendar> {
   List<SleepData> sleepHistory = [
     SleepData(DateTime(2023, 8, 12), SleepQuality.Horrible),
     SleepData(DateTime(2023, 8, 13), SleepQuality.Great),
@@ -70,9 +72,7 @@ class _BaseCalendarState extends State<BaseCalendar> {
           SleepQuality sleepQuality = SleepQuality.Good;
 
           for (SleepData sleepData in sleepDataList) {
-            print('Checking sleep data for date: ${sleepData.date}');
             if (date == sleepData.date) {
-              print('Found matching sleep data. Sleep quality: ${sleepData.sleepQuality}');
               sleepQuality = sleepData.sleepQuality;
               break;
             }
@@ -183,7 +183,7 @@ class SleepDetailsDialog extends StatelessWidget {
 
   
 
-  SleepDetailsDialog(this.date, this.sleepQuality);
+  const SleepDetailsDialog(this.date, this.sleepQuality, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -209,16 +209,16 @@ class SleepDetailsDialog extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:[
-              Text("13 Aug 2023",style:AppStyles.subheadingTextStyle2),
+              const Text("13 Aug 2023",style:AppStyles.subheadingTextStyle2),
                IconButton(
               onPressed: (){
                 PageNavigator(context: context).nextPage( const SleepHistory());
               },
-              icon: Icon(Icons.delete_outlined,color: AppColors.primaryColor,)
+              icon: const Icon(Icons.delete_outlined,color: AppColors.primaryColor,)
             )
             ],
           ),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

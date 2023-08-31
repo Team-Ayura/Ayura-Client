@@ -5,10 +5,10 @@ class Createmeal extends StatefulWidget {
   const Createmeal({Key? key}) : super(key: key);
 
   @override
-  _CreatemealState createState() => _CreatemealState();
+  CreatemealState createState() => CreatemealState();
 }
 
-class _CreatemealState extends State<Createmeal> {
+class CreatemealState extends State<Createmeal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

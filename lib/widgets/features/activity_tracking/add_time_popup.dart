@@ -46,7 +46,6 @@ class _AddTimePopUpState extends State<AddTimePopUp> {
                             context: context, initialTime: startTime);
                         if (input != null) {
                           startTime = input;
-                          print(input);
                           // if (finishTime.compareTo(startTime) < 0) {
                           //   finishTime = TimeOfDay.fromDateTime(
                           //       startTime.toDateTime().add(Duration(hours: 1)));

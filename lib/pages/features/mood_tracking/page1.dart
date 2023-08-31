@@ -1,7 +1,6 @@
 import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/features/mood_tracking/page3.dart';
 import 'package:ayura/widgets/features/mood_traking/mood_chips.dart';
-import 'package:ayura/widgets/global/custom_app_bar.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +10,6 @@ import 'package:provider/provider.dart';
 
 import '../../../provider/moodProviders/selectedmood.dart';
 import '../../../utils/router.dart';
-import '../../../widgets/global/bottom_navigation.dart';
 
 // import 'package:ayura/widgets/features/mood_tracking/mood_chips.dart';
 
@@ -41,7 +39,7 @@ class SelectMood extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButton(onPressed:(){PageNavigator(context: context).nextPage(const ThirdPage());} , icon:Icon(Icons.calendar_month_outlined) ),
+                IconButton(onPressed:(){PageNavigator(context: context).nextPage(const ThirdPage());} , icon:const Icon(Icons.calendar_month_outlined) ),
               ],),
             
             const SizedBox(
@@ -111,7 +109,7 @@ class SelectMood extends StatelessWidget {
                     moodProvider.selectMood(moodProvider.selectedMood, selectedDateTime);
                     moodProvider.removeMoodFromHistory(selectedDateTime);
                     moodProvider.addMoodToHistory(moodProvider.selectedMood, selectedDateTime);
-                    PageNavigator(context: context).nextPage(SecondPage());
+                    PageNavigator(context: context).nextPage(const SecondPage());
                   } else {
                     // Show a snackbar or any other feedback that a mood should be selected
                     ScaffoldMessenger.of(context).showSnackBar(

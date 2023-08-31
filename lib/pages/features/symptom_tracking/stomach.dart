@@ -1,6 +1,4 @@
-import 'package:ayura/pages/features/symptom_tracking/chesttips.dart';
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
-import 'package:ayura/pages/features/symptom_tracking/page3.dart';
 import 'package:ayura/pages/features/symptom_tracking/stomachtips.dart';
 import 'package:ayura/pages/features/vitals/vitals.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +12,10 @@ class Stomach extends StatefulWidget {
   const Stomach({super.key});
 
   @override
-  _StomachState createState() => _StomachState();
+  StomachState createState() => StomachState();
 }
 
-class _StomachState extends State<Stomach> {
+class StomachState extends State<Stomach> {
   List<CustomListItem> customList = [
     CustomListItem('Abdominal Pain'),
     CustomListItem('Bloating'),
@@ -34,11 +32,10 @@ class _StomachState extends State<Stomach> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          Icons.arrow_back_outlined,
-          Icons.calendar_month_outlined,
-          "Stomach",
-          leftCallback :()=>Navigator.of(context).pop(),
-          rightCallback :()=>PageNavigator(context: context).nextPage(const Page2())),
+          Icons.arrow_back_outlined, Icons.calendar_month_outlined, "Stomach",
+          leftCallback: () => Navigator.of(context).pop(),
+          rightCallback: () =>
+              PageNavigator(context: context).nextPage(const Page2())),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -74,13 +71,15 @@ class _StomachState extends State<Stomach> {
                                   });
                                 },
                                 child: ListTile(
-                                  leading: const Icon(Icons.sentiment_satisfied),
+                                  leading:
+                                      const Icon(Icons.sentiment_satisfied),
                                   title: Text(customList[index].title),
                                   trailing: Checkbox(
                                     value: selectedButtonIndexes[index] != -1,
                                     onChanged: (value) {
                                       setState(() {
-                                        selectedButtonIndexes[index] = value == true ? 0 : -1;
+                                        selectedButtonIndexes[index] =
+                                            value == true ? 0 : -1;
                                       });
                                     },
                                   ),
@@ -97,12 +96,17 @@ class _StomachState extends State<Stomach> {
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: selectedButtonIndexes[index] == 1
-                                            ? Colors.green
-                                            : Colors.white,
-                                        onPrimary: selectedButtonIndexes[index] == 1 ? Colors.white : Colors.grey,
+                                        foregroundColor:
+                                            selectedButtonIndexes[index] == 1
+                                                ? Colors.white
+                                                : Colors.grey,
+                                        backgroundColor:
+                                            selectedButtonIndexes[index] == 1
+                                                ? Colors.green
+                                                : Colors.white,
                                       ),
-                                      child: const Text('Light, It did not interrupt my daily routine'),
+                                      child: const Text(
+                                          'Light, It did not interrupt my daily routine'),
                                     ),
                                     const SizedBox(width: 16.0),
                                     ElevatedButton(
@@ -112,12 +116,17 @@ class _StomachState extends State<Stomach> {
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: selectedButtonIndexes[index] == 2
-                                            ? Colors.orange
-                                            : Colors.white,
-                                        onPrimary: selectedButtonIndexes[index] == 2 ? Colors.white : Colors.grey,
+                                        primary:
+                                            selectedButtonIndexes[index] == 2
+                                                ? Colors.orange
+                                                : Colors.white,
+                                        onPrimary:
+                                            selectedButtonIndexes[index] == 2
+                                                ? Colors.white
+                                                : Colors.grey,
                                       ),
-                                      child: const Text('Moderate, It was hard but manageable'),
+                                      child: const Text(
+                                          'Moderate, It was hard but manageable'),
                                     ),
                                     const SizedBox(width: 16.0),
                                     ElevatedButton(
@@ -127,12 +136,17 @@ class _StomachState extends State<Stomach> {
                                         });
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: selectedButtonIndexes[index] == 3
-                                            ? Colors.red
-                                            : Colors.white,
-                                        onPrimary: selectedButtonIndexes[index] == 3 ? Colors.white : Colors.grey,
+                                        primary:
+                                            selectedButtonIndexes[index] == 3
+                                                ? Colors.red
+                                                : Colors.white,
+                                        onPrimary:
+                                            selectedButtonIndexes[index] == 3
+                                                ? Colors.white
+                                                : Colors.grey,
                                       ),
-                                      child: const Text('Unbearable, I could not even stand straight'),
+                                      child: const Text(
+                                          'Unbearable, I could not even stand straight'),
                                     ),
                                     const SizedBox(width: 16.0),
                                   ],
@@ -157,18 +171,17 @@ class _StomachState extends State<Stomach> {
                   text: 'More Areas',
                   width: 120,
                   height: 60,
-                  context: context
-              ),
+                  context: context),
               const SizedBox(width: 50),
               customButton(
                   tap: () {
-                    PageNavigator(context: context).nextPage(const StomachTips());
+                    PageNavigator(context: context)
+                        .nextPage(const StomachTips());
                   },
                   text: 'Done',
                   width: 120,
                   height: 60,
-                  context: context
-              ),
+                  context: context),
             ],
           )
         ],

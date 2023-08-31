@@ -1,25 +1,20 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/pages/features/community/community_chat/community_chat_view.dart';
 import 'package:ayura/provider/communityProviders/community_provider.dart';
-import 'package:ayura/provider/models/community_model.dart';
 import 'package:ayura/provider/models/memberModel.dart';
-import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/community/member_card.dart';
 import 'package:ayura/widgets/global/custom_app_bar.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
-import 'package:flutter/material.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AddMember extends StatefulWidget {
   final String communityId;
-  AddMember({required this.communityId});
+  const AddMember({super.key, required this.communityId});
   @override
-  _AddMemberState createState() => _AddMemberState();
+  AddMemberState createState() => AddMemberState();
 }
 
-class _AddMemberState extends State<AddMember> {
+class AddMemberState extends State<AddMember> {
   @override
   void initState() {
     super.initState();
@@ -27,28 +22,32 @@ class _AddMemberState extends State<AddMember> {
         .getMembersList(widget.communityId);
   }
 
-  TextEditingController _emailController = TextEditingController();
-  List<String> _membersList = [];
+  final TextEditingController _emailController = TextEditingController();
+  final List<String> _membersList = [];
 
   void _addMember(String communityId) async {
     String newMember = _emailController.text.trim();
     if (newMember.isNotEmpty && !_membersList.contains(newMember)) {
       try {
-        await Provider.of<CommunityProvider>(context, listen: false)
-            .addMember(communityId, newMember);
-        _membersList.add(newMember);
+        final communityProvider =
+            Provider.of<CommunityProvider>(context, listen: false);
+        // Add the new member to the community
+        await communityProvider.addMember(communityId, newMember);
+        // Update the local list of members
+        setState(() {
+          _membersList.add(newMember);
+        });
+        // Clear the email controller
         _emailController.clear();
-        await Provider.of<CommunityProvider>(context, listen: false)
-            .getMembersList(widget.communityId);
+        // Fetch updated member list from the provider
+        await communityProvider.getMembersList(widget.communityId);
+        // Show a snackbar to indicate successful addition
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text('Member Added')));
-
-        setState(() {});
-      } catch (e) {
-        // Handle error, e.g., display a snackbar with an error message
+      } catch (error) {
+        // Handle any errors that occur during the process
         ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('User not Found')));
-        print('Error: $e');
+            .showSnackBar(const SnackBar(content: Text('User not found')));
       }
     }
   }
@@ -105,7 +104,7 @@ class _AddMemberState extends State<AddMember> {
                       itemBuilder: (context, index) {
                         MemberModel member = members[index];
                         return MemberCard(
-                          memberName: member.firstName + ' ' + member.lastName,
+                          memberName: '${member.firstName} ${member.lastName}',
                           memberMail: member.email,
                         );
                       });

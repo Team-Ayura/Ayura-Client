@@ -1,11 +1,7 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
-import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/activity_tracking/sharable_image_collage.dart';
-import 'package:ayura/widgets/global/custom_appbar.dart';
-
-// import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/image_container.dart';
 import 'package:ayura/widgets/features/activity_tracking/map.dart';
@@ -371,7 +367,7 @@ class _PanelWidgetState extends State<PanelWidget> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width - 40,
             height: MediaQuery.of(context).size.height - 300,
             child: Consumer<CyclingOnRideProvider>(
@@ -394,7 +390,7 @@ class _PanelWidgetState extends State<PanelWidget> {
                     ElevatedButton(onPressed: () async {
                       final imageBytes = await captureWidget(_collageKey);
                       await shareCapturedImage(imageBytes);
-                    }, child: Text('Share')),
+                    }, child: const Text('Share')),
                   ],
                 );
               }

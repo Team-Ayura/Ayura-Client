@@ -54,7 +54,7 @@ class SleepFirstPage extends StatelessWidget {
             ),
 
             const SizedBox(height: 20.0,),
-            SleepQualitySelection(),
+            const SleepQualitySelection(),
              const Row(
               children: [
                 Text(
@@ -68,7 +68,7 @@ class SleepFirstPage extends StatelessWidget {
             Container(
               color: Colors.white,
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child:SleepQualityFactorSelection(),
+              child:const SleepQualityFactorSelection(),
             ),
            const SizedBox(height: 20.0,),
            Center(
@@ -88,7 +88,7 @@ class SleepFirstPage extends StatelessWidget {
          ],
         ),
       ),
-      bottomNavigationBar: AppNavigation(),
+      bottomNavigationBar: const AppNavigation(),
     );
   }
 }

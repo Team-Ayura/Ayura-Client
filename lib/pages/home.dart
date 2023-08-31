@@ -1,6 +1,5 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/sleep_tracking/page1.dart';
-import 'package:ayura/pages/features/sleep_tracking/page2.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/home/activity_card.dart';
 import 'package:ayura/widgets/features/home/tips_card.dart';
@@ -134,80 +133,7 @@ class _HomeState extends State<Home> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 15.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color.fromARGB(69, 158, 158, 158),
-                        blurRadius: 2.0,
-                      ),
-                    ],
-                  ),
-                  child: const Column(
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.emoji_emotions_outlined,
-                            size: 24.0,
-                            color: AppColors.yellowColor,
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            'How are you feeling today?',
-                            style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 16,
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Expanded(
-                            child: SizedBox(),
-                          ),
-                          IconButton(
-                            onPressed: null,
-                            icon: Icon(
-                              Icons.arrow_forward_rounded,
-                              size: 20,
-                              color: AppColors.primaryColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                      //Moods
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            MoodButton(emojiName: 'Happy', mood: 'Happy'),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            MoodButton(emojiName: 'Tired', mood: 'Tired'),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            MoodButton(emojiName: 'calm', mood: 'Calm'),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            MoodButton(emojiName: 'Bored', mood: 'Bored'),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            MoodButton(emojiName: 'Angry', mood: 'Angry'),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+               
                 SizedBox(height: height * 0.02),
                 Container(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 15),

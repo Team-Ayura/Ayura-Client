@@ -10,16 +10,16 @@ class AddChallenge extends StatefulWidget {
   const AddChallenge({Key? key, required this.communityId}) : super(key: key);
 
   @override
-  _AddChallengeState createState() => _AddChallengeState();
+  AddChallengeState createState() => AddChallengeState();
 }
 
-class _AddChallengeState extends State<AddChallenge> {
+class AddChallengeState extends State<AddChallenge> {
   final List<String> dropdownItems = ['Running', 'Walking', 'Cycling'];
   final _formKey = GlobalKey<FormState>();
   String _selectedItem = 'Running'; // Default selected item
-  String _ChallengeName = '';
-  String _ChallengeDescription = '';
-  String _Distance = '';
+  String _challengeName = '';
+  String _challengeDescription = '';
+  String _distance = '';
   DateTimeRange? _selectedDateRange;
   final TextEditingController _dateRangeController = TextEditingController();
 
@@ -133,7 +133,7 @@ class _AddChallengeState extends State<AddChallenge> {
                         return null;
                       },
                       onChanged: (value) {
-                        _ChallengeName = value;
+                        _challengeName = value;
                       },
                     ),
                     const SizedBox(
@@ -158,7 +158,7 @@ class _AddChallengeState extends State<AddChallenge> {
                         return null;
                       },
                       onChanged: (value) {
-                        _ChallengeDescription = value;
+                        _challengeDescription = value;
                       },
                     ),
                     const SizedBox(
@@ -181,12 +181,12 @@ class _AddChallengeState extends State<AddChallenge> {
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                               color: AppColors.primaryColor, width: 2.0),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                               color: AppColors.primaryColor, width: 1.0),
                         ),
                         suffixIcon: IconButton(
@@ -218,7 +218,7 @@ class _AddChallengeState extends State<AddChallenge> {
                         return null;
                       },
                       onChanged: (value) {
-                        _Distance = value;
+                        _distance = value;
                       },
                     ),
                     const SizedBox(

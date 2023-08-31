@@ -4,8 +4,6 @@ import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
-
-// import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/chart.dart';
 import 'package:ayura/widgets/features/activity_tracking/cycle_ride_box.dart';
@@ -61,18 +59,18 @@ class _CyclingPageState extends State<CyclingPage> {
             ),
             Consumer<CyclingProvider>(
                 builder: (context, cyclingProvider, _) {
-                  return Container(margin: EdgeInsets.only(left: 25), child: Column(
+                  return Container(margin: const EdgeInsets.only(left: 25), child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Average Distance', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
-                      SizedBox(height:5),
+                      const Text('Average Distance', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+                      const SizedBox(height:5),
                       Text(cyclingProvider.timePeriod, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.textColor.withOpacity(0.5))),
                     ],
                   ));
                 }
             ),
-            SizedBox(height:5),
+            const SizedBox(height:5),
             // the chart
             Container(
               height: 200,

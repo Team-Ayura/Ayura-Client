@@ -44,7 +44,6 @@ class CommunityProvider extends ChangeNotifier {
     final url = '$requestBaseUrl/api/communities';
 
     try {
-      print('Inside getCommunitiesList');
       http.Response req = await http.get(
         Uri.parse(url),
         headers: {
@@ -52,19 +51,14 @@ class CommunityProvider extends ChangeNotifier {
         },
       );
       final res = json.decode(req.body);
-      print('API Response: $res');
-      print('Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         _communityList = List<CommunityModel>.from(res.map<CommunityModel>(
           (communityData) => CommunityModel.fromJson(communityData),
         ));
-        print('Community List Fetched: $_communityList');
       } else {
-        print("Error Occurred $res");
       }
     } catch (error) {
-      print('Error: $error');
     }
     notifyListeners();
   }
@@ -75,7 +69,6 @@ class CommunityProvider extends ChangeNotifier {
 
     try {
       final body = community.toJson(); // Convert the community model to JSON
-      print('JSON Body: ${json.encode(body)}');
       http.Response req = await http.post(
         Uri.parse(url),
         headers: {
@@ -85,16 +78,12 @@ class CommunityProvider extends ChangeNotifier {
       );
 
       final res = json.decode(req.body);
-      print('Create Community Response: $res');
-      print('Create Community Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         await getCommunitiesList(); // Fetch the updated community list
       } else {
-        print("Error Occurred $res");
       }
     } catch (error) {
-      print('Error: $error');
     }
     notifyListeners();
   }
@@ -133,7 +122,6 @@ class CommunityProvider extends ChangeNotifier {
     final url = '$requestBaseUrl/api/communities/getMembers/$id';
 
     try {
-      print('Inside getMembersList');
       http.Response req = await http.get(
         Uri.parse(url),
         headers: {
@@ -141,19 +129,14 @@ class CommunityProvider extends ChangeNotifier {
         },
       );
       final res = json.decode(req.body);
-      print('API Response: $res');
-      print('Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         _membersList = List<MemberModel>.from(res.map<MemberModel>(
           (memberData) => MemberModel.fromJson(memberData),
         ));
-        print('Member List Fetched: $_membersList');
       } else {
-        print("Error Occurred $res");
       }
     } catch (error) {
-      print('Error: $error');
     }
     notifyListeners();
   }

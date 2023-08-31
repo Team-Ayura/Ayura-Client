@@ -19,11 +19,13 @@ List<SleepQualityOption> sleepQualityOptions = [
 ];
 
 class SleepQualitySelection extends StatefulWidget {
+  const SleepQualitySelection({super.key});
+
   @override
-  _SleepQualitySelectionState createState() => _SleepQualitySelectionState();
+  SleepQualitySelectionState createState() => SleepQualitySelectionState();
 }
 
-class _SleepQualitySelectionState extends State<SleepQualitySelection> {
+class SleepQualitySelectionState extends State<SleepQualitySelection> {
   int selectedTileIndex = -1;
 
   void selectTile(int index) {
@@ -34,12 +36,12 @@ class _SleepQualitySelectionState extends State<SleepQualitySelection> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 450,
       child: ListView.separated(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: sleepQualityOptions.length,
-        separatorBuilder: (context, index) => SizedBox(height: 10.0),
+        separatorBuilder: (context, index) => const SizedBox(height: 10.0),
         itemBuilder: (context, index) {
           SleepQualityOption option = sleepQualityOptions[index];
           bool isSelected = index == selectedTileIndex;

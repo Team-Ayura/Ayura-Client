@@ -1,5 +1,4 @@
 import 'package:ayura/pages/features/symptom_tracking/page2.dart';
-import 'package:ayura/pages/features/symptom_tracking/welcome.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
