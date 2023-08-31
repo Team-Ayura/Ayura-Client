@@ -1,4 +1,5 @@
 import 'package:ayura/constants/colors.dart';
+import 'package:ayura/pages/features/settings/settings.dart';
 import 'package:ayura/pages/features/sleep_tracking/page1.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/home/activity_card.dart';
@@ -69,14 +70,20 @@ class _HomeState extends State<Home> {
                         size: 35,
                       ),
                       SizedBox(width: width * 0.02),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/profileIcon.png'),
-                            fit: BoxFit.cover,
+                      GestureDetector(
+                        onTap: (){
+                          PageNavigator(context: context)
+                              .nextPage(const SettingsPage());
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/profileIcon.png'),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),

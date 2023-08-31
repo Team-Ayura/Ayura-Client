@@ -73,6 +73,7 @@ flutter:
     - assets/images/symptom_tracking/
     - assets/images/sleep_tracking/
     - assets/images/community/
+    - assets/icons/connectedapps/
 
   fonts:
     - family: Inter
