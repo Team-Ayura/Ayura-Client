@@ -28,7 +28,7 @@ class CommunityHome extends StatefulWidget {
 }
 
 class _CommunityHomeState extends State<CommunityHome> {
-   @override
+  @override
   void initState() {
     super.initState();
     Provider.of<CommunityProvider>(context, listen: false).getCommunitiesList();
@@ -58,7 +58,7 @@ class _CommunityHomeState extends State<CommunityHome> {
     );
   }
 
- // Init State
+  // Init State
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +90,7 @@ class _CommunityHomeState extends State<CommunityHome> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'text',
+                  'Your Communities',
                   style: AppStyles.subheadingTextStyle2,
                 ),
                 TextButton(
@@ -107,7 +107,7 @@ class _CommunityHomeState extends State<CommunityHome> {
               ],
             ),
             SizedBox(
-              // Main Chats Container
+              // Main communities Container
               height: MediaQuery.of(context).size.height * 0.35,
               child: Consumer<CommunityProvider>(
                   builder: (context, communityProvider, _) {

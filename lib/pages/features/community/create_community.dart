@@ -30,7 +30,6 @@ class _CreateCommunityState extends State<CreateCommunity> {
   String _communityName = '';
   String _communityDescription = '';
 
-
   void handleCategorySelection(String category, bool isSelected) {
     // Handle the selection change here
     if (isSelected) {
@@ -167,7 +166,15 @@ class _CreateCommunityState extends State<CreateCommunity> {
                     Container(
                       width: 100,
                       height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: AppColors.primaryColor),
+                      ),
                       child: DropdownButtonFormField(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                        ),
                         items: dropdownItems
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(

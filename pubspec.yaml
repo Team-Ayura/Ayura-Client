@@ -40,6 +40,7 @@ dependencies:
   image_cropper: ^5.0.0
   flutter_native_image: ^0.0.6
   share_plus: ^7.1.0
+  syncfusion_flutter_datepicker: ^22.2.11
 
 
 dev_dependencies:
@@ -71,6 +72,7 @@ flutter:
     - assets/icons/features/activity_tracking/sports/
     - assets/images/symptom_tracking/
     - assets/images/sleep_tracking/
+    - assets/images/community/
 
   fonts:
     - family: Inter
