@@ -1,11 +1,10 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 import 'package:flutter/material.dart';
 
 class AverageSleepCard extends StatefulWidget {
   
   final String duration;
-  AverageSleepCard({required this.duration});
+  const AverageSleepCard({super.key, required this.duration});
 
   @override
   State<AverageSleepCard> createState() => _AverageSleepCardState();
@@ -30,7 +29,7 @@ class _AverageSleepCardState extends State<AverageSleepCard> {
                         children: [
                           Text(
                             widget.duration,
-                            style: TextStyle(color: Color(0xFF878787),fontFamily: 'Inter',fontSize: 14,),
+                            style: const TextStyle(color: Color(0xFF878787),fontFamily: 'Inter',fontSize: 14,),
                           ),
                           const Row(
                             children: [

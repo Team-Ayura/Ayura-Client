@@ -16,7 +16,7 @@ class PageNavigator {
   }
 
   //Navigate without back button like from onboarding page to login page
-  Future NextPageOnly(Widget? page) {
+  Future nextPageOnly(Widget? page) {
     return Navigator.pushAndRemoveUntil(
       context!,
       MaterialPageRoute(builder: (context) => page!), (route) => false,

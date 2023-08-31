@@ -62,18 +62,18 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
             ),
             Consumer<WalkingAndRunningProvider>(
               builder: (context, walkAndRunningProvider, _) {
-                return Container(margin: EdgeInsets.only(left: 25), child: Column(
+                return Container(margin: const EdgeInsets.only(left: 25), child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Average Step Count', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
-                    SizedBox(height:5),
+                    const Text('Average Step Count', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+                    const SizedBox(height:5),
                     Text(walkAndRunningProvider.timePeriod, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.textColor.withOpacity(0.5))),
                   ],
                 ));
               }
             ),
-            SizedBox(height:5),
+            const SizedBox(height:5),
             // the chart
             Container(
               height: 200,

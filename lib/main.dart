@@ -15,6 +15,8 @@ import 'package:ayura/provider/functions/init.dart';
 import 'package:ayura/provider/moodProviders/selectedmood.dart';
 import 'package:ayura/provider/navigationProvider/navigation_provider.dart';
 import 'package:ayura/provider/symptomProviders/symptomlist.dart';
+import 'package:ayura/provider/communityProviders/community_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,6 +55,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SportsProvider()),
         ChangeNotifierProvider(create: (_) => WorkoutsProvider()),
         ChangeNotifierProvider(create: (_) => SymptomsProvider()),
+        ChangeNotifierProvider(create: (_) => CommunityProvider()),
         ChangeNotifierProvider(create: (_) => GoogleAuthProvider()),
       ],
       child: MaterialApp(

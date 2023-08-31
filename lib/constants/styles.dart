@@ -15,32 +15,32 @@ class AppStyles {
   static const TextStyle subHeadingTextStyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 20,
-    color: Color.fromARGB(255, 123, 123, 123),
+    color: AppColors.textColor,
   );
 
   static const TextStyle subheadingTextStyle2 = TextStyle(
     fontFamily: 'Inter',
     fontSize: 16,
     fontWeight: FontWeight.bold,
-    color: Color.fromARGB(255, 0, 0, 0),
+    color: AppColors.textColor,
   );
 
   static const TextStyle subHeadingTextStyle3 = TextStyle(
     fontFamily: 'Inter',
     fontSize: 14,
     fontWeight: FontWeight.w700,
-    color: Colors.black,
+    color: AppColors.textColor,
   );
 
   static const TextStyle bodyTextStyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 14,
-    color: Colors.black,
+    color: AppColors.textColor,
   );
 
   static const TextStyle bodyTextStyle2 = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 15,
+    fontSize: 14,
     color: Color(0xFF878787),
   );
 
@@ -48,7 +48,7 @@ class AppStyles {
   static const TextStyle mainQuestionsStyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 25,
-    color: Colors.black,
+    color: AppColors.textColor,
     fontWeight: FontWeight.bold,
   );
 
@@ -56,10 +56,21 @@ class AppStyles {
   static const TextStyle appBarTitleStyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 20,
-    color: Colors.black,
+    color: AppColors.textColor,
     fontWeight: FontWeight.bold,
   );
 
+  static InputDecoration inputdec = InputDecoration(
+    contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.0),
+      borderSide: const BorderSide(color: AppColors.primaryColor, width: 2.0),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.0),
+      borderSide: const BorderSide(color: AppColors.primaryColor, width: 1.0),
+    ),
+  );
   InputDecoration inputDecoration(String placeholder, String error) {
     return InputDecoration(
       fillColor: Colors.transparent,

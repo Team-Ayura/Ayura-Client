@@ -14,10 +14,10 @@ class MapContainer extends StatefulWidget {
     required this.markerTitle,
   });
   @override
-  _MapContainerState createState() => _MapContainerState();
+  MapContainerState createState() => MapContainerState();
 }
 
-class _MapContainerState extends State<MapContainer> {
+class MapContainerState extends State<MapContainer> {
   late GoogleMapController mapController;
 
   @override

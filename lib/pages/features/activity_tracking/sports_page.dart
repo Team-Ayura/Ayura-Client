@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:ayura/widgets/global/custom_appbar.dart';
 
 class SportsPage extends StatefulWidget {
   SportsPage({Key? key}) : super(key: key);
@@ -41,7 +40,6 @@ class _SportsPageState extends State<SportsPage> {
           Consumer<SportsProvider>(builder: (context, sportsProvider, _) {
             return IconButton(
               onPressed: () async {
-                print("clicked add");
                 // List<SportModel> newList = await showPopUp(context);
                 // // setState(() {
                 // print(newList);

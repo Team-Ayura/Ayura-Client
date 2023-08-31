@@ -6,13 +6,13 @@ class SleepDetailsPage extends StatelessWidget {
   final DateTime date;
   final SleepQuality sleepQuality;
 
-  SleepDetailsPage(this.date, this.sleepQuality);
+  const SleepDetailsPage(this.date, this.sleepQuality, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sleep Details'),
+        title: const Text('Sleep Details'),
       ),
       body: Center(
         child: Column(

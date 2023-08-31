@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ayura/constants/colors.dart';
 
 class MultiSelectChip extends StatefulWidget {
-  const MultiSelectChip({required this.challengeCategory, super.key});
+  const MultiSelectChip({required this.challengeCategory, super.key, required this.onSelectionChanged});
 
   @override
   State<MultiSelectChip> createState() {
@@ -11,6 +11,7 @@ class MultiSelectChip extends StatefulWidget {
   }
 
   final String challengeCategory;
+  final ValueChanged<bool> onSelectionChanged; // New callback function
 }
 
 class _MultiSelectChipState extends State<MultiSelectChip> {
@@ -33,6 +34,7 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
         onSelected: (selected) {
           setState(() {
             isSelected = selected;
+            widget.onSelectionChanged(selected); // Call callback function
           });
         },
         selectedColor: AppColors.primaryColor,

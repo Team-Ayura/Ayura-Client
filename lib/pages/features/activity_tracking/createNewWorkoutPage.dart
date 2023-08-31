@@ -42,7 +42,6 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
       setState(() {
         isPanelOpen = true;
       });
-      print(isPanelOpen);
     }
 
     void closePanel() {
@@ -50,7 +49,6 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
       setState(() {
         isPanelOpen = false;
       });
-      print(isPanelOpen);
     }
 
 
@@ -69,7 +67,7 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
           maxHeight: panelHeightOpen,
           body: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -79,7 +77,7 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
                     label: 'Workout plan name',
                     errorMsg: '',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   // const Text(
@@ -102,26 +100,24 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
                       color: AppColors.primaryColor,
                     ),
                   ),
-                  Container(
-                    child: Consumer<WorkoutsProvider>(
-                      builder: (context, workoutsProvider, _) {
-                        final activityMap = workoutsProvider.newWorkoutActivities;
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  for (int index = 0; index < activityMap.length; index++)
-                                    ExerciseItemWidget(
-                                      activityid: activityMap[index].activityId,
-                                      activityname: activityMap[index].activityName,
-                                      count: activityMap[index].countPerSet,
-                                      sets: activityMap[index].numOfSets,
-                                      index: index,
-                                    ),
-                                ],
-                              );
-                      }
-                    ),
-                        ),
+                  Consumer<WorkoutsProvider>(
+                    builder: (context, workoutsProvider, _) {
+                      final activityMap = workoutsProvider.newWorkoutActivities;
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                for (int index = 0; index < activityMap.length; index++)
+                                  ExerciseItemWidget(
+                                    activityid: activityMap[index].activityId,
+                                    activityname: activityMap[index].activityName,
+                                    count: activityMap[index].countPerSet,
+                                    sets: activityMap[index].numOfSets,
+                                    index: index,
+                                  ),
+                              ],
+                            );
+                    }
+                  ),
                   // Consumer<WorkoutsProvider>(
                   //   builder: (context, workoutsProvider, _) {
                   //     final activityMap = workoutsProvider.newWorkoutActivities;
@@ -158,7 +154,7 @@ class _CreateNewWorkoutPageState extends State<CreateNewWorkoutPage> {
                           },
                         child: Container(
                           margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           decoration: BoxDecoration(
                               color: AppColors.primaryColor,
                               borderRadius: BorderRadius.circular(8)),
@@ -220,7 +216,7 @@ class Activity {
 
 class PanelWidget extends StatefulWidget {
   final ScrollController controller;
-  PanelController panelController;
+  final PanelController panelController;
   bool isOpenPanel = false;
   PanelWidget(
       {Key? key, required this.controller, required this.panelController})
@@ -252,7 +248,7 @@ class _PanelWidgetState extends State<PanelWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-        padding: EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.only(top: 10),
         controller: widget.controller,
         children: <Widget>[
           buildDragHandle(),
@@ -298,7 +294,7 @@ class _PanelWidgetState extends State<PanelWidget> {
   // }
 
   Widget buildPanelScreenContent() => Container(
-    padding: EdgeInsets.all(10),
+    padding: const EdgeInsets.all(10),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -326,8 +322,8 @@ class _PanelWidgetState extends State<PanelWidget> {
             ),
           ),
         ),
-        SizedBox(height: 10),
-        Container(
+        const SizedBox(height: 10),
+        SizedBox(
           height: 600,
           child: Scrollbar(
             thumbVisibility: true,
@@ -340,7 +336,7 @@ class _PanelWidgetState extends State<PanelWidget> {
                     InkWell(
                       onTap: () => addActivity(activity),
                       child: Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.transparent,
@@ -355,7 +351,7 @@ class _PanelWidgetState extends State<PanelWidget> {
                             );
                           },
                           leading: Container(
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               color: AppColors.textColor.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(8),
@@ -370,7 +366,7 @@ class _PanelWidgetState extends State<PanelWidget> {
                           ),
                           title: Text(
                             activity.activityName,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: AppColors.textColor,
                             ),
                           ),
@@ -401,12 +397,12 @@ class _PanelWidgetState extends State<PanelWidget> {
 
 class WorkoutDialog extends StatefulWidget {
   final Activity activity;
-  WorkoutDialog({Key? key, required this.activity}) : super(key: key);
+  const WorkoutDialog({Key? key, required this.activity}) : super(key: key);
   @override
-  _WorkoutDialogState createState() => _WorkoutDialogState();
+  WorkoutDialogState createState() => WorkoutDialogState();
 }
 
-class _WorkoutDialogState extends State<WorkoutDialog> {
+class WorkoutDialogState extends State<WorkoutDialog> {
   late TextEditingController _countController;
   late TextEditingController _setsController;
 
@@ -427,19 +423,19 @@ class _WorkoutDialogState extends State<WorkoutDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Set Workout'),
+      title: const Text('Set Workout'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             controller: _countController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Count Per Set'),
+            decoration: const InputDecoration(labelText: 'Count Per Set'),
           ),
           TextField(
             controller: _setsController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Number of Sets'),
+            decoration: const InputDecoration(labelText: 'Number of Sets'),
           ),
         ],
       ),
@@ -448,7 +444,7 @@ class _WorkoutDialogState extends State<WorkoutDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         TextButton(
           onPressed: () {
@@ -459,7 +455,7 @@ class _WorkoutDialogState extends State<WorkoutDialog> {
             workoutProvider.addActivityToNewWorkout(widget.activity, countPerSet, numOfSets);
             Navigator.of(context).pop();
           },
-          child: Text('OK'),
+          child: const Text('OK'),
         ),
       ],
     );

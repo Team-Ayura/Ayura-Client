@@ -1,11 +1,8 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/sleep_tracking/page1.dart';
 import 'package:ayura/widgets/features/sleep_tracking/averagesleeptimecard.dart';
-import 'package:ayura/widgets/features/sleep_tracking/biweekline_chart.dart';
 import 'package:ayura/widgets/features/sleep_tracking/monthlycalendar.dart';
 import 'package:ayura/widgets/features/sleep_tracking/sleepqualitypiechart.dart';
-import 'package:ayura/widgets/features/sleep_tracking/weeklinechart.dart';
-import 'package:ayura/widgets/features/symptom_tracking/calendar.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +26,7 @@ class _MonthlyTabState extends State<MonthlyTab> {
               child:Column(
                 children:[
                   const SizedBox(height: 10,),  
-                  AverageSleepCard(duration: 'Monthly',),
+                  const AverageSleepCard(duration: 'Monthly',),
 
 
                   const SizedBox(height: 10,),
@@ -55,7 +52,7 @@ class _MonthlyTabState extends State<MonthlyTab> {
                         color: AppColors.primaryColor,
                       )),
                       subtitle: const Text("Establish a consistent Sleep Schedule"),
-                      trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepSchedules());}, child:Icon( Icons.arrow_forward,))
+                      trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepSchedules());}, child:const Icon( Icons.arrow_forward,))
                     ),
                                   ),
                   ),
@@ -64,7 +61,7 @@ class _MonthlyTabState extends State<MonthlyTab> {
                     padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
                     color: Colors.white,
                     // child: CalendarWidget()
-                    child: BaseCalendar()
+                    child: const BaseCalendar()
                   ),
                   const SizedBox(height: 10.0,),
                   const Row(
