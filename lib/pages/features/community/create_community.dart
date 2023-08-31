@@ -169,7 +169,15 @@ class _CreateCommunityState extends State<CreateCommunity> {
                     SizedBox(
                       width: 100,
                       height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: AppColors.primaryColor),
+                      ),
                       child: DropdownButtonFormField(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                        ),
                         items: dropdownItems
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(

@@ -1,4 +1,7 @@
 import 'package:ayura/constants/styles.dart';
+import 'package:ayura/pages/features/community/add_challenge.dart';
+import 'package:ayura/utils/router.dart';
+import 'package:ayura/widgets/features/community/add_member.dart';
 import 'package:ayura/widgets/features/community/header_btn.dart';
 import 'package:ayura/widgets/features/community/input_fields.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +29,8 @@ class CommunityChat extends StatefulWidget {
 
 class _CommunityChatState extends State<CommunityChat> {
   String activeComponent = 'Overview'; // Keeps track of the active UI component
+  //For now I am declaring this here needs to come from before screen
+  String commmunityId = '64f02b738347e3aa26227165';
 
   void updateActiveComponent(String component) {
     setState(() {
@@ -73,7 +78,11 @@ class _CommunityChatState extends State<CommunityChat> {
             ),
             // Settings
             GestureDetector(
-              onTap: null,
+              onTap: (() {
+                PageNavigator(context: context).nextPage(AddMember(
+                  communityId: commmunityId,
+                ));
+              }),
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
@@ -85,6 +94,33 @@ class _CommunityChatState extends State<CommunityChat> {
                 ),
                 child: const Text(
                   "Add Members",
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: AppColors.textColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: (() {
+                PageNavigator(context: context).nextPage(AddChallenge(
+                  communityId: commmunityId,
+                ));
+              }),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+                width: MediaQuery.of(context).size.width * 0.8,
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Text(
+                  "Add Challenges",
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 15,
