@@ -5,6 +5,7 @@ enum BasicUserData {
   lastName,
   profileImage,
   token,
+  googleAccessToken,
 }
 
 extension BasicUserDataExtension on BasicUserData {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:ayura/constants/constants.dart';
+import 'package:ayura/constants/enums.dart';
 import 'package:ayura/provider/models/walkAndRunDataModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:ayura/provider/activityProviders/googleAuthProvider.dart';
@@ -35,8 +36,9 @@ class WalkingAndRunningProvider extends ChangeNotifier {
 
   // getters
   String get duration {
-    int hours = walkAndRunData?.avgMoveMinutes ?? 0 ~/ 60;
-    int minutes = walkAndRunData?.avgMoveMinutes ?? 0 % 60;
+    int avgMoveMinutes = walkAndRunData?.avgMoveMinutes ?? 0;
+    int hours = avgMoveMinutes ~/ 60;
+    int minutes = avgMoveMinutes % 60;
 
     String formattedHours = hours.toString().padLeft(2, '0');
     String formattedMinutes = minutes.toString().padLeft(2, '0');
@@ -148,10 +150,10 @@ class WalkingAndRunningProvider extends ChangeNotifier {
   // For example: fetchWalkAndRunningData, updateStepsData, etc.
 
   void initWalkAndRunningProviderState() async {
-    walkAndRunDataToday ??= await fetchWalkAndRunDataGoogleFit(ChartFilterType.week);
-    walkAndRunDataCurrentWeek ??= await fetchWalkAndRunDataBackEnd(ChartFilterType.week);
-    walkAndRunDataCurrentMonth ??= await fetchWalkAndRunDataBackEnd(ChartFilterType.month);
-    walkAndRunDataCurrentYear ??= await fetchWalkAndRunDataBackEnd(ChartFilterType.year);
+    walkAndRunDataToday = await fetchWalkAndRunDataGoogleFit(ChartFilterType.week);
+    walkAndRunDataCurrentWeek = await fetchWalkAndRunDataBackEnd(ChartFilterType.week);
+    walkAndRunDataCurrentMonth = await fetchWalkAndRunDataBackEnd(ChartFilterType.month);
+    walkAndRunDataCurrentYear = await fetchWalkAndRunDataBackEnd(ChartFilterType.year);
     selectedFilter = ChartFilterType.day;
 
     notifyListeners();
@@ -161,23 +163,23 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     selectedFilter = filter;
     switch (selectedFilter) {
       case ChartFilterType.day:
-        walkAndRunDataToday ??= await fetchWalkAndRunDataGoogleFit(filter);
+        walkAndRunDataToday = await fetchWalkAndRunDataGoogleFit(filter);
         walkAndRunData = walkAndRunDataToday;
         break;
       case ChartFilterType.week:
-        walkAndRunDataCurrentWeek ??= await fetchWalkAndRunDataBackEnd(filter);
+        walkAndRunDataCurrentWeek = await fetchWalkAndRunDataBackEnd(filter);
         walkAndRunData = walkAndRunDataCurrentWeek;
         break;
       case ChartFilterType.month:
-        walkAndRunDataCurrentMonth ??= await fetchWalkAndRunDataBackEnd(filter);
+        walkAndRunDataCurrentMonth = await fetchWalkAndRunDataBackEnd(filter);
         walkAndRunData = walkAndRunDataCurrentMonth;
         break;
       case ChartFilterType.year:
-        walkAndRunDataCurrentYear ??= await fetchWalkAndRunDataBackEnd(filter);
+        walkAndRunDataCurrentYear = await fetchWalkAndRunDataBackEnd(filter);
         walkAndRunData = walkAndRunDataCurrentYear;
         break;
     }
-    print(walkAndRunData);
+    // print(walkAndRunData);
     // After updating the state, notify listeners to rebuild widgets that depend on this provider.
     notifyListeners();
   }
@@ -187,7 +189,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
 
     // prepare the request arguments
     final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getString('userId');
+    final userId = prefs.getString(BasicUserData.userId.label);
     final filterType = type.label;
 
     // backend api endpoint
@@ -196,24 +198,37 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     // initialize the result object
     WalkAndRunDataModel? result;
 
-
     // post request and get response
     try {
       http.Response req = await http.get(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization' : 'Bearer ${prefs.getString('jwtToken')}'
+          'Authorization' : 'Bearer ${prefs.getString(BasicUserData.token.label)}'
         },
       );
 
+
       if (req.statusCode == 200 || req.statusCode == 201) {
         final res = json.decode(req.body);
-        result = res["data"];
+        final resbody = res["data"];
+        print(resbody);
+
+        result = WalkAndRunDataModel(
+          timePeriod: resbody["timePeriod"],
+          avgDistanceWalked: resbody["avgDistanceWalked"],
+          avgStepCount: resbody["avgStepCount"],
+          avgMoveMinutes: resbody["avgMoveMinutes"],
+          avgCaloriesBurned: resbody["avgCaloriesBurned"],
+          improvement: resbody["improvement"],
+          steps: List<int>.from(resbody["steps"]),
+        );
+
         _resMessage = "Fetched Successfully!";
       } else {
         final res = json.decode(req.body);
         _resMessage = res['message'];
+
       }
     } on SocketException catch (e) {
       _resMessage = e.toString();
@@ -228,7 +243,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
 
     // prepare the request arguments
     final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getString('userId');
+    final userId = prefs.getString(BasicUserData.userId.label);
 
     // backend api endpoint
     String url = '$requestBaseUrl/api/activity/getwalkandrundatabyfilter?userId=$userId&todayStepCount=$stepCount';
@@ -242,7 +257,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization' : 'Bearer ${prefs.getString('jwtToken')}'
+          'Authorization' : 'Bearer ${prefs.getString(BasicUserData.token.label)}'
         },
       );
 
@@ -295,7 +310,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
 
       improvement = stepsDistanceCaloriesMoveMinutesMap["improvement"];
     }
-    
+    print(stepsDistanceCaloriesMoveMinutesMap);
     // steps array in each hour
     List<int> steps = await fetchStepCountGoogleFit(type, 3600000, startOfTodayMillis, nowMillis);
 
@@ -322,7 +337,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
 
     // get google account access token
     String? token = await _googleAuthProvider.getAccessToken();
-
+    print(token);
     // generate the request headers
     final headers = {
       'Content-type': 'application/json',
@@ -332,7 +347,9 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     // generate the request body
     final requestBody = {
       "aggregateBy": [
-        {"dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"}
+        {
+          "dataTypeName": "com.google.step_count.delta"
+        }
       ],
       "bucketByTime": {"durationMillis": bucketTime},
       "startTimeMillis": startMillis,
@@ -431,88 +448,6 @@ class WalkingAndRunningProvider extends ChangeNotifier {
   }
 }
 
-// old code
-
-// // this works now think how to manage the accesstoken seamlessly
-// Future<List<int>> fetchStepsData(ChartFilterType filter) async {
-//   // Get the current date and time
-//   DateTime now = DateTime.now();
-//   int nowMillis = now.millisecondsSinceEpoch;
-//
-//   // Start time of today (00:00 AM)
-//   DateTime startOfToday = DateTime(now.year, now.month, now.day);
-//   int startOfTodayMillis = startOfToday.millisecondsSinceEpoch;
-//
-//   // steps today
-//   switch(filter){
-//     case ChartFilterType.week:
-//       return await getStepCountsBackEndAPI(ChartFilterType.week);
-//     case ChartFilterType.month:
-//       return await getStepCountsBackEndAPI(ChartFilterType.month);
-//     case ChartFilterType.year:
-//       return await getStepCountsBackEndAPI(ChartFilterType.year);
-//     default:
-//       return await getStepCounts(ChartFilterType.day, 86400000, startOfTodayMillis, nowMillis);
-//   }
-// }
-//
-
-//
-// Future<List<int>> getStepCountsBackEndAPI(ChartFilterType type) async{
-//   final prefs = await SharedPreferences.getInstance();
-//   int listsize = type == ChartFilterType.day ? 24 : type == ChartFilterType.day ? 7 : type == ChartFilterType.day ? 30 : 12;
-//   List<int> result = generateIntArray(listsize);
-//   // prepare the request body
-//   String url = '$requestBaseUrl/api/activity/stepcount';
-//
-//   final body = {
-//     'userId' : prefs.getString('userId'),
-//     'filterType' : type.label,
-//   };
-//
-//   // post request and get response
-//   try {
-//     http.Response req = await http.post(
-//       Uri.parse(url),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: json.encode(body),
-//     );
-//
-//     if (req.statusCode == 200 || req.statusCode == 201) {
-//       final List<int> res = json.decode(req.body);
-//       return result = addArrays(result, res);
-//       _resMessage = "Registered Successfully!";
-//     } else {
-//       final res = json.decode(req.body);
-//
-//       _resMessage = res['message'];
-//     }
-//   } on SocketException catch (e) {
-//     _resMessage = e.toString();
-//   } catch (e) {
-//     _resMessage = e.toString();
-//   }
-//
-//   // update the state
-//   return result;
-// }
-//
-// List<int> addArrays(List<int> array1, List<int> array2) {
-//   List<int> result = [];
-//   int minLength = array1.length < array2.length ? array1.length : array2.length;
-//
-//   for (int i = 0; i < minLength; i++) {
-//     result.add(array1[i] + array2[i]);
-//   }
-//
-//   result.addAll(array1.sublist(minLength));
-//   result.addAll(array2.sublist(minLength));
-//
-//   return result;
-// }
-//
 List<int> generateIntArray(int size) {
   List<int> result = [];
 

@@ -1,5 +1,7 @@
+import 'package:ayura/constants/enums.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GoogleAuthProvider extends ChangeNotifier{
   GoogleSignInAccount? user;
@@ -25,6 +27,7 @@ class GoogleAuthProvider extends ChangeNotifier{
         user = null;
       }else{
         user = await _googleSignIn.signIn();
+
       }
       isUserAuthorized = !isUserAuthorized;
       notifyListeners();
@@ -35,12 +38,18 @@ class GoogleAuthProvider extends ChangeNotifier{
     // if the token is expired refresh it here
     // if the user is not authorized, authorize here
     // so that some how this method returns the accessToken
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
     GoogleSignInAuthentication? googleSignInAuthentication;
     if(user != null) {
       googleSignInAuthentication = await user!
           .authentication;
+      prefs.setString(BasicUserData.googleAccessToken.label, googleSignInAuthentication.accessToken ?? "");
+    }else{
+      login();
+      return await getAccessToken();
     }
-    return googleSignInAuthentication?.accessToken;
+    return prefs.getString(BasicUserData.googleAccessToken.label);
   }
 
 }

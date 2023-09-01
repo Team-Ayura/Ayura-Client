@@ -17,12 +17,12 @@ class WalkingAndRunningPage extends StatefulWidget {
 class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
   int activeIndex = 0; // -1 means no active index
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Provider.of<WalkingAndRunningProvider>(context, listen: false).initWalkAndRunningProviderState();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   Provider.of<WalkingAndRunningProvider>(context, listen: false).initWalkAndRunningProviderState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +200,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                                     (context, walkingAndRunningProvider, _) {
                                   final String distance =
                                       walkingAndRunningProvider.distance
-                                          .toString();
+                                          .toStringAsFixed(2);
                                   return Text(
                                     distance,
                                     style: const TextStyle(
