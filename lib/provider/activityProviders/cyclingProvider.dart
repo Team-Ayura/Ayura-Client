@@ -1,7 +1,8 @@
+import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:flutter/foundation.dart';
 
 class CyclingProvider extends ChangeNotifier {
-  String selectedFilter = 'D'; // Default filter is 'D' for Day
+  ChartFilterType selectedFilter = ChartFilterType.day; // Default filter is 'D' for Day
   Map<String, int> stepsData = {}; // Data for steps taken on each day
 
   String timePeriod = "Aug 14";
@@ -126,7 +127,7 @@ class CyclingProvider extends ChangeNotifier {
   // Implement methods to fetch data from the server and update the provider state
   // For example: fetchWalkAndRunningData, updateStepsData, etc.
 
-  void updateFilter(String filter) {
+  void updateFilter(ChartFilterType filter) {
     selectedFilter = filter;
     // Fetch and update the stepsData and distance based on the selected filter
     // You should implement this logic based on how you fetch data from the server
@@ -139,7 +140,7 @@ class CyclingProvider extends ChangeNotifier {
     calorieCount++;
     improvement--;
     switch (selectedFilter) {
-      case 'D':
+      case ChartFilterType.day:
         steps = daysteps;
         calorieCount = daycalorieCount;
         improvement = dayimprovement;
@@ -147,7 +148,7 @@ class CyclingProvider extends ChangeNotifier {
         timePeriod = daytimePeriod;
         distance = daydistance;
         break;
-      case 'W':
+      case ChartFilterType.week:
         steps = weeksteps;
         calorieCount = weekcalorieCount;
         improvement = weekimprovement;
@@ -155,7 +156,7 @@ class CyclingProvider extends ChangeNotifier {
         timePeriod = weektimePeriod;
         distance = weekdistance;
         break;
-      case 'M':
+      case ChartFilterType.month:
         steps = monthsteps;
         calorieCount = monthcalorieCount;
         improvement = monthimprovement;
@@ -163,7 +164,7 @@ class CyclingProvider extends ChangeNotifier {
         timePeriod = monthtimePeriod;
         distance = monthdistance;
         break;
-      case 'Y':
+      case ChartFilterType.year:
         steps = yearsteps;
         calorieCount = yearcalorieCount;
         improvement = yearimprovement;

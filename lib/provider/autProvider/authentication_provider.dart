@@ -243,8 +243,8 @@ class AuthenticationProvider2 extends ChangeNotifier {
       // print(req.body);
 
       if (req.statusCode == 200 || req.statusCode == 201) {
-        // final res = json.decode(req.body);
-        // print(req.body);
+        final res = json.decode(req.body);
+        print(req.body);
 
         _resMessage = "Login Successful!";
 
