@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ayura/constants/enums.dart';
 import 'package:ayura/provider/models/validationModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:ayura/provider/models/userModel.dart';
 import 'package:ayura/constants/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationProvider2 extends ChangeNotifier {
   // BaseURL
@@ -243,9 +245,16 @@ class AuthenticationProvider2 extends ChangeNotifier {
       // print(req.body);
 
       if (req.statusCode == 200 || req.statusCode == 201) {
-        // final res = json.decode(req.body);
+        final res = json.decode(req.body);
         // print(req.body);
-
+        print(res);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString(BasicUserData.userId.label, res["userId"]);
+        prefs.setString(BasicUserData.email.label, res["email"]);
+        prefs.setString(BasicUserData.firstName.label, res["firstName"]);
+        prefs.setString(BasicUserData.lastName.label, res["lastName"]);
+        prefs.setString(BasicUserData.profileImage.label, res["profileImage"]);
+        prefs.setString(BasicUserData.token.label, res["email"]);
         _resMessage = "Login Successful!";
 
         notifyListeners();
