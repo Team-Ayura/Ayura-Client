@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'dart:convert';
 //Constants
 import 'package:ayura/constants/colors.dart';
-
+import 'dart:typed_data';
 // Feature Widgets
 
 class PostsView extends StatefulWidget {
@@ -12,12 +12,14 @@ class PostsView extends StatefulWidget {
   final String? postImagePath;
   final String? profileImagePath;
   final VoidCallback? onPressed;
+  final String base64ImageData;
 
   const PostsView({
     super.key,
     required this.username,
     required this.timeAgo,
     required this.challengeDescription,
+    required this.base64ImageData,
     this.postImagePath,
     this.profileImagePath,
     this.onPressed,
@@ -32,14 +34,18 @@ class PostsView extends StatefulWidget {
 class _PostsViewState extends State<PostsView> {
   @override
   Widget build(BuildContext context) {
+    // Decode the Base64 string to bytes
+    Uint8List imageBytes = base64.decode(widget.base64ImageData);
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
       ),
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -79,12 +85,14 @@ class _PostsViewState extends State<PostsView> {
               color: AppColors.textColor,
               fontSize: 14,
             ),
+            textAlign: TextAlign.left,
           ),
           const SizedBox(
             height: 20,
           ),
-          Image.asset(
-            widget.postImagePath ?? 'assets/images/postImage.png',
+          Image.memory(
+            // Display the image from bytes
+            imageBytes,
             width: 300,
             height: 300,
             fit: BoxFit.contain,
@@ -92,98 +100,51 @@ class _PostsViewState extends State<PostsView> {
           const SizedBox(
             height: 15,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(12), // Adjust the radius as needed
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.alternateGreyColor
-                          .withOpacity(0.2), // Shadow color with low opacity
-                      spreadRadius: 1, // Spread radius
-                      blurRadius: 1, // Blur radius
-                      offset: const Offset(0,
-                          1), // Offset from the top to create a bottom shadow
-                    ),
-                  ],
+          Container(
+            decoration: BoxDecoration(
+              borderRadius:
+                  BorderRadius.circular(12), // Adjust the radius as needed
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.alternateGreyColor
+                      .withOpacity(0.2), // Shadow color with low opacity
+                  spreadRadius: 1, // Spread radius
+                  blurRadius: 1, // Blur radius
+                  offset: const Offset(
+                      0, 1), // Offset from the top to create a bottom shadow
                 ),
-                child: const IconButton(
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
                   onPressed: null,
                   icon: Icon(
                     Icons.thumb_up,
                     size: 20,
-                    color: AppColors.primaryColor,
+                    color: AppColors.accentColor,
                   ),
                 ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(12), // Adjust the radius as needed
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.alternateGreyColor
-                          .withOpacity(0.2), // Shadow color with low opacity
-                      spreadRadius: 1, // Spread radius
-                      blurRadius: 1, // Blur radius
-                      offset: const Offset(0,
-                          1), // Offset from the top to create a bottom shadow
-                    ),
-                  ],
-                ),
-                child: IconButton(
+                IconButton(
                   onPressed: widget.onPressed,
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.message_outlined,
                     size: 20,
-                    color: AppColors.primaryColor,
+                    color: AppColors.accentColor,
                   ),
                 ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(12), // Adjust the radius as needed
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.alternateGreyColor
-                          .withOpacity(0.2), // Shadow color with low opacity
-                      spreadRadius: 1, // Spread radius
-                      blurRadius: 1, // Blur radius
-                      offset: const Offset(0,
-                          1), // Offset from the top to create a bottom shadow
-                    ),
-                  ],
-                ),
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    elevation:
-                        MaterialStateProperty.all(0.0), // Remove elevation
-
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent),
-                  ),
-                  icon: const Icon(
-                    Icons.arrow_forward,
+                IconButton(
+                  onPressed: null,
+                  icon: Icon(
+                    Icons.send_rounded,
                     size: 20,
-                    color: AppColors.primaryColor,
-                  ),
-                  label: const Text(
-                    'Participate',
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      color: AppColors.primaryColor,
-                      fontSize: 13,
-                    ),
+                    color: AppColors.accentColor,
                   ),
                 ),
-              ),
-            ],
-          )
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -2,13 +2,25 @@ import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/features/community/add_challenge.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/community/add_member.dart';
-import 'package:ayura/widgets/features/community/header_btn.dart';
+import 'package:ayura/widgets/features/community/header_btn.dart';import 'package:ayura/provider/communityProviders/community_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:ayura/provider/communityProviders/community_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:ayura/provider/models/community_model.dart';
+import 'package:ayura/pages/features/community/community_chat/posts_view.dart';
+import 'package:ayura/pages/features/community/community_chat/leaderboard_view.dart';
+import 'package:ayura/pages/features/community/community_chat/challenge_details_view.dart';
+import 'package:provider/provider.dart';
+import 'package:ayura/provider/models/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:ayura/pages/features/community/community_chat/posts_view.dart';
 import 'package:ayura/pages/features/community/community_chat/leaderboard_view.dart';
 import 'package:ayura/pages/features/community/community_chat/challenge_details_view.dart';
 import 'package:ayura/widgets/features/community/comment_section.dart';
-
+import 'package:ayura/widgets/features/community/comment_section.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'dart:convert';
 //Constants
 import 'package:ayura/constants/colors.dart';
 
@@ -16,8 +28,9 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/widgets/features/community/community_appbar.dart';
 
 class CommunityChat extends StatefulWidget {
-  const CommunityChat({super.key});
+  const CommunityChat({required this.communityId, super.key});
 
+  final String communityId;
   @override
   State<CommunityChat> createState() {
     return _CommunityChatState();
@@ -27,7 +40,49 @@ class CommunityChat extends StatefulWidget {
 class _CommunityChatState extends State<CommunityChat> {
   String activeComponent = 'Overview'; // Keeps track of the active UI component
   //For now I am declaring this here needs to come from before screen
-  String commmunityId = '64f02b738347e3aa26227165';
+  String commmunityId = '';
+  late File _image;
+  String base64Image = '';
+  String _postCaption = "";
+  Color _uploadIconColor = AppColors.alternateGreyColor;
+
+  void getImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(
+            pickedFile.path); // Initialize _image when an image is selected
+        base64Image = base64Encode(_image.readAsBytesSync());
+        print('Image selected.');
+
+        setState(() {
+          _postCaption = "";
+          _uploadIconColor = AppColors.accentColor;
+        });
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  void _submitPostForm() {
+    final newPost = PostModel(
+      id: "",
+      authorName: "",
+      caption: _postCaption,
+      imageUrl: base64Image,
+      authorId: "649e52033a23be6f73bfecc4",
+      //Need to fetch real author ID later
+      communityId: widget.communityId,
+    );
+
+    Provider.of<CommunityProvider>(context, listen: false).submitPost(newPost);
+    setState(() {
+      _postCaption = "";
+      _uploadIconColor = AppColors.alternateGreyColor;
+    });
+  }
 
   void updateActiveComponent(String component) {
     setState(() {
@@ -179,6 +234,17 @@ class _CommunityChatState extends State<CommunityChat> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // Access widget properties within initState
+    commmunityId = widget.communityId;
+    Provider.of<CommunityProvider>(context, listen: false)
+        .getCommunityById(commmunityId); //Initializing the community list
+    Provider.of<CommunityProvider>(context, listen: false)
+        .getPostsList(commmunityId); //Initializing the community list
+  }
+
+  @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
@@ -188,11 +254,16 @@ class _CommunityChatState extends State<CommunityChat> {
       resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(90.0),
-        child: CommunityAppBar(
-          appbarTitle: 'Colombo Active Life',
-          visibility: 'Public',
-          memberCount: '210',
-          onPressed: openCommunitySettingsOverlay,
+        child: Consumer<CommunityProvider>(
+          builder: (ctx, communityProvider, _) {
+            CommunityModel community = communityProvider.communityModel;
+            return CommunityAppBar(
+              appbarTitle: community.communityName,
+              visibility: community.isPublic ? "Public" : "Private",
+              memberCount: community.members.length.toString(),
+              onPressed: openCommunitySettingsOverlay,
+            );
+          },
         ),
       ),
       body: Container(
@@ -228,6 +299,7 @@ class _CommunityChatState extends State<CommunityChat> {
               height: 20,
             ),
             if (activeComponent == 'Overview') //Posts View
+
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -253,6 +325,9 @@ class _CommunityChatState extends State<CommunityChat> {
                                 ),
                                 Expanded(
                                   child: TextFormField(
+                                    onChanged: (value) {
+                                      _postCaption = value;
+                                    },
                                     maxLines: 2,
                                     style: const TextStyle(
                                       fontFamily: 'Inter',
@@ -282,12 +357,12 @@ class _CommunityChatState extends State<CommunityChat> {
                                     ),
                                   ),
                                 ),
-                                const IconButton(
-                                  onPressed: null,
+                                IconButton(
+                                  onPressed: getImage,
                                   icon: Icon(
                                     Icons.perm_media_rounded,
                                     size: 20,
-                                    color: AppColors.primaryColor,
+                                    color: _uploadIconColor,
                                   ),
                                 ),
                               ],
@@ -302,9 +377,7 @@ class _CommunityChatState extends State<CommunityChat> {
                                   width: 20,
                                 ),
                                 TextButton(
-                                  onPressed: () {
-                                    // Add your onPressed action here
-                                  },
+                                  onPressed: _submitPostForm,
                                   style: ButtonStyle(
                                     side: MaterialStateProperty.all(
                                       const BorderSide(
@@ -368,20 +441,26 @@ class _CommunityChatState extends State<CommunityChat> {
                       const SizedBox(
                         height: 10,
                       ),
-                      PostsView(
-                        username: "Ruchira Bogahawatta",
-                        timeAgo: "10 mins ago",
-                        challengeDescription:
-                            "Challenge : Complete a 1 kilometer run in 3 consecutive days",
-                        onPressed: openCommentSection,
-                      ),
-                      PostsView(
-                        username: "Ruchira Bogahawatta",
-                        timeAgo: "10 mins ago",
-                        challengeDescription:
-                            "Challenge : Complete a 1 kilometer run in 3 consecutive days",
-                        onPressed: openCommentSection,
-                      ),
+                      SizedBox(
+                        height: height * 0.65,
+                        child: Consumer<CommunityProvider>(
+                            builder: (ctx, communityProvider, _) {
+                          List<PostModel> posts = communityProvider.postsList;
+                          return ListView.builder(
+                            itemCount: posts.length,
+                            itemBuilder: (context, index) {
+                              PostModel post = posts[index];
+                              return PostsView(
+                                base64ImageData: post.imageUrl,
+                                username: post.authorName,
+                                timeAgo: "10 mins",
+                                challengeDescription: post.caption,
+                                onPressed: openCommentSection,
+                              );
+                            },
+                          );
+                        }),
+                      )
                     ],
                   ),
                 ),
@@ -389,7 +468,7 @@ class _CommunityChatState extends State<CommunityChat> {
             else if (activeComponent == 'Leaderboard')
               const LeaderboardView()
             else if (activeComponent == 'Challenge')
-              const ChallengeDetailsView()
+              const ChallengeDetailsView(),
           ],
         ),
       ),

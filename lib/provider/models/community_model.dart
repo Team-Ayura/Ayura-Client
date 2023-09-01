@@ -15,7 +15,7 @@ class CommunityModel {
     List<String>? categories, // Initialize as empty list
     List<String>? members, // Initialize as empty list
   })  : categories = categories ?? [],
-        members = members ?? [];
+        members = members ?? [];  
 
   // Factory constructor to create CommunityModel from JSON data
   factory CommunityModel.fromJson(Map<String, dynamic> json) {
