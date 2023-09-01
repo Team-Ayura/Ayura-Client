@@ -4,10 +4,11 @@ import 'package:ayura/utils/router.dart';
 import 'package:ayura/pages/features/mealPlan/viewmeal_screen.dart';
 
 class MealCard extends StatelessWidget {
+  final String name;
   final String imagePath;
   final double calories;
 
-  const MealCard({required this.imagePath, required this.calories});
+  const MealCard({required this.name, required this.imagePath, required this.calories});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,18 @@ class MealCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Text(
+                name,
+                style: const TextStyle(
+                  fontFamily: 'Inter',
+                  color: AppColors.textColor,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
             ClipRRect(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
@@ -43,7 +56,7 @@ class MealCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
