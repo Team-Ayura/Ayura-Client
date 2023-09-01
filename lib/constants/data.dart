@@ -4,7 +4,7 @@ List<Meal> mealList = [
   Meal(
     mealId: '1',
     name: 'Green gram milk rice',
-    image: 'assets\images\mealPlan\greengramrice.png',
+    image: 'assets/images/mealPlan/greengramrice.png',
     mainmass: 135.0,
     sidemass: 15.0,
     protein: 6.9,
@@ -14,8 +14,8 @@ List<Meal> mealList = [
   ),
   Meal(
     mealId: '2',
-    name: 'String Hoppers (Red rice flour )',
-    image: 'assets/images/mealplan/redstringhoppers.png',
+    name: 'String Hoppers',
+    image: 'assets/images/mealPlan/redstringhoppers.png',
     mainmass: 180.0,
     sidemass: 160.0,
     protein: 18.1,
@@ -26,7 +26,7 @@ List<Meal> mealList = [
   Meal(
     mealId: '3',
     name: 'Boiled Cowpea',
-    image: 'assets/images/kaupi.png.png',
+    image: 'assets/images/mealPlan/cowpea.png',
     mainmass: 200.0,
     sidemass: 0.0,
     protein: 5.6,
@@ -37,7 +37,7 @@ List<Meal> mealList = [
   Meal(
     mealId: '4',
     name: 'Itly',
-    image: 'assets/images/itly.png.png',
+    image: 'assets/images/mealPlan/pittu.png',
     mainmass: 200.0,
     sidemass: 0.0,
     protein: 5.6,
@@ -48,7 +48,7 @@ List<Meal> mealList = [
   Meal(
     mealId: '4',
     name: 'Boiled Cowpea',
-    image: 'assets/images/kaupi.png.png',
+    image: 'assets/images/mealPlan/hoppers.png',
     mainmass: 200.0,
     sidemass: 0.0,
     protein: 5.6,
@@ -59,7 +59,7 @@ List<Meal> mealList = [
   Meal(
     mealId: '3',
     name: 'Boiled Cowpea',
-    image: 'assets/images/kaupi.png.png',
+    image: 'assets/images/mealPlan/ricepancake.png',
     mainmass: 200.0,
     sidemass: 0.0,
     protein: 5.6,

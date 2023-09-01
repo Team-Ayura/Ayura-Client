@@ -2,8 +2,6 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
 import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
-import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
-import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/activity_tracking/sharable_image_collage.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/image_container.dart';

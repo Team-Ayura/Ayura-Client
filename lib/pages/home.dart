@@ -5,7 +5,6 @@ import 'package:ayura/widgets/features/home/activity_card.dart';
 import 'package:ayura/widgets/features/home/tips_card.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:ayura/widgets/features/community/challenge_card.dart'; // Challenge Card Widget
-import 'package:ayura/widgets/features/mood_traking/mood_chips.dart';
 
 import 'package:flutter/material.dart';
 
@@ -133,7 +132,6 @@ class _HomeState extends State<Home> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-               
                 SizedBox(height: height * 0.02),
                 Container(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 15),
@@ -256,6 +254,8 @@ class _HomeState extends State<Home> {
                           remainingTime: '5 Days',
                           completedCount: '1.1',
                           totalCount: '4 km',
+                          startingDate: '2021-09-01',
+                          endingDate: '2021-09-07',
                         ),
                       ),
                     ],
