@@ -7,9 +7,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
+
+  void _launchApp() async {
+    final deepLink = 'youruniqueappscheme://openapp';
+    if (await canLaunchUrlString(deepLink)) {
+      await launchUrlString(deepLink);
+    } else {
+      // Handle the case where the "FinalP" app is not installed
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,13 +78,29 @@ class SettingsPage extends StatelessWidget {
                 ),
                 SettingsLabel(text: 'preferences'),
                 SizedBox(
+                    height: 10
+                ),
+                PreferenceItem(
+                  label: "Language",
+                  icon: Icons.language,
+                  onTap: (){},
+                ),
+                SizedBox(
+                    height: 10
+                ),
+                PreferenceItem(
+                  label: "Notifications",
+                  icon: Icons.notifications_active_outlined,
+                  onTap: (){},
+                ),
+                SizedBox(
                   height: 20
                 ),
                 SettingsLabel(text: 'Connected Apps'),
                 SizedBox(
                     height: 10
                 ),
-                ConnectedAppWidget(appName: 'Thurula', appImagePath: 'assets/icons/connectedapps/thurula.svg', mode: ConnectedAppModes.open),
+                ConnectedAppWidget(appName: 'Thurula', appImagePath: 'assets/icons/connectedapps/thurula.svg', mode: ConnectedAppModes.open, onTap: _launchApp),
                 ConnectedAppWidget(appName: 'GoogleFit', appImagePath: 'assets/icons/connectedapps/googlefit.svg', mode: ConnectedAppModes.toggle),
               ],
             ),
@@ -82,6 +109,59 @@ class SettingsPage extends StatelessWidget {
     );
   }
 }
+
+class PreferenceItem extends StatelessWidget {
+  final IconData icon;
+  VoidCallback onTap;
+  final String label;
+  PreferenceItem({super.key, required this.label, required this.icon, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onTap,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+
+        ),
+        padding: const EdgeInsets.all(0),
+        shadowColor: Colors.transparent,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(icon, weight: 2, color: AppColors.textColor,),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  label,
+                  style: AppStyles.subheadingTextStyle2.copyWith(color: AppColors.textColor, fontSize: 16, fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+            const Row(
+              children: [
+                Icon(Icons.arrow_forward_ios_rounded, size: 16, color: AppColors.textColor,),
+                SizedBox(
+                  width: 10,
+                )
+              ],
+            )
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
 class CustomProfileButton extends StatelessWidget {
   final String text;
@@ -148,7 +228,8 @@ class ConnectedAppWidget extends StatefulWidget {
   final String appName;
   final String appImagePath;
   final ConnectedAppModes mode;
-  const ConnectedAppWidget({super.key, required this.appName, required this.appImagePath, required this.mode});
+  VoidCallback? onTap;
+  ConnectedAppWidget({super.key, required this.appName, required this.appImagePath, required this.mode, this.onTap});
 
   @override
   State<ConnectedAppWidget> createState() => _ConnectedAppWidgetState();
@@ -158,7 +239,7 @@ class _ConnectedAppWidgetState extends State<ConnectedAppWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -193,7 +274,7 @@ class _ConnectedAppWidgetState extends State<ConnectedAppWidget> {
           ),
           if(widget.mode == ConnectedAppModes.open)
             GestureDetector(
-            onTap: (){},
+            onTap: widget.onTap,
             child: Container(
               decoration: BoxDecoration(
                 color: AppColors.primaryColor,
