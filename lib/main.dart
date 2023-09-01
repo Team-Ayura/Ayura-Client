@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
           future: _initFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return isViewed != 0 ? const CommunityHome() : const Home();
+              return isViewed != 0 ? const OnboardingScreen() : const Home();
             } else {
               return const SplashScreen();
             }
