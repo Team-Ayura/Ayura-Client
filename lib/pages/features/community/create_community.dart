@@ -166,7 +166,7 @@ class _CreateCommunityState extends State<CreateCommunity> {
                     const SizedBox(
                       width: 10,
                     ),
-                    SizedBox(
+                    Container(
                       width: 100,
                       height: 50,
                       decoration: BoxDecoration(

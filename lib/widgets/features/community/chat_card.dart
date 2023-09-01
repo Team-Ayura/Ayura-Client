@@ -11,8 +11,10 @@ class ChatCard extends StatelessWidget {
       {required this.communityName,
       required this.visibiity,
       required this.memberCount,
+      required this.communityId,
       super.key});
 
+  final String communityId;
   final String communityName;
   final String visibiity;
   final String memberCount;
@@ -21,7 +23,8 @@ class ChatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        PageNavigator(context: context).nextPage(const CommunityChat());
+        PageNavigator(context: context)
+            .nextPage(CommunityChat(communityId: communityId));
       }, // Navigator function
       child: Container(
         //Main chat box

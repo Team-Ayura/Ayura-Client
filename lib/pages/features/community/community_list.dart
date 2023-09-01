@@ -74,6 +74,7 @@ class _CommunityListState extends State<CommunityList> {
                       itemBuilder: (context, index) {
                         CommunityModel community = communities[index];
                         return ChatCard(
+                            communityId: community.id,
                             communityName: community.communityName,
                             visibiity:
                                 community.isPublic ? 'Public' : 'Private',

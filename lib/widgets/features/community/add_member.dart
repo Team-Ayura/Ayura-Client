@@ -94,7 +94,9 @@ class _AddMemberState extends State<AddMember> {
               const SizedBox(height: 16),
               customButton(
                   tap: (() {
-                    PageNavigator(context: context).nextPage(CommunityChat());
+                    PageNavigator(context: context).nextPage(
+                        const CommunityChat(
+                            communityId: "64f02b738347e3aa26227165"));
                   }),
                   width: MediaQuery.of(context).size.width * 0.4,
                   text: 'Save',
