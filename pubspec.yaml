@@ -43,6 +43,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^22.2.11
   google_sign_in: ^6.1.4
   flutter_secure_storage: ^8.0.0
+  getwidget: ^4.0.0
 
 
 dev_dependencies:
