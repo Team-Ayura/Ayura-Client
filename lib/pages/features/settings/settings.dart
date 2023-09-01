@@ -126,7 +126,6 @@ class _ConnectedAppWidgetState extends State<ConnectedAppWidget> {
                 ),
             )
           )
-          else
 
         ]
       ),
