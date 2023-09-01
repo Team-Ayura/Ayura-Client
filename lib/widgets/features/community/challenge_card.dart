@@ -11,6 +11,8 @@ class ChallengeCard extends StatelessWidget {
       required this.remainingTime,
       required this.completedCount,
       required this.totalCount,
+      required this.startingDate,
+      required this.endingDate,
       this.margin = 10,
       this.padding = 20,
       super.key});
@@ -22,6 +24,8 @@ class ChallengeCard extends StatelessWidget {
   final String remainingTime;
   final String completedCount;
   final String totalCount;
+  final String startingDate;
+  final String endingDate;
   final double margin;
   final double padding;
 
@@ -122,6 +126,34 @@ class ChallengeCard extends StatelessWidget {
               minHeight: 10, // Minimum height of the progress bar
             ),
           ),
+          const SizedBox(
+            height: 10,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Starting date : $startingDate',
+              style: const TextStyle(
+                  color: AppColors.textColor,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 15),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+             'Ending date $endingDate',
+              style: const TextStyle(
+                  color: AppColors.textColor,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 15),
+            ),
+          )
         ],
       ),
     );

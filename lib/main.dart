@@ -1,5 +1,6 @@
 import 'package:ayura/auth/onboarding_screen.dart';
-import 'package:ayura/pages/features/mealPlan/meal_screen.dart';
+import 'package:ayura/pages/features/community/community_home.dart';
+import 'package:ayura/pages/features/community/community_list.dart';
 import 'package:ayura/pages/splash_screen.dart';
 // import 'package:ayura/auth/signup.dart';
 import 'package:ayura/pages/home.dart';
@@ -66,7 +67,7 @@ class MyApp extends StatelessWidget {
           future: _initFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return isViewed != 0 ? const OnboardingScreen() : const Home();
+              return isViewed != 0 ? const CommunityHome() : const Home();
             } else {
               return const SplashScreen();
             }

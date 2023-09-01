@@ -8,7 +8,6 @@ import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class Activities extends StatelessWidget {
@@ -49,7 +48,7 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         preferredSize:
         Size.fromHeight(90.0),
         child: CustomAppBar(
@@ -77,35 +76,35 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
                 ),
               ],
             ),
-            CustomBoxItem(
+            const CustomBoxItem(
               index: 1,
               imagePath: 'assets/images/activity_tracking/running.svg',
               mainText: 'Walking & Running',
               subText: 'Step by step, you\'re closer to your goals',
               route: '/walkingandrunning',
             ),
-            CustomBoxItem(
+            const CustomBoxItem(
               index: 2,
               imagePath: 'assets/images/activity_tracking/cycling.svg',
               mainText: 'Cycling',
               subText: 'Pedal your way to strength and freedom.',
               route: '/cycling',
             ),
-            CustomBoxItem(
+            const CustomBoxItem(
               index: 3,
               imagePath: 'assets/images/activity_tracking/stairs.svg',
               mainText: 'Stairs',
               subText: 'Climb higher, conquer your limits.',
               route: '/stairs',
             ),
-            CustomBoxItem(
+            const CustomBoxItem(
               index: 4,
               imagePath: 'assets/images/activity_tracking/sports.svg',
               mainText: 'Sports',
               subText: 'Unleash your passion, embrace the challenge.',
               route: '/sports',
             ),
-            CustomBoxItem(
+            const CustomBoxItem(
               index: 5,
               imagePath: 'assets/images/activity_tracking/workout.svg',
               mainText: 'Workout',
@@ -116,7 +115,7 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
           ],
         ),
       ),
-      bottomNavigationBar: AppNavigation(),
+      bottomNavigationBar: const AppNavigation(),
     );
   }
 
