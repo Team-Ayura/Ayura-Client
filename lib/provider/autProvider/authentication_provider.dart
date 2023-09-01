@@ -247,6 +247,7 @@ class AuthenticationProvider2 extends ChangeNotifier {
       if (req.statusCode == 200 || req.statusCode == 201) {
         final res = json.decode(req.body);
         // print(req.body);
+        print(res);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString(BasicUserData.userId.label, res["userId"]);
         prefs.setString(BasicUserData.email.label, res["email"]);
@@ -271,6 +272,7 @@ class AuthenticationProvider2 extends ChangeNotifier {
       _resMessage = 'No Internet Connection';
       notifyListeners();
     } catch (e) {
+      print(e);
       _resMessage = 'Something went wrong';
       notifyListeners();
     }
