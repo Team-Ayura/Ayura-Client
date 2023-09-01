@@ -20,7 +20,6 @@ class CustomRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return TextButton(
       onPressed: () {
         onChanged(index);

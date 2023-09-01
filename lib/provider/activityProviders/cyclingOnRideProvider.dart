@@ -1,7 +1,4 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:photo_manager/photo_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

@@ -3,11 +3,13 @@ import 'package:ayura/constants/styles.dart';
 import 'package:flutter/material.dart';
 
 class SleepQualityFactorSelection extends StatefulWidget {
+  const SleepQualityFactorSelection({super.key});
+
   @override
-  _SleepQualityFactorSelectionState createState() => _SleepQualityFactorSelectionState();
+  SleepQualityFactorSelectionState createState() => SleepQualityFactorSelectionState();
 }
 
-class _SleepQualityFactorSelectionState extends State<SleepQualityFactorSelection> {
+class SleepQualityFactorSelectionState extends State<SleepQualityFactorSelection> {
   List<String> beforeSleepQualityFactors = [
     "Stress",
     "Shower or Bath",
@@ -44,7 +46,7 @@ class _SleepQualityFactorSelectionState extends State<SleepQualityFactorSelectio
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
       child: Column(
         children: [
           //before sleep part
@@ -91,7 +93,7 @@ class _SleepQualityFactorSelectionState extends State<SleepQualityFactorSelectio
                 ),
                 borderRadius: BorderRadius.circular(10.0),
                 ),
-                labelPadding: EdgeInsets.all(3.0),
+                labelPadding: const EdgeInsets.all(3.0),
               );
             }).toList(),
           ),

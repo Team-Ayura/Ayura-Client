@@ -67,9 +67,9 @@ class CustomTabBarView extends StatelessWidget {
                           const WeekCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
-                           SizedBox(height: 10.0,),
-                           Padding(
-                             padding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
+                           const SizedBox(height: 10.0,),
+                           const Padding(
+                             padding: EdgeInsets.fromLTRB(15, 0, 10, 0),
                              child: Row(
                                 children: [
                                   Text("Try these things to fix your mental health status.",style: AppStyles.subHeadingTextStyle3,),
@@ -82,13 +82,13 @@ class CustomTabBarView extends StatelessWidget {
                               description: habit1 != null ? habit1['description'] : "",
                               image: habit1 != null ? habit1['image'] : "",
                             ),
-                            SizedBox(height: 10.0,),
+                            const SizedBox(height: 10.0,),
                             TipChip(
                               title: habit2 != null ? habit2['title'] : "",
                               description: habit2 != null ? habit2['description'] : "",
                               image: habit2 != null ? habit2['image'] : "",
                             ),
-                            SizedBox(height: 10.0,),
+                            const SizedBox(height: 10.0,),
                              TipChip(
                                 title: habit3 != null ? habit3['title'] : "",
                                 description: habit3 != null ? habit3['description'] : "",
@@ -106,7 +106,7 @@ class CustomTabBarView extends StatelessWidget {
                           const BiweekCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
-                           SizedBox(height: 10.0,),
+                           const SizedBox(height: 10.0,),
                            const Row(
                               children: [
                                 Text("Try these things to fix your mental health status.",style: AppStyles.subHeadingTextStyle3,),
@@ -118,13 +118,13 @@ class CustomTabBarView extends StatelessWidget {
                               description: habit1 != null ? habit1['description'] : "",
                               image: habit1 != null ? habit1['image'] : "",
                             ),
-                            SizedBox(height: 10.0,),
+                            const SizedBox(height: 10.0,),
                             TipChip(
                               title: habit2 != null ? habit2['title'] : "",
                               description: habit2 != null ? habit2['description'] : "",
                               image: habit2 != null ? habit2['image'] : "",
                             ),
-                            SizedBox(height: 10.0,),
+                            const SizedBox(height: 10.0,),
                              TipChip(
                                 title: habit3 != null ? habit3['title'] : "",
                                 description: habit3 != null ? habit3['description'] : "",
@@ -143,7 +143,7 @@ class CustomTabBarView extends StatelessWidget {
                           const MonthCalendar(),
                           const SizedBox(height: 10,),
                           MoodVariationChart(),
-                          SizedBox(height: 10.0,),
+                          const SizedBox(height: 10.0,),
                           const Row(
                             children: [
                               Text("Try these things to fix your mental health status.",style: AppStyles.subHeadingTextStyle3,),
@@ -155,13 +155,13 @@ class CustomTabBarView extends StatelessWidget {
                               description: habit1 != null ? habit1['description'] : "",
                               image: habit1 != null ? habit1['image'] : "",
                             ),
-                            SizedBox(height: 10.0,),
+                            const SizedBox(height: 10.0,),
                             TipChip(
                               title: habit2 != null ? habit2['title'] : "",
                               description: habit2 != null ? habit2['description'] : "",
                               image: habit2 != null ? habit2['image'] : "",
                             ),
-                            SizedBox(height: 10.0,),
+                            const SizedBox(height: 10.0,),
                              TipChip(
                                 title: habit3 != null ? habit3['title'] : "",
                                 description: habit3 != null ? habit3['description'] : "",

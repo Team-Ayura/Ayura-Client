@@ -13,10 +13,10 @@ class Page1 extends StatefulWidget {
   const Page1({super.key});
 
   @override
-  _Page1State createState() => _Page1State();
+  Page1State createState() => Page1State();
 }
 
-class _Page1State extends State<Page1> {
+class Page1State extends State<Page1> {
   List<CustomListItem> customList = [
     CustomListItem('Headache'),
     CustomListItem('Nausea'),

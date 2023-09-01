@@ -1,4 +1,6 @@
 
+// ignore_for_file: unused_import
+
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +19,10 @@ class AlarmDescription extends StatefulWidget {
       : super(key: key);
 
   @override
-  _AlarmDescriptionState createState() => _AlarmDescriptionState();
+  AlarmDescriptionState createState() => AlarmDescriptionState();
 }
 
-class _AlarmDescriptionState extends State<AlarmDescription> {
+class AlarmDescriptionState extends State<AlarmDescription> {
   double horizontalPadding = 0.15;
   double verticalPadding = 0.1;
   double aspectRatio = 0.8;

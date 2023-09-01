@@ -1,11 +1,12 @@
 import 'dart:math';
 
+import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/provider/models/sportModel.dart';
 import 'package:ayura/widgets/features/activity_tracking/multi_selection_popup.dart';
 import 'package:flutter/material.dart';
 
 class SportsProvider extends ChangeNotifier {
-  String selectedFilter = 'D';
+  ChartFilterType selectedFilter = ChartFilterType.day;
   String duration = '00:00';
   String timePeriod = "Aug 14";
   String daytimePeriod = "Aug 14";
@@ -147,7 +148,7 @@ class SportsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateFilter(String filter) {
+  void updateFilter(ChartFilterType filter) {
     selectedFilter = filter;
     // Fetch and update the stepsData and distance based on the selected filter
     // You should implement this logic based on how you fetch data from the server
@@ -160,19 +161,19 @@ class SportsProvider extends ChangeNotifier {
     // calorieCount++;
     // improvement--;
     switch (selectedFilter) {
-      case 'D':
+      case ChartFilterType.day:
         chartduration = dayduration;
         timePeriod = daytimePeriod;
         break;
-      case 'W':
+      case ChartFilterType.week:
         chartduration = weekduration;
         timePeriod = weektimePeriod;
         break;
-      case 'M':
+      case ChartFilterType.month:
         chartduration = monthduration;
         timePeriod = monthtimePeriod;
         break;
-      case 'Y':
+      case ChartFilterType.year:
         chartduration = yearduration;
         timePeriod = yeartimePeriod;
         break;

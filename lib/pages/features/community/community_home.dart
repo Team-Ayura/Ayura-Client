@@ -102,8 +102,8 @@ class _CommunityHomeState extends State<CommunityHome> {
               ],
             ),
             SizedBox(
-              // Main Chats Container
-              height: MediaQuery.of(context).size.height * 0.4,
+              // Main communities Container
+              height: MediaQuery.of(context).size.height * 0.28,
               child: Consumer<CommunityProvider>(
                 builder: (context, communityProvider, _) {
                   
@@ -163,6 +163,8 @@ class _CommunityHomeState extends State<CommunityHome> {
                 remainingTime: '7 Days',
                 completedCount: '12.6',
                 totalCount: '20 km',
+                startingDate: '2021-09-01',
+                endingDate: '2021-09-07',
               ),
             ),
           ],

@@ -4,15 +4,11 @@ import 'package:ayura/utils/router.dart';
 import 'package:ayura/pages/features/mealPlan/viewmeal_screen.dart';
 
 class MealCard extends StatelessWidget {
+  final String name;
   final String imagePath;
-  final String calories;
-  final String time;
+  final double calories;
 
-  const MealCard({
-    required this.imagePath,
-    required this.calories,
-    required this.time,
-  });
+  const MealCard({required this.name, required this.imagePath, required this.calories});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +33,18 @@ class MealCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Text(
+                name,
+                style: const TextStyle(
+                  fontFamily: 'Inter',
+                  color: AppColors.textColor,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
             ClipRRect(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
@@ -48,13 +56,13 @@ class MealCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  calories,
+                  '$calories kcal',
                   style: const TextStyle(
                     fontFamily: 'Inter',
                     color: AppColors.textColor,
@@ -63,15 +71,11 @@ class MealCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 50),
-                Text(
-                  time,
-                  style: const TextStyle(
-                    fontFamily: 'Inter',
-                    color: AppColors.alternateGreyColor,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                const Icon(
+                  Icons.favorite,
+                  color: Color.fromARGB(255, 157, 10, 0),
+                  size: 20,
+                )
               ],
             ),
           ],

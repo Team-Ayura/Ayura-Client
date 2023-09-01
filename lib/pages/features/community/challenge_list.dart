@@ -46,6 +46,8 @@ class ChallengeList extends StatelessWidget {
                     remainingTime: '7 Days',
                     completedCount: '12.6',
                     totalCount: '20 km',
+                    startingDate: '09/01',
+                    endingDate: '09/07',
                   ),
                   ChallengeCard(
                     //Must Pass other data also, such as challenge data
@@ -55,6 +57,8 @@ class ChallengeList extends StatelessWidget {
                     remainingTime: '7 Days',
                     completedCount: '2.3',
                     totalCount: '12 km',
+                    startingDate: '09/01',
+                    endingDate: '09/07',
                   ),
                   ChallengeCard(
                     //Must Pass other data also, such as challenge data
@@ -64,27 +68,9 @@ class ChallengeList extends StatelessWidget {
                     remainingTime: '2 Days',
                     completedCount: '3.6',
                     totalCount: '5 km',
+                    startingDate: '09/01',
+                    endingDate: '09/07',
                   ),
-                  ChallengeCard(
-                    //Must Pass other data also, such as challenge data
-                    communityName: 'DiabetesCare',
-                    challengeName: 'Walk the Talk Challenge',
-                    challengeType: 'Running',
-                    remainingTime: '12 Days',
-                    completedCount: '4',
-                    totalCount: '10 km',
-                  ),
-                  ChallengeCard(
-                    //Must Pass other data also, such as challenge data
-                    communityName: 'CardioBuddy - Colombo',
-                    challengeName: 'Marathon Month',
-                    challengeType: 'Running',
-                    remainingTime: '27 Days',
-                    completedCount: '3.1',
-                    totalCount: '20 km',
-                  ),
-
-                  // Add more ChatCard widgets as needed
                 ],
               ),
             ),

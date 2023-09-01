@@ -18,10 +18,10 @@ class RulerPickerInput extends StatefulWidget {
       : super(key: key);
 
   @override
-  _RulerPickerInputState createState() => _RulerPickerInputState();
+  RulerPickerInputState createState() => RulerPickerInputState();
 }
 
-class _RulerPickerInputState extends State<RulerPickerInput> {
+class RulerPickerInputState extends State<RulerPickerInput> {
   RulerPickerController? _rulerPickerController =
       RulerPickerController(value: 50);
 
@@ -31,10 +31,8 @@ class _RulerPickerInputState extends State<RulerPickerInput> {
   void initState() {
     super.initState();
     _rulerPickerController = RulerPickerController(value: widget.value);
-    print(widget.value);
     // widget.controller.text =
     //     (widget.value == 0) ? '50' : widget.value.toString();
-    print(widget.controller.text);
     widget.controller.text = widget.value.toString();
   }
 
@@ -98,7 +96,6 @@ class _RulerPickerInputState extends State<RulerPickerInput> {
               ],
               onValueChange: (value) {
                 widget.update!(value);
-                print(value);
                 setState(() {
                   widget.controller.text = value.toString();
                 });

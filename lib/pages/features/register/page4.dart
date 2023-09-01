@@ -9,10 +9,10 @@ class PageFour extends StatefulWidget {
   const PageFour({Key? key}) : super(key: key);
 
   @override
-  _PageFourState createState() => _PageFourState();
+  PageFourState createState() => PageFourState();
 }
 
-class _PageFourState extends State<PageFour> {
+class PageFourState extends State<PageFour> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();

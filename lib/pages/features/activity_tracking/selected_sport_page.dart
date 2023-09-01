@@ -1,5 +1,6 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/provider/activityProviders/sportsProvider.dart';
+import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/provider/models/sportModel.dart';
 import 'package:ayura/utils/snack_message.dart';
 // import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
@@ -49,27 +50,27 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _buildCustomButton('D', 0),
-                  _buildCustomButton('W', 1),
-                  _buildCustomButton('M', 2),
-                  _buildCustomButton('Y', 3),
+                  _buildCustomButton(ChartFilterType.day, 0),
+                  _buildCustomButton(ChartFilterType.week, 1),
+                  _buildCustomButton(ChartFilterType.month, 2),
+                  _buildCustomButton(ChartFilterType.year, 3),
                 ],
               ),
             ),
             Consumer<SportsProvider>(
                 builder: (context, sportsProvider, _) {
-                  return Container(margin: EdgeInsets.only(left: 25), child: Column(
+                  return Container(margin: const EdgeInsets.only(left: 25), child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Average Duration', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
-                      SizedBox(height:5),
+                      const Text('Average Duration', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+                      const SizedBox(height:5),
                       Text(sportsProvider.timePeriod, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.textColor.withOpacity(0.5))),
                     ],
                   ));
                 }
             ),
-            SizedBox(height:5),
+            const SizedBox(height:5),
             // the chart
             Container(
               height: 200,
@@ -354,7 +355,7 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
     );
   }
 
-  Consumer<SportsProvider> _buildCustomButton(String buttonText, int index) {
+  Consumer<SportsProvider> _buildCustomButton(ChartFilterType buttonText, int index) {
     return Consumer<SportsProvider>(builder: (context, sportsProvider, _) {
       bool isActive = sportsProvider.selectedFilter == buttonText;
       return Expanded(
@@ -372,7 +373,7 @@ class _SelectedSportPageState extends State<SelectedSportPage> {
                 duration: const Duration(milliseconds: 300),
                 opacity: isActive ? 1.0 : 0.7,
                 child: Text(
-                  buttonText,
+                  buttonText.label.substring(0,1).toUpperCase(),
                   style: TextStyle(
                     color: isActive ? Colors.white : AppColors.textColor,
                     fontWeight: FontWeight.w500,

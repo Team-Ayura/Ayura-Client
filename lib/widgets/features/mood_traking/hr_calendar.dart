@@ -102,7 +102,7 @@ class DateTimelinePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      final moodProvider = Provider.of<MoodProvider>(context);// Add this line
-    return Container(
+    return SizedBox(
       height: 130.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -117,8 +117,6 @@ class DateTimelinePicker extends StatelessWidget {
 
           // Find the mood history for the current date
           for (var history in moodProvider.moodHistory) {
-            print('Mood History: ${history.date}');
-            print('Date: ${dateModel.date}');
             if ( _isSameDay(history.date, dateModel.date)) {
               moodHistory = history;
               break;
@@ -129,7 +127,6 @@ class DateTimelinePicker extends StatelessWidget {
 
           
           // print('Mood History: ${moodHistory?.date}');
-          print('Mood History mood: ${moodHistory?.mood}');
 
           return GestureDetector(
             onTap: () {
@@ -168,7 +165,7 @@ class DateTimelinePicker extends StatelessWidget {
                       DateFormat.MMM().format(dateModel.date),
                       style: const TextStyle(color: Color.fromARGB(255, 128, 126, 126)),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                    
                       // ignore: unnecessary_null_comparison
                        if (moodHistory != null)
@@ -179,7 +176,7 @@ class DateTimelinePicker extends StatelessWidget {
                         //  SvgPicture.asset(
                         //   'assets/images/mood_tracking/Bored.svg',
                         // ),
-                        SizedBox(
+                        const SizedBox(
                           width: 24,
                           height: 24,
                           // You can add a placeholder icon or leave it empty

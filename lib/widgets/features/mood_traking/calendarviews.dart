@@ -1,6 +1,5 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
-import 'package:ayura/pages/features/mood_tracking/page1.dart';
 import 'package:ayura/pages/features/vitals/vitals.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/pages/features/mood_tracking/page2.dart';
@@ -9,9 +8,6 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
 show CalendarCarousel;
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:intl/intl.dart' 
-show DateFormat;
 import 'package:provider/provider.dart';
 
 import '../../../provider/moodProviders/selectedmood.dart';
@@ -121,15 +117,13 @@ class _BaseCalendarState extends State<BaseCalendar> {
                 onTap: () {
                     // Check if the selected date has events in the markedDateMap
                     bool hasEvent = moodProvider.getMarkedDateList().getEvents(day).isNotEmpty;
-                    print("selected date: " + day.toString());
-                    print("events: " +hasEvent.toString());
                     // Only navigate for past and today's dates
                     if (day.isBefore(DateTime.now().add(const Duration(days: 1)))) {
                       setState(() => widget.currentDate = day);
                        if (hasEvent) {
                         PageNavigator(context: context).nextPage(const SecondPage());
                       } else {
-                        PageNavigator(context: context).nextPage(Vitals()); // Navigate to the first page when no event
+                        PageNavigator(context: context).nextPage(const Vitals()); // Navigate to the first page when no event
                       }
                     }
                 },
@@ -149,15 +143,13 @@ class _BaseCalendarState extends State<BaseCalendar> {
                   onTap: () {
                     // Check if the selected date has events in the markedDateMap
                     bool hasEvent = moodProvider.getMarkedDateList().getEvents(day).isNotEmpty;
-                    print("selected date: " + day.toString());
-                    print("events: " +hasEvent.toString());
                     // Only navigate for past and today's dates
                     if (day.isBefore(DateTime.now().add(const Duration(days: 1)))) {
                       setState(() => widget.currentDate = day);
                        if (hasEvent) {
                         PageNavigator(context: context).nextPage(const SecondPage());
                       } else {
-                        PageNavigator(context: context).nextPage(Vitals()); // Navigate to the first page when no event
+                        PageNavigator(context: context).nextPage(const Vitals()); // Navigate to the first page when no event
                       }
                     }
                   },
@@ -205,7 +197,7 @@ class _BaseCalendarState extends State<BaseCalendar> {
 
                   // DateTime selectedDateTime = day; // Capture the current date and time
                   // moodProvider.selectMood(moodProvider.selectedMood, selectedDateTime);
-                 PageNavigator(context: context).nextPage(SecondPage());
+                 PageNavigator(context: context).nextPage(const SecondPage());
                 }
               },
               child: Center(

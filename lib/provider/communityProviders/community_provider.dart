@@ -1,3 +1,4 @@
+import 'package:ayura/provider/models/memberModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -18,6 +19,8 @@ class CommunityProvider extends ChangeNotifier {
   );
   List<CommunityModel> _communityList = [];
   List<PostModel> _postsList = [];
+  List<MemberModel> _membersList = [];
+  String _resMessage = '';
 
   PostModel _postModel = PostModel(
       id: "",
@@ -31,12 +34,14 @@ class CommunityProvider extends ChangeNotifier {
   PostModel get postModel => _postModel;
   List<CommunityModel> get communityList => _communityList;
   List<PostModel> get postsList => _postsList;
+  List<MemberModel> get memberList => _membersList;
   String get id => _communityModel.id;
   String get communityName => _communityModel.communityName;
   String get communityDescription => _communityModel.communityDescription;
   bool get isPublic => _communityModel.isPublic;
   List get categories => _communityModel.categories;
   List get members => _communityModel.members;
+  String get resMessage => _resMessage;
 
   void updateCommunityInfo(CommunityModel community) {
     _communityModel.id = community.id;
@@ -54,7 +59,6 @@ class CommunityProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     try {
-      print('Inside getCommunitiesList');
       http.Response req = await http.get(
         Uri.parse(url),
         headers: {
@@ -62,22 +66,16 @@ class CommunityProvider extends ChangeNotifier {
         },
       );
       final res = json.decode(req.body);
-      print('API Response: $res');
-      print('Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         _communityList = List<CommunityModel>.from(res.map<CommunityModel>(
           (communityData) => CommunityModel.fromJson(communityData),
         ));
-        print('Community List Fetched: $_communityList');
-        isLoading = false;
-        notifyListeners();
+      print('Community List Fetched: $_communityList');
       } else {
-        print("Error Occurred $res");
       }
     } catch (error) {
-      print('Error: $error');
-    }
+  }
   }
 
   //Create community
@@ -86,8 +84,7 @@ class CommunityProvider extends ChangeNotifier {
 
     try {
       final body = community.toJson(); // Convert the community model to JSON
-      print('JSON Body: ${json.encode(body)}');
-      http.Response req = await http.post(
+    http.Response req = await http.post(
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
@@ -96,16 +93,65 @@ class CommunityProvider extends ChangeNotifier {
       );
 
       final res = json.decode(req.body);
-      print('Create Community Response: $res');
-      print('Create Community Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         await getCommunitiesList(); // Fetch the updated community list
       } else {
-        print("Error Occurred $res");
       }
     } catch (error) {
-      print('Error: $error');
+    }
+    notifyListeners();
+  }
+
+  //Add member
+  Future<void> addMember(String communityId, String email) async {
+    final url = '$requestBaseUrl/api/communities/addMember';
+
+    final Map<String, String> headers = {'Content-Type': 'application/json'};
+
+    final Map<String, dynamic> requestBody = {
+      'communityId': communityId,
+      'userEmail': email,
+    };
+
+    final response = await http.put(
+      Uri.parse(url),
+      headers: headers,
+      body: json.encode(requestBody),
+    );
+
+    if (response.statusCode == 200) {
+      _resMessage = 'Member added Successfully';
+      // Member added successfully
+      // You can handle any success logic here
+    } else {
+      // Handle error response
+      _resMessage = 'Cannot find user';
+      throw Exception('Failed to add member to the community');
+    }
+    notifyListeners();
+  }
+
+  //Get the members list from database
+  Future<void> getMembersList(id) async {
+    final url = '$requestBaseUrl/api/communities/getMembers/$id';
+
+    try {
+      http.Response req = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      );
+      final res = json.decode(req.body);
+
+      if (req.statusCode == 200 || req.statusCode == 201) {
+        _membersList = List<MemberModel>.from(res.map<MemberModel>(
+          (memberData) => MemberModel.fromJson(memberData),
+        ));
+      } else {
+      }
+    } catch (error) {
     }
     notifyListeners();
   }
@@ -116,7 +162,7 @@ class CommunityProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     try {
-      print('Inside getCommunitiesList');
+    print('Inside getCommunitiesList');
       http.Response req = await http.get(
         Uri.parse(url),
         headers: {
@@ -124,7 +170,7 @@ class CommunityProvider extends ChangeNotifier {
         },
       );
       final res = json.decode(req.body);
-      print('API Response: $res');
+    print('API Response: $res');
       print('Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
@@ -158,20 +204,19 @@ class CommunityProvider extends ChangeNotifier {
       );
 
       final res = json.decode(req.body);
-      print('Create POST Response: $res');
+    print('Create POST Response: $res');
       print('Create POST Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         await getPostsList(newPost.communityId); // Fetch the updated posts list
       } else {
-        print("Error Occurred $res");
+      print("Error Occurred $res");
       }
     } catch (error) {
-      print('Error: $error');
+    print('Error: $error');
     }
     notifyListeners();
   }
-
   Future<void> getPostById(String postId) async {
     final url = '$requestBaseUrl/api/communities/post/$postId';
     isLoading = true;

@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
@@ -12,7 +9,7 @@ import 'package:flutter_calendar_carousel/classes/event_list.dart';
     'Sad': const Color.fromARGB(255, 110, 160, 3),
     'Angry': const Color(0xFFFF2400),
     'Stressed': const Color(0xFF6E8B7E),
-    'Bored': Color.fromARGB(255, 105, 206, 236),
+    'Bored': const Color.fromARGB(255, 105, 206, 236),
   };
 
    Color getColorForMood(String mood) {
@@ -295,7 +292,7 @@ class MoodProvider with ChangeNotifier {
 
   EventList<Event> getMarkedDateList() {
     final EventList<Event> markedDateList = EventList<Event>(events: {});
-    _moodHistory.forEach((mood) {
+    for (var mood in _moodHistory) {
       markedDateList.add(
         mood.date,
         Event(
@@ -306,7 +303,7 @@ class MoodProvider with ChangeNotifier {
           ),
         ),
       );
-    });
+    }
 
     return markedDateList;
   }

@@ -1,19 +1,13 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/activity_tracking/createNewWorkoutPage.dart';
-import 'package:ayura/pages/features/activity_tracking/selected_sport_page.dart';
 import 'package:ayura/provider/activityProviders/sportsProvider.dart';
-import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/provider/activityProviders/workoutsProvider.dart';
-import 'package:ayura/provider/models/sportModel.dart';
 import 'package:ayura/utils/router.dart';
-import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
-import 'package:ayura/widgets/features/activity_tracking/chart.dart';
 import 'package:ayura/widgets/features/activity_tracking/multi_selection_popup.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class WorkoutsPage extends StatefulWidget {
@@ -91,7 +85,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                               Row(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(5),
+                                    padding: const EdgeInsets.all(5),
                                     width: 70,
                                     height: 70,
                                     decoration: BoxDecoration(
@@ -110,7 +104,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                                   ),
                                   Text(
                                     widget.workoutplans[index].workoutPlanName,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 18,
                                         color: AppColors.textColor),
                                   ),
@@ -226,6 +220,6 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
   }
 
   void _addNewWorkoutPlan() {
-    PageNavigator(context: context).nextPage(CreateNewWorkoutPage());
+    PageNavigator(context: context).nextPage(const CreateNewWorkoutPage());
   }
 }

@@ -2,10 +2,9 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/activity_tracking/cycling_on_ride.dart';
 import 'package:ayura/provider/activityProviders/cyclingOnRideProvider.dart';
 import 'package:ayura/provider/activityProviders/cyclingProvider.dart';
+import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
-
-// import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:ayura/widgets/features/activity_tracking/activity_stat_box.dart';
 import 'package:ayura/widgets/features/activity_tracking/chart.dart';
 import 'package:ayura/widgets/features/activity_tracking/cycle_ride_box.dart';
@@ -52,27 +51,27 @@ class _CyclingPageState extends State<CyclingPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _buildCustomButton('D', 0),
-                  _buildCustomButton('W', 1),
-                  _buildCustomButton('M', 2),
-                  _buildCustomButton('Y', 3),
+                  _buildCustomButton(ChartFilterType.day, 0),
+                  _buildCustomButton(ChartFilterType.week, 1),
+                  _buildCustomButton(ChartFilterType.month, 2),
+                  _buildCustomButton(ChartFilterType.year, 3),
                 ],
               ),
             ),
             Consumer<CyclingProvider>(
                 builder: (context, cyclingProvider, _) {
-                  return Container(margin: EdgeInsets.only(left: 25), child: Column(
+                  return Container(margin: const EdgeInsets.only(left: 25), child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Average Distance', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
-                      SizedBox(height:5),
+                      const Text('Average Distance', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primaryColor)),
+                      const SizedBox(height:5),
                       Text(cyclingProvider.timePeriod, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.textColor.withOpacity(0.5))),
                     ],
                   ));
                 }
             ),
-            SizedBox(height:5),
+            const SizedBox(height:5),
             // the chart
             Container(
               height: 200,
@@ -329,7 +328,7 @@ class _CyclingPageState extends State<CyclingPage> {
     );
   }
 
-  Consumer<CyclingProvider> _buildCustomButton(String buttonText, int index) {
+  Consumer<CyclingProvider> _buildCustomButton(ChartFilterType buttonText, int index) {
     return Consumer<CyclingProvider>(
         builder: (context, walkingAndRunningProvider, _) {
       bool isActive = walkingAndRunningProvider.selectedFilter == buttonText;
@@ -348,7 +347,7 @@ class _CyclingPageState extends State<CyclingPage> {
                 duration: const Duration(milliseconds: 300),
                 opacity: isActive ? 1.0 : 0.7,
                 child: Text(
-                  buttonText,
+                  buttonText.label.substring(0,1).toUpperCase(),
                   style: TextStyle(
                     color: isActive ? Colors.white : AppColors.textColor,
                     fontWeight: FontWeight.w500,

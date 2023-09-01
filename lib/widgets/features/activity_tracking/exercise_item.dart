@@ -1,7 +1,6 @@
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/provider/activityProviders/workoutsProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -13,112 +12,110 @@ class ExerciseItemWidget extends StatelessWidget {
   final int sets;
   final int index;
 
-  ExerciseItemWidget({Key? key, required this.activityid, required this.activityname, required this.count, required this.sets, required this.index,}) : super(key: key);
+  const ExerciseItemWidget({Key? key, required this.activityid, required this.activityname, required this.count, required this.sets, required this.index,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Expanded(
-            child: Consumer<WorkoutsProvider>(
-              builder: (context, workoutsProvider, _) {
-                return Slidable(
-                  key: Key(activityid),
-                  endActionPane: ActionPane(
-                    motion: const StretchMotion(),
-                    dismissible: DismissiblePane(
-                      onDismissed: () => workoutsProvider.removeActivityFromNewWorkout(index)
+    return Row(
+      children: [
+        Expanded(
+          child: Consumer<WorkoutsProvider>(
+            builder: (context, workoutsProvider, _) {
+              return Slidable(
+                key: Key(activityid),
+                endActionPane: ActionPane(
+                  motion: const StretchMotion(),
+                  dismissible: DismissiblePane(
+                    onDismissed: () => workoutsProvider.removeActivityFromNewWorkout(index)
+                  ),
+                  children: [
+                    SlidableAction(
+                      icon: Icons.edit,
+                      backgroundColor: Colors.green,
+                      onPressed: (context) {
+                        // Handle edit action
+                      },
                     ),
-                    children: [
-                      SlidableAction(
-                        icon: Icons.edit,
-                        backgroundColor: Colors.green,
-                        onPressed: (context) {
-                          // Handle edit action
-                        },
+                    SlidableAction(
+                      icon: Icons.delete,
+                      backgroundColor: Colors.redAccent,
+                      onPressed: (context) {
+                        workoutsProvider.removeActivityFromNewWorkout(index);
+                        // Handle delete action
+                      },
+                    ),
+                  ],
+                ),
+                child: Builder(
+                  builder: (context) {
+                    return Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: AppColors.textColor.withOpacity(0.02), // Replace with your desired box color
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      SlidableAction(
-                        icon: Icons.delete,
-                        backgroundColor: Colors.redAccent,
-                        onPressed: (context) {
-                          workoutsProvider.removeActivityFromNewWorkout(index);
-                          // Handle delete action
-                        },
-                      ),
-                    ],
-                  ),
-                  child: Builder(
-                    builder: (context) {
-                      return Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: AppColors.textColor.withOpacity(0.02), // Replace with your desired box color
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                color: Colors.blueGrey.withOpacity(0.1), // Replace with your desired color
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Lottie.asset(
-                                'assets/images/activity_tracking/activities/${activityname.replaceAll(' ', '').toLowerCase()}.json', // Replace with your SVG asset path
-                                width: 50,
-                                height: 50,
-                              ),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            width: 70,
+                            height: 70,
+                            decoration: BoxDecoration(
+                              color: Colors.blueGrey.withOpacity(0.1), // Replace with your desired color
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            const SizedBox(
-                              width: 10,
+                            child: Lottie.asset(
+                              'assets/images/activity_tracking/activities/${activityname.replaceAll(' ', '').toLowerCase()}.json', // Replace with your SVG asset path
+                              width: 50,
+                              height: 50,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  activityname,
-                                  style: const TextStyle(
-                                    color: AppColors.textColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                activityname,
+                                style: const TextStyle(
+                                  color: AppColors.textColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '$count',
+                                    style: const TextStyle(
+                                      color: AppColors.textColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                    ),
                                   ),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      '$count',
-                                      style: const TextStyle(
-                                        color: AppColors.textColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16,
-                                      ),
+                                  Text(
+                                    'x $sets',
+                                    style: const TextStyle(
+                                      color: AppColors.textColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
                                     ),
-                                    Text(
-                                      'x $sets',
-                                      style: const TextStyle(
-                                        color: AppColors.textColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
+                              ),
 
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }
-            ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              );
+            }
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

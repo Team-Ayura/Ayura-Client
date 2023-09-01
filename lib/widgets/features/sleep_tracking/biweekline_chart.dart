@@ -121,12 +121,12 @@ class _BiWeeklyChartState extends State<BiWeeklyChart> {
                       ],
                       isCurved: true,
                       gradient: LinearGradient(
-                          colors: [Colors.blue.withOpacity(0.3),Color.fromARGB(255, 117, 174, 209)],
+                          colors: [Colors.blue.withOpacity(0.3),const Color.fromARGB(255, 117, 174, 209)],
                       ),
                       // colors: [Colors.blue.withOpacity(0.3)],
                       dotData: const FlDotData(show: false),
                       belowBarData: BarAreaData(show: true, gradient: LinearGradient(
-                          colors: [Colors.blue.withOpacity(0.1),Color.fromARGB(255, 117, 174, 209)],
+                          colors: [Colors.blue.withOpacity(0.1),const Color.fromARGB(255, 117, 174, 209)],
                         ),),
                     ),
                     LineChartBarData(
@@ -141,12 +141,12 @@ class _BiWeeklyChartState extends State<BiWeeklyChart> {
                       ],
                       isCurved: true,
                        gradient: LinearGradient(
-                          colors: [Colors.purple.withOpacity(0.3),Color.fromARGB(255, 224, 154, 234)],
+                          colors: [Colors.purple.withOpacity(0.3),const Color.fromARGB(255, 224, 154, 234)],
                         ),
                       // colors: [Colors.purple.withOpacity(0.3)],
                       dotData: const FlDotData(show: false),
                       belowBarData: BarAreaData(show: true, gradient: LinearGradient(
-                          colors: [Colors.purple.withOpacity(0.1),Color.fromARGB(255, 224, 154, 234)],
+                          colors: [Colors.purple.withOpacity(0.1),const Color.fromARGB(255, 224, 154, 234)],
                         ),),
                     ),
                   ],
