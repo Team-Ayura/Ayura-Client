@@ -272,7 +272,6 @@ class AuthenticationProvider2 extends ChangeNotifier {
       _resMessage = 'No Internet Connection';
       notifyListeners();
     } catch (e) {
-      print(e);
       _resMessage = 'Something went wrong';
       notifyListeners();
     }

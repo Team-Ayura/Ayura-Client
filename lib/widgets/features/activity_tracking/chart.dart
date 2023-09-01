@@ -1,3 +1,4 @@
+import 'package:ayura/provider/activityProviders/walkAndRunningProvider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,7 @@ import '../../../constants/colors.dart';
 class BarChartWeekly extends StatefulWidget {
   final List<int> data;
   final String yAxisLabel;
-  final String filter;
+  final ChartFilterType filter;
   BarChartWeekly(
       {super.key,
       required this.yAxisLabel,
@@ -43,11 +44,11 @@ class BarChartWeeklyState extends State<BarChartWeekly> {
     List<int> showTooltips = const [],
   }) {
     barColor ??= widget.barColor;
-    width ??= widget.filter == 'D'
+    width ??= widget.filter == ChartFilterType.day
         ? 7
-        : widget.filter == 'W'
+        : widget.filter == ChartFilterType.week
             ? 25
-            : widget.filter == 'M'
+            : widget.filter == ChartFilterType.month
                 ? 5
                 : 15;
     return BarChartGroupData(
@@ -165,7 +166,7 @@ class BarChartWeeklyState extends State<BarChartWeekly> {
     );
     Widget text;
     switch (widget.filter) {
-      case 'W':
+      case ChartFilterType.week:
         switch (value.toInt()) {
           case 0:
             text = const Text('Mon', style: style);
@@ -193,7 +194,7 @@ class BarChartWeeklyState extends State<BarChartWeekly> {
             break;
         }
         break;
-      case 'M': // filter by month
+      case ChartFilterType.month: // filter by month
         switch (value.toInt()) {
           case 4:
             text = const Text('5', style: style);
@@ -212,7 +213,7 @@ class BarChartWeeklyState extends State<BarChartWeekly> {
             break;
         }
         break;
-      case 'Y': // filter by year
+      case ChartFilterType.year: // filter by year
         switch (value.toInt()) {
           case 0:
             text = const Text('Jan', style: style);

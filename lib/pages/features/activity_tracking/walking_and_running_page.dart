@@ -18,6 +18,13 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
   int activeIndex = 0; // -1 means no active index
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<WalkingAndRunningProvider>(context, listen: false).initWalkAndRunningProviderState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final NumberFormat numberFormat = NumberFormat('#,###');
 
@@ -46,10 +53,10 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _buildCustomButton('D', 0),
-                  _buildCustomButton('W', 1),
-                  _buildCustomButton('M', 2),
-                  _buildCustomButton('Y', 3),
+                  _buildCustomButton(ChartFilterType.day, 0),
+                  _buildCustomButton(ChartFilterType.week, 1),
+                  _buildCustomButton(ChartFilterType.month, 2),
+                  _buildCustomButton(ChartFilterType.year, 3),
                 ],
               ),
             ),
@@ -314,7 +321,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
   }
 
   Consumer<WalkingAndRunningProvider> _buildCustomButton(
-      String buttonText, int index) {
+      ChartFilterType buttonText, int index) {
     return Consumer<WalkingAndRunningProvider>(
         builder: (context, walkingAndRunningProvider, _) {
       bool isActive = walkingAndRunningProvider.selectedFilter == buttonText;
@@ -333,7 +340,7 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                 duration: const Duration(milliseconds: 300),
                 opacity: isActive ? 1.0 : 0.7,
                 child: Text(
-                  buttonText,
+                  buttonText.label.substring(0,1).toUpperCase(),
                   style: TextStyle(
                     color: isActive ? Colors.white : AppColors.textColor,
                     fontWeight: FontWeight.w500,
