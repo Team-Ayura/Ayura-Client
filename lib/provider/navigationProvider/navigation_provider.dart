@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-enum AppTab { vitals, activity, home, community, mealplans }
+enum AppTab { diary, activity, home, community, mealplans }
 
 class AppNavigationProvider extends ChangeNotifier {
   AppTab _selectedTab = AppTab.home;

@@ -1,79 +1,63 @@
-
-// ignore_for_file: unused_import
-
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 import 'package:flutter/material.dart';
 
-class AlarmDescription extends StatefulWidget {
+class AlarmDescription extends StatelessWidget {
   final IconData iconData;
   final String title;
   final String time;
   final double width;
-  const AlarmDescription(
-      {Key? key,
-      required this.iconData,
-      required this.title,
-      required this.width,
-      required this.time})
-      : super(key: key);
 
-  @override
-  AlarmDescriptionState createState() => AlarmDescriptionState();
-}
-
-class AlarmDescriptionState extends State<AlarmDescription> {
-  double horizontalPadding = 0.15;
-  double verticalPadding = 0.1;
-  double aspectRatio = 0.8;
-  late double height;
-
-  @override
-  void initState() {
-    super.initState();
-    height = widget.width / aspectRatio;
-  }
+  const AlarmDescription({
+    Key? key,
+    required this.iconData,
+    required this.title,
+    required this.width,
+    required this.time,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double horizontalPadding = 0.15;
+    double verticalPadding = 0.1;
+    double aspectRatio = 0.8;
+    double height = width / aspectRatio;
+
     return Padding(
       padding: EdgeInsets.symmetric(
-          vertical: height * verticalPadding,
-          horizontal: widget.width * horizontalPadding),
+        vertical: height * verticalPadding,
+        horizontal: width * horizontalPadding,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          
           Row(
             children: [
               Icon(
-                widget.iconData,
+                iconData,
                 color: AppColors.primaryColor,
                 size: height * 0.15,
               ),
-              const SizedBox(width: 5.0,),
+              const SizedBox(width: 5.0),
               Text(
-                widget.title,
+                title,
                 style: const TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
+                  color: AppColors.primaryColor,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-
             ],
           ),
           Text(
-            widget.time,
+            time,
             style: const TextStyle(
-              color:AppColors.textColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0,
+              color: AppColors.textColor,
+              fontWeight: FontWeight.w400,
+              fontSize: 15.0,
             ),
           ),
-      
         ],
       ),
     );
   }
 }
-
