@@ -19,7 +19,10 @@ class CyclingOnRideProvider extends ChangeNotifier {
 
   void addImagePath(String imagePath) {
     _imagePaths.add(imagePath);
+    // print(_imagePaths);
     notifyListeners();
+    print(imagePaths[0]);
+    print("now");
   }
 
   void startTimer() {
@@ -36,6 +39,7 @@ class CyclingOnRideProvider extends ChangeNotifier {
       startTimer();
     }
     _isPaused = false;
+    _imagePaths.clear();
     notifyListeners();
   }
 
@@ -54,7 +58,7 @@ class CyclingOnRideProvider extends ChangeNotifier {
     _secondsElapsed = 0;
     _timer?.cancel();
     _timer = null;
-    _imagePaths.clear();
+    // _imagePaths.clear();
     notifyListeners();
   }
 

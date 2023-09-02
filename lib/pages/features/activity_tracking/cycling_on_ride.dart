@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'dart:ui' as ui;
@@ -43,8 +44,8 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
             parallaxOffset: 0.7,
             body: const MapContainer(
                 isRegular: true,
-                latitude: 6.90221215135692,
-                longitude: 79.86115227454063,
+                latitude: 6.8954287930749905,
+                longitude: 79.8556938953704,
                 markerTitle: "Colombo"),
             panelBuilder: (controller) => PanelWidget(
               controller: controller,
@@ -123,6 +124,7 @@ class PanelWidget extends StatefulWidget {
 class _PanelWidgetState extends State<PanelWidget> {
   final GlobalKey<State<StatefulWidget>> _collageKey = GlobalKey();
   final NumberFormat numberFormat = NumberFormat('#,###');
+  final _screenshotController = ScreenshotController();
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -276,7 +278,7 @@ class _PanelWidgetState extends State<PanelWidget> {
                       return GestureDetector(
                         onTap: () {
                           cyclingOnRideProvider.stopCycling();
-                          // _showCollageDialog(context);
+                          _showCollageDialog(context);
                           // here I should show the caputred snapshot of the widget and make it sharable
                           Navigator.of(context).pop();
                         },
@@ -377,23 +379,29 @@ class _PanelWidgetState extends State<PanelWidget> {
               builder: (context, cyclingOnRideProvider, _) {
                 return Column(
                   children: [
-                    RepaintBoundary(
-                      key: _collageKey,
-                      child: CollageWithStatsWidget(
-                        imagePaths: cyclingOnRideProvider.imagePaths,
-                        locationName: 'Bellanwila Park Ride',
-                        durationValue: cyclingOnRideProvider.getFormattedTime(),
-                        caloriesValue: cyclingOnRideProvider.calorieCounter,
-                        speedValue: cyclingOnRideProvider.cyclingSpeed,
+                    Screenshot(
+                      controller: _screenshotController,
+                      child: RepaintBoundary(
+                        key: _collageKey,
+                        child: CollageWithStatsWidget(
+                          imagePaths: cyclingOnRideProvider.imagePaths,
+                          locationName: 'Bellanwila Park Ride',
+                          durationValue: cyclingOnRideProvider.getFormattedTime(),
+                          caloriesValue: cyclingOnRideProvider.calorieCounter,
+                          speedValue: cyclingOnRideProvider.cyclingSpeed,
+                        ),
                       ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    ElevatedButton(onPressed: () async {
-                      final imageBytes = await captureWidget(_collageKey);
-                      await shareCapturedImage(imageBytes);
-                    }, child: const Text('Share')),
+                    ElevatedButton(
+                      onPressed: takeScreenshot,
+                    //     onPressed: () async {
+                    //   final imageBytes = await captureWidget(_collageKey);
+                    //   await shareCapturedImage(imageBytes);
+                    // },
+                        child: const Text('Share')),
                   ],
                 );
               }
@@ -401,6 +409,17 @@ class _PanelWidgetState extends State<PanelWidget> {
           ),
         );
       },
+    );
+  }
+
+  void takeScreenshot() async {
+    final imageFile = await _screenshotController.capture();
+    Share.shareXFiles(
+        [XFile.fromData(
+          buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+          name: 'flutter_logo.png',
+          mimeType: 'image/png',
+        ),]
     );
   }
 

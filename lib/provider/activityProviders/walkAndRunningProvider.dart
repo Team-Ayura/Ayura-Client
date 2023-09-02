@@ -52,103 +52,6 @@ class WalkingAndRunningProvider extends ChangeNotifier {
   int get improvement => walkAndRunData?.improvement ?? 0;
   List<int> get steps => walkAndRunData?.steps ?? [];
 
-  // String timePeriod = "Aug 14";
-  // String daytimePeriod = "Aug 14";
-  // String weektimePeriod = "Aug 12 - Aug 14";
-  // String monthtimePeriod = "Aug 01 - Aug 14";
-  // String yeartimePeriod = "Jan 01 - Aug 14";
-
-  // double distance = 2.42; // Total distance covered
-  // double daydistance = 2.42;
-  // double weekdistance = 3.05;
-  // double monthdistance = 4.20;
-  // double yearsdistance = 3.31;
-
-  // int stepCount = 824;
-  // int daystepCount = 824;
-  // int weekstepcount = 755;
-  // int monthstepcount = 766;
-  // int yearstepcount = 734;
-  //
-  // String duration = '1:23:00';
-  // String dayduration = '01:23:00';
-  // String weekduration = '01:44:00';
-  // String monthduration = '02:05:00';
-  // String yearduration = '01:52:00';
-
-  // int calorieCount = 456;
-  // int daycalorieCount = 456;
-  // int weekcalorieCount = 703;
-  // int monthcalorieCount = 1338;
-  // int yearcalorieCount = 815;
-
-  // int improvement = 12;
-  // int dayimprovement = 12;
-  // int weekimprovement = 14;
-  // int monthimprovement = 20;
-  // int yearimprovement = 15;
-
-  List<int> daysteps = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    420,
-    174,
-    0,
-    0,
-    0,
-    115,
-    80,
-    221,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-  ];
-  // List<int> steps = [
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   420,
-  //   174,
-  //   0,
-  //   0,
-  //   0,
-  //   115,
-  //   80,
-  //   221,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  // ];
-  List<int> weeksteps = [4375, 3198, 1042, 0, 0, 0, 0];
-  List<int> monthsteps = [3287, 4345, 5032, 4098, 3590, 5045, 4211, 4756, 3800, 5265, 4422, 4375, 3198, 1042, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  List<int> yearsteps = [4200, 5150, 3550, 4920, 4675, 3035, 5298, 4067, 0, 0, 0, 0];
-
-  // Implement methods to fetch data from the server and update the provider state
-  // For example: fetchWalkAndRunningData, updateStepsData, etc.
-
   void initWalkAndRunningProviderState() async {
     walkAndRunDataToday = await fetchWalkAndRunDataGoogleFit(ChartFilterType.week);
     walkAndRunDataCurrentWeek = await fetchWalkAndRunDataBackEnd(ChartFilterType.week);
@@ -163,19 +66,19 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     selectedFilter = filter;
     switch (selectedFilter) {
       case ChartFilterType.day:
-        walkAndRunDataToday = await fetchWalkAndRunDataGoogleFit(filter);
+        walkAndRunDataToday ??= await fetchWalkAndRunDataGoogleFit(filter);
         walkAndRunData = walkAndRunDataToday;
         break;
       case ChartFilterType.week:
-        walkAndRunDataCurrentWeek = await fetchWalkAndRunDataBackEnd(filter);
+        walkAndRunDataCurrentWeek ??= await fetchWalkAndRunDataBackEnd(filter);
         walkAndRunData = walkAndRunDataCurrentWeek;
         break;
       case ChartFilterType.month:
-        walkAndRunDataCurrentMonth = await fetchWalkAndRunDataBackEnd(filter);
+        walkAndRunDataCurrentMonth ??= await fetchWalkAndRunDataBackEnd(filter);
         walkAndRunData = walkAndRunDataCurrentMonth;
         break;
       case ChartFilterType.year:
-        walkAndRunDataCurrentYear = await fetchWalkAndRunDataBackEnd(filter);
+        walkAndRunDataCurrentYear ??= await fetchWalkAndRunDataBackEnd(filter);
         walkAndRunData = walkAndRunDataCurrentYear;
         break;
     }
@@ -191,7 +94,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     final userId = prefs.getString(BasicUserData.userId.label);
     final filterType = type.label;
-
+    print(prefs.getString(BasicUserData.googleAccessToken.label));
     // backend api endpoint
     String url = '$requestBaseUrl/api/activity/getwalkandrundatabyfilter?userId=$userId&filterType=$filterType';
 
@@ -310,7 +213,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
 
       improvement = stepsDistanceCaloriesMoveMinutesMap["improvement"];
     }
-    print(stepsDistanceCaloriesMoveMinutesMap);
+    // print(stepsDistanceCaloriesMoveMinutesMap);
     // steps array in each hour
     List<int> steps = await fetchStepCountGoogleFit(type, 3600000, startOfTodayMillis, nowMillis);
 
@@ -336,7 +239,9 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     List<int> result = generateIntArray(24);
 
     // get google account access token
-    String? token = await _googleAuthProvider.getAccessToken();
+    // String? token = await _googleAuthProvider.getAccessToken();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString(BasicUserData.googleAccessToken.label);
     print(token);
     // generate the request headers
     final headers = {
@@ -374,19 +279,24 @@ class WalkingAndRunningProvider extends ChangeNotifier {
         }
       }
     }
+    print(result);
     return result;
   }
 
   Future<Map<String, dynamic>?> fetchOtherSingularDataGoogleFit(ChartFilterType type, int bucketTime, int startMillis, int endMillis) async {
     // prepare url endpoint
     final url = Uri.parse('https://fitness.googleapis.com/fitness/v1/users/me/dataset:aggregate');
-
+    print(startMillis);
+    print(endMillis);
     // initializing the result variable
     // 24 because 24 hours per day
     Map<String, dynamic>? result;
 
     // get google account access token
-    String? token = await _googleAuthProvider.getAccessToken();
+    // String? token = await _googleAuthProvider.getAccessToken();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString(BasicUserData.googleAccessToken.label);
+    print(token);
 
     // generate the request headers
     final headers = {
@@ -421,7 +331,9 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     int index = 0;
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
+      print(data);
       final List<dynamic> bucket = data['bucket'] ?? [];
+      // print(bucket);
       if (bucket.isNotEmpty) {
         final Map<String, dynamic> dataset = bucket[0]['dataset'][0];
         final int stepCount = dataset['point'][0]['value'][0]['intVal'];
@@ -444,6 +356,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
         };
       }
     }
+    print(result);
     return result;
   }
 }
@@ -452,7 +365,7 @@ List<int> generateIntArray(int size) {
   List<int> result = [];
 
   for (int i = 0; i < size; i++) {
-    result.add(i);
+    result.add(0);
   }
 
   return result;

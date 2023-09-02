@@ -236,6 +236,8 @@ class ConnectedAppWidget extends StatefulWidget {
 }
 
 class _ConnectedAppWidgetState extends State<ConnectedAppWidget> {
+  bool? isselected = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -290,8 +292,16 @@ class _ConnectedAppWidgetState extends State<ConnectedAppWidget> {
             Consumer<GoogleAuthProvider>(
               builder: (context, googleAuthProvider, _) {
                 return GFToggle(
-                  onChanged: (val){
-                    googleAuthProvider.toggleGoogleAuthorization(val != null ? !val : true);
+                  onChanged: (isselected){
+                    googleAuthProvider.login();
+                    setState(() {
+                      if(isselected == true){
+                        isselected = false;
+                      }else{
+                        isselected = true;
+                      }
+                    });
+                    // googleAuthProvider.toggleGoogleAuthorization(val != null ? !val : true);
                   },
                   value: googleAuthProvider.isUserAuthorized,
                   disabledTrackColor: AppColors.textColor.withOpacity(0.07),
