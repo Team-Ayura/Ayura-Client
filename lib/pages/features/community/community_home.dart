@@ -5,7 +5,6 @@ import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:provider/provider.dart';
 // Community Feature Widgets
 import 'package:ayura/widgets/features/community/chat_card.dart'; // Chat Card Widget
-import 'package:ayura/widgets/features/community/search_box.dart'; // SearchBox Widget
 import 'package:ayura/widgets/features/community/challenge_card.dart'; // Challenge Card Widget
 import 'package:ayura/pages/features/community/community_list.dart';
 import 'package:ayura/pages/features/community/challenge_list.dart';
@@ -30,7 +29,9 @@ class _CommunityHomeState extends State<CommunityHome> {
   @override
   void initState() {
     super.initState();
-    Provider.of<CommunityProvider>(context, listen: false).getCommunitiesList();
+    Provider.of<CommunityProvider>(context, listen: false)
+        .getCommunitiesList(); //Initializing the community list
+  
   }
 
   void openCreateCommunityOverlay() {
@@ -80,11 +81,6 @@ class _CommunityHomeState extends State<CommunityHome> {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
-            //Search Box
-            const SearchBox(),
-            const SizedBox(
-              height: 10,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -95,7 +91,7 @@ class _CommunityHomeState extends State<CommunityHome> {
                 TextButton(
                   onPressed: openCommunityListOverlay,
                   child: const Text(
-                    'View All',
+                    'Explore',
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w500,
@@ -107,21 +103,34 @@ class _CommunityHomeState extends State<CommunityHome> {
             ),
             SizedBox(
               // Main communities Container
-              height: MediaQuery.of(context).size.height * 0.35,
+              height: MediaQuery.of(context).size.height * 0.28,
               child: Consumer<CommunityProvider>(
-                  builder: (context, communityProvider, _) {
-                List<CommunityModel> communities =
-                    communityProvider.communityList;
-                return ListView.builder(
-                    itemCount: communities.length,
-                    itemBuilder: (context, index) {
-                      CommunityModel community = communities[index];
-                      return ChatCard(
-                          communityName: community.communityName,
-                          visibiity: community.isPublic ? 'Public' : 'Private',
-                          memberCount: community.members.length.toString());
-                    });
-              }),
+                builder: (context, communityProvider, _) {
+                  
+                  List<CommunityModel> communities =
+                      communityProvider.communityList; // Getter
+
+                  // Check for loading
+                  if (communityProvider.isLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return ListView.builder(
+                      itemCount: communities.length,
+                      itemBuilder: (context, index) {
+                        CommunityModel community = communities[index];
+                        return ChatCard(
+                            communityId: community.id,
+                            communityName: community.communityName,
+                            visibiity:
+                                community.isPublic ? 'Public' : 'Private',
+                            memberCount: community.members.length.toString());
+                      },
+                    );
+                  }
+                },
+              ),
             ),
             const SizedBox(
               height: 10,
@@ -154,6 +163,8 @@ class _CommunityHomeState extends State<CommunityHome> {
                 remainingTime: '7 Days',
                 completedCount: '12.6',
                 totalCount: '20 km',
+                startingDate: '2021-09-01',
+                endingDate: '2021-09-07',
               ),
             ),
           ],

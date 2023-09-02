@@ -17,7 +17,9 @@ class MemberCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        PageNavigator(context: context).nextPage(const CommunityChat());
+        PageNavigator(context: context).nextPage(const CommunityChat(
+          communityId: "64f02b738347e3aa26227165",
+        ));
       }, // Navigator function
       child: Container(
         //Main chat box

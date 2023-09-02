@@ -1,57 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 Widget nutritions(BuildContext? context) {
   final width = MediaQuery.of(context!).size.width;
+  Map<String, double> dataMap = {"Protien": 7.2, "Carbs": 32.1, "Fat": 6.9};
+  final colorList = <Color>[const Color.fromARGB(255, 109, 248, 113), const Color.fromARGB(255, 249, 97, 86), const Color.fromARGB(255, 224, 130, 241)];
   return SizedBox(
-    width: width * 0.8,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        CircularPercentIndicator(
-          radius: 35.0,
-          lineWidth: 10.0,
-          percent: 0.65,
-          center: const Text("65%"),
-          footer: const Text('Carbs'),
-          progressColor: Colors.green,
-          backgroundColor: const Color.fromRGBO(54, 244, 76, 0.161),
-          circularStrokeCap: CircularStrokeCap.round,
+      width: width * 0.8,
+      child: PieChart(
+        dataMap: dataMap,
+        animationDuration: const Duration(milliseconds: 800),
+        chartLegendSpacing: 32,
+        chartRadius: MediaQuery.of(context).size.width / 3.2,
+        colorList: colorList,
+        initialAngleInDegree: 0,
+        chartType: ChartType.disc,
+        ringStrokeWidth: 32,
+        legendOptions:const LegendOptions(
+          showLegendsInRow: false,
+          legendPosition: LegendPosition.right,
+          showLegends: true,
+          legendTextStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        SizedBox(width: width * 0.02),
-        CircularPercentIndicator(
-          radius: 35.0,
-          lineWidth: 10.0,
-          percent: 0.40,
-          center: const Text("40%"),
-          footer: const Text('Fat'),
-          progressColor: Colors.red,
-          backgroundColor: const Color.fromRGBO(244, 67, 54, 0.162),
-          circularStrokeCap: CircularStrokeCap.round,
+        chartValuesOptions: const ChartValuesOptions(
+          showChartValueBackground: false,
+          showChartValues: true,
+          showChartValuesInPercentage: true,
+          showChartValuesOutside: false,
+          decimalPlaces: 1,
         ),
-        SizedBox(width: width * 0.02),
-        CircularPercentIndicator(
-          radius: 35.0,
-          lineWidth: 10.0,
-          percent: 0.60,
-          center: const Text("60%"),
-          footer: const Text('Protien'),
-          progressColor: Colors.yellow,
-          backgroundColor: const Color.fromRGBO(244, 225, 54, 0.278),
-          circularStrokeCap: CircularStrokeCap.round,
-        ),
-        SizedBox(width: width * 0.02),
-        CircularPercentIndicator(
-          radius: 35.0,
-          lineWidth: 10.0,
-          percent: 0.90,
-          center: const Text("90%"),
-          footer: const Text('Calories'),
-          progressColor: const Color.fromARGB(255, 167, 76, 175),
-          backgroundColor: const Color.fromRGBO(222, 54, 244, 0.275),
-          circularStrokeCap: CircularStrokeCap.round,
-        )
-      ],
-    ),
-  );
+      ));
 }

@@ -1,4 +1,5 @@
 import 'package:ayura/auth/onboarding_screen.dart';
+import 'package:ayura/pages/features/Diary/diary_list.dart';
 import 'package:ayura/pages/splash_screen.dart';
 // import 'package:ayura/auth/signup.dart';
 import 'package:ayura/pages/home.dart';

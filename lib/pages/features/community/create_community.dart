@@ -54,6 +54,9 @@ class _CreateCommunityState extends State<CreateCommunity> {
       Provider.of<CommunityProvider>(context, listen: false)
           .createCommunity(newCommunity);
     }
+    
+    // Navigate back to the community home screen
+    Navigator.pop(context);
   }
 
   @override

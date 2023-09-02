@@ -11,10 +11,11 @@ class ViewmealScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final List<String> ingredients = [
       'Rice',
-      'Beans',
-      'Dhal',
-      'Chicken',
-      'Onion',
+      'Green Gram',
+      'Big Onion',
+      'Salt',
+      'Dried chilli',
+      'Lime juice',      
       // Add more items as needed.
     ];
     return Scaffold(
@@ -26,9 +27,9 @@ class ViewmealScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: SizedBox(
               height: height * 0.35,
-              width: 100,
+              width: 90,
               child: Image.asset(
-                'assets/images/mealPlan/riceandcurry.png',
+                'assets/images/mealPlan/greengramrice.png',
                 width: 30,
               ),
             ),
@@ -37,9 +38,20 @@ class ViewmealScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 SizedBox(height: height * 0.02),
-                const Text(
-                  'Nutritional Information',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Nutritional Information',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      '213kcal\n/per serving',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                    ),
+                  ],
                 ),
                 SizedBox(height: height * 0.02),
                 nutritions(context),
@@ -75,7 +87,6 @@ class ViewmealScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 5),
                                 Text(ingredients[index]),
-                                const Text('2 cups'),
                               ],
                             ),
                           ),
@@ -85,19 +96,7 @@ class ViewmealScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: height * 0.03),
-                const Text(
-                  'Instructions',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                ),
-                SizedBox(height: height * 0.02),
-                const Text(
-                  "To make rice curry, start by washing and cooking 1 cup of rice until it's fluffy; set it aside. In a pot, heat 2 tablespoons of oil and add 1 teaspoon of cumin seeds, letting them splutter. Sauté 1 chopped onion until it turns golden, then add 2 cloves of minced garlic and 1-inch of minced ginger, and sauté for another minute. Mix in 2 chopped tomatoes, 1 teaspoon of turmeric, 1 teaspoon of ground coriander, 1 teaspoon of ground cumin, 1/2 teaspoon of red chili powder, and salt to taste. Add 1 cup of mixed vegetables, cover, and cook until they're tender. Combine the cooked vegetables with the rice, gently mixing them together. Sprinkle 1/2 teaspoon of garam masala and mix gently. Garnish the dish with fresh cilantro leaves, and serve the rice curry hot with yogurt or pickle. Feel free to adjust the spices and vegetables according to your preferences.",
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    fontFamily: "Inter",
-                    color: AppColors.textColor,
-                  ),
-                ),
+              
               ],
             ),
           ),

@@ -14,9 +14,10 @@ class MealsList extends StatelessWidget {
           mainAxisSpacing: 8.0, // Spacing between rows
           mainAxisExtent: 220, //Vertical height of each cell
         ),
-        itemCount: 3,
+        itemCount: 6,
         itemBuilder: (context, index) {
           return MealCard(
+          name: mealList[index].name,
           imagePath: mealList[index].image,
           calories: mealList[index].calories,
           

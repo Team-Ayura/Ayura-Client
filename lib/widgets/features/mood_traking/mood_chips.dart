@@ -32,7 +32,7 @@ class MoodButton extends StatelessWidget {
         ),
       ),
       visualDensity: const VisualDensity(horizontal: 4.0, vertical: 2.0),
-      labelPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+      labelPadding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
       clipBehavior: Clip.antiAlias,
       backgroundColor: isSelected ? AppColors.primaryColor : Colors.white,
       shadowColor: AppColors.shadowColor,
@@ -41,8 +41,8 @@ class MoodButton extends StatelessWidget {
         padding: const EdgeInsets.only(left: 5.0),
         child: SvgPicture.asset(
           'assets/images/mood_tracking/$emojiName.svg',
-          width: 30.0,
-          height: 30.0,
+          width: 25.0,
+          height: 25.0,
         ),
       ),
     );
