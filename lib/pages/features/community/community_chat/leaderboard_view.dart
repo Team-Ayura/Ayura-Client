@@ -204,7 +204,7 @@ class _LeaderboardViewState extends State<LeaderboardView> {
           ),
         ),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
         //relevant challenge details
         SizedBox(
@@ -230,7 +230,7 @@ class _LeaderboardViewState extends State<LeaderboardView> {
                         fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,

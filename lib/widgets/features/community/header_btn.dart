@@ -41,7 +41,7 @@ class _HeaderButtonState extends State<HeaderButton> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100,
+      width: 110,
       child: TextButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
