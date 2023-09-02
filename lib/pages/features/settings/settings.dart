@@ -59,9 +59,9 @@ class SettingsPage extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text('Namadee Shakya',
+                      const Text('Nadeeka Perera',
                       style: AppStyles.subheadingTextStyle2),
-                      Text('namadee@gmail.com',
+                      Text('nadeekaperera@gmail.com',
                           style: AppStyles.subHeadingTextStyle3.copyWith(color: AppColors.textColor.withOpacity(0.5))),
                       CustomProfileButton(
                         text: 'Edit Profile',

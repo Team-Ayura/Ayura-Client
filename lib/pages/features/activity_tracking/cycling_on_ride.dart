@@ -396,11 +396,11 @@ class _PanelWidgetState extends State<PanelWidget> {
                       height: 20,
                     ),
                     ElevatedButton(
-                      onPressed: takeScreenshot,
-                    //     onPressed: () async {
-                    //   final imageBytes = await captureWidget(_collageKey);
-                    //   await shareCapturedImage(imageBytes);
-                    // },
+                      // onPressed: takeScreenshot,
+                        onPressed: () async {
+                      final imageBytes = await captureWidget(_collageKey);
+                      await shareCapturedImage(imageBytes);
+                    },
                         child: const Text('Share')),
                   ],
                 );
@@ -414,13 +414,13 @@ class _PanelWidgetState extends State<PanelWidget> {
 
   void takeScreenshot() async {
     final imageFile = await _screenshotController.capture();
-    Share.shareXFiles(
-        [XFile.fromData(
-          buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
-          name: 'flutter_logo.png',
-          mimeType: 'image/png',
-        ),]
-    );
+    // Share.shareXFiles(
+    //     [XFile.fromData(
+    //       buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+    //       name: 'flutter_logo.png',
+    //       mimeType: 'image/png',
+    //     ),]
+    // );
   }
 
 }
