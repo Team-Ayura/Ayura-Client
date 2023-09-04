@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
                             fontWeight: FontWeight.w600),
                       ),
                       Text(
-                        'Namadee Shakya',
+                        'Nadeeka Perera',
                         style: TextStyle(
                             fontFamily: "Inter",
                             color: AppColors.textColor,

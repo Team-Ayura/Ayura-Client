@@ -8,6 +8,7 @@ import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class Activities extends StatelessWidget {
@@ -48,7 +49,7 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
+      appBar: PreferredSize(
         preferredSize:
         Size.fromHeight(90.0),
         child: CustomAppBar(
@@ -61,22 +62,22 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Consumer<GoogleAuthProvider>(
-                  builder: (context, googleAuthProvider, _) {
-                    return Switch(
-                      value: googleAuthProvider.isUserAuthorized,
-                      onChanged: (bool togglebtn){
-                        googleAuthProvider.toggleGoogleAuthorization(!togglebtn);
-                      },
-                    );
-                  }
-                ),
-              ],
-            ),
-            const CustomBoxItem(
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   children: [
+            //     Consumer<GoogleAuthProvider>(
+            //       builder: (context, googleAuthProvider, _) {
+            //         return Switch(
+            //           value: googleAuthProvider.isUserAuthorized,
+            //           onChanged: (bool togglebtn){
+            //             googleAuthProvider.toggleGoogleAuthorization(!togglebtn);
+            //           },
+            //         );
+            //       }
+            //     ),
+            //   ],
+            // ),
+            CustomBoxItem(
               index: 1,
               imagePath: 'assets/images/activity_tracking/running.svg',
               mainText: 'Walking & Running',
