@@ -1,4 +1,5 @@
 import 'package:ayura/auth/onboarding_screen.dart';
+import 'package:ayura/constants/enums.dart';
 import 'package:ayura/pages/features/Diary/diary_list.dart';
 import 'package:ayura/pages/splash_screen.dart';
 // import 'package:ayura/auth/signup.dart';
@@ -23,11 +24,14 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 int? isViewed;
+bool? isLoggedIn;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isViewed = prefs.getInt("isViewed");
+  print(prefs.getString(BasicUserData.token.label));
+  isLoggedIn = prefs.getString(BasicUserData.token.label) != null && prefs.getString(BasicUserData.token.label) != "";
   await prefs.setInt("isViewed", 1);
   runApp(MyApp());
 }
@@ -65,7 +69,9 @@ class MyApp extends StatelessWidget {
         home: FutureBuilder(
           future: _initFuture,
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
+            if(isLoggedIn != null && isLoggedIn == true){
+              return const Home();
+            }else if (snapshot.connectionState == ConnectionState.done) {
               return isViewed != 0 ? const OnboardingScreen() : const Home();
             } else {
               return const SplashScreen();
