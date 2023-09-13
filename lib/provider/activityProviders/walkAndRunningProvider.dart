@@ -4,7 +4,7 @@ import 'package:ayura/constants/constants.dart';
 import 'package:ayura/constants/enums.dart';
 import 'package:ayura/provider/models/walkAndRunDataModel.dart';
 import 'package:http/http.dart' as http;
-import 'package:ayura/provider/activityProviders/googleAuthProvider.dart';
+// import 'package:ayura/provider/activityProviders/googleAuthProvider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,7 +23,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
   // constants
   final String requestBaseUrl = AppUrls.baseUrl;
   String _resMessage = '';
-  final GoogleAuthProvider _googleAuthProvider = GoogleAuthProvider();
+  // final GoogleAuthProvider _googleAuthProvider = GoogleAuthProvider();
 
   // walk and running provider state variables
   WalkAndRunDataModel? walkAndRunData;
@@ -54,11 +54,11 @@ class WalkingAndRunningProvider extends ChangeNotifier {
 
   void initWalkAndRunningProviderState() async {
     walkAndRunDataToday = await fetchWalkAndRunDataGoogleFit(ChartFilterType.week);
-    walkAndRunDataCurrentWeek = await fetchWalkAndRunDataBackEnd(ChartFilterType.week);
-    walkAndRunDataCurrentMonth = await fetchWalkAndRunDataBackEnd(ChartFilterType.month);
-    walkAndRunDataCurrentYear = await fetchWalkAndRunDataBackEnd(ChartFilterType.year);
+    walkAndRunDataCurrentWeek ??= await fetchWalkAndRunDataBackEnd(ChartFilterType.week);
+    walkAndRunDataCurrentMonth ??= await fetchWalkAndRunDataBackEnd(ChartFilterType.month);
+    walkAndRunDataCurrentYear ??= await fetchWalkAndRunDataBackEnd(ChartFilterType.year);
     selectedFilter = ChartFilterType.day;
-
+    walkAndRunData = walkAndRunDataToday;
     notifyListeners();
   }
 
@@ -66,23 +66,22 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     selectedFilter = filter;
     switch (selectedFilter) {
       case ChartFilterType.day:
-        walkAndRunDataToday ??= await fetchWalkAndRunDataGoogleFit(filter);
+        // walkAndRunDataToday ??= await fetchWalkAndRunDataGoogleFit(filter);
         walkAndRunData = walkAndRunDataToday;
         break;
       case ChartFilterType.week:
-        walkAndRunDataCurrentWeek ??= await fetchWalkAndRunDataBackEnd(filter);
+        // walkAndRunDataCurrentWeek ??= await fetchWalkAndRunDataBackEnd(filter);
         walkAndRunData = walkAndRunDataCurrentWeek;
         break;
       case ChartFilterType.month:
-        walkAndRunDataCurrentMonth ??= await fetchWalkAndRunDataBackEnd(filter);
+        // walkAndRunDataCurrentMonth ??= await fetchWalkAndRunDataBackEnd(filter);
         walkAndRunData = walkAndRunDataCurrentMonth;
         break;
       case ChartFilterType.year:
-        walkAndRunDataCurrentYear ??= await fetchWalkAndRunDataBackEnd(filter);
+        // walkAndRunDataCurrentYear ??= await fetchWalkAndRunDataBackEnd(filter);
         walkAndRunData = walkAndRunDataCurrentYear;
         break;
     }
-    // print(walkAndRunData);
     // After updating the state, notify listeners to rebuild widgets that depend on this provider.
     notifyListeners();
   }
@@ -94,7 +93,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     final userId = prefs.getString(BasicUserData.userId.label);
     final filterType = type.label;
-    print(prefs.getString(BasicUserData.googleAccessToken.label));
+    // print(prefs.getString(BasicUserData.googleAccessToken.label));
     // backend api endpoint
     String url = '$requestBaseUrl/api/activity/getwalkandrundatabyfilter?userId=$userId&filterType=$filterType';
 
@@ -115,7 +114,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
       if (req.statusCode == 200 || req.statusCode == 201) {
         final res = json.decode(req.body);
         final resbody = res["data"];
-        print(resbody);
+        // print(resbody);
 
         result = WalkAndRunDataModel(
           timePeriod: resbody["timePeriod"],
@@ -242,7 +241,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     // String? token = await _googleAuthProvider.getAccessToken();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString(BasicUserData.googleAccessToken.label);
-    print(token);
+    // print(token);
     // generate the request headers
     final headers = {
       'Content-type': 'application/json',
@@ -279,15 +278,15 @@ class WalkingAndRunningProvider extends ChangeNotifier {
         }
       }
     }
-    print(result);
+    // print(result);
     return result;
   }
 
   Future<Map<String, dynamic>?> fetchOtherSingularDataGoogleFit(ChartFilterType type, int bucketTime, int startMillis, int endMillis) async {
     // prepare url endpoint
     final url = Uri.parse('https://fitness.googleapis.com/fitness/v1/users/me/dataset:aggregate');
-    print(startMillis);
-    print(endMillis);
+    // print(startMillis);
+    // print(endMillis);
     // initializing the result variable
     // 24 because 24 hours per day
     Map<String, dynamic>? result;
@@ -296,7 +295,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
     // String? token = await _googleAuthProvider.getAccessToken();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString(BasicUserData.googleAccessToken.label);
-    print(token);
+    // print(token);
 
     // generate the request headers
     final headers = {
@@ -328,24 +327,39 @@ class WalkingAndRunningProvider extends ChangeNotifier {
 
     // marshalling -> sending -> receiving -> unmarshalling the data
     final response = await http.post(url, headers: headers, body: jsonEncode(requestBody));
-    int index = 0;
+    // int index = 0;
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      print(data);
+      // print(data);
       final List<dynamic> bucket = data['bucket'] ?? [];
       // print(bucket);
       if (bucket.isNotEmpty) {
         final Map<String, dynamic> dataset = bucket[0]['dataset'][0];
-        final int stepCount = dataset['point'][0]['value'][0]['intVal'];
+        // print(dataset);
+        int stepCount=0;
+        if(dataset['point'].length > 0){
+          // print(dataset['point']);
+          stepCount = dataset['point'][0]['value'][0]['intVal'];
+        }
 
         final Map<String, dynamic> distanceDataset = bucket[0]['dataset'][1];
-        final double distanceWalked = distanceDataset['point'][0]['value'][0]['fpVal'];
+        // print(distanceDataset);
+        double distanceWalked=0.0;
+        if(dataset['point'].length > 0){
+          distanceWalked = distanceDataset['point'][0]['value'][0]['fpVal'];
+        }
 
         final Map<String, dynamic> caloriesDataset = bucket[0]['dataset'][3];
-        final double caloriesBurned = caloriesDataset['point'][0]['value'][0]['fpVal'];
+        int caloriesBurned = 0;
+        if(dataset['point'].length > 0){
+          caloriesBurned = caloriesDataset['point'][0]['value'][0]['fpVal'];
+        }
 
         final Map<String, dynamic> moveMinutesDataset = bucket[0]['dataset'][2];
-        final int moveMinutes = moveMinutesDataset['point'][0]['value'][0]['intVal'];
+        int moveMinutes = 0;
+        if(dataset['point'].length > 0){
+          moveMinutes = moveMinutesDataset['point'][0]['value'][0]['intVal'];
+        }
 
         result = {
           'stepCount': stepCount,
@@ -356,7 +370,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
         };
       }
     }
-    print(result);
+    // print(result);
     return result;
   }
 }
