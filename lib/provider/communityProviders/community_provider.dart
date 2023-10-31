@@ -56,7 +56,7 @@ class CommunityProvider extends ChangeNotifier {
   //Get the communities from database
   Future<void> getCommunitiesList() async {
     final url = '$requestBaseUrl/api/communities';
-    isLoading = true;
+    // isLoading = true;
     notifyListeners();
     try {
       http.Response req = await http.get(

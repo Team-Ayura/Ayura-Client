@@ -23,6 +23,13 @@ class _CyclingPageState extends State<CyclingPage> {
   int activeIndex = 0; // -1 means no active index
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<CyclingProvider>(context, listen: false).initCyclingProviderState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final NumberFormat numberFormat = NumberFormat('#,###');
 
@@ -79,9 +86,9 @@ class _CyclingPageState extends State<CyclingPage> {
               child: Consumer<CyclingProvider>(
                   builder: (context, cyclingProvider, _) {
                 return BarChartWeekly(
-                    yAxisLabel: 'Steps',
+                    yAxisLabel: 'Distance',
                     filter: cyclingProvider.selectedFilter,
-                    data: cyclingProvider.steps);
+                    data: cyclingProvider.distances);
               }),
             ),
             // distance
