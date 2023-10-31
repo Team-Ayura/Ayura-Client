@@ -7,6 +7,8 @@ import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
 
+import '../pages/home.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 
@@ -70,7 +72,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                     InkWell(
                       onTap: () {
                         PageNavigator(context: context).nextPage(const Login());
-                        // PageNavigator(context: context).nextPage(const Diary_Home());
+                        // PageNavigator(context: context).nextPage(const Home());
                       },
                       child: const Text(
                         'Sign in',
