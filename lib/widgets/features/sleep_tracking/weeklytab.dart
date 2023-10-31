@@ -6,11 +6,14 @@ import 'package:ayura/widgets/features/sleep_tracking/sleepqualitypiechart.dart'
 import 'package:ayura/widgets/features/sleep_tracking/weeklinechart.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../constants/styles.dart';
 import '../../../pages/features/sleep_tracking/page3.dart';
 import '../../../utils/router.dart';
 import '../../global/tip_chip.dart';
+
+
 
 class WeeklyTab extends StatefulWidget {
   const WeeklyTab({super.key});
@@ -18,6 +21,13 @@ class WeeklyTab extends StatefulWidget {
   @override
   State<WeeklyTab> createState() => _WeeklyTabState();
 }
+  DateTime now = DateTime.now();
+  DateTime currentWeekStart = now.subtract(Duration(days: now.weekday - 1));
+  DateTime currentWeekEnd = currentWeekStart.add(Duration(days: 6));
+
+  // Format the dates if needed
+  String formattedStartDate = DateFormat('MMM-dd').format(currentWeekStart);
+  String formattedEndDate = DateFormat('MMM-dd').format(currentWeekEnd);
 
 class _WeeklyTabState extends State<WeeklyTab> {
   @override
@@ -27,13 +37,13 @@ class _WeeklyTabState extends State<WeeklyTab> {
               child:Column(
                 children:[
                     const SizedBox(height: 10,),  
-                   const Padding(
+                    Padding(
                      padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
                      child: Row(
                       children: [
-                        Text("Aug 13 - Aug 19",style: AppStyles.subheadingTextStyle2,)
+                        Text("$formattedStartDate-$formattedEndDate",style: AppStyles.subheadingTextStyle2,)
                       ],
-                                     ),
+                    ),
                    ),
                   const SizedBox(height: 10,),   
                   const AverageSleepCard(duration: 'Weekly',),
