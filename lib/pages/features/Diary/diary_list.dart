@@ -43,6 +43,28 @@ class DiaryListState extends State<DiaryList> {
     });
   }
 
+  List<String> DailyActicities = [
+    "Going to the gym",
+    "Going to the school",
+    "Going to the work",
+    "Reading books",
+    "Volunteering",
+    "Gardening",
+    "Playing sports",
+    "Watching movies or TV shows",
+    "Cooking or baking",
+    "Painting or drawing",
+    "Hiking or nature walks",
+    "Yoga or meditation",
+    "Playing musical instruments",
+    "Listening to podcasts or music",
+    
+ 
+
+    // Add more factors as needed
+  ];
+
+  List<String> selectedDailyActicities = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,76 +82,134 @@ class DiaryListState extends State<DiaryList> {
         ),
       ),
       body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  //Horizontal calander
-                  const HorizontalCalender(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(DateFormat('MMM d').format(DateTime.now())),
-                      Text(DateFormat('hh:mm a').format(DateTime.now()))
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                 
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('How well did you sleep today ?',
-                        style:
-                            TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                  ),
-                  SleepTime(
-                    alarmTime: alarmTime,
-                    bedTime: bedTime,
-                    sleepDuration: sleepDuration,
-                    onAlarmTimeChanged: onAlarmTimeChanged,
-                    onBedTimeChanged: onBedTimeChanged,
-                    onSleepDurationChanged: onSleepDurationChanged,
-                  ),
+        child: Column(
+          // height: MediaQuery.of(context).size.height,
+          // shrinkWrap: true,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    //Horizontal calander
+                    const HorizontalCalender(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(DateFormat('MMM d').format(DateTime.now())),
+                        Text(DateFormat('hh:mm a').format(DateTime.now()))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('How well did you sleep today ?',
+                          style:
+                              TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                    ),
+                    SleepTime(
+                      alarmTime: alarmTime,
+                      bedTime: bedTime,
+                      sleepDuration: sleepDuration,
+                      onAlarmTimeChanged: onAlarmTimeChanged,
+                      onBedTimeChanged: onBedTimeChanged,
+                      onSleepDurationChanged: onSleepDurationChanged,
+                    ),
 
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: const Text('How are you feeling today ?',
-                        style:
-                            TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                  ),
-                  //moods chips
-                  const Center(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                      child: Wrap(
-                        spacing: 8.0,
-                        runSpacing: 8.0,
-                        children: [
-                          MoodButton(emojiName: 'Happy', mood: 'Happy'),
-                          MoodButton(emojiName: 'Tired', mood: 'Tired'),
-                          MoodButton(emojiName: 'Sad', mood: 'Sad'),
-                          MoodButton(emojiName: 'Angry', mood: 'Angry'),
-                          MoodButton(emojiName: 'Bored', mood: 'Bored'),
-                          MoodButton(emojiName: 'Stressed', mood: 'Stressed'),
-                        ],
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('How are you feeling today ?',
+                          style:
+                              TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                    ),
+                    //moods chips
+                    const Center(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                        child: Wrap(
+                          spacing: 8.0,
+                          runSpacing: 6.0,
+                          children: [
+                            MoodButton(emojiName: 'Happy', mood: 'Happy'),
+                            MoodButton(emojiName: 'Tired', mood: 'Tired'),
+                            MoodButton(emojiName: 'Sad', mood: 'Sad'),
+                            MoodButton(emojiName: 'Angry', mood: 'Angry'),
+                            MoodButton(emojiName: 'Bored', mood: 'Bored'),
+                            MoodButton(emojiName: 'Stressed', mood: 'Stressed'),
+                          ],
+                        ),
                       ),
+                    ),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('What have you been up to?',
+                          style:
+                              TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                    ),
+                    //activity chips
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
+                      child: Wrap(
+                          spacing: 8.0,
+                          runSpacing: 8.0,
+                          children: DailyActicities.map((factor) {
+                            bool isSelected = selectedDailyActicities.contains(factor);
+                                
+                            return ChoiceChip(
+                              label: Text(factor),
+                              selected: isSelected,
+                              onSelected: (isSelected) {
+                                setState(() {
+                                  if (isSelected) {
+                                    selectedDailyActicities.add(factor);
+                                  } else {
+                                    selectedDailyActicities.remove(factor);
+                                  }
+                                });
+                              },
+                              selectedColor: AppColors.primaryColor,
+                              labelStyle: TextStyle(
+                                color: isSelected ? Colors.white : Colors.black,
+                                fontWeight: FontWeight.normal,
+                              ),
+                              backgroundColor: isSelected ?AppColors.primaryColor.withOpacity(0.2) : Colors.white,
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                color: isSelected ? AppColors.primaryColor.withOpacity(0.2) : AppColors.disabledColor,
+                                width: 1.0, // Adjust the width as needed
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              labelPadding: const EdgeInsets.all(3.0),
+                            );
+                          }).toList(),
+                        ),
                     ),
                   ),
 
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  customButton(
-                      tap: (() {}), width: 100, text: 'Save', context: context),
-                ],
+
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    customButton(
+                        tap: (() {}), width: 100, text: 'Save', context: context),
+                  ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ),
       bottomNavigationBar: const AppNavigation(),
