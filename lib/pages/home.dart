@@ -17,11 +17,24 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   TextEditingController birthdayController = TextEditingController();
+   String getGreeting() {
+    final currentTime = DateTime.now();
+    final hour = currentTime.hour;
+
+    if (hour < 12) {
+      return 'Good Morning!';
+    } else if (hour < 17) {
+      return 'Good Afternoon!';
+    } else {
+      return 'Good Evening!';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    String greeting = getGreeting();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -38,19 +51,19 @@ class _HomeState extends State<Home> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Good Morning!',
-                        style: TextStyle(
+                        greeting,
+                        style: const TextStyle(
                             fontFamily: "Inter",
                             color: AppColors.textColor,
                             fontSize: 22,
                             fontWeight: FontWeight.w600),
                       ),
-                      Text(
+                      const Text(
                         'Namadee Shakya',
                         style: TextStyle(
                             fontFamily: "Inter",

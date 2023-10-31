@@ -12,6 +12,8 @@ import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../widgets/features/home/tips_card.dart';
+
 class DiaryList extends StatefulWidget {
   const DiaryList({Key? key}) : super(key: key);
 
@@ -24,6 +26,7 @@ class DiaryListState extends State<DiaryList> {
   String alarmTime = "12:00 PM";
   String bedTime = "12:00 AM";
   String sleepDuration = "12 hr 00 min";
+  
 
   void onAlarmTimeChanged(String value) {
     setState(() {
@@ -67,6 +70,7 @@ class DiaryListState extends State<DiaryList> {
   List<String> selectedDailyActicities = [];
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
@@ -199,7 +203,41 @@ class DiaryListState extends State<DiaryList> {
                     ),
                   ),
 
+                     const SizedBox(
+                      height: 10,
+                    ),
 
+                    tipsCard(
+                    height: height * 0.15,
+                    title: 'Health tips',
+                    descritpion:
+                        'Aim to drink at least 8 glasses (about 2 liters) of water daily!',
+                    cta: ' ',
+                    icon: Icons.lightbulb,
+                  ),
+                  const SizedBox(
+                      height: 10,
+                    ),
+                  tipsCard(
+                    height: height * 0.15,
+                    title: 'Health tips',
+                    descritpion:
+                        'Aim to drink at least 8 glasses (about 2 liters) of water daily!',
+                    cta: ' ',
+                    icon: Icons.lightbulb,
+                  ),
+                  const SizedBox(
+                      height: 10,
+                    ),
+                  tipsCard(
+                    height: height * 0.15,
+                    title: 'Health tips',
+                    descritpion:
+                        'Aim to drink at least 8 glasses (about 2 liters) of water daily!',
+                    cta: ' ',
+                    icon: Icons.lightbulb,
+                  ),
+                
                     const SizedBox(
                       height: 10,
                     ),
