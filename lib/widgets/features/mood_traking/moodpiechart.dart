@@ -10,15 +10,12 @@ class MoodVariationChart extends StatelessWidget {
   //map mood,no of days with that mood
   //days with that mood/total days * 100%
   Map<String,double> dataMap = {
-    "Happy": 8.47,
-    // "Calm": 17.70,
-    "Tired": 14.25,
-    "Sad": 6.51,
-    "Angry": 12.83,
-    "Stressed": 9.83,
-    // "Lonely": 2.83,
-    // "Sick": 2.83,
-    "Bored": 4.83,
+    "Happy": 0.25,
+    "Tired": 0,
+    "Sad": 0.25,
+    "Angry": 0,
+    "Stressed": 0.5,
+    "Bored": 0,
   };
 
   List<Color> colorList = [
