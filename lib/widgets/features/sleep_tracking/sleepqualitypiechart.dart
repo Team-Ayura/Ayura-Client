@@ -10,10 +10,10 @@ class SleepQualitynChart extends StatelessWidget {
   //map quality,no of days with that quality
   //days with that quality/total days * 100%
   Map<String,double> dataMap = {
-    "Excessive": 1.25,
-    "Good": 3.51,
-    "Sufficient": 5.83,
-    "Insufficient": 10.25,
+    "Excessive Sleep Days": 1,
+    "Good Sleep Days": 1,
+    "Sufficient Sleep Days": 1,
+    "Insufficient Sleep Days": 2,
     
   };
 
@@ -60,8 +60,9 @@ class SleepQualitynChart extends StatelessWidget {
               chartValuesOptions: const ChartValuesOptions(
                 showChartValues: true,
                 showChartValuesOutside: true,
-                showChartValuesInPercentage: true,
+                showChartValuesInPercentage: false,
                 showChartValueBackground: true,
+                decimalPlaces: 0,
               ),
               legendOptions: const LegendOptions(
                 showLegends: true,
