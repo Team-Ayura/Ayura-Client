@@ -114,7 +114,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
       if (req.statusCode == 200 || req.statusCode == 201) {
         final res = json.decode(req.body);
         final resbody = res["data"];
-        // print(resbody);
+        print(resbody);
 
         result = WalkAndRunDataModel(
           timePeriod: resbody["timePeriod"],

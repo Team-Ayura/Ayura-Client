@@ -47,8 +47,8 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
                 if (position != null) {
                   return MapContainer(
                     isRegular: true,
-                    latitude: cyclingOnRideProvider.currentLocation?.latitude ?? 6.90215097043552,
-                    longitude: cyclingOnRideProvider.currentLocation?.longitude ?? 79.86117498503802,
+                    latitude:  6.90215097043552,
+                    longitude:  79.86117498503802,
                     markerTitle: "Colombo",
                   );
                 } else {
