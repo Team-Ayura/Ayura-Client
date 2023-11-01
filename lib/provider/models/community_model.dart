@@ -2,9 +2,11 @@ class CommunityModel {
   String id;
   String communityName;
   String communityDescription;
+  String adminId;
   bool isPublic;
   List<String> categories;
   List<String> members;
+  List<String> challenges;
 
   // Constructor
   CommunityModel({
@@ -13,9 +15,12 @@ class CommunityModel {
     required this.communityDescription,
     required this.isPublic,
     List<String>? categories, // Initialize as empty list
+    List<String>? challenges, // Initialize as empty list
+    required this.adminId,
     List<String>? members, // Initialize as empty list
   })  : categories = categories ?? [],
-        members = members ?? [];  
+        members = members ?? [],
+        challenges = challenges ?? [];
 
   // Factory constructor to create CommunityModel from JSON data
   factory CommunityModel.fromJson(Map<String, dynamic> json) {
@@ -25,7 +30,9 @@ class CommunityModel {
       communityDescription: json['communityDescription'] ?? '',
       isPublic: json['isPublic'] ?? false,
       categories: List<String>.from(json['categories'] ?? []),
+      adminId: json['adminId'] ?? '',
       members: List<String>.from(json['members'] ?? []),
+      challenges: List<String>.from(json['challenges'] ?? []),
     );
   }
 
@@ -38,6 +45,8 @@ class CommunityModel {
       'isPublic': isPublic,
       'categories': categories,
       'members': members,
+      'challenges': challenges,
+      'adminId': adminId,
     };
   }
 }
