@@ -2,7 +2,8 @@ import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/features/community/add_challenge.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/community/add_member.dart';
-import 'package:ayura/widgets/features/community/header_btn.dart';import 'package:ayura/provider/communityProviders/community_provider.dart';
+import 'package:ayura/widgets/features/community/header_btn.dart';
+import 'package:ayura/provider/communityProviders/community_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:ayura/provider/communityProviders/community_provider.dart';
 import 'package:provider/provider.dart';
@@ -28,9 +29,16 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/widgets/features/community/community_appbar.dart';
 
 class CommunityChat extends StatefulWidget {
-  const CommunityChat({required this.communityId, super.key});
+  const CommunityChat(
+      {required this.communityId,
+      required this.adminId,
+      required this.userId,
+      super.key});
 
   final String communityId;
+  final String adminId;
+  final String userId;
+
   @override
   State<CommunityChat> createState() {
     return _CommunityChatState();
@@ -112,6 +120,10 @@ class _CommunityChatState extends State<CommunityChat> {
 
   // Community Settings Section Widget
   Padding communitySettings() {
+    bool isUserAdmin = widget.userId == widget.adminId;
+    print(widget.userId);
+    print(widget.adminId);
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 25, 10, 15),
       child: SizedBox(

@@ -1,5 +1,5 @@
 class AppUrls {
-  // static String baseUrl = "https://ayura.azurewebsites.net";
+  static String baseUrl = "https://ayura.azurewebsites.net";
 
-  static String baseUrl = "http://localhost:5005";
+  // static String baseUrl = "http://localhost:5005";
 }
