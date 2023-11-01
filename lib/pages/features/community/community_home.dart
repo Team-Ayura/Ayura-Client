@@ -8,6 +8,7 @@ import 'package:ayura/widgets/features/community/chat_card.dart'; // Chat Card W
 import 'package:ayura/widgets/features/community/challenge_card.dart'; // Challenge Card Widget
 import 'package:ayura/pages/features/community/community_list.dart';
 import 'package:ayura/pages/features/community/challenge_list.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Constants
 import 'package:ayura/constants/colors.dart';
@@ -30,7 +31,7 @@ class _CommunityHomeState extends State<CommunityHome> {
   void initState() {
     super.initState();
     Provider.of<CommunityProvider>(context, listen: false)
-        .getCommunitiesList(); 
+        .getUserJoinedCommunities(); 
   
   }
 
@@ -108,7 +109,7 @@ class _CommunityHomeState extends State<CommunityHome> {
                 builder: (context, communityProvider, _) {
                   
                   List<CommunityModel> communities =
-                      communityProvider.communityList; // Getter
+                      communityProvider.userJoinedCommunityList; // Getter
 
                   // Check for loading
                   if (communityProvider.isLoading) {

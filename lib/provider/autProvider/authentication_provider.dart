@@ -148,7 +148,8 @@ class AuthenticationProvider2 extends ChangeNotifier {
 
   void confirmPassword(String confirmPassword) {
     if (confirmPassword == _userModel.password) {
-      _confirmPasswordvalidate = ValidationModel(error: '', value: confirmPassword);
+      _confirmPasswordvalidate =
+          ValidationModel(error: '', value: confirmPassword);
     } else {
       _confirmPasswordvalidate =
           ValidationModel(error: 'Password does not match', value: '');
@@ -255,6 +256,7 @@ class AuthenticationProvider2 extends ChangeNotifier {
         prefs.setString(BasicUserData.lastName.label, res["lastName"]);
         prefs.setString(BasicUserData.profileImage.label, res["profileImage"]);
         prefs.setString("token", res["token"]);
+
         _resMessage = "Login Successful!";
 
         notifyListeners();
