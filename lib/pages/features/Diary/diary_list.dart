@@ -2,17 +2,21 @@ import 'dart:convert';
 
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/widgets/features/diary/HorizontalCalender.dart';
+import 'package:ayura/widgets/features/diary/lifestyle_list.dart';
 import 'package:ayura/widgets/features/diary/sleepTime.dart';
 import 'package:ayura/widgets/features/mood_traking/mood_chips.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import '../../../provider/moodProviders/selectedmood.dart';
+import '../../../widgets/features/home/diary_activity_card.dart';
 import '../../../widgets/features/home/tips_card.dart';
+import '../../../widgets/features/sleep_tracking/sleepquality.dart';
 
 class DiaryList extends StatefulWidget {
   const DiaryList({Key? key}) : super(key: key);
@@ -111,14 +115,32 @@ class DiaryListState extends State<DiaryList> {
     }
   }
 
+  final List _activity = [
+    'Sedentary',
+    'Lightly Active',
+    'Moderately Active',
+    'Very Active',
+    'Extremely Active'
+  ];
+  final List _description = [
+    'Little to no activity',
+    'Regular walks, light exercises, or low-intensity workouts.',
+    'Moderate exercise or sports 3-5 days a week',
+    'Engaged in physically demanding occupations.',
+    'Regular High Intensity Workouts, Athletics and Sports',
+  ];
+
   List<String> selectedDailyActicities = [];
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _textEditingController = TextEditingController();
     double width = MediaQuery.of(context).size.width;
-    // double height = MediaQuery.of(context).size.height;
+    int selected = 0;
     String greeting = getGreeting();
     double height = MediaQuery.of(context).size.height;
+    // double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       // appBar: PreferredSize(
       //   preferredSize:
@@ -194,6 +216,8 @@ class DiaryListState extends State<DiaryList> {
           ),
         ),
       ),
+
+      //body part
       body: SingleChildScrollView(
         child: Column(
           // height: MediaQuery.of(context).size.height,
@@ -218,6 +242,36 @@ class DiaryListState extends State<DiaryList> {
                       height: 20,
                     ),
 
+                    //display google fit data
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          diaryactivityCard(
+                            text: 'Today Steps',
+                            number: '5400',
+                            image: 'assets/icons/step_icon.png',
+                          ),
+                          SizedBox(width: width * 0.04),
+                          diaryactivityCard(
+                            text: 'Today Calories',
+                            number: '2200',
+                            image: 'assets/icons/fire.png',
+                          ),
+                          SizedBox(width: width * 0.04),
+                          diaryactivityCard(
+                            text: 'Today Heart Rate',
+                            number: '72',
+                            image: 'assets/icons/heart.png',
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    //sleep data
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text('How well did you sleep today ?',
@@ -236,6 +290,10 @@ class DiaryListState extends State<DiaryList> {
                     const SizedBox(
                       height: 20,
                     ),
+
+
+
+                    //get mood 
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text('How are you feeling today ?',
@@ -260,63 +318,78 @@ class DiaryListState extends State<DiaryList> {
                         ),
                       ),
                     ),
-
                     const SizedBox(
                       height: 20,
                     ),
+
+                    //about the day
                     const Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('What have you been up to?',
+                      child: Text('How was your day ?',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w500)),
                     ),
-                    //activity chips
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
-                        child: Wrap(
-                          spacing: 8.0,
-                          runSpacing: 8.0,
-                          children: DailyActicities.map((factor) {
-                            bool isSelected =
-                                selectedDailyActicities.contains(factor);
-
-                            return ChoiceChip(
-                              label: Text(factor),
-                              selected: isSelected,
-                              onSelected: (isSelected) {
-                                setState(() {
-                                  if (isSelected) {
-                                    selectedDailyActicities.add(factor);
-                                    print(selectedDailyActicities);
-                                  } else {
-                                    selectedDailyActicities.remove(factor);
-                                  }
-                                });
-                              },
-                              selectedColor: AppColors.primaryColor,
-                              labelStyle: TextStyle(
-                                color: isSelected ? Colors.white : Colors.black,
-                                fontWeight: FontWeight.normal,
-                              ),
-                              backgroundColor: isSelected
-                                  ? AppColors.primaryColor.withOpacity(0.2)
-                                  : Colors.white,
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: isSelected
-                                      ? AppColors.primaryColor.withOpacity(0.2)
-                                      : AppColors.disabledColor,
-                                  width: 1.0, // Adjust the width as needed
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              labelPadding: const EdgeInsets.all(3.0),
-                            );
-                          }).toList(),
-                        ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                     const LifeStyleSelection(),
+                    TextField(
+                      controller: _textEditingController,
+                      maxLines: 5, // Adjust the number of lines as needed
+                      decoration: const InputDecoration(
+                        labelText: 'Briefly explain your day',
+                        border: OutlineInputBorder(),
                       ),
                     ),
+            
+
+                    // //activity chips
+                    // Center(
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
+                    //     child: Wrap(
+                    //       spacing: 8.0,
+                    //       runSpacing: 8.0,
+                    //       children: DailyActicities.map((factor) {
+                    //         bool isSelected =
+                    //             selectedDailyActicities.contains(factor);
+
+                    //         return ChoiceChip(
+                    //           label: Text(factor),
+                    //           selected: isSelected,
+                    //           onSelected: (isSelected) {
+                    //             setState(() {
+                    //               if (isSelected) {
+                    //                 selectedDailyActicities.add(factor);
+                    //                 print(selectedDailyActicities);
+                    //               } else {
+                    //                 selectedDailyActicities.remove(factor);
+                    //               }
+                    //             });
+                    //           },
+                    //           selectedColor: AppColors.primaryColor,
+                    //           labelStyle: TextStyle(
+                    //             color: isSelected ? Colors.white : Colors.black,
+                    //             fontWeight: FontWeight.normal,
+                    //           ),
+                    //           backgroundColor: isSelected
+                    //               ? AppColors.primaryColor.withOpacity(0.2)
+                    //               : Colors.white,
+                    //           shape: RoundedRectangleBorder(
+                    //             side: BorderSide(
+                    //               color: isSelected
+                    //                   ? AppColors.primaryColor.withOpacity(0.2)
+                    //                   : AppColors.disabledColor,
+                    //               width: 1.0, // Adjust the width as needed
+                    //             ),
+                    //             borderRadius: BorderRadius.circular(10.0),
+                    //           ),
+                    //           labelPadding: const EdgeInsets.all(3.0),
+                    //         );
+                    //       }).toList(),
+                    //     ),
+                    //   ),
+                    // ),
 
                     const SizedBox(
                       height: 10,
