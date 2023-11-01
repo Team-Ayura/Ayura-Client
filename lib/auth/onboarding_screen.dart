@@ -74,8 +74,8 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        // PageNavigator(context: context).nextPage(const Login());
-                        PageNavigator(context: context).nextPage(const DiaryList());
+                        PageNavigator(context: context).nextPage(const Login());
+                        // PageNavigator(context: context).nextPage(const DiaryList());
                       },
                       child: const Text(
                         'Sign in',
