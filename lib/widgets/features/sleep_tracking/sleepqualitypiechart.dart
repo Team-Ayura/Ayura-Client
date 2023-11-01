@@ -10,11 +10,10 @@ class SleepQualitynChart extends StatelessWidget {
   //map quality,no of days with that quality
   //days with that quality/total days * 100%
   Map<String,double> dataMap = {
-    "Great": 8.47,
-    "Good": 14.25,
-    "Okay": 6.51,
-    "Not Great": 12.83,
-    "Horrible": 9.83,
+    "Excessive": 1.25,
+    "Good": 3.51,
+    "Sufficient": 5.83,
+    "Insufficient": 10.25,
     
   };
 
@@ -22,7 +21,7 @@ class SleepQualitynChart extends StatelessWidget {
       const Color.fromARGB(255, 27, 158, 4), //Great
       const Color(0xFF00DF59), //Good
       const Color(0xFFFFD600), //Okay
-      const Color.fromARGB(255, 232, 121, 1), //Not Great
+      // const Color.fromARGB(255, 232, 121, 1), //Not Great
       const Color.fromARGB(255, 228, 8, 8), //Horrible
      
   ];
@@ -41,7 +40,7 @@ class SleepQualitynChart extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "Sleep Quality",
+                    "Sleep Duration",
                     textAlign: TextAlign.left,
                     style: AppStyles.subheadingTextStyle2,
                   ),

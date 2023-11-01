@@ -22,12 +22,12 @@ class WeeklyTab extends StatefulWidget {
   State<WeeklyTab> createState() => _WeeklyTabState();
 }
   DateTime now = DateTime.now();
-  DateTime currentWeekStart = now.subtract(Duration(days: now.weekday - 1));
+  DateTime currentWeekStart = now.subtract(Duration(days: now.weekday));
   DateTime currentWeekEnd = currentWeekStart.add(Duration(days: 6));
 
   // Format the dates if needed
-  String formattedStartDate = DateFormat('MMM-dd').format(currentWeekStart);
-  String formattedEndDate = DateFormat('MMM-dd').format(currentWeekEnd);
+  String formattedStartDate = DateFormat('MMM dd').format(currentWeekStart);
+  String formattedEndDate = DateFormat('MMM dd').format(currentWeekEnd);
 
 class _WeeklyTabState extends State<WeeklyTab> {
   @override
@@ -54,27 +54,27 @@ class _WeeklyTabState extends State<WeeklyTab> {
 
                   
                   
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
-                    child: Card(
-                    elevation: 1, // Adjust elevation for shadow
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0), // Adjust the border radius
-                    ),
-                    child: ListTile(
-                        horizontalTitleGap: 25.0,
-                      contentPadding: const EdgeInsets.fromLTRB(15, 10, 10, 8),
-                      title: const Text('Check your daily sleep schedules ',style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.primaryColor,
-                      )),
-                      subtitle: const Text("Establish a consistent Sleep Schedule"),
-                      trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepSchedules());}, child:const Icon( Icons.arrow_forward,))
-                    ),
-                                  ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                  //   child: Card(
+                  //   elevation: 1, // Adjust elevation for shadow
+                  //   shape: RoundedRectangleBorder(
+                  //     borderRadius: BorderRadius.circular(10.0), // Adjust the border radius
+                  //   ),
+                  //   child: ListTile(
+                  //       horizontalTitleGap: 25.0,
+                  //     contentPadding: const EdgeInsets.fromLTRB(15, 10, 10, 8),
+                  //     title: const Text('Check your daily sleep schedules ',style: TextStyle(
+                  //       fontFamily: 'Inter',
+                  //       fontSize: 16,
+                  //       fontWeight: FontWeight.w700,
+                  //       color: AppColors.primaryColor,
+                  //     )),
+                  //     subtitle: const Text("Establish a consistent Sleep Schedule"),
+                  //     trailing: TextButton(onPressed: () {PageNavigator(context: context).nextPage( const SleepSchedules());}, child:const Icon( Icons.arrow_forward,))
+                  //   ),
+                  //                 ),
+                  // ),
 
                   const SizedBox(height: 10,),
                   const WeeklyChart(),
