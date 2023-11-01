@@ -1,26 +1,27 @@
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/pages/features/settings/settings.dart';
 import 'package:ayura/pages/features/sleep_tracking/page1.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/home/activity_card.dart';
+import 'package:ayura/widgets/features/home/diary_activity_card.dart';
 import 'package:ayura/widgets/features/home/tips_card.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:ayura/widgets/features/community/challenge_card.dart'; // Challenge Card Widget
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
-import 'features/sleep_tracking/page2.dart';
-
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class Diary_Home extends StatefulWidget {
+  const Diary_Home({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _Diary_HomeState createState() => _Diary_HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _Diary_HomeState extends State<Diary_Home> {
   TextEditingController birthdayController = TextEditingController();
-   String getGreeting() {
+
+    String getGreeting() {
     final currentTime = DateTime.now();
     final hour = currentTime.hour;
 
@@ -37,7 +38,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    String formattedDate = DateFormat('dd MMM yyyy').format(DateTime.now());
     String greeting = getGreeting();
+
 
     return Scaffold(
       appBar: PreferredSize(
@@ -66,9 +69,9 @@ class _HomeState extends State<Home> {
                             fontSize: 22,
                             fontWeight: FontWeight.w600),
                       ),
-                      const Text(
-                        'Namadee Shakya',
-                        style: TextStyle(
+                      Text(
+                        formattedDate,
+                        style: const TextStyle(
                             fontFamily: "Inter",
                             color: AppColors.textColor,
                             fontSize: 15,
@@ -84,20 +87,14 @@ class _HomeState extends State<Home> {
                         size: 35,
                       ),
                       SizedBox(width: width * 0.02),
-                      GestureDetector(
-                        onTap: (){
-                          PageNavigator(context: context)
-                              .nextPage(const SettingsPage());
-                        },
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/profileIcon.png'),
-                              fit: BoxFit.cover,
-                            ),
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          image: const DecorationImage(
+                            image: AssetImage('assets/images/profileIcon.png'),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
@@ -112,37 +109,28 @@ class _HomeState extends State<Home> {
         child: CustomScrollView(slivers: [
           SliverToBoxAdapter(
             child: SizedBox(
-              height: height * 0.35,
+              height: height * 0.2,
               child: Column(
                 children: [
                   SizedBox(height: height * 0.01),
-                  tipsCard(
-                    height: height * 0.15,
-                    title: 'Health tips',
-                    descritpion:
-                        'Aim to drink at least 8 glasses (about 2 liters) of water daily!',
-                    cta: ' ',
-                    icon: Icons.lightbulb,
-                  ),
-                  SizedBox(height: height * 0.02),
                   Expanded(
                     child: ListView(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: false,
                         children: [
-                          activityCard(
-                              text: 'Step Count',
-                              number: 2548,
+                          diaryactivityCard(
+                              text: 'Today Steps',
+                              number: '0' ,
                               image: 'assets/icons/step_icon.png'),
                           SizedBox(width: width * 0.04),
-                          activityCard(
-                              text: 'Heart Rate',
-                              number: 100,
+                          diaryactivityCard(
+                              text: 'Overall Mood',
+                              number: 'Happy',
                               image: 'assets/icons/heart.png'),
                           SizedBox(width: width * 0.04),
-                          activityCard(
-                              text: 'Calories',
-                              number: 243,
+                          diaryactivityCard(
+                              text: 'Today Calories',
+                              number: '0',
                               image: 'assets/icons/fire.png'),
                         ]),
                   ),
@@ -154,6 +142,86 @@ class _HomeState extends State<Home> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
+                SizedBox(height: height * 0.02),
+               Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color.fromARGB(69, 158, 158, 158),
+                        blurRadius: 2.0,
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.emoji_emotions_outlined,
+                            size: 24.0,
+                            color: AppColors.yellowColor,
+                          ),
+                          const SizedBox(width: 10),
+                          const Flexible(
+                            child: Text(
+                              'Mood Details ',
+                              style: TextStyle(
+                                color: AppColors.textColor,
+                                fontSize: 14,
+                                fontFamily: "Inter",
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                           const SizedBox(width: 120),
+                          TextButton(
+                            onPressed: () {
+                              PageNavigator(context: context)
+                                  .nextPage(const SleepFirstPage());
+                            }, 
+                            child: const Text(
+                              'Add Mood',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: "Inter",
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: height * 0.02),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children:[
+                              SvgPicture.asset('assets/icons/diary_add.svg'),
+                              const SizedBox(height:10 ,),
+                              const Text(
+                                'Add Mood Details',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 205, 200, 200),
+                                  fontSize: 14,
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                                              
+                            ]
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(height: height * 0.02),
                 Container(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 15),
@@ -181,36 +249,53 @@ class _HomeState extends State<Home> {
                           const SizedBox(width: 10),
                           const Flexible(
                             child: Text(
-                              'How many hours did you sleep? ',
+                              'Sleep Details ',
                               style: TextStyle(
                                 color: AppColors.textColor,
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontFamily: "Inter",
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
-                          IconButton(
+                           const SizedBox(width: 120),
+                          TextButton(
                             onPressed: () {
                               PageNavigator(context: context)
-                                  .nextPage(const SleepHistory());
-                            },
-                            icon: const Icon(
-                              Icons.arrow_forward_rounded,
-                              size: 20,
-                              color: AppColors.primaryColor,
+                                  .nextPage(const SleepFirstPage());
+                            }, 
+                            child: const Text(
+                              'Add Nap',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: "Inter",
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        // Challenge Container
-                        child: Text(
-                          "Establish a consistent Sleep Schedule",
-                          style: TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 14,
-                            color: AppColors.textColor,
+                      SizedBox(height: height * 0.02),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children:[
+                              SvgPicture.asset('assets/icons/diary_add.svg'),
+                              const SizedBox(height:10 ,),
+                              const Text(
+                                'Add a Nap/Sleep',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 205, 200, 200),
+                                  fontSize: 14,
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                                              
+                            ]
                           ),
                         ),
                       ),

@@ -1,3 +1,5 @@
+import 'package:ayura/auth/auth_screen.dart';
+import 'package:ayura/auth/login.dart';
 import 'package:ayura/auth/onboarding_screen.dart';
 import 'package:ayura/constants/enums.dart';
 import 'package:ayura/pages/features/Diary/diary_list.dart';
@@ -72,7 +74,7 @@ class MyApp extends StatelessWidget {
             if(isLoggedIn != null && isLoggedIn == true){
               return const Home();
             }else if (snapshot.connectionState == ConnectionState.done) {
-              return isViewed != 0 ? const OnboardingScreen() : const Home();
+              return isViewed != 0 ? const OnboardingScreen() : const Login();
             } else {
               return const SplashScreen();
             }

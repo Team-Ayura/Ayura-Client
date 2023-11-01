@@ -6,13 +6,32 @@ class AverageSleepCard extends StatefulWidget {
   final String duration;
   const AverageSleepCard({super.key, required this.duration});
 
+  
   @override
   State<AverageSleepCard> createState() => _AverageSleepCardState();
 }
 
 class _AverageSleepCardState extends State<AverageSleepCard> {
+
+  String getAvgSleepDuration(){
+    if(widget.duration == "Week"){
+        return '05h 35m';
+    }
+    else if(widget.duration == "Fortnight"){
+        return '06h 25m';
+    }
+    else{
+        return '05h 15m';
+    }
+    
+    
+    
+  }
+
   @override
   Widget build(BuildContext context) {
+  String avgSleepDuration =  getAvgSleepDuration();
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(8,0,8,0),
       child: Card(
@@ -35,12 +54,12 @@ class _AverageSleepCardState extends State<AverageSleepCard> {
                             children: [
                               Icon(
                                 Icons.circle,
-                                color: Colors.yellow,
+                                color: Color.fromARGB(255, 228, 8, 8),
                                 size: 12,
                               ),
                               SizedBox(width: 4),
                               Text(
-                                'Not enough',
+                                'Insufficient',
                                 style: TextStyle(color: Color(0xFF878787),fontFamily: 'Inter',fontSize: 14,),
                               ),
                             ],
@@ -57,11 +76,11 @@ class _AverageSleepCardState extends State<AverageSleepCard> {
                       ],
                     ),
     
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '05h 35m',
+                          avgSleepDuration,
                           style: TextStyle(fontSize:32,color: Colors.black,fontWeight: FontWeight.bold),
                         ),
                       ],
