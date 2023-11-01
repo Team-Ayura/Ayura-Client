@@ -1,4 +1,6 @@
 import 'package:ayura/auth/auth_screen.dart';
+import 'package:ayura/pages/diary_home.dart';
+import 'package:ayura/pages/features/Diary/diary_list.dart';
 import 'package:ayura/pages/home.dart';
 import 'package:ayura/provider/autProvider/authentication_provider.dart';
 import 'package:ayura/utils/router.dart';
@@ -156,7 +158,8 @@ class LoginState extends State<Login> {
                               if (loginSuccess) {
                                 showMessage(context, auth.resMessage);
                                 PageNavigator(context: context)
-                                    .nextPage(const Home());
+                                    .nextPage(const DiaryList());
+                                    // .nextPage(const Home());
                               } else {
                                 // Show an error message or handle the unsuccessful login case
                                 showMessage(context, auth.resMessage);

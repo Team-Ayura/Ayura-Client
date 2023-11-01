@@ -10,7 +10,6 @@ Widget tipsCard({
   required double height,
 }) {
   return Container(
-    height: height,
     padding: const EdgeInsets.all(10.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),
@@ -32,7 +31,7 @@ Widget tipsCard({
                 ? TextButton.icon(
                     onPressed: () {},
                     icon: Icon(
-                      icon,
+                      Icons.abc,
                       size: 24.0,
                       color: iconColor ?? AppColors.yellowColor,
                     ),
@@ -46,36 +45,20 @@ Widget tipsCard({
                       ),
                     ),
                   )
-                : TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      title!,
-                      style: const TextStyle(
-                        color: AppColors.textColor,
-                        fontSize: 16,
-                        fontFamily: "Inter",
-                        fontWeight: FontWeight.w600,
-                      ),
+                : Flexible(
+                  child: Text(
+                    title!,
+                    style: const TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 16,
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-            TextButton.icon(
-              onPressed: () {},
-              label: const Icon(
-                Icons.arrow_forward_rounded,
-                size: 18,
-                color: AppColors.primaryColor,
-              ),
-              icon: Text(
-                cta,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: "Inter",
                 ),
-              ),
-            )
           ],
         ),
+        const SizedBox(height: 10.0),
         Padding(
           padding: const EdgeInsets.only(left: 10.0),
           child: Text(

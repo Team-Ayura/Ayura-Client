@@ -19,7 +19,7 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final moodProvider = Provider.of<MoodProvider>(context);
-    DateTime? selectedDateTime = moodProvider.selectedDateTime;  
+    DateTime? selectedDateTime = DateTime.now();  
     //take habits from provider
     final habits = moodProvider.getHabitsForMood(moodProvider.selectedMood.toLowerCase()); 
     final habit1 = habits.isNotEmpty ? habits[0] : null;
