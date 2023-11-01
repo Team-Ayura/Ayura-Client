@@ -9,6 +9,7 @@ import 'package:ayura/widgets/features/activity_tracking/map.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -40,12 +41,32 @@ class _CyclingOnRidePageState extends State<CyclingOnRidePage> {
             maxHeight: panelHeightOpen,
             parallaxEnabled: true,
             parallaxOffset: 0.7,
-            body: const MapContainer(
-                isRegular: true,
-                latitude: 6.8954287930749905,
-                longitude: 79.8556938953704,
-                markerTitle: "Colombo"),
-            panelBuilder: (controller) => PanelWidget(
+            body: Consumer<CyclingOnRideProvider>(
+              builder: (context, cyclingOnRideProvider, _) {
+                Position? position = cyclingOnRideProvider.currentLocation;
+                if (position != null) {
+                  return MapContainer(
+                    isRegular: true,
+                    latitude: cyclingOnRideProvider.currentLocation?.latitude ?? 6.90215097043552,
+                    longitude: cyclingOnRideProvider.currentLocation?.longitude ?? 79.86117498503802,
+                    markerTitle: "Colombo",
+                  );
+                } else {
+                  // Handle cases where the location is not available.
+                  return const Center(
+                    child: SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2, // You can adjust the thickness as needed
+                      ),
+                    ),
+                  );// or other UI elements
+                }
+              },
+            ),
+
+          panelBuilder: (controller) => PanelWidget(
               controller: controller,
               panelController: panelController,
             ),
@@ -276,7 +297,9 @@ class _PanelWidgetState extends State<PanelWidget> {
                       return GestureDetector(
                         onTap: () {
                           cyclingOnRideProvider.stopCycling();
-                          _showCollageDialog(context);
+                          if(cyclingOnRideProvider.imagePaths.isNotEmpty) {
+                            _showCollageDialog(context);
+                          }
                           // here I should show the caputred snapshot of the widget and make it sharable
                           Navigator.of(context).pop();
                         },

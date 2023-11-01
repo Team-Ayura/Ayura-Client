@@ -230,7 +230,7 @@ class _CyclingPageState extends State<CyclingPage> {
                 builder: (context, cyclingOnRideProvider, _) {
               return GestureDetector(
                 onTap: () {
-                  cyclingOnRideProvider.startTimer();
+                  cyclingOnRideProvider.startCycling();
                   PageNavigator(context: context).nextPage(const CyclingOnRidePage());
                 },
                 child: Container(
