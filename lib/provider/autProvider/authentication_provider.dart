@@ -249,12 +249,12 @@ class AuthenticationProvider2 extends ChangeNotifier {
         // print(req.body);
         print(res);
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString(BasicUserData.userId.label, res["userId"]);
+        prefs.setString("userId", res["userId"]);
         prefs.setString(BasicUserData.email.label, res["email"]);
         prefs.setString(BasicUserData.firstName.label, res["firstName"]);
         prefs.setString(BasicUserData.lastName.label, res["lastName"]);
         prefs.setString(BasicUserData.profileImage.label, res["profileImage"]);
-        prefs.setString(BasicUserData.token.label, res["email"]);
+        prefs.setString("token", res["token"]);
         _resMessage = "Login Successful!";
 
         notifyListeners();

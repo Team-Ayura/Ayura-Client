@@ -30,7 +30,7 @@ class _CommunityHomeState extends State<CommunityHome> {
   void initState() {
     super.initState();
     Provider.of<CommunityProvider>(context, listen: false)
-        .getCommunitiesList(); //Initializing the community list
+        .getCommunitiesList(); 
   
   }
 

@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:ayura/constants/constants.dart';
 import 'package:ayura/provider/models/community_model.dart';
 import 'package:ayura/provider/models/post_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CommunityProvider extends ChangeNotifier {
   bool isLoading = false; // For Loading animation
@@ -53,29 +54,51 @@ class CommunityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Get user token from SharedPreferences
+  Future<String> getSavedToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    return token!;
+  }
+
+  // Get userId from SharedPreferences
+  Future<String> getSavedUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getString('userId');
+    return userId!;
+  }
+
   //Get the communities from database
   Future<void> getCommunitiesList() async {
+    final String token = await getSavedToken();
     final url = '$requestBaseUrl/api/communities';
     isLoading = true;
-    notifyListeners();
+
     try {
       http.Response req = await http.get(
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
         },
       );
       final res = json.decode(req.body);
+      print('Inside try block');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         _communityList = List<CommunityModel>.from(res.map<CommunityModel>(
           (communityData) => CommunityModel.fromJson(communityData),
         ));
-      print('Community List Fetched: $_communityList');
+        print('Community List Fetched: $_communityList');
+        isLoading = false;
       } else {
+        print("Error Occurred $res");
       }
     } catch (error) {
-  }
+      print('Error: $error');
+    }
+
+    notifyListeners();
   }
 
   //Create community
@@ -84,7 +107,7 @@ class CommunityProvider extends ChangeNotifier {
 
     try {
       final body = community.toJson(); // Convert the community model to JSON
-    http.Response req = await http.post(
+      http.Response req = await http.post(
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
@@ -96,10 +119,8 @@ class CommunityProvider extends ChangeNotifier {
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         await getCommunitiesList(); // Fetch the updated community list
-      } else {
-      }
-    } catch (error) {
-    }
+      } else {}
+    } catch (error) {}
     notifyListeners();
   }
 
@@ -149,28 +170,28 @@ class CommunityProvider extends ChangeNotifier {
         _membersList = List<MemberModel>.from(res.map<MemberModel>(
           (memberData) => MemberModel.fromJson(memberData),
         ));
-      } else {
-      }
-    } catch (error) {
-    }
+      } else {}
+    } catch (error) {}
     notifyListeners();
   }
 
   //Get the community by id
   Future<void> getCommunityById(String communityId) async {
+    final String token = await getSavedToken();
     final url = '$requestBaseUrl/api/communities/$communityId';
     isLoading = true;
     notifyListeners();
     try {
-    print('Inside getCommunitiesList');
+      print('Inside getCommunitiesList');
       http.Response req = await http.get(
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
         },
       );
       final res = json.decode(req.body);
-    print('API Response: $res');
+      print('API Response: $res');
       print('Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
@@ -204,19 +225,20 @@ class CommunityProvider extends ChangeNotifier {
       );
 
       final res = json.decode(req.body);
-    print('Create POST Response: $res');
+      print('Create POST Response: $res');
       print('Create POST Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         await getPostsList(newPost.communityId); // Fetch the updated posts list
       } else {
-      print("Error Occurred $res");
+        print("Error Occurred $res");
       }
     } catch (error) {
-    print('Error: $error');
+      print('Error: $error');
     }
     notifyListeners();
   }
+
   Future<void> getPostById(String postId) async {
     final url = '$requestBaseUrl/api/communities/post/$postId';
     isLoading = true;
@@ -249,6 +271,7 @@ class CommunityProvider extends ChangeNotifier {
   }
 
   Future<void> getPostsList(communityId) async {
+    final String token = await getSavedToken();
     final url = '$requestBaseUrl/api/communities/posts/$communityId';
     isLoading = true;
     notifyListeners();
@@ -258,6 +281,7 @@ class CommunityProvider extends ChangeNotifier {
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
         },
       );
       final res = json.decode(req.body);
