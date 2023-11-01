@@ -8,6 +8,8 @@ import 'package:ayura/widgets/features/community/challenge_card.dart'; // Challe
 
 import 'package:flutter/material.dart';
 
+import 'features/sleep_tracking/page2.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -184,7 +186,7 @@ class _HomeState extends State<Home> {
                           IconButton(
                             onPressed: () {
                               PageNavigator(context: context)
-                                  .nextPage(const SleepFirstPage());
+                                  .nextPage(const SleepHistory());
                             },
                             icon: const Icon(
                               Icons.arrow_forward_rounded,
