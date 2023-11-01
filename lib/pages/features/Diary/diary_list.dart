@@ -67,21 +67,98 @@ class DiaryListState extends State<DiaryList> {
     // Add more factors as needed
   ];
 
+  String getGreeting() {
+    final currentTime = DateTime.now();
+    final hour = currentTime.hour;
+
+    if (hour < 12) {
+      return 'Good Morning!';
+    } else if (hour < 17) {
+      return 'Good Afternoon!';
+    } else {
+      return 'Good Evening!';
+    }
+  }
+
   List<String> selectedDailyActicities = [];
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
+    String greeting = getGreeting();
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: PreferredSize(
+      // appBar: PreferredSize(
+      //   preferredSize:
+      //       const Size.fromHeight(60.0), // Set the preferred size here.
+      //   child: PreferredSize(
+      //     preferredSize: const Size.fromHeight(90.0),
+      //     child: CustomAppBar(
+      //       Icons.arrow_back,
+      //       Icons.more_vert,
+      //       'Diary',
+      //       leftCallback: () => Navigator.pop(context),
+      //     ),
+      //   ),
+      // ),
+       appBar: PreferredSize(
         preferredSize:
-            const Size.fromHeight(60.0), // Set the preferred size here.
-        child: PreferredSize(
-          preferredSize: const Size.fromHeight(90.0),
-          child: CustomAppBar(
-            Icons.arrow_back,
-            Icons.more_vert,
-            'Diary',
-            leftCallback: () => Navigator.pop(context),
+            const Size.fromHeight(110.0), // Set the preferred size here.
+        child: AppBar(
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          toolbarHeight: 110.0,
+          title: Padding(
+            padding: EdgeInsets.fromLTRB(
+                width * 0.05, height * 0.07, width * 0.05, height * 0.04),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        greeting,
+                        style: const TextStyle(
+                            fontFamily: "Inter",
+                            color: AppColors.textColor,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      const Text(
+                        'Namadee Shakya',
+                        style: TextStyle(
+                            fontFamily: "Inter",
+                            color: AppColors.textColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.notifications_outlined,
+                        color: AppColors.textColor,
+                        size: 35,
+                      ),
+                      SizedBox(width: width * 0.02),
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          image: const DecorationImage(
+                            image: AssetImage('assets/images/profileIcon.png'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ]),
           ),
         ),
       ),
