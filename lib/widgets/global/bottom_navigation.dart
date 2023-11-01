@@ -2,6 +2,9 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/pages/features/Diary/diary.dart';
 import 'package:ayura/pages/features/Diary/diary_list.dart';
 import 'package:ayura/pages/features/activity_tracking/activity.dart';
+import 'package:ayura/pages/features/mood_tracking/page2.dart';
+import 'package:ayura/pages/features/mood_tracking/page3.dart';
+import 'package:ayura/pages/features/sleep_tracking/page2.dart';
 import 'package:ayura/provider/navigationProvider/navigation_provider.dart';
 import 'package:ayura/utils/router.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +35,12 @@ class AppNavigation extends StatelessWidget {
             .nextPage(_buildPageForTab(AppTab.values[index]));
       },
       items: [
-        _buildNavigationItem('vitals', 'diary', AppTab.diary),
+        // _buildNavigationItem('vitals', 'diary', AppTab.diary),
+        _buildNavigationItem('vitals', 'diary', AppTab.mood),
         _buildNavigationItem('activity', 'Activity', AppTab.activity),
         _buildNavigationItem('home', 'Home', AppTab.home),
         _buildNavigationItem('community', 'Community', AppTab.community),
-        _buildNavigationItem('mealplans', 'Meal Plans', AppTab.mealplans),
+        _buildNavigationItem('sleep', 'Meal Plans', AppTab.sleep),
       ],
     );
   }
@@ -68,16 +72,16 @@ class AppNavigation extends StatelessWidget {
   // edit this to navigate to your feature
   Widget _buildPageForTab(AppTab tab) {
     switch (tab) {
-      case AppTab.diary:
-        return const DiaryList(); // navigate to vitals page
+      case AppTab.mood:
+        return const ThirdPage(); // navigate to vitals page
       case AppTab.activity:
         return const Activities(); // navigate to activities page
       case AppTab.home:
-        return const Home(); // navigate to home page
+        return const DiaryList(); // navigate to home page
       case AppTab.community:
         return const CommunityHome(); // navigate to community page
-      case AppTab.mealplans:
-        return const MealScreen(); // navigate to mealplans page
+      case AppTab.sleep:
+        return const SleepHistory(); // navigate to mealplans page
       default:
         return const SizedBox.shrink();
     }
