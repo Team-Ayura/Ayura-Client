@@ -6,17 +6,27 @@ import 'package:ayura/constants/colors.dart';
 // Pages //Must navigate to the relevant Community Chat
 import 'package:ayura/pages/features/community/community_chat/community_chat_view.dart';
 
-class MemberCard extends StatelessWidget {
-  const MemberCard(
-      {required this.memberName, required this.memberMail, super.key});
+class ChatCardTwo extends StatelessWidget {
+  const ChatCardTwo(
+      {required this.communityName,
+      required this.visibiity,
+      required this.memberCount,
+      required this.communityId,
+      required this.onTapCallback,
+      super.key});
 
-  final String memberName;
-  final String memberMail;
+  final String communityId;
+  final String communityName;
+  final String visibiity;
+  final String memberCount;
+  final Function onTapCallback;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {}, // Navigator function
+      onTap: () {
+        onTapCallback();
+      }, // Navigator function
       child: Container(
         //Main chat box
         margin: const EdgeInsets.fromLTRB(0, 5.0, 0, 5.0),
@@ -36,7 +46,7 @@ class MemberCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    memberName,
+                    communityName,
                     style: const TextStyle(
                       fontFamily: 'Inter',
                       color: AppColors.textColor,
@@ -47,7 +57,7 @@ class MemberCard extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    memberMail,
+                    visibiity,
                     style: const TextStyle(
                       fontFamily: 'Inter',
                       color: Color.fromRGBO(191, 191, 191, 1),
@@ -56,12 +66,14 @@ class MemberCard extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.remove),
-              color: AppColors.primaryColor,
+            const Text(
+              "Join",
+              style: TextStyle(
+                  fontFamily: 'Inter',
+                  color: AppColors.primaryColor,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600),
             ),
-
             // Aligned to the right
           ],
         ),

@@ -8,7 +8,7 @@ import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
 // Feature Widgets
 import 'package:ayura/widgets/features/community/search_box.dart'; // SearchBox Widget
-import 'package:ayura/widgets/features/community/chat_card.dart'; // Chat Card Widget
+import 'package:ayura/widgets/features/community/chat_card2.dart'; // Chat Card Widget
 
 class CommunityList extends StatefulWidget {
   const CommunityList({super.key});
@@ -23,6 +23,42 @@ class _CommunityListState extends State<CommunityList> {
     super.initState();
     Provider.of<CommunityProvider>(context, listen: false)
         .getCommunitiesList(); //Initializing the community list
+  }
+
+  void openConfirmationBox(communityId) {
+    print("called here");
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => SizedBox(
+        height: 150,
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            const Text(
+              "Are you sure you want to join?",
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Provider.of<CommunityProvider>(context, listen: false)
+                    .joinMember(communityId);
+                Navigator.of(ctx).pop();
+              },
+              child: const Text(
+                "Yes",
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            const SizedBox(height: 50),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -73,7 +109,10 @@ class _CommunityListState extends State<CommunityList> {
                       itemCount: communities.length,
                       itemBuilder: (context, index) {
                         CommunityModel community = communities[index];
-                        return ChatCard(
+                        return ChatCardTwo(
+                            onTapCallback: () {
+                              openConfirmationBox(community.id);
+                            },
                             communityId: community.id,
                             communityName: community.communityName,
                             visibiity:

@@ -69,8 +69,7 @@ class CommunityProvider extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final userId = prefs.getString('userId');
     final token = prefs.getString('token');
-    print(userId);
-    print(token);
+
     final url = '$requestBaseUrl/api/communities/public/$userId';
     isLoading = true;
 
@@ -144,15 +143,16 @@ class CommunityProvider extends ChangeNotifier {
   Future<void> createCommunity(CommunityModel community) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
+    final userId = prefs.getString('userId');
 
     final url = '$requestBaseUrl/api/communities';
     print('Inside createCommunity');
 
-    final newBody = community.toJson();
-    print(newBody);
-
     try {
       final body = community.toJson(); // Convert the community model to JSON
+      body["adminId"] = userId;
+      body["members"] = [userId];
+
       http.Response req = await http.post(
         Uri.parse(url),
         headers: {
@@ -180,9 +180,16 @@ class CommunityProvider extends ChangeNotifier {
 
   //Add member
   Future<void> addMember(String communityId, String email) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final token = prefs.getString('token');
+
     final url = '$requestBaseUrl/api/communities/addMember';
 
-    final Map<String, String> headers = {'Content-Type': 'application/json'};
+    final Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
 
     final Map<String, dynamic> requestBody = {
       'communityId': communityId,
@@ -198,7 +205,7 @@ class CommunityProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       _resMessage = 'Member added Successfully';
       // Member added successfully
-      // You can handle any success logic here
+      notifyListeners();
     } else {
       // Handle error response
       _resMessage = 'Cannot find user';
@@ -344,8 +351,6 @@ class CommunityProvider extends ChangeNotifier {
         },
       );
       final res = json.decode(req.body);
-      print('API Response: $res');
-      print('Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         _postsList = List<PostModel>.from(res.map<PostModel>(
@@ -360,5 +365,25 @@ class CommunityProvider extends ChangeNotifier {
     } catch (error) {
       print('Error: $error');
     }
+  }
+
+  //JOIN MEMBER
+  Future<void> joinMember(String communityId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //get email
+    final email = prefs.getString('email')!;
+    var communityID = communityId;
+
+    //get email and community ID
+    addMember(communityId, email);
+
+    notifyListeners();
+  }
+
+  //Get AdminId
+  Future<String> getAdminId(String communityId) async {
+    await getCommunityById(communityId); // Fetch the community data
+    String adminId = _communityModel.adminId; // Access the adminId
+    return adminId;
   }
 }
