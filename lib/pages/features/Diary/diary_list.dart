@@ -1,17 +1,17 @@
+import 'dart:convert';
+
 import 'package:ayura/constants/colors.dart';
-import 'package:ayura/constants/styles.dart';
 import 'package:ayura/widgets/features/diary/HorizontalCalender.dart';
 import 'package:ayura/widgets/features/diary/sleepTime.dart';
-import 'package:ayura/widgets/features/mood_traking/hr_calendar.dart';
 import 'package:ayura/widgets/features/mood_traking/mood_chips.dart';
-import 'package:ayura/widgets/features/sleep_tracking/circletimepicker.dart';
-import 'package:ayura/widgets/features/sleep_tracking/sleepquality.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
-import 'package:ayura/widgets/global/custom_app_bar.dart';
 import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
+import '../../../provider/moodProviders/selectedmood.dart';
 import '../../../widgets/features/home/tips_card.dart';
 
 class DiaryList extends StatefulWidget {
@@ -26,7 +26,40 @@ class DiaryListState extends State<DiaryList> {
   String alarmTime = "12:00 PM";
   String bedTime = "12:00 AM";
   String sleepDuration = "12 hr 00 min";
-  
+
+  List<Widget> generatedTipsWidgets = [];
+
+
+  List<Tip> generatedTips = [
+    Tip(
+      title: 'Health tips',
+      description:
+      'Aim to drink at least 8 glasses (about 2 liters) of water daily!',
+    ),
+  ];
+
+
+  // init state
+  @override
+  void initState() {
+    super.initState();
+
+    generatedTipsWidgets = generatedTips.map((tip) {
+      return Column(
+        children: [tipsCard(
+          title: tip.title,
+          descritpion: tip.description,
+          height: 150.0,
+          cta: '', // Set the desired height here
+        ),
+          SizedBox(height: 10.0,)
+      ]
+      );
+    }).toList();
+
+
+  }
+
 
   void onAlarmTimeChanged(String value) {
     setState(() {
@@ -50,8 +83,8 @@ class DiaryListState extends State<DiaryList> {
     "Going to the gym",
     "Going to the school",
     "Going to the work",
-    "Reading books",
-    "Volunteering",
+    "Doing overtime",
+    "Working Hard",
     "Gardening",
     "Playing sports",
     "Watching movies or TV shows",
@@ -61,8 +94,6 @@ class DiaryListState extends State<DiaryList> {
     "Yoga or meditation",
     "Playing musical instruments",
     "Listening to podcasts or music",
-    
- 
 
     // Add more factors as needed
   ];
@@ -81,6 +112,7 @@ class DiaryListState extends State<DiaryList> {
   }
 
   List<String> selectedDailyActicities = [];
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -101,9 +133,9 @@ class DiaryListState extends State<DiaryList> {
       //     ),
       //   ),
       // ),
-       appBar: PreferredSize(
-        preferredSize:
-            const Size.fromHeight(110.0), // Set the preferred size here.
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(110.0),
+        // Set the preferred size here.
         child: AppBar(
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
@@ -128,7 +160,7 @@ class DiaryListState extends State<DiaryList> {
                             fontWeight: FontWeight.w600),
                       ),
                       const Text(
-                        'Namadee Shakya',
+                        'Saman Perera',
                         style: TextStyle(
                             fontFamily: "Inter",
                             color: AppColors.textColor,
@@ -185,12 +217,12 @@ class DiaryListState extends State<DiaryList> {
                     const SizedBox(
                       height: 20,
                     ),
-                  
+
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text('How well did you sleep today ?',
-                          style:
-                              TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500)),
                     ),
                     SleepTime(
                       alarmTime: alarmTime,
@@ -207,8 +239,8 @@ class DiaryListState extends State<DiaryList> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text('How are you feeling today ?',
-                          style:
-                              TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500)),
                     ),
                     //moods chips
                     const Center(
@@ -235,19 +267,20 @@ class DiaryListState extends State<DiaryList> {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text('What have you been up to?',
-                          style:
-                              TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500)),
                     ),
                     //activity chips
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
-                      child: Wrap(
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
+                        child: Wrap(
                           spacing: 8.0,
                           runSpacing: 8.0,
                           children: DailyActicities.map((factor) {
-                            bool isSelected = selectedDailyActicities.contains(factor);
-                                
+                            bool isSelected =
+                                selectedDailyActicities.contains(factor);
+
                             return ChoiceChip(
                               label: Text(factor),
                               selected: isSelected,
@@ -255,6 +288,7 @@ class DiaryListState extends State<DiaryList> {
                                 setState(() {
                                   if (isSelected) {
                                     selectedDailyActicities.add(factor);
+                                    print(selectedDailyActicities);
                                   } else {
                                     selectedDailyActicities.remove(factor);
                                   }
@@ -265,61 +299,47 @@ class DiaryListState extends State<DiaryList> {
                                 color: isSelected ? Colors.white : Colors.black,
                                 fontWeight: FontWeight.normal,
                               ),
-                              backgroundColor: isSelected ?AppColors.primaryColor.withOpacity(0.2) : Colors.white,
+                              backgroundColor: isSelected
+                                  ? AppColors.primaryColor.withOpacity(0.2)
+                                  : Colors.white,
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
-                                color: isSelected ? AppColors.primaryColor.withOpacity(0.2) : AppColors.disabledColor,
-                                width: 1.0, // Adjust the width as needed
-                              ),
-                              borderRadius: BorderRadius.circular(10.0),
+                                  color: isSelected
+                                      ? AppColors.primaryColor.withOpacity(0.2)
+                                      : AppColors.disabledColor,
+                                  width: 1.0, // Adjust the width as needed
+                                ),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                               labelPadding: const EdgeInsets.all(3.0),
                             );
                           }).toList(),
                         ),
-                    ),
-                  ),
-
-                     const SizedBox(
-                      height: 10,
+                      ),
                     ),
 
-                    tipsCard(
-                    height: height * 0.15,
-                    title: 'Health tips',
-                    descritpion:
-                        'Aim to drink at least 8 glasses (about 2 liters) of water daily!',
-                    cta: ' ',
-                    icon: Icons.lightbulb,
-                  ),
-                  const SizedBox(
-                      height: 10,
-                    ),
-                  tipsCard(
-                    height: height * 0.15,
-                    title: 'Health tips',
-                    descritpion:
-                        'Aim to drink at least 8 glasses (about 2 liters) of water daily!',
-                    cta: ' ',
-                    icon: Icons.lightbulb,
-                  ),
-                  const SizedBox(
-                      height: 10,
-                    ),
-                  tipsCard(
-                    height: height * 0.15,
-                    title: 'Health tips',
-                    descritpion:
-                        'Aim to drink at least 8 glasses (about 2 liters) of water daily!',
-                    cta: ' ',
-                    icon: Icons.lightbulb,
-                  ),
-                
                     const SizedBox(
                       height: 10,
                     ),
-                    customButton(
-                        tap: (() {}), width: 100, text: 'Save', context: context),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Tips for you',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500)),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    //tips cards
+                    Column(
+                      children: generatedTipsWidgets,
+                    ),
+                    //elevated refresh button that calls the fucntion _generateTip and refreshes the list of tips
+                    ElevatedButton(
+                      onPressed: _generateTip,
+                      child: const Text('Refresh'),
+                    ),
+
                   ],
                 ),
               ),
@@ -329,5 +349,128 @@ class DiaryListState extends State<DiaryList> {
       ),
       bottomNavigationBar: const AppNavigation(),
     );
+  }
+
+
+  void updateGeneratedTips(List<Tip> newTips) {
+    setState(() {
+      generatedTips = newTips;
+    });
+  }
+
+  void _generateTip() async {
+    //get mood from mood provider
+    String mood = Provider.of<MoodProvider>(context, listen: false).selectedMood;
+    // format selectedDailyActivities to have a comma between each activity. and remove new lines, tabs
+    String selectedDailyActivities = this.selectedDailyActicities.join(', ');
+    // remove new lines from it as well
+    selectedDailyActivities = selectedDailyActivities.replaceAll('\n', '').replaceAll('\t', '').replaceAll('[', '')
+        .replaceAll(']', '');
+    List<Tip> newTips = await _sendGPTRequest(
+        mood, sleepDuration, selectedDailyActicities
+    );
+    updateGeneratedTips(newTips);
+    _rebuildTipsSection();
+  }
+
+  void _rebuildTipsSection() {
+    generatedTipsWidgets = generatedTips.map((tip) {
+      return Column(
+        children: [
+          tipsCard(
+            title: tip.title,
+            descritpion: tip.description,
+            height: 150.0,
+            cta: '', // Set the desired height here
+          ),
+          SizedBox(height: 10.0)
+        ],
+      );
+    }).toList();
+
+    setState(() {}); // Trigger a rebuild of the UI
+  }
+
+}
+
+class Tip {
+  final String title;
+  final String description;
+
+  Tip({
+    required this.title,
+    required this.description,
+  });
+}
+
+
+Future<List<Tip>> _sendGPTRequest(String selectedMood, String sleepDuration, List<String> selectedDailyActivities) async {
+  List<Tip> tips = [];
+  // add circular progress indicator here
+  try {
+    var response = await http.post(Uri.parse('http://10.0.2.2:5005/api/gpt'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: jsonEncode(<String, String>{
+        'prompt': 'Send me a sample JSON code within brackets. With 5 objects of attributes title and description. Description should be short. Tips should be actionable tips that are tailor made to handle and manage the following details and scenarios. My sleep duration was $sleepDuration. My mood is $selectedMood. My activities include: ${selectedDailyActivities.join(', ')} ',
+
+      }),);
+    print(response.body);
+
+    String jsonString = response.body;
+
+// Remove line breaks and extra brackets
+    jsonString =
+        jsonString.replaceAll('\n', '').replaceAll('\t', '').replaceAll('[', '')
+            .replaceAll(']', '');
+
+    print(jsonString);
+
+    jsonString = jsonString.replaceAll(RegExp(r'[\n\t]'), '');
+
+// Check if the response starts and ends with double quotes, if so, remove them
+    if (jsonString.startsWith('"') && jsonString.endsWith('"')) {
+      jsonString = jsonString.substring(1, jsonString.length - 1);
+    }
+
+    print(jsonString);
+
+    // remove '\' from the string
+    jsonString = jsonString.replaceAll('\\n', '');
+
+    jsonString = jsonString.replaceAll('\\t', '');
+
+    print(jsonString);
+
+    // remove "\" from the string
+    jsonString = jsonString.replaceAll('\\', '');
+
+    print(jsonString);
+
+    // remove dot from beginning of the string
+    jsonString = jsonString.replaceAll('.', '');
+
+    print(jsonString);
+
+    // enclose between [ ]
+    jsonString = '[' + jsonString + ']';
+
+    // convert into JSON
+    List<dynamic> json = jsonDecode(jsonString);
+
+    // map json to Tip objects
+    tips = json.map((tip) {
+      return Tip(
+        title: tip['title'],
+        description: tip['description'],
+      );
+    }).toList();
+
+    return tips;
+
+  } catch (e) {
+    print(e);
+    return tips;
   }
 }
