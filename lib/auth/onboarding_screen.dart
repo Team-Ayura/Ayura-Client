@@ -1,5 +1,7 @@
 import 'package:ayura/auth/auth_screen.dart';
 import 'package:ayura/auth/login.dart';
+import 'package:ayura/pages/home.dart';
+
 import 'package:ayura/constants/colors.dart';
 import 'package:ayura/constants/styles.dart';
 import 'package:ayura/pages/diary_home.dart';

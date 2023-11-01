@@ -5,6 +5,7 @@ import 'package:ayura/widgets/global/custom_button.dart';
 import 'package:ayura/widgets/global/custom_grey_btn.dart';
 // Community Feature Widgets
 import 'package:ayura/widgets/features/community/multiselect_card.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Constants
 import 'package:ayura/constants/colors.dart';
@@ -27,7 +28,7 @@ class _CreateCommunityState extends State<CreateCommunity> {
   final List<String> _selectedCategories = [];
   String _communityName = '';
   String _communityDescription = '';
-
+  String _userId = "";
   void handleCategorySelection(String category, bool isSelected) {
     // Handle the selection change here
     if (isSelected) {
@@ -39,24 +40,33 @@ class _CreateCommunityState extends State<CreateCommunity> {
     }
   }
 
+  void getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _userId = prefs.getString('userId')!;
+    print(_userId);
+  }
+
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
+      getUserId();
       // Form is valid, proceed to create community
       final newCommunity = CommunityModel(
-        id: '', // This will be assigned by the backend
-        communityName: _communityName,
-        communityDescription: _communityDescription,
-        isPublic: _selectedItem == 'Public' ? true : false,
-        categories: _selectedCategories,
-        members: [],
-      );
-
-      Provider.of<CommunityProvider>(context, listen: false)
-          .createCommunity(newCommunity);
+          id: "", // This will be assigned by the backend
+          communityName: _communityName,
+          communityDescription: _communityDescription,
+          isPublic: _selectedItem == 'Public' ? true : false,
+          categories: _selectedCategories,
+          adminId: _userId,
+          members: [_userId],
+          challenges: []);
+      print("Inside formSubmit");
+      print(_userId);
+      // Provider.of<CommunityProvider>(context, listen: false)
+      //     .createCommunity(newCommunity);
     }
-    
+
     // Navigate back to the community home screen
-    Navigator.pop(context);
+    // Navigator.pop(context);
   }
 
   @override

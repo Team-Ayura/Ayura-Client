@@ -452,7 +452,7 @@ class _CommunityChatState extends State<CommunityChat> {
                               PostModel post = posts[index];
                               return PostsView(
                                 base64ImageData: post.imageUrl,
-                                username: post.authorName,
+                                username: "Ruchira Bogahawatta",
                                 timeAgo: "10 mins",
                                 challengeDescription: post.caption,
                                 onPressed: openCommentSection,

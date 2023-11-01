@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:ayura/constants/constants.dart';
 import 'package:ayura/provider/models/community_model.dart';
 import 'package:ayura/provider/models/post_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ayura/constants/enums.dart';
 
 class CommunityProvider extends ChangeNotifier {
   bool isLoading = false; // For Loading animation
@@ -13,11 +15,14 @@ class CommunityProvider extends ChangeNotifier {
     id: "",
     communityName: "",
     communityDescription: "",
+    adminId: '',
     isPublic: true,
     categories: [],
     members: [],
+    challenges: [],
   );
   List<CommunityModel> _communityList = [];
+  List<CommunityModel> _userJoinedCommunityList = [];
   List<PostModel> _postsList = [];
   List<MemberModel> _membersList = [];
   String _resMessage = '';
@@ -33,6 +38,8 @@ class CommunityProvider extends ChangeNotifier {
   CommunityModel get communityModel => _communityModel;
   PostModel get postModel => _postModel;
   List<CommunityModel> get communityList => _communityList;
+  List<CommunityModel> get userJoinedCommunityList => _userJoinedCommunityList;
+
   List<PostModel> get postsList => _postsList;
   List<MemberModel> get memberList => _membersList;
   String get id => _communityModel.id;
@@ -41,6 +48,9 @@ class CommunityProvider extends ChangeNotifier {
   bool get isPublic => _communityModel.isPublic;
   List get categories => _communityModel.categories;
   List get members => _communityModel.members;
+  List get challenges => _communityModel.challenges;
+  String get adminId => _communityModel.adminId;
+
   String get resMessage => _resMessage;
 
   void updateCommunityInfo(CommunityModel community) {
@@ -50,55 +60,120 @@ class CommunityProvider extends ChangeNotifier {
     _communityModel.isPublic = community.isPublic;
     _communityModel.categories = community.categories;
     _communityModel.members = community.members;
+    _communityModel.challenges = community.challenges;
     notifyListeners();
   }
 
   //Get the communities from database
   Future<void> getCommunitiesList() async {
-    final url = '$requestBaseUrl/api/communities';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getString('userId');
+    final token = prefs.getString('token');
+    print(userId);
+    print(token);
+    final url = '$requestBaseUrl/api/communities/public/$userId';
     isLoading = true;
-    notifyListeners();
+
     try {
       http.Response req = await http.get(
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
         },
       );
       final res = json.decode(req.body);
+      print('Inside try block');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         _communityList = List<CommunityModel>.from(res.map<CommunityModel>(
           (communityData) => CommunityModel.fromJson(communityData),
         ));
-      print('Community List Fetched: $_communityList');
+        print('Public Community List Fetched: $_communityList');
+        isLoading = false;
       } else {
+        print("Error Occurred $res");
       }
     } catch (error) {
+      print('Error: $error');
+    }
+
+    notifyListeners();
   }
+
+  // User Joined communities
+  Future<void> getUserJoinedCommunities() async {
+    print("inside getUserJoinedCommunities");
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getString('userId');
+    final token = prefs.getString('token');
+    print(userId);
+    print(token);
+
+    final url = '$requestBaseUrl/api/communities/joined/$userId';
+    isLoading = true;
+
+    try {
+      http.Response req = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
+        },
+      );
+      final res = json.decode(req.body);
+      if (req.statusCode == 200 || req.statusCode == 201) {
+        _userJoinedCommunityList =
+            List<CommunityModel>.from(res.map<CommunityModel>(
+          (communityData) => CommunityModel.fromJson(communityData),
+        ));
+        print('User Joined Community List Fetched: $_userJoinedCommunityList');
+        isLoading = false;
+      } else {
+        print("Error Occurred $res");
+      }
+    } catch (error) {
+      print('Error: $error');
+    }
+
+    notifyListeners();
   }
 
   //Create community
   Future<void> createCommunity(CommunityModel community) async {
-    final url = '$requestBaseUrl/api/communities/create';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    final url = '$requestBaseUrl/api/communities';
+    print('Inside createCommunity');
+
+    final newBody = community.toJson();
+    print(newBody);
 
     try {
       final body = community.toJson(); // Convert the community model to JSON
-    http.Response req = await http.post(
+      http.Response req = await http.post(
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
         },
         body: json.encode(body),
       );
 
+      print("Response Status Code: ${req.statusCode}");
+      print("Response Body: ${req.body}");
+
       final res = json.decode(req.body);
 
       if (req.statusCode == 200 || req.statusCode == 201) {
-        await getCommunitiesList(); // Fetch the updated community list
+        await getUserJoinedCommunities(); // Fetch the updated community list
       } else {
+        print("Res Error Occurred $res");
       }
     } catch (error) {
+      print("Error Occurred $error");
     }
     notifyListeners();
   }
@@ -149,28 +224,31 @@ class CommunityProvider extends ChangeNotifier {
         _membersList = List<MemberModel>.from(res.map<MemberModel>(
           (memberData) => MemberModel.fromJson(memberData),
         ));
-      } else {
-      }
-    } catch (error) {
-    }
+      } else {}
+    } catch (error) {}
     notifyListeners();
   }
 
   //Get the community by id
   Future<void> getCommunityById(String communityId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    print(token);
+
     final url = '$requestBaseUrl/api/communities/$communityId';
     isLoading = true;
     notifyListeners();
     try {
-    print('Inside getCommunitiesList');
+      print('Inside getCommunitiesList');
       http.Response req = await http.get(
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
         },
       );
       final res = json.decode(req.body);
-    print('API Response: $res');
+      print('API Response: $res');
       print('Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
@@ -204,19 +282,20 @@ class CommunityProvider extends ChangeNotifier {
       );
 
       final res = json.decode(req.body);
-    print('Create POST Response: $res');
+      print('Create POST Response: $res');
       print('Create POST Status Code: ${req.statusCode}');
 
       if (req.statusCode == 200 || req.statusCode == 201) {
         await getPostsList(newPost.communityId); // Fetch the updated posts list
       } else {
-      print("Error Occurred $res");
+        print("Error Occurred $res");
       }
     } catch (error) {
-    print('Error: $error');
+      print('Error: $error');
     }
     notifyListeners();
   }
+
   Future<void> getPostById(String postId) async {
     final url = '$requestBaseUrl/api/communities/post/$postId';
     isLoading = true;
@@ -249,6 +328,9 @@ class CommunityProvider extends ChangeNotifier {
   }
 
   Future<void> getPostsList(communityId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    print(token);
     final url = '$requestBaseUrl/api/communities/posts/$communityId';
     isLoading = true;
     notifyListeners();
@@ -258,6 +340,7 @@ class CommunityProvider extends ChangeNotifier {
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
         },
       );
       final res = json.decode(req.body);
