@@ -40,15 +40,10 @@ class _CreateCommunityState extends State<CreateCommunity> {
     }
   }
 
-  void getUserId() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _userId = prefs.getString('userId')!;
-    print(_userId);
-  }
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      getUserId();
+  
       // Form is valid, proceed to create community
       final newCommunity = CommunityModel(
           id: "", // This will be assigned by the backend
@@ -56,17 +51,15 @@ class _CreateCommunityState extends State<CreateCommunity> {
           communityDescription: _communityDescription,
           isPublic: _selectedItem == 'Public' ? true : false,
           categories: _selectedCategories,
-          adminId: _userId,
-          members: [_userId],
+          adminId: "",
+          members: [],
           challenges: []);
-      print("Inside formSubmit");
-      print(_userId);
-      // Provider.of<CommunityProvider>(context, listen: false)
-      //     .createCommunity(newCommunity);
+      Provider.of<CommunityProvider>(context, listen: false)
+          .createCommunity(newCommunity);
     }
 
     // Navigate back to the community home screen
-    // Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   @override

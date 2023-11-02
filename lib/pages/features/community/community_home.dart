@@ -31,8 +31,7 @@ class _CommunityHomeState extends State<CommunityHome> {
   void initState() {
     super.initState();
     Provider.of<CommunityProvider>(context, listen: false)
-        .getUserJoinedCommunities(); 
-  
+        .getUserJoinedCommunities();
   }
 
   void openCreateCommunityOverlay() {
@@ -107,7 +106,6 @@ class _CommunityHomeState extends State<CommunityHome> {
               height: MediaQuery.of(context).size.height * 0.28,
               child: Consumer<CommunityProvider>(
                 builder: (context, communityProvider, _) {
-                  
                   List<CommunityModel> communities =
                       communityProvider.userJoinedCommunityList; // Getter
 
@@ -122,6 +120,7 @@ class _CommunityHomeState extends State<CommunityHome> {
                       itemBuilder: (context, index) {
                         CommunityModel community = communities[index];
                         return ChatCard(
+                            context: context,
                             communityId: community.id,
                             communityName: community.communityName,
                             visibiity:
