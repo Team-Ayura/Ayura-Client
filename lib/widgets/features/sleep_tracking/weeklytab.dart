@@ -11,6 +11,9 @@ import 'package:intl/intl.dart';
 
 import '../../../constants/styles.dart';
 import '../../../pages/features/Diary/diary_list.dart';
+
+import '../../../pages/features/sleep_tracking/page3.dart';
+
 import '../../../utils/router.dart';
 import '../home/tips_card.dart';
 
@@ -122,8 +125,7 @@ class _WeeklyTabState extends State<WeeklyTab> {
           const SizedBox(
             height: 10,
           ),
-          SleepQualitynChart(),
-
+          SleepQualitynChart(sleepDuration: '',),
           // Padding(
           //   padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
           //   child: Card(
@@ -145,7 +147,6 @@ class _WeeklyTabState extends State<WeeklyTab> {
           //   ),
           //                 ),
           // ),
-
           const SizedBox(
             height: 10,
           ),
