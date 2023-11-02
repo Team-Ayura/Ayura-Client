@@ -98,55 +98,53 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                   //   width: 2,
                   // ),
                 ),
-                child: Expanded(
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 200,
-                        padding: const EdgeInsets.only(
-                          top: 20,
-                          bottom: 20,
-                          left: 10,
-                          right: 10,
-                        ),
-                        decoration: const BoxDecoration(
-                          color: Colors
-                              .white, // Set your desired button color here
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(50),
-                              // bottomRight: Radius.circular(35),
-                              topLeft: Radius.circular(8.0),
-                              bottomLeft: Radius.circular(8.0)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Average Steps',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                            Consumer<WalkingAndRunningProvider>(builder:
-                                (context, walkingAndRunningProvider, _) {
-                              final String stepCount = numberFormat
-                                  .format(walkingAndRunningProvider.stepCount)
-                                  .toString();
-                              return Text(
-                                stepCount,
-                                style: const TextStyle(
-                                  fontSize: 36,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              );
-                            }),
-                          ],
-                        ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 200,
+                      padding: const EdgeInsets.only(
+                        top: 20,
+                        bottom: 20,
+                        left: 10,
+                        right: 10,
                       ),
-                      Container(),
-                    ],
-                  ),
+                      decoration: const BoxDecoration(
+                        color: Colors
+                            .white, // Set your desired button color here
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(50),
+                            // bottomRight: Radius.circular(35),
+                            topLeft: Radius.circular(8.0),
+                            bottomLeft: Radius.circular(8.0)),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Average Steps',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          Consumer<WalkingAndRunningProvider>(builder:
+                              (context, walkingAndRunningProvider, _) {
+                            final String stepCount = numberFormat
+                                .format(walkingAndRunningProvider.stepCount)
+                                .toString();
+                            return Text(
+                              stepCount,
+                              style: const TextStyle(
+                                fontSize: 36,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
+                    Container(),
+                  ],
                 )),
             Container(
                 margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
@@ -159,73 +157,71 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                   //   width: 2,
                   // ),
                 ),
-                child: Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(),
-                      Container(
-                        width: 200,
-                        padding: const EdgeInsets.only(
-                          top: 20,
-                          bottom: 20,
-                          left: 10,
-                          right: 10,
-                        ),
-                        decoration: const BoxDecoration(
-                          color: Colors
-                              .white, // Set your desired button color here
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(50),
-                              // topLeft: Radius.circular(35),
-                              topRight: Radius.circular(8.0),
-                              bottomRight: Radius.circular(8.0)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const Text(
-                              'Average Distance',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(),
+                    Container(
+                      width: 200,
+                      padding: const EdgeInsets.only(
+                        top: 20,
+                        bottom: 20,
+                        left: 10,
+                        right: 10,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Colors
+                            .white, // Set your desired button color here
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(50),
+                            // topLeft: Radius.circular(35),
+                            topRight: Radius.circular(8.0),
+                            bottomRight: Radius.circular(8.0)),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const Text(
+                            'Average Distance',
+                            style: TextStyle(
+                              fontSize: 16,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.baseline,
-                              textBaseline: TextBaseline.alphabetic,
-                              children: [
-                                Consumer<WalkingAndRunningProvider>(builder:
-                                    (context, walkingAndRunningProvider, _) {
-                                  final String distance =
-                                      walkingAndRunningProvider.distance
-                                          .toString();
-                                  return Text(
-                                    distance,
-                                    style: const TextStyle(
-                                      fontSize: 36,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  );
-                                }),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                const Text(
-                                  'Km',
-                                  style: TextStyle(
-                                    fontSize: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Consumer<WalkingAndRunningProvider>(builder:
+                                  (context, walkingAndRunningProvider, _) {
+                                final String distance =
+                                    walkingAndRunningProvider.distance
+                                        .toStringAsFixed(2);
+                                return Text(
+                                  distance,
+                                  style: const TextStyle(
+                                    fontSize: 36,
                                     fontWeight: FontWeight.w500,
                                   ),
+                                );
+                              }),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              const Text(
+                                'Km',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 )),
 
             // row of duration calories & improvement
@@ -236,50 +232,48 @@ class _WalkingAndRunningPageState extends State<WalkingAndRunningPage> {
                     .withOpacity(0.3), // Set your desired button color here
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Consumer<WalkingAndRunningProvider>(
-                        builder: (context, walkingAndRunningProvider, _) {
-                      final String duration =
-                          walkingAndRunningProvider.duration;
-                      return ActivityStatBox(
-                        svgName: 'clock.svg',
-                        value: duration,
-                        label: 'Duration',
-                      );
-                    }),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Consumer<WalkingAndRunningProvider>(
-                        builder: (context, walkingAndRunningProvider, _) {
-                      final String calorieCount = numberFormat
-                          .format(walkingAndRunningProvider.calorieCount)
-                          .toString();
-                      return ActivityStatBox(
-                        svgName: 'heart.svg',
-                        value: calorieCount,
-                        label: 'Calories',
-                      );
-                    }),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Consumer<WalkingAndRunningProvider>(
-                        builder: (context, walkingAndRunningProvider, _) {
-                      final String improvement =
-                          walkingAndRunningProvider.improvement.toString();
-                      return ActivityStatBox(
-                        svgName: 'chart.svg',
-                        value: improvement,
-                        label: 'Improvement',
-                        isPercentageValue: true,
-                      );
-                    }),
-                  ],
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Consumer<WalkingAndRunningProvider>(
+                      builder: (context, walkingAndRunningProvider, _) {
+                    final String duration =
+                        walkingAndRunningProvider.duration;
+                    return ActivityStatBox(
+                      svgName: 'clock.svg',
+                      value: duration,
+                      label: 'Duration',
+                    );
+                  }),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Consumer<WalkingAndRunningProvider>(
+                      builder: (context, walkingAndRunningProvider, _) {
+                    final String calorieCount = numberFormat
+                        .format(walkingAndRunningProvider.calorieCount)
+                        .toString();
+                    return ActivityStatBox(
+                      svgName: 'heart.svg',
+                      value: calorieCount,
+                      label: 'Calories',
+                    );
+                  }),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Consumer<WalkingAndRunningProvider>(
+                      builder: (context, walkingAndRunningProvider, _) {
+                    final String improvement =
+                        walkingAndRunningProvider.improvement.toString();
+                    return ActivityStatBox(
+                      svgName: 'chart.svg',
+                      value: improvement,
+                      label: 'Improvement',
+                      isPercentageValue: true,
+                    );
+                  }),
+                ],
               ),
             ),
             // about section

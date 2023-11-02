@@ -8,6 +8,7 @@ import 'package:ayura/widgets/features/activity_tracking/activity_type.dart';
 import 'package:ayura/widgets/global/bottom_navigation.dart';
 import 'package:ayura/widgets/global/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class Activities extends StatelessWidget {
@@ -48,7 +49,7 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
+      appBar: PreferredSize(
         preferredSize:
         Size.fromHeight(90.0),
         child: CustomAppBar(
@@ -61,22 +62,7 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Consumer<GoogleAuthProvider>(
-                  builder: (context, googleAuthProvider, _) {
-                    return Switch(
-                      value: googleAuthProvider.isUserAuthorized,
-                      onChanged: (bool togglebtn){
-                        googleAuthProvider.toggleGoogleAuthorization(!togglebtn);
-                      },
-                    );
-                  }
-                ),
-              ],
-            ),
-            const CustomBoxItem(
+            CustomBoxItem(
               index: 1,
               imagePath: 'assets/images/activity_tracking/running.svg',
               mainText: 'Walking & Running',
@@ -90,13 +76,13 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
               subText: 'Pedal your way to strength and freedom.',
               route: '/cycling',
             ),
-            const CustomBoxItem(
-              index: 3,
-              imagePath: 'assets/images/activity_tracking/stairs.svg',
-              mainText: 'Stairs',
-              subText: 'Climb higher, conquer your limits.',
-              route: '/stairs',
-            ),
+            // const CustomBoxItem(
+            //   index: 3,
+            //   imagePath: 'assets/images/activity_tracking/stairs.svg',
+            //   mainText: 'Stairs',
+            //   subText: 'Climb higher, conquer your limits.',
+            //   route: '/stairs',
+            // ),
             const CustomBoxItem(
               index: 4,
               imagePath: 'assets/images/activity_tracking/sports.svg',

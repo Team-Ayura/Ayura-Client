@@ -43,6 +43,10 @@ dependencies:
   syncfusion_flutter_datepicker: ^22.2.11
   google_sign_in: ^6.1.4
   flutter_secure_storage: ^8.0.0
+  getwidget: ^4.0.0
+  url_launcher: ^6.1.14
+  screenshot: ^2.1.0
+  geolocator: ^10.1.0
 
 
 dev_dependencies:
@@ -74,6 +78,8 @@ flutter:
     - assets/icons/features/activity_tracking/sports/
     - assets/images/symptom_tracking/
     - assets/images/sleep_tracking/
+    - assets/images/community/
+    - assets/icons/connectedapps/
 
   fonts:
     - family: Inter

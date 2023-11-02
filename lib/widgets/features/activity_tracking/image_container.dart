@@ -83,6 +83,7 @@ class ImageContainerState extends State<ImageContainer> {
         // } else {
         //   // Discard the image
         // }
+        print(savedPath);
       }
     } catch (e) {
     }
