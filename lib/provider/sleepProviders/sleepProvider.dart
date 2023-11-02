@@ -51,73 +51,76 @@ class SleepProvider extends ChangeNotifier {
   List<String> get stepCount => SleepData?.sleepQualities ?? [];
   List<String> get improvement => SleepData?.sleepHistory ?? [];
 
-  
+    // function to update today's mood data from input
+  Future<void> updateSleepData(String sleepTime, String sleepQuality, String sleepHistory) async {
+    // List<int> daysteps = [
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    //   420,
+    //   174,
+    //   0,
+    //   0,
+    //   0,
+    //   115,
+    //   80,
+    //   221,
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    //   0,
+    // ];
 
-  // List<int> daysteps = [
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   420,
-  //   174,
-  //   0,
-  //   0,
-  //   0,
-  //   115,
-  //   80,
-  //   221,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  //   0,
-  // ];
-  
-  // List<int> weeksteps = [4375, 3198, 1042, 0, 0, 0, 0];
-  // List<int> monthsteps = [3287, 4345, 5032, 4098, 3590, 5045, 4211, 4756, 3800, 5265, 4422, 4375, 3198, 1042, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  // List<int> yearsteps = [4200, 5150, 3550, 4920, 4675, 3035, 5298, 4067, 0, 0, 0, 0];
+    // List<int> weeksteps = [4375, 3198, 1042, 0, 0, 0, 0];
+    // List<int> monthsteps = [3287, 4345, 5032, 4098, 3590, 5045, 4211, 4756, 3800, 5265, 4422, 4375, 3198, 1042, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    // List<int> yearsteps = [4200, 5150, 3550, 4920, 4675, 3035, 5298, 4067, 0, 0, 0, 0];
 
-  // Implement methods to fetch data from the server and update the provider state
-  // For example: fetchWalkAndRunningData, updateStepsData, etc.
+    // Implement methods to fetch data from the server and update the provider state
+    // For example: fetchWalkAndRunningData, updateStepsData, etc.
 
-  void initSleepProviderState() async {
-    
-    SleepDataCurrentWeek ??= await fetchSleepDataBackEnd(ChartFilterType.week);
-    SleepDataCurrentBiWeek ??= await fetchSleepDataBackEnd(ChartFilterType.biweek);
-    SleepDataCurrentMonth ??= await fetchSleepDataBackEnd(ChartFilterType.month);
-   
-    selectedFilter = ChartFilterType.week;
+    void initSleepProviderState() async {
+      SleepDataCurrentWeek ??=
+      await fetchSleepDataBackEnd(ChartFilterType.week);
+      SleepDataCurrentBiWeek ??=
+      await fetchSleepDataBackEnd(ChartFilterType.biweek);
+      SleepDataCurrentMonth ??=
+      await fetchSleepDataBackEnd(ChartFilterType.month);
 
-    notifyListeners();
-  }
+      selectedFilter = ChartFilterType.week;
 
-  void updateFilter(ChartFilterType filter) async {
-    selectedFilter = filter;
-    switch (selectedFilter) {
-      case ChartFilterType.week:
-        SleepDataCurrentWeek ??= await fetchSleepDataBackEnd(filter);
-        SleepData = SleepDataCurrentWeek;
-        break;
-      case ChartFilterType.biweek:
-        SleepDataCurrentBiWeek ??= await fetchSleepDataBackEnd(filter);
-        SleepData = SleepDataCurrentBiWeek;
-        break;
-      case ChartFilterType.month:
-        SleepDataCurrentMonth ??= await fetchSleepDataBackEnd(filter);
-        SleepData = SleepDataCurrentMonth;
-        break;
+      notifyListeners();
     }
-    print(SleepData);
-    // After updating the state, notify listeners to rebuild widgets that depend on this provider.
-    notifyListeners();
+
+    void updateFilter(ChartFilterType filter) async {
+      selectedFilter = filter;
+      switch (selectedFilter) {
+        case ChartFilterType.week:
+          SleepDataCurrentWeek ??= await fetchSleepDataBackEnd(filter);
+          SleepData = SleepDataCurrentWeek;
+          break;
+        case ChartFilterType.biweek:
+          SleepDataCurrentBiWeek ??= await fetchSleepDataBackEnd(filter);
+          SleepData = SleepDataCurrentBiWeek;
+          break;
+        case ChartFilterType.month:
+          SleepDataCurrentMonth ??= await fetchSleepDataBackEnd(filter);
+          SleepData = SleepDataCurrentMonth;
+          break;
+      }
+      print(SleepData);
+      // After updating the state, notify listeners to rebuild widgets that depend on this provider.
+      notifyListeners();
+    }
   }
 
   // retrieve sleep data from back end.
@@ -162,7 +165,7 @@ class SleepProvider extends ChangeNotifier {
     return result;
   }
 
-  
+
 }    
    
 

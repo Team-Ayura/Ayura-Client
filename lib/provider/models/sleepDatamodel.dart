@@ -11,7 +11,6 @@ class SleepDataModel {
     required this.sleepingHours,
     required this.sleepQualities,
     required this.sleepHistory,
-    
   });
 }
 
