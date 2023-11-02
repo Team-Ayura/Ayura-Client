@@ -28,6 +28,7 @@ class DiaryList extends StatefulWidget {
 }
 
 class DiaryListState extends State<DiaryList> {
+  final TextEditingController _textEditingController = TextEditingController();
   TimeOfDay? selectedTime;
   String alarmTime = "12:00 PM";
   String bedTime = "12:00 AM";
@@ -117,6 +118,10 @@ class DiaryListState extends State<DiaryList> {
     }
   }
 
+  String steps = '5000';
+  String calories = "2200";
+  String heart = '72';
+
   final List _activity = [
     'Sedentary',
     'Lightly Active',
@@ -136,7 +141,6 @@ class DiaryListState extends State<DiaryList> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _textEditingController = TextEditingController();
     double width = MediaQuery.of(context).size.width;
     int selected = 0;
     String greeting = getGreeting();
@@ -184,7 +188,7 @@ class DiaryListState extends State<DiaryList> {
                             fontWeight: FontWeight.w600),
                       ),
                       const Text(
-                        'Saman Perera',
+                        'Namadee Perera',
                         style: TextStyle(
                             fontFamily: "Inter",
                             color: AppColors.textColor,
@@ -257,19 +261,19 @@ class DiaryListState extends State<DiaryList> {
                         children: [
                           diaryactivityCard(
                             text: 'Today Steps',
-                            number: '5400',
+                            number: steps,
                             image: 'assets/icons/step_icon.png',
                           ),
                           SizedBox(width: width * 0.04),
                           diaryactivityCard(
                             text: 'Today Calories',
-                            number: '2200',
+                            number: calories,
                             image: 'assets/icons/fire.png',
                           ),
                           SizedBox(width: width * 0.04),
                           diaryactivityCard(
                             text: 'Today Heart Rate',
-                            number: '72',
+                            number: heart,
                             image: 'assets/icons/heart.png',
                           ),
                         ],
@@ -340,13 +344,14 @@ class DiaryListState extends State<DiaryList> {
                     const SizedBox(
                       height: 8,
                     ),
-                     const LifeStyleSelection(),
+                     // const LifeStyleSelection(),
                     TextField(
                       controller: _textEditingController,
                       maxLines: 5, // Adjust the number of lines as needed
                       decoration: const InputDecoration(
                         labelText: 'Briefly explain your day',
                         border: OutlineInputBorder(),
+                        // update the string on change
                       ),
                     ),
             
@@ -443,12 +448,11 @@ class DiaryListState extends State<DiaryList> {
     //get mood from mood provider
     String mood = Provider.of<MoodProvider>(context, listen: false).selectedMood;
     // format selectedDailyActivities to have a comma between each activity. and remove new lines, tabs
-    String selectedDailyActivities = this.selectedDailyActicities.join(', ');
-    // remove new lines from it as well
-    selectedDailyActivities = selectedDailyActivities.replaceAll('\n', '').replaceAll('\t', '').replaceAll('[', '')
-        .replaceAll(']', '');
+    String activityLevel = "Lazy";
+    String dayExp = _textEditingController.text;
+
     List<Tip> newTips = await _sendGPTRequest(
-        mood, sleepDuration, selectedDailyActicities
+        mood, sleepDuration, activityLevel, dayExp, steps, calories, heart
     );
     updateGeneratedTips(newTips);
     _rebuildTipsSection();
@@ -485,7 +489,7 @@ class Tip {
 }
 
 
-Future<List<Tip>> _sendGPTRequest(String selectedMood, String sleepDuration, List<String> selectedDailyActivities) async {
+Future<List<Tip>> _sendGPTRequest(String selectedMood, String sleepDuration, String activityLevel, String dayExp, String steps, String calories, String heart) async {
   List<Tip> tips = [];
   // add circular progress indicator here
   try {
@@ -494,7 +498,7 @@ Future<List<Tip>> _sendGPTRequest(String selectedMood, String sleepDuration, Lis
         'Content-Type': 'application/json; charset=UTF-8'
       },
       body: jsonEncode(<String, String>{
-        'prompt': 'Send me a sample JSON code within brackets. With 5 objects of attributes title and description. Description should be short. Tips should be actionable tips that are tailor made to handle and manage the following details and scenarios. My sleep duration was $sleepDuration. My mood is $selectedMood. My activities include: ${selectedDailyActivities.join(', ')} ',
+        'prompt': 'Send me a sample JSON code within brackets. With 10 objects of attributes title and description. Description should be short. Tips should be actionable tips that are tailor made to handle and manage the following details and scenarios. My Average heart rate for today is $heart, My step count for today is $steps. My calories burnt for today is $calories. My sleep duration was $sleepDuration. My mood is $selectedMood. My activities include: $activityLevel. Brief explanation of my days is $dayExp. Consider all of this and generate the tips',
 
       }),);
     print(response.body);
