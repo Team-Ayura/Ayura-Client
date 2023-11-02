@@ -62,21 +62,6 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.start,
-            //   children: [
-            //     Consumer<GoogleAuthProvider>(
-            //       builder: (context, googleAuthProvider, _) {
-            //         return Switch(
-            //           value: googleAuthProvider.isUserAuthorized,
-            //           onChanged: (bool togglebtn){
-            //             googleAuthProvider.toggleGoogleAuthorization(!togglebtn);
-            //           },
-            //         );
-            //       }
-            //     ),
-            //   ],
-            // ),
             CustomBoxItem(
               index: 1,
               imagePath: 'assets/images/activity_tracking/running.svg',
@@ -91,13 +76,13 @@ class _ActivitiesPageState extends State<ActivitiesPage> {
               subText: 'Pedal your way to strength and freedom.',
               route: '/cycling',
             ),
-            const CustomBoxItem(
-              index: 3,
-              imagePath: 'assets/images/activity_tracking/stairs.svg',
-              mainText: 'Stairs',
-              subText: 'Climb higher, conquer your limits.',
-              route: '/stairs',
-            ),
+            // const CustomBoxItem(
+            //   index: 3,
+            //   imagePath: 'assets/images/activity_tracking/stairs.svg',
+            //   mainText: 'Stairs',
+            //   subText: 'Climb higher, conquer your limits.',
+            //   route: '/stairs',
+            // ),
             const CustomBoxItem(
               index: 4,
               imagePath: 'assets/images/activity_tracking/sports.svg',

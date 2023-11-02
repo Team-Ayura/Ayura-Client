@@ -53,16 +53,19 @@ class WalkingAndRunningProvider extends ChangeNotifier {
   List<int> get steps => walkAndRunData?.steps ?? [];
 
   void initWalkAndRunningProviderState() async {
+    print("init state");
     walkAndRunDataToday = await fetchWalkAndRunDataGoogleFit(ChartFilterType.week);
     walkAndRunDataCurrentWeek ??= await fetchWalkAndRunDataBackEnd(ChartFilterType.week);
     walkAndRunDataCurrentMonth ??= await fetchWalkAndRunDataBackEnd(ChartFilterType.month);
     walkAndRunDataCurrentYear ??= await fetchWalkAndRunDataBackEnd(ChartFilterType.year);
     selectedFilter = ChartFilterType.day;
     walkAndRunData = walkAndRunDataToday;
+    print(walkAndRunDataCurrentWeek);
     notifyListeners();
   }
 
   void updateFilter(ChartFilterType filter) async {
+    print("update filter");
     selectedFilter = filter;
     switch (selectedFilter) {
       case ChartFilterType.day:
@@ -82,6 +85,7 @@ class WalkingAndRunningProvider extends ChangeNotifier {
         walkAndRunData = walkAndRunDataCurrentYear;
         break;
     }
+    print(walkAndRunData);
     // After updating the state, notify listeners to rebuild widgets that depend on this provider.
     notifyListeners();
   }
@@ -91,8 +95,11 @@ class WalkingAndRunningProvider extends ChangeNotifier {
 
     // prepare the request arguments
     final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getString(BasicUserData.userId.label);
+    // final userId = prefs.getString(BasicUserData.userId.label);
+    final userId = prefs.getString("userId");
     final filterType = type.label;
+    print(userId);
+    print(filterType);
     // print(prefs.getString(BasicUserData.googleAccessToken.label));
     // backend api endpoint
     String url = '$requestBaseUrl/api/activity/getwalkandrundatabyfilter?userId=$userId&filterType=$filterType';
@@ -110,12 +117,12 @@ class WalkingAndRunningProvider extends ChangeNotifier {
         },
       );
 
-
+      print(req.statusCode);
       if (req.statusCode == 200 || req.statusCode == 201) {
         final res = json.decode(req.body);
         final resbody = res["data"];
         print(resbody);
-
+        print("got data above");
         result = WalkAndRunDataModel(
           timePeriod: resbody["timePeriod"],
           avgDistanceWalked: resbody["avgDistanceWalked"],
@@ -145,7 +152,8 @@ class WalkingAndRunningProvider extends ChangeNotifier {
 
     // prepare the request arguments
     final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getString(BasicUserData.userId.label);
+    // final userId = prefs.getString(BasicUserData.userId.label);
+    final userId = prefs.getString("userId");
 
     // backend api endpoint
     String url = '$requestBaseUrl/api/activity/getwalkandrundatabyfilter?userId=$userId&todayStepCount=$stepCount';

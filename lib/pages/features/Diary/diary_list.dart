@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:ayura/constants/colors.dart';
+import 'package:ayura/pages/features/settings/settings.dart';
+import 'package:ayura/utils/router.dart';
 import 'package:ayura/widgets/features/diary/HorizontalCalender.dart';
 import 'package:ayura/widgets/features/diary/sleepTime.dart';
 import 'package:ayura/widgets/features/mood_traking/mood_chips.dart';
@@ -177,14 +179,20 @@ class DiaryListState extends State<DiaryList> {
                         size: 35,
                       ),
                       SizedBox(width: width * 0.02),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/profileIcon.png'),
-                            fit: BoxFit.cover,
+                      GestureDetector(
+                        onTap: (){
+                          PageNavigator(context: context)
+                              .nextPage(const SettingsPage());
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/profileIcon.png'),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),

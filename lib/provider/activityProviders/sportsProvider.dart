@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 class SportsProvider extends ChangeNotifier {
   ChartFilterType selectedFilter = ChartFilterType.day;
   String duration = '00:00';
-  String timePeriod = "Aug 14";
-  String daytimePeriod = "Aug 14";
-  String weektimePeriod = "Aug 12 - Aug 14";
-  String monthtimePeriod = "Aug 01 - Aug 14";
-  String yeartimePeriod = "Jan 01 - Aug 14";
+  String timePeriod = "Nov 02";
+  String daytimePeriod = "Nov 02";
+  String weektimePeriod = "Sep 30 - Nov 02";
+  String monthtimePeriod = "Nov 01 - Nov 02";
+  String yeartimePeriod = "Jan 01 - Nov 02";
   int calorieCount = 0;
   int improvement = 0;
   List<int> dayduration = [
@@ -110,13 +110,6 @@ class SportsProvider extends ChangeNotifier {
       id: '1',
       caloriesPerHour: 100,
       name: 'Basketball',
-      averageDuration: 0,
-      sportHistory: [],
-    ),
-    SportModel(
-      id: '2',
-      caloriesPerHour: 100,
-      name: 'Cricket',
       averageDuration: 0,
       sportHistory: [],
     ),

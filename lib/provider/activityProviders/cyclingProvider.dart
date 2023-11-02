@@ -199,7 +199,8 @@ class CyclingProvider extends ChangeNotifier {
 
     // prepare the request arguments
     final prefs = await SharedPreferences.getInstance();
-    final userId = prefs.getString(BasicUserData.userId.label);
+    // final userId = prefs.getString(BasicUserData.userId.label);
+    final userId = prefs.getString("userId");
     print(userId);
     final filterType = type.label;
     print(prefs.getString(BasicUserData.googleAccessToken.label));

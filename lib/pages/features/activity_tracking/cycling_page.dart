@@ -103,70 +103,68 @@ class _CyclingPageState extends State<CyclingPage> {
                   //   width: 2,
                   // ),
                 ),
-                child: Expanded(
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 200,
-                        padding: const EdgeInsets.only(
-                          top: 20,
-                          bottom: 20,
-                          left: 10,
-                          right: 10,
-                        ),
-                        decoration: const BoxDecoration(
-                          color: Colors
-                              .white, // Set your desired button color here
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(50),
-                              // bottomRight: Radius.circular(35),
-                              topLeft: Radius.circular(8.0),
-                              bottomLeft: Radius.circular(8.0)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Distance',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.baseline,
-                              textBaseline: TextBaseline.alphabetic,
-                              children: [
-                                Consumer<CyclingProvider>(builder:
-                                    (context, walkingAndRunningProvider, _) {
-                                  final String stepCount =
-                                      walkingAndRunningProvider.distance
-                                          .toString();
-                                  return Text(
-                                    stepCount,
-                                    style: const TextStyle(
-                                      fontSize: 36,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  );
-                                }),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                const Text(
-                                  'Km',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 200,
+                      padding: const EdgeInsets.only(
+                        top: 20,
+                        bottom: 20,
+                        left: 10,
+                        right: 10,
                       ),
-                      Container(),
-                    ],
-                  ),
+                      decoration: const BoxDecoration(
+                        color: Colors
+                            .white, // Set your desired button color here
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(50),
+                            // bottomRight: Radius.circular(35),
+                            topLeft: Radius.circular(8.0),
+                            bottomLeft: Radius.circular(8.0)),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Distance',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Consumer<CyclingProvider>(builder:
+                                  (context, walkingAndRunningProvider, _) {
+                                final String stepCount =
+                                    walkingAndRunningProvider.distance
+                                        .toString();
+                                return Text(
+                                  stepCount,
+                                  style: const TextStyle(
+                                    fontSize: 36,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                );
+                              }),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              const Text(
+                                'Km',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(),
+                  ],
                 )),
 
             // row of duration calories & improvement
@@ -177,49 +175,47 @@ class _CyclingPageState extends State<CyclingPage> {
                     .withOpacity(0.3), // Set your desired button color here
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Consumer<CyclingProvider>(
-                        builder: (context, cyclingProvider, _) {
-                      final String duration = cyclingProvider.duration;
-                      return ActivityStatBox(
-                        svgName: 'clock.svg',
-                        value: duration,
-                        label: 'Duration',
-                      );
-                    }),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Consumer<CyclingProvider>(
-                        builder: (context, cyclingProvider, _) {
-                      final String calorieCount = numberFormat
-                          .format(cyclingProvider.calorieCount)
-                          .toString();
-                      return ActivityStatBox(
-                        svgName: 'heart.svg',
-                        value: calorieCount,
-                        label: 'Calories',
-                      );
-                    }),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Consumer<CyclingProvider>(
-                        builder: (context, cyclingProvider, _) {
-                      final String improvement =
-                          cyclingProvider.improvement.toString();
-                      return ActivityStatBox(
-                        svgName: 'chart.svg',
-                        value: improvement,
-                        label: 'Speed',
-                        isPercentageValue: true,
-                      );
-                    }),
-                  ],
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Consumer<CyclingProvider>(
+                      builder: (context, cyclingProvider, _) {
+                    final String duration = cyclingProvider.duration;
+                    return ActivityStatBox(
+                      svgName: 'clock.svg',
+                      value: duration,
+                      label: 'Duration',
+                    );
+                  }),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Consumer<CyclingProvider>(
+                      builder: (context, cyclingProvider, _) {
+                    final String calorieCount = numberFormat
+                        .format(cyclingProvider.calorieCount)
+                        .toString();
+                    return ActivityStatBox(
+                      svgName: 'heart.svg',
+                      value: calorieCount,
+                      label: 'Calories',
+                    );
+                  }),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Consumer<CyclingProvider>(
+                      builder: (context, cyclingProvider, _) {
+                    final String improvement =
+                        cyclingProvider.improvement.toString();
+                    return ActivityStatBox(
+                      svgName: 'chart.svg',
+                      value: improvement,
+                      label: 'Speed',
+                      isPercentageValue: true,
+                    );
+                  }),
+                ],
               ),
             ),
             const SizedBox(
