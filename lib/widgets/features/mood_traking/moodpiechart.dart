@@ -10,12 +10,12 @@ class MoodVariationChart extends StatelessWidget {
   //map mood,no of days with that mood
   //days with that mood/total days * 100%
   Map<String,double> dataMap = {
-    "Happy Days": 1,
-    "Tired Days": 0,
-    "Sad Days": 1,
-    "Angry Days": 1,
-    "Stressed Days": 2,
-    "Bored Days": 0,
+    "Happy Mood": 1,
+    "Tired Mood": 0,
+    "Sad Mood": 1,
+    "Angry Mood": 1,
+    "Stressed Mood": 2,
+    "Bored Mood": 0,
   };
 
   List<Color> colorList = [
@@ -52,7 +52,7 @@ class MoodVariationChart extends StatelessWidget {
             const Align(
               alignment: Alignment.topLeft,
               child: Text(
-                "Mood Variations",
+                "Mood Count",
                 textAlign: TextAlign.left,
                 style: AppStyles.subheadingTextStyle2,
               ),

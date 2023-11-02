@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class SleepQualitynChart extends StatelessWidget {
- SleepQualitynChart({super.key});
+final String sleepDuration;
+
+  SleepQualitynChart({Key? key, required this.sleepDuration}) : super(key: key);
 
   int choiceIndex = 0;
-
   //map quality,no of days with that quality
   //days with that quality/total days * 100%
   Map<String,double> dataMap = {
@@ -28,6 +29,31 @@ class SleepQualitynChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     // Check sleepDuration and update dataMap accordingly
+    if (sleepDuration == "week") {
+      dataMap = {
+        "Excessive Sleep Days": 1,
+        "Good Sleep Days": 1,
+        "Sufficient Sleep Days": 1,
+        "Insufficient Sleep Days": 2,
+      };
+    } else if (sleepDuration == "biweek") {
+      dataMap = {
+        "Excessive Sleep Days": 1,
+        "Good Sleep Days": 2,
+        "Sufficient Sleep Days": 3,
+        "Insufficient Sleep Days": 6,
+      };
+    } else if (sleepDuration == "month") {
+      dataMap = {
+        "Excessive Sleep Days": 0,
+        "Good Sleep Days": 0,
+        "Sufficient Sleep Days": 0,
+        "Insufficient Sleep Days": 2,
+      };
+    }
+
+
     return Container(
         decoration:AppStyles.containerDecoration,
         margin: const EdgeInsets.symmetric(horizontal: 15),
