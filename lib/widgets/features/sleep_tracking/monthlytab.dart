@@ -1,4 +1,5 @@
 import 'package:ayura/constants/colors.dart';
+import 'package:ayura/pages/features/Diary/diary_list.dart';
 import 'package:ayura/pages/features/sleep_tracking/page1.dart';
 import 'package:ayura/widgets/features/sleep_tracking/averagesleeptimecard.dart';
 import 'package:ayura/widgets/features/sleep_tracking/monthlycalendar.dart';
@@ -30,7 +31,7 @@ class _MonthlyTabState extends State<MonthlyTab> {
 
 
                   const SizedBox(height: 10,),
-                  SleepQualitynChart(),
+                  SleepQualitynChart(sleepDuration: 'month',),
 
                   const SizedBox(height: 10,),
                   // const WeeklyChart(),
@@ -94,7 +95,7 @@ class _MonthlyTabState extends State<MonthlyTab> {
                   Center(
                   child: customButton(
                       tap: () {
-                        PageNavigator(context: context).nextPage( const SleepFirstPage());
+                        PageNavigator(context: context).nextPage( const DiaryList());
                       },
                       icon: Icons.arrow_forward,
                       text: 'Enter Data',

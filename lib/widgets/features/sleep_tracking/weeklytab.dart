@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../constants/styles.dart';
+import '../../../pages/features/Diary/diary_list.dart';
 import '../../../pages/features/sleep_tracking/page3.dart';
 import '../../../utils/router.dart';
 import '../../global/tip_chip.dart';
@@ -50,7 +51,7 @@ class _WeeklyTabState extends State<WeeklyTab> {
 
 
                   const SizedBox(height: 10,),
-                  SleepQualitynChart(),
+                  SleepQualitynChart(sleepDuration: 'week'),
 
                   
                   
@@ -108,7 +109,7 @@ class _WeeklyTabState extends State<WeeklyTab> {
                   Center(
                   child: customButton(
                       tap: () {
-                        PageNavigator(context: context).nextPage( const SleepFirstPage());
+                        PageNavigator(context: context).nextPage( const DiaryList());
                       },
                       icon: Icons.arrow_forward,
                       text: 'Enter Data',
