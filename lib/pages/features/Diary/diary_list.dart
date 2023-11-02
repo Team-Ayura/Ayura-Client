@@ -188,7 +188,7 @@ class DiaryListState extends State<DiaryList> {
                             fontWeight: FontWeight.w600),
                       ),
                       const Text(
-                        'Saman Perera',
+                        'Namadee Perera',
                         style: TextStyle(
                             fontFamily: "Inter",
                             color: AppColors.textColor,
